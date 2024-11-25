@@ -45,6 +45,5 @@ const routes: RouteObject[] = [
 ];
 
 const router = createBrowserRouter(routes);
-console.log(UserProfile)
 
 export default router;
