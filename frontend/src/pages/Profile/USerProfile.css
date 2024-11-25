@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf5;
+  }
+  
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #fdf0e5;
+    font-size: 1.5em;
+  }
+  
+  .logo {
+    font-weight: bold;
+    color: #d97673;
+  }
+  
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profile-name {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Aclonica', sans-serif;
+  }
+  
+  .edit-link {
+    font-size: 0.8em;
+    color: #d97673;
+    cursor: pointer;
+  }
+  
+  .profile-form {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border: 1px solid #d97673;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+  }
+  
+  .icon {
+    margin-right: 10px;
+  }
+  
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1em;
+  }
+  
+  .save-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #b2d4cf;
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #a3a3a3;
+    background-color: #fffaf5;
+  }
+  
+  .social-icons span {
+    margin: 0 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  
