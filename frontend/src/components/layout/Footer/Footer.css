@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Afacad:regular,500,600,700,italic,500italic,600italic,700italic);
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 120px;
+    background-color: #fcf6ee;
+    width: 100%;
+    text-align: center;
+    line-height: 0.5;
+    font-family: 'Afacad', sans-serif;
+    color: #442A07;
+  }
