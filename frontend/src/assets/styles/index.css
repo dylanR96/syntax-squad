@@ -1,9 +1,10 @@
 /* Global element based styling */
 * {
   box-sizing: border-box;
+  font-family: "Afacad", sans-serif;
 }
 html {
-  font-size: 10px;
+  color: #442a07;
 }
 body {
   margin: 0;
