@@ -1,7 +1,7 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
-import UserProfile from "../pages/Profile/UserProfile";
+import { createBrowserRouter } from "react-router-dom";
+import Profile from "../pages/Profile/UserProfile";
 
-const routes: RouteObject[] = [
+const router = createBrowserRouter([
   // {
   //   path: "/",
   //   element: <Login />,
@@ -32,7 +32,7 @@ const routes: RouteObject[] = [
   // },
   {
     path: "/profile",
-    element: <UserProfile />,
+    element: <Profile />,
   },
   // {
   //   path: "/profile/edit",
@@ -42,8 +42,6 @@ const routes: RouteObject[] = [
   //   path: "/about",
   //   element: <About />,
   // },
-];
-
-const router = createBrowserRouter(routes);
+]);
 
 export default router;
