@@ -1,6 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouteObject } from "react-router-dom";
+import UserProfile from "../pages/Profile/UserProfile";
 
-const router = createBrowserRouter([
+const routes: RouteObject[] = [
   // {
   //   path: "/",
   //   element: <Login />,
@@ -29,10 +30,10 @@ const router = createBrowserRouter([
   //   path: "/orders",
   //   element: <Orders />,
   // },
-  // {
-  //   path: "/profile",
-  //   element: <Profile />,
-  // },
+  {
+    path: "/profile",
+    element: <UserProfile />,
+  },
   // {
   //   path: "/profile/edit",
   //   element: <EditProfile />,
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
   //   path: "/about",
   //   element: <About />,
   // },
-]);
+];
+
+const router = createBrowserRouter(routes);
+console.log(UserProfile)
 
 export default router;
