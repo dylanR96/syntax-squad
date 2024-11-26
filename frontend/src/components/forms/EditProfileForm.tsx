@@ -1,4 +1,4 @@
-const EditProfile = () => {
+const EditProfileForm = () => {
     
   return <form className="profile-form">
   <div className="form-group">
@@ -33,5 +33,5 @@ const EditProfile = () => {
 </form>
 };
 
-export default EditProfile;
+export default EditProfileForm;
 
