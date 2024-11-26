@@ -9,10 +9,21 @@ export const IngredientService = {
     return await ingredientModel.getAllIngredients();
   },
   getIngredientsByIds: async (ingredientData) => {
-    const keys = ingredientData.ingredientIDs.map((id) => ({
-      ingredientID: id,
+    const keys = ingredientData.ingredients.map((ingredient) => ({
+      ingredientID: ingredient.id,
     }));
-    return await ingredientModel.getIngredientsByIds(keys);
+    const ingredients = await ingredientModel.getIngredientsByIds(keys);
+    const enrichedIngredients = ingredients.map((ingredient) => {
+      const matchingInput = ingredientData.ingredients.find(
+        (input) => input.id === ingredient.ingredientID
+      );
+
+      return {
+        ...ingredient,
+        quantity: matchingInput.quantity,
+      };
+    });
+    return enrichedIngredients;
   },
   deleteIngredient: async (ingredientData) => {
     return await ingredientModel.deleteIngredient(ingredientData);
@@ -23,8 +34,4 @@ export const IngredientService = {
     // Needs to check if the ingredientData.ingredientID exists
     return await ingredientModel.editIngredient(ingredientData);
   },
-  // getAdmin: async (data) => {
-  //     //validering(middleware)
-  //     return await adminModel.getAdmin(data);
-  //   }
 };

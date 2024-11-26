@@ -1,7 +1,7 @@
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
 import { db } from "../config/dynamoConfig.js";
 import { createID } from "../utils/dynamodbHelper.js";
-
+// Test
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
     const params = {
@@ -41,7 +41,6 @@ export const ingredientModel = {
       },
     };
     const data = await db.batchGet(params);
-    console.log(data.Responses[INGREDIENTS_TABLE]);
     return data.Responses[INGREDIENTS_TABLE];
   },
   editIngredient: async (ingredientData) => {
