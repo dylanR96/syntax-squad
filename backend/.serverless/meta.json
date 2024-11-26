@@ -99,6 +99,18 @@
                       "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllIngredients"
                     }
                   },
+                  "GetAllProductsLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllProducts"
+                    }
+                  },
+                  "CreateProductLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-createProduct"
+                    }
+                  },
                   "IamRoleLambdaExecution": {
                     "Type": "AWS::IAM::Role",
                     "Properties": {
@@ -195,7 +207,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/adminHandler.createAdmin",
                       "Runtime": "nodejs20.x",
@@ -218,7 +230,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/adminHandler.getAdmin",
                       "Runtime": "nodejs20.x",
@@ -241,7 +253,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/customerHandler.createCustomer",
                       "Runtime": "nodejs20.x",
@@ -264,7 +276,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/customerHandler.getCustomers",
                       "Runtime": "nodejs20.x",
@@ -287,7 +299,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.addIngredient",
                       "Runtime": "nodejs20.x",
@@ -310,7 +322,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.deleteIngredient",
                       "Runtime": "nodejs20.x",
@@ -333,7 +345,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.editIngredient",
                       "Runtime": "nodejs20.x",
@@ -356,7 +368,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.getIngredientsByIds",
                       "Runtime": "nodejs20.x",
@@ -379,7 +391,7 @@
                     "Properties": {
                       "Code": {
                         "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                        "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.getAllIngredients",
                       "Runtime": "nodejs20.x",
@@ -397,94 +409,160 @@
                       "GetAllIngredientsLogGroup"
                     ]
                   },
-                  "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ": {
+                  "GetAllProductsLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/productHandler.getAllProducts",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-getAllProducts",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "GetAllProductsLogGroup"
+                    ]
+                  },
+                  "CreateProductLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/productHandler.createProduct",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-createProduct",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "CreateProductLogGroup"
+                    ]
+                  },
+                  "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateAdminLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc": {
+                  "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetAdminLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg": {
+                  "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateCustomerLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw": {
+                  "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetCustomersLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik": {
+                  "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AddIngredientLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0": {
+                  "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "DeleteIngredientLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io": {
+                  "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "EditIngredientLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ": {
+                  "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetIngredientsByIdLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
-                  "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE": {
+                  "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetAllIngredientsLambdaFunction"
                       },
-                      "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
+                    }
+                  },
+                  "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "GetAllProductsLambdaFunction"
+                      },
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
+                    }
+                  },
+                  "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "CreateProductLambdaFunction"
+                      },
+                      "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
                     }
                   },
                   "HttpApi": {
@@ -506,7 +584,9 @@
                         "AllowMethods": [
                           "OPTIONS",
                           "POST",
-                          "GET"
+                          "GET",
+                          "DELETE",
+                          "PUT"
                         ],
                         "AllowOrigins": [
                           "*"
@@ -581,13 +661,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostCreateadmin": {
+                  "HttpApiRoutePostAdmin": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /createAdmin",
+                      "RouteKey": "POST /admin",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -656,13 +736,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRouteGetGetadminAdminidVar": {
+                  "HttpApiRouteGetAdminAdminidVar": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "GET /getAdmin/{adminID}",
+                      "RouteKey": "GET /admin/{adminID}",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -731,13 +811,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostCreatecustomer": {
+                  "HttpApiRoutePostCustomer": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /createCustomer",
+                      "RouteKey": "POST /customer",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -881,13 +961,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostAddingredient": {
+                  "HttpApiRoutePostIngredient": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /addIngredient",
+                      "RouteKey": "POST /ingredient",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -956,13 +1036,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostDeleteingredient": {
+                  "HttpApiRouteDeleteIngredient": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /deleteIngredient",
+                      "RouteKey": "DELETE /ingredient",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -1031,13 +1111,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostEditingredient": {
+                  "HttpApiRoutePutIngredient": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /editIngredient",
+                      "RouteKey": "PUT /ingredient",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -1106,13 +1186,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRoutePostGetingredients": {
+                  "HttpApiRoutePostIngredientsbyid": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "POST /getIngredients",
+                      "RouteKey": "POST /ingredientsById",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -1181,13 +1261,13 @@
                       "TimeoutInMillis": 30000
                     }
                   },
-                  "HttpApiRouteGetGetallingredients": {
+                  "HttpApiRouteGetIngredients": {
                     "Type": "AWS::ApiGatewayV2::Route",
                     "Properties": {
                       "ApiId": {
                         "Ref": "HttpApi"
                       },
-                      "RouteKey": "GET /getAllIngredients",
+                      "RouteKey": "GET /ingredients",
                       "Target": {
                         "Fn::Join": [
                           "/",
@@ -1201,6 +1281,156 @@
                       }
                     },
                     "DependsOn": "HttpApiIntegrationGetAllIngredients"
+                  },
+                  "GetAllProductsLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "GetAllProductsLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationGetAllProducts": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "GetAllProductsLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetProducts": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /products",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationGetAllProducts"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationGetAllProducts"
+                  },
+                  "CreateProductLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "CreateProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationCreateProduct": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "CreateProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePostProduct": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "POST /product",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationCreateProduct"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationCreateProduct"
                   },
                   "AdminTable": {
                     "Type": "AWS::DynamoDB::Table",
@@ -1327,7 +1557,7 @@
                   "CreateAdminLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ"
+                      "Ref": "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
@@ -1336,7 +1566,7 @@
                   "GetAdminLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc"
+                      "Ref": "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
@@ -1345,7 +1575,7 @@
                   "CreateCustomerLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg"
+                      "Ref": "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -1354,7 +1584,7 @@
                   "GetCustomersLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw"
+                      "Ref": "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
@@ -1363,7 +1593,7 @@
                   "AddIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik"
+                      "Ref": "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
@@ -1372,7 +1602,7 @@
                   "DeleteIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0"
+                      "Ref": "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
@@ -1381,7 +1611,7 @@
                   "EditIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io"
+                      "Ref": "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
@@ -1390,7 +1620,7 @@
                   "GetIngredientsByIdLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ"
+                      "Ref": "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
@@ -1399,10 +1629,28 @@
                   "GetAllIngredientsLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE"
+                      "Ref": "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "GetAllProductsLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "CreateProductLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
                     }
                   },
                   "HttpApiId": {
@@ -1449,11 +1697,11 @@
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/createAdmin",
+                      "path": "/admin",
                       "method": "POST"
                     },
                     "resolvedMethod": "POST",
-                    "resolvedPath": "/createAdmin"
+                    "resolvedPath": "/admin"
                   }
                 ],
                 "name": "syntax-squad-dev-createAdmin",
@@ -1462,18 +1710,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ"
+                "versionLogicalId": "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA"
               },
               "getAdmin": {
                 "handler": "src/handlers/adminHandler.getAdmin",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/getAdmin/{adminID}",
+                      "path": "/admin/{adminID}",
                       "method": "GET"
                     },
                     "resolvedMethod": "GET",
-                    "resolvedPath": "/getAdmin/{adminID}"
+                    "resolvedPath": "/admin/{adminID}"
                   }
                 ],
                 "name": "syntax-squad-dev-getAdmin",
@@ -1482,18 +1730,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc"
+                "versionLogicalId": "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs"
               },
               "createCustomer": {
                 "handler": "src/handlers/customerHandler.createCustomer",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/createCustomer",
+                      "path": "/customer",
                       "method": "POST"
                     },
                     "resolvedMethod": "POST",
-                    "resolvedPath": "/createCustomer"
+                    "resolvedPath": "/customer"
                   }
                 ],
                 "name": "syntax-squad-dev-createCustomer",
@@ -1502,7 +1750,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg"
+                "versionLogicalId": "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY"
               },
               "getCustomers": {
                 "handler": "src/handlers/customerHandler.getCustomers",
@@ -1522,18 +1770,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw"
+                "versionLogicalId": "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI"
               },
               "addIngredient": {
                 "handler": "src/handlers/ingredientHandler.addIngredient",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/addIngredient",
+                      "path": "/ingredient",
                       "method": "POST"
                     },
                     "resolvedMethod": "POST",
-                    "resolvedPath": "/addIngredient"
+                    "resolvedPath": "/ingredient"
                   }
                 ],
                 "name": "syntax-squad-dev-addIngredient",
@@ -1542,18 +1790,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik"
+                "versionLogicalId": "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo"
               },
               "deleteIngredient": {
                 "handler": "src/handlers/ingredientHandler.deleteIngredient",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/deleteIngredient",
-                      "method": "POST"
+                      "path": "/ingredient",
+                      "method": "DELETE"
                     },
-                    "resolvedMethod": "POST",
-                    "resolvedPath": "/deleteIngredient"
+                    "resolvedMethod": "DELETE",
+                    "resolvedPath": "/ingredient"
                   }
                 ],
                 "name": "syntax-squad-dev-deleteIngredient",
@@ -1562,18 +1810,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0"
+                "versionLogicalId": "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg"
               },
               "editIngredient": {
                 "handler": "src/handlers/ingredientHandler.editIngredient",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/editIngredient",
-                      "method": "POST"
+                      "path": "/ingredient",
+                      "method": "PUT"
                     },
-                    "resolvedMethod": "POST",
-                    "resolvedPath": "/editIngredient"
+                    "resolvedMethod": "PUT",
+                    "resolvedPath": "/ingredient"
                   }
                 ],
                 "name": "syntax-squad-dev-editIngredient",
@@ -1582,18 +1830,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io"
+                "versionLogicalId": "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ"
               },
               "getIngredientsById": {
                 "handler": "src/handlers/ingredientHandler.getIngredientsByIds",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/getIngredients",
+                      "path": "/ingredientsById",
                       "method": "POST"
                     },
                     "resolvedMethod": "POST",
-                    "resolvedPath": "/getIngredients"
+                    "resolvedPath": "/ingredientsById"
                   }
                 ],
                 "name": "syntax-squad-dev-getIngredientsById",
@@ -1602,18 +1850,18 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ"
+                "versionLogicalId": "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE"
               },
               "getAllIngredients": {
                 "handler": "src/handlers/ingredientHandler.getAllIngredients",
                 "events": [
                   {
                     "httpApi": {
-                      "path": "/getAllIngredients",
+                      "path": "/ingredients",
                       "method": "GET"
                     },
                     "resolvedMethod": "GET",
-                    "resolvedPath": "/getAllIngredients"
+                    "resolvedPath": "/ingredients"
                   }
                 ],
                 "name": "syntax-squad-dev-getAllIngredients",
@@ -1622,7 +1870,47 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE"
+                "versionLogicalId": "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y"
+              },
+              "getAllProducts": {
+                "handler": "src/handlers/productHandler.getAllProducts",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/products",
+                      "method": "GET"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/products"
+                  }
+                ],
+                "name": "syntax-squad-dev-getAllProducts",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k"
+              },
+              "createProduct": {
+                "handler": "src/handlers/productHandler.createProduct",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/product",
+                      "method": "POST"
+                    },
+                    "resolvedMethod": "POST",
+                    "resolvedPath": "/product"
+                  }
+                ],
+                "name": "syntax-squad-dev-createProduct",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg"
               }
             },
             "resources": {
@@ -1854,6 +2142,18 @@
                 "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllIngredients"
               }
             },
+            "GetAllProductsLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllProducts"
+              }
+            },
+            "CreateProductLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-createProduct"
+              }
+            },
             "IamRoleLambdaExecution": {
               "Type": "AWS::IAM::Role",
               "Properties": {
@@ -1950,7 +2250,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/adminHandler.createAdmin",
                 "Runtime": "nodejs20.x",
@@ -1973,7 +2273,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/adminHandler.getAdmin",
                 "Runtime": "nodejs20.x",
@@ -1996,7 +2296,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/customerHandler.createCustomer",
                 "Runtime": "nodejs20.x",
@@ -2019,7 +2319,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/customerHandler.getCustomers",
                 "Runtime": "nodejs20.x",
@@ -2042,7 +2342,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.addIngredient",
                 "Runtime": "nodejs20.x",
@@ -2065,7 +2365,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.deleteIngredient",
                 "Runtime": "nodejs20.x",
@@ -2088,7 +2388,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.editIngredient",
                 "Runtime": "nodejs20.x",
@@ -2111,7 +2411,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.getIngredientsByIds",
                 "Runtime": "nodejs20.x",
@@ -2134,7 +2434,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
-                  "S3Key": "serverless/syntax-squad/dev/1732615761901-2024-11-26T10:09:21.901Z/syntax-squad.zip"
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.getAllIngredients",
                 "Runtime": "nodejs20.x",
@@ -2152,94 +2452,160 @@
                 "GetAllIngredientsLogGroup"
               ]
             },
-            "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ": {
+            "GetAllProductsLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/productHandler.getAllProducts",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-getAllProducts",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetAllProductsLogGroup"
+              ]
+            },
+            "CreateProductLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732618144264-2024-11-26T10:49:04.264Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/productHandler.createProduct",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-createProduct",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "CreateProductLogGroup"
+              ]
+            },
+            "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateAdminLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc": {
+            "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAdminLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg": {
+            "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateCustomerLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw": {
+            "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetCustomersLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik": {
+            "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AddIngredientLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0": {
+            "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "DeleteIngredientLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io": {
+            "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EditIngredientLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ": {
+            "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetIngredientsByIdLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
-            "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE": {
+            "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAllIngredientsLambdaFunction"
                 },
-                "CodeSha256": "En8oYVHS2BjFEXfsyOZowGFqnZt0/LdP1p/kKmiPHOU="
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
+              }
+            },
+            "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetAllProductsLambdaFunction"
+                },
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
+              }
+            },
+            "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "CreateProductLambdaFunction"
+                },
+                "CodeSha256": "Xo6hiJTFvgOpWIag/wk0pS1lp+QDv1wnPDMNxL87QXA="
               }
             },
             "HttpApi": {
@@ -2261,7 +2627,9 @@
                   "AllowMethods": [
                     "OPTIONS",
                     "POST",
-                    "GET"
+                    "GET",
+                    "DELETE",
+                    "PUT"
                   ],
                   "AllowOrigins": [
                     "*"
@@ -2336,13 +2704,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostCreateadmin": {
+            "HttpApiRoutePostAdmin": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /createAdmin",
+                "RouteKey": "POST /admin",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2411,13 +2779,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRouteGetGetadminAdminidVar": {
+            "HttpApiRouteGetAdminAdminidVar": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "GET /getAdmin/{adminID}",
+                "RouteKey": "GET /admin/{adminID}",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2486,13 +2854,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostCreatecustomer": {
+            "HttpApiRoutePostCustomer": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /createCustomer",
+                "RouteKey": "POST /customer",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2636,13 +3004,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostAddingredient": {
+            "HttpApiRoutePostIngredient": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /addIngredient",
+                "RouteKey": "POST /ingredient",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2711,13 +3079,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostDeleteingredient": {
+            "HttpApiRouteDeleteIngredient": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /deleteIngredient",
+                "RouteKey": "DELETE /ingredient",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2786,13 +3154,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostEditingredient": {
+            "HttpApiRoutePutIngredient": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /editIngredient",
+                "RouteKey": "PUT /ingredient",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2861,13 +3229,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRoutePostGetingredients": {
+            "HttpApiRoutePostIngredientsbyid": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "POST /getIngredients",
+                "RouteKey": "POST /ingredientsById",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2936,13 +3304,13 @@
                 "TimeoutInMillis": 30000
               }
             },
-            "HttpApiRouteGetGetallingredients": {
+            "HttpApiRouteGetIngredients": {
               "Type": "AWS::ApiGatewayV2::Route",
               "Properties": {
                 "ApiId": {
                   "Ref": "HttpApi"
                 },
-                "RouteKey": "GET /getAllIngredients",
+                "RouteKey": "GET /ingredients",
                 "Target": {
                   "Fn::Join": [
                     "/",
@@ -2956,6 +3324,156 @@
                 }
               },
               "DependsOn": "HttpApiIntegrationGetAllIngredients"
+            },
+            "GetAllProductsLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetAllProductsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationGetAllProducts": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "GetAllProductsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteGetProducts": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "GET /products",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationGetAllProducts"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationGetAllProducts"
+            },
+            "CreateProductLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "CreateProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationCreateProduct": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "CreateProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRoutePostProduct": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "POST /product",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationCreateProduct"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationCreateProduct"
             },
             "AdminTable": {
               "Type": "AWS::DynamoDB::Table",
@@ -3082,7 +3600,7 @@
             "CreateAdminLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ"
+                "Ref": "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
@@ -3091,7 +3609,7 @@
             "GetAdminLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc"
+                "Ref": "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
@@ -3100,7 +3618,7 @@
             "CreateCustomerLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg"
+                "Ref": "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -3109,7 +3627,7 @@
             "GetCustomersLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw"
+                "Ref": "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
@@ -3118,7 +3636,7 @@
             "AddIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik"
+                "Ref": "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
@@ -3127,7 +3645,7 @@
             "DeleteIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0"
+                "Ref": "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
@@ -3136,7 +3654,7 @@
             "EditIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io"
+                "Ref": "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
@@ -3145,7 +3663,7 @@
             "GetIngredientsByIdLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ"
+                "Ref": "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
@@ -3154,10 +3672,28 @@
             "GetAllIngredientsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE"
+                "Ref": "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
+              }
+            },
+            "GetAllProductsLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
+              }
+            },
+            "CreateProductLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
               }
             },
             "HttpApiId": {
@@ -3204,11 +3740,11 @@
           "events": [
             {
               "httpApi": {
-                "path": "/createAdmin",
+                "path": "/admin",
                 "method": "POST"
               },
               "resolvedMethod": "POST",
-              "resolvedPath": "/createAdmin"
+              "resolvedPath": "/admin"
             }
           ],
           "name": "syntax-squad-dev-createAdmin",
@@ -3217,18 +3753,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateAdminLambdaVersionaZKzeuG8DgITblVxtnjWkyOpbKH0DmPOSvAzAZfcWQ"
+          "versionLogicalId": "CreateAdminLambdaVersionJUX9Q9JbLSIlIiwXeIL929Dz6HOcxSCHgOFUULDb4MA"
         },
         "getAdmin": {
           "handler": "src/handlers/adminHandler.getAdmin",
           "events": [
             {
               "httpApi": {
-                "path": "/getAdmin/{adminID}",
+                "path": "/admin/{adminID}",
                 "method": "GET"
               },
               "resolvedMethod": "GET",
-              "resolvedPath": "/getAdmin/{adminID}"
+              "resolvedPath": "/admin/{adminID}"
             }
           ],
           "name": "syntax-squad-dev-getAdmin",
@@ -3237,18 +3773,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAdminLambdaVersionRqV5ta47n9DNoouwepyDlI7PSNPTt3oJGyiJGdQfyoc"
+          "versionLogicalId": "GetAdminLambdaVersion5FE2bZBG8yQMhqWu5tHAUdWkx6xanwR8kzplICs"
         },
         "createCustomer": {
           "handler": "src/handlers/customerHandler.createCustomer",
           "events": [
             {
               "httpApi": {
-                "path": "/createCustomer",
+                "path": "/customer",
                 "method": "POST"
               },
               "resolvedMethod": "POST",
-              "resolvedPath": "/createCustomer"
+              "resolvedPath": "/customer"
             }
           ],
           "name": "syntax-squad-dev-createCustomer",
@@ -3257,7 +3793,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateCustomerLambdaVersionZyCVPID500x5u2FVqoRVSVd4NpE8zfUhzhGZHlMzJLg"
+          "versionLogicalId": "CreateCustomerLambdaVersionPWLwMEm3yq9klHOPAoiUGNZYbNULGSwgG9ziiISFFxY"
         },
         "getCustomers": {
           "handler": "src/handlers/customerHandler.getCustomers",
@@ -3277,18 +3813,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetCustomersLambdaVersionSpHe3NBlX22fJ0SchnqVT1uQtiBkuFzBMprQya9QItw"
+          "versionLogicalId": "GetCustomersLambdaVersionuRkpUNhkVBu8BmOufSCRWGqrUwzCD3QK8Zlqk9u2GI"
         },
         "addIngredient": {
           "handler": "src/handlers/ingredientHandler.addIngredient",
           "events": [
             {
               "httpApi": {
-                "path": "/addIngredient",
+                "path": "/ingredient",
                 "method": "POST"
               },
               "resolvedMethod": "POST",
-              "resolvedPath": "/addIngredient"
+              "resolvedPath": "/ingredient"
             }
           ],
           "name": "syntax-squad-dev-addIngredient",
@@ -3297,18 +3833,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AddIngredientLambdaVersionstMGi7ZPWMigzFUDqn1qwOWUbldSKssmuCpJqwPV9Ik"
+          "versionLogicalId": "AddIngredientLambdaVersiong9sCewZBgjHCWzqhsgeZ9t9ANbySlHfUurCjxPQCoo"
         },
         "deleteIngredient": {
           "handler": "src/handlers/ingredientHandler.deleteIngredient",
           "events": [
             {
               "httpApi": {
-                "path": "/deleteIngredient",
-                "method": "POST"
+                "path": "/ingredient",
+                "method": "DELETE"
               },
-              "resolvedMethod": "POST",
-              "resolvedPath": "/deleteIngredient"
+              "resolvedMethod": "DELETE",
+              "resolvedPath": "/ingredient"
             }
           ],
           "name": "syntax-squad-dev-deleteIngredient",
@@ -3317,18 +3853,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "DeleteIngredientLambdaVersion4g91imkwQ46tFO66v1qmcZyMkzEKIoyWclnixAOTmr0"
+          "versionLogicalId": "DeleteIngredientLambdaVersiontiWFx6zVl8HrIttS2wYFBb83toCw2TAYmG60dTDg"
         },
         "editIngredient": {
           "handler": "src/handlers/ingredientHandler.editIngredient",
           "events": [
             {
               "httpApi": {
-                "path": "/editIngredient",
-                "method": "POST"
+                "path": "/ingredient",
+                "method": "PUT"
               },
-              "resolvedMethod": "POST",
-              "resolvedPath": "/editIngredient"
+              "resolvedMethod": "PUT",
+              "resolvedPath": "/ingredient"
             }
           ],
           "name": "syntax-squad-dev-editIngredient",
@@ -3337,18 +3873,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EditIngredientLambdaVersionQN1KG2g0uuPo1moE5eo4LlKosnLPyKgqKT8k7N40Io"
+          "versionLogicalId": "EditIngredientLambdaVersionoi80lPvtgFZFsw0xiYSLKtXqlR2SY3frj3kE8hPQ"
         },
         "getIngredientsById": {
           "handler": "src/handlers/ingredientHandler.getIngredientsByIds",
           "events": [
             {
               "httpApi": {
-                "path": "/getIngredients",
+                "path": "/ingredientsById",
                 "method": "POST"
               },
               "resolvedMethod": "POST",
-              "resolvedPath": "/getIngredients"
+              "resolvedPath": "/ingredientsById"
             }
           ],
           "name": "syntax-squad-dev-getIngredientsById",
@@ -3357,18 +3893,18 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetIngredientsByIdLambdaVersionZcZevKopJtATLBY2eVpFGiApLVFIF1NGvXkGUMVOVQ"
+          "versionLogicalId": "GetIngredientsByIdLambdaVersionbQ3hCPdyau1EiRiOY1sl3ns5ktJvWegIrwRetfSrIE"
         },
         "getAllIngredients": {
           "handler": "src/handlers/ingredientHandler.getAllIngredients",
           "events": [
             {
               "httpApi": {
-                "path": "/getAllIngredients",
+                "path": "/ingredients",
                 "method": "GET"
               },
               "resolvedMethod": "GET",
-              "resolvedPath": "/getAllIngredients"
+              "resolvedPath": "/ingredients"
             }
           ],
           "name": "syntax-squad-dev-getAllIngredients",
@@ -3377,7 +3913,47 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAllIngredientsLambdaVersionUOWvIDlF6ullgSSArcDqTBJzVSbeXof8v4dSWWRJ5rE"
+          "versionLogicalId": "GetAllIngredientsLambdaVersionPrftdzr8CANaDRhVsNniyBGjy4CziHVWqHDegUQ4Y"
+        },
+        "getAllProducts": {
+          "handler": "src/handlers/productHandler.getAllProducts",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/products",
+                "method": "GET"
+              },
+              "resolvedMethod": "GET",
+              "resolvedPath": "/products"
+            }
+          ],
+          "name": "syntax-squad-dev-getAllProducts",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "GetAllProductsLambdaVersionsn15wW1zKCMhxVRekPrlyCC2gusROofyLUtDyOe7k"
+        },
+        "createProduct": {
+          "handler": "src/handlers/productHandler.createProduct",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/product",
+                "method": "POST"
+              },
+              "resolvedMethod": "POST",
+              "resolvedPath": "/product"
+            }
+          ],
+          "name": "syntax-squad-dev-createProduct",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "CreateProductLambdaVersion6oUmTwO9pS3fpG1XJBm4W35lB34r9bhwvabaP7hBOg"
         }
       },
       "resources": {
@@ -3500,7 +4076,7 @@
         "Outputs": {}
       }
     },
-    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\norg: fedandreas\n# \"service\" is the name of this project. This will also be added to your AWS resource names.\nservice: syntax-squad\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: eu-north-1\n  httpApi:\n    cors: true\n  iam:\n    role:\n      statements:\n        - Effect: \"Allow\"\n          Action:\n            - dynamodb:Query\n            - dynamodb:Scan\n            - dynamodb:GetItem\n            - dynamodb:PutItem\n            - dynamodb:UpdateItem\n            - dynamodb:DeleteItem\n            - dynamodb:BatchGetItem\n          Resource: \"*\"\nfunctions:\n  # Admin\n  createAdmin:\n    handler: src/handlers/adminHandler.createAdmin\n    events:\n      - httpApi:\n          path: /createAdmin\n          method: POST\n  getAdmin:\n    handler: src/handlers/adminHandler.getAdmin\n    events:\n      - httpApi:\n          path: /getAdmin/{adminID}\n          method: GET\n  # Customers\n  createCustomer:\n    handler: src/handlers/customerHandler.createCustomer\n    events:\n      - httpApi:\n          path: /createCustomer\n          method: POST\n  getCustomers:\n    handler: src/handlers/customerHandler.getCustomers\n    events:\n      - httpApi:\n          path: /customers\n          method: GET\n  # Ingredients\n  addIngredient:\n    handler: src/handlers/ingredientHandler.addIngredient\n    events:\n      - httpApi:\n          path: /addIngredient\n          method: POST\n  deleteIngredient:\n    handler: src/handlers/ingredientHandler.deleteIngredient\n    events:\n      - httpApi:\n          path: /deleteIngredient\n          method: POST\n  editIngredient:\n    handler: src/handlers/ingredientHandler.editIngredient\n    events:\n      - httpApi:\n          path: /editIngredient\n          method: POST\n  getIngredientsById:\n    handler: src/handlers/ingredientHandler.getIngredientsByIds\n    events:\n      - httpApi:\n          path: /getIngredients\n          method: POST\n  getAllIngredients:\n    handler: src/handlers/ingredientHandler.getAllIngredients\n    events:\n      - httpApi:\n          path: /getAllIngredients\n          method: GET\n\nresources:\n  Resources:\n    AdminTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_admins\n        AttributeDefinitions:\n          - AttributeName: adminID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: adminID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    CustomerTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_customers\n        AttributeDefinitions:\n          - AttributeName: customerID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: customerID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    InfoTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_info\n        AttributeDefinitions:\n          - AttributeName: shopID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: shopID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    ProductsTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_products\n        AttributeDefinitions:\n          - AttributeName: productID\n            AttributeType: N\n        KeySchema:\n          - AttributeName: productID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    IngredientsTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_ingredients\n        AttributeDefinitions:\n          - AttributeName: ingredientID\n            AttributeType: N\n        KeySchema:\n          - AttributeName: ingredientID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    OrdersTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_orders\n        AttributeDefinitions:\n          - AttributeName: orderNO\n            AttributeType: N\n        KeySchema:\n          - AttributeName: orderNO\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n",
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\norg: fedandreas\n# \"service\" is the name of this project. This will also be added to your AWS resource names.\nservice: syntax-squad\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: eu-north-1\n  httpApi:\n    cors: true\n  iam:\n    role:\n      statements:\n        - Effect: \"Allow\"\n          Action:\n            - dynamodb:Query\n            - dynamodb:Scan\n            - dynamodb:GetItem\n            - dynamodb:PutItem\n            - dynamodb:UpdateItem\n            - dynamodb:DeleteItem\n            - dynamodb:BatchGetItem\n          Resource: \"*\"\nfunctions:\n  # Admin\n  createAdmin:\n    handler: src/handlers/adminHandler.createAdmin\n    events:\n      - httpApi:\n          path: /admin\n          method: POST\n  getAdmin:\n    handler: src/handlers/adminHandler.getAdmin\n    events:\n      - httpApi:\n          path: /admin/{adminID}\n          method: GET\n  # Customers\n  createCustomer:\n    handler: src/handlers/customerHandler.createCustomer\n    events:\n      - httpApi:\n          path: /customer\n          method: POST\n  getCustomers:\n    handler: src/handlers/customerHandler.getCustomers\n    events:\n      - httpApi:\n          path: /customers\n          method: GET\n  # Ingredients\n  addIngredient:\n    handler: src/handlers/ingredientHandler.addIngredient\n    events:\n      - httpApi:\n          path: /ingredient\n          method: POST\n  deleteIngredient:\n    handler: src/handlers/ingredientHandler.deleteIngredient\n    events:\n      - httpApi:\n          path: /ingredient\n          method: DELETE\n  editIngredient:\n    handler: src/handlers/ingredientHandler.editIngredient\n    events:\n      - httpApi:\n          path: /ingredient\n          method: PUT\n  getIngredientsById:\n    handler: src/handlers/ingredientHandler.getIngredientsByIds\n    events:\n      - httpApi:\n          path: /ingredientsById\n          method: POST\n  getAllIngredients:\n    handler: src/handlers/ingredientHandler.getAllIngredients\n    events:\n      - httpApi:\n          path: /ingredients\n          method: GET\n  getAllProducts:\n    handler: src/handlers/productHandler.getAllProducts\n    events:\n      - httpApi:\n          path: /products\n          method: GET\n  createProduct:\n    handler: src/handlers/productHandler.createProduct\n    events:\n      - httpApi:\n          path: /product\n          method: POST\n\nresources:\n  Resources:\n    AdminTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_admins\n        AttributeDefinitions:\n          - AttributeName: adminID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: adminID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    CustomerTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_customers\n        AttributeDefinitions:\n          - AttributeName: customerID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: customerID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    InfoTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_info\n        AttributeDefinitions:\n          - AttributeName: shopID\n            AttributeType: S\n        KeySchema:\n          - AttributeName: shopID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    ProductsTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_products\n        AttributeDefinitions:\n          - AttributeName: productID\n            AttributeType: N\n        KeySchema:\n          - AttributeName: productID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    IngredientsTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_ingredients\n        AttributeDefinitions:\n          - AttributeName: ingredientID\n            AttributeType: N\n        KeySchema:\n          - AttributeName: ingredientID\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n\n    OrdersTable:\n      Type: AWS::DynamoDB::Table\n      Properties:\n        TableName: easybake_orders\n        AttributeDefinitions:\n          - AttributeName: orderNO\n            AttributeType: N\n        KeySchema:\n          - AttributeName: orderNO\n            KeyType: HASH\n        BillingMode: PAY_PER_REQUEST\n",
     "command": [
       "deploy"
     ],
@@ -3536,38 +4112,38 @@
     "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:686255964174:stack/syntax-squad-dev/6bdc5600-abbf-11ef-a7e4-0e156b11bde1",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:686255964174:stack/syntax-squad-dev/6bdc5600-abbf-11ef-a7e4-0e156b11bde1",
     "serviceProviderAwsCfStackCreated": "2024-11-26T06:26:50.958Z",
-    "serviceProviderAwsCfStackUpdated": "2024-11-26T10:09:31.463Z",
+    "serviceProviderAwsCfStackUpdated": "2024-11-26T10:49:09.907Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
-        "OutputKey": "CreateCustomerLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createCustomer:24",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
-      },
-      {
-        "OutputKey": "GetCustomersLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getCustomers:24",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
-      },
-      {
         "OutputKey": "CreateAdminLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createAdmin:24",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createAdmin:27",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
       },
       {
+        "OutputKey": "GetAllProductsLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAllProducts:4",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
+      },
+      {
         "OutputKey": "GetAllIngredientsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAllIngredients:23",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAllIngredients:26",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "AddIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-addIngredient:23",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-addIngredient:26",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createProduct:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
@@ -3576,28 +4152,10 @@
         "ExportName": "sls-syntax-squad-dev-HttpApiId"
       },
       {
-        "OutputKey": "GetIngredientsByIdLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getIngredientsById:9",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
-      },
-      {
         "OutputKey": "GetAdminLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAdmin:24",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAdmin:27",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
-      },
-      {
-        "OutputKey": "DeleteIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteIngredient:14",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
-      },
-      {
-        "OutputKey": "EditIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-editIngredient:15",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
@@ -3609,6 +4167,36 @@
         "OutputValue": "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-syntax-squad-dev-HttpApiUrl"
+      },
+      {
+        "OutputKey": "CreateCustomerLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createCustomer:27",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetCustomersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getCustomers:27",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetIngredientsByIdLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getIngredientsById:12",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteIngredientLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteIngredient:17",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "EditIngredientLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-editIngredient:18",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
       }
     ]
   }

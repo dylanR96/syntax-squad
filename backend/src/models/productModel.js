@@ -1,38 +1,30 @@
 import { db } from "../config/dynamoConfig.js";
-import { nanoid } from "nanoid";
+import { PRODUCTS_TABLE } from "../constants/tableNames.js";
+import { createID } from "../utils/dynamodbHelper.js";
 
-import { CUSTOMERS_TABLE } from '../constants/tableNames.js'
-
-export const customerModel = {
-  createCustomer: async (customerData) => {
+export const productModel = {
+  createProduct: async (productData) => {
     const params = {
-      TableName: CUSTOMERS_TABLE,
+      TableName: PRODUCTS_TABLE,
       Item: {
-        customerID: nanoid(),
-        email: customerData.email,
-        password: customerData.password,
-        firstname: customerData.firstname,
-        surname: customerData.surname,
-        address: customerData.address,
-        zipcode: customerData.zipcode,
-        city: customerData.city,
-        phoneNumber: customerData.phoneNumber,
+        productID: await createID(PRODUCTS_TABLE, "productID", 100),
+        productName: productData.name,
+        ingredients: productData.ingredients,
+        tags: productData.tags,
+        price: productData.price,
+        specialOffer: productData.specialOffer,
+        description: productData.description,
         createdAt: new Date().toISOString(),
       },
     };
-  
-    const data = await db.put(params)
-    console.log(data);
+
+    const data = await db.put(params);
     return data;
   },
-  getCustomers: async () => {
-    const { Items } = await db.scan({TableName: CUSTOMERS_TABLE});
+  getAllProducts: async () => {
+    const { Items } = await db.scan({ TableName: PRODUCTS_TABLE });
     return Items;
   },
-  deleteCustomer: async () => {
-
-  },
-  editCustomer: async () => {
-
-  }
-}
+  deleteCustomer: async () => {},
+  editCustomer: async () => {},
+};

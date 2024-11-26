@@ -28,20 +28,20 @@ functions:
     handler: src/handlers/adminHandler.createAdmin
     events:
       - httpApi:
-          path: /createAdmin
+          path: /admin
           method: POST
   getAdmin:
     handler: src/handlers/adminHandler.getAdmin
     events:
       - httpApi:
-          path: /getAdmin/{adminID}
+          path: /admin/{adminID}
           method: GET
   # Customers
   createCustomer:
     handler: src/handlers/customerHandler.createCustomer
     events:
       - httpApi:
-          path: /createCustomer
+          path: /customer
           method: POST
   getCustomers:
     handler: src/handlers/customerHandler.getCustomers
@@ -54,32 +54,44 @@ functions:
     handler: src/handlers/ingredientHandler.addIngredient
     events:
       - httpApi:
-          path: /addIngredient
+          path: /ingredient
           method: POST
   deleteIngredient:
     handler: src/handlers/ingredientHandler.deleteIngredient
     events:
       - httpApi:
-          path: /deleteIngredient
-          method: POST
+          path: /ingredient
+          method: DELETE
   editIngredient:
     handler: src/handlers/ingredientHandler.editIngredient
     events:
       - httpApi:
-          path: /editIngredient
-          method: POST
+          path: /ingredient
+          method: PUT
   getIngredientsById:
     handler: src/handlers/ingredientHandler.getIngredientsByIds
     events:
       - httpApi:
-          path: /getIngredients
+          path: /ingredientsById
           method: POST
   getAllIngredients:
     handler: src/handlers/ingredientHandler.getAllIngredients
     events:
       - httpApi:
-          path: /getAllIngredients
+          path: /ingredients
           method: GET
+  getAllProducts:
+    handler: src/handlers/productHandler.getAllProducts
+    events:
+      - httpApi:
+          path: /products
+          method: GET
+  createProduct:
+    handler: src/handlers/productHandler.createProduct
+    events:
+      - httpApi:
+          path: /product
+          method: POST
 
 resources:
   Resources:

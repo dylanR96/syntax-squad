@@ -11,7 +11,7 @@ export const ingredientModel = {
         ingredientName: ingredientData.name,
         stock: ingredientData.stock,
         units: ingredientData.units,
-        priceForExtra: ingredientData.priceForExtra,
+        pricePerUnit: ingredientData.pricePerUnit,
         exchangeFor: ingredientData.exchangeFor,
       },
     };
