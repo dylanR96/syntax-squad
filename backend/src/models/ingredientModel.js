@@ -41,7 +41,6 @@ export const ingredientModel = {
       },
     };
     const data = await db.batchGet(params);
-    console.log(data.Responses[INGREDIENTS_TABLE]);
     return data.Responses[INGREDIENTS_TABLE];
   },
   editIngredient: async (ingredientData) => {
