@@ -14,28 +14,46 @@ body {
     min-height: 100svh;
   }
     
-  .profile-section {
+  main {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    height: 100%;
+    height: auto;
+  }
+
+  .profile__container {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
   
-  .profile-image {
+  .profile__image {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
   }
   
-  .profile-name, .profile-header {
+  .profile__name {
     color: #442A07;
     margin-top: 10px;
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
     font-family: 'Aclonica', sans-serif;
+  }
+  
+  .profile__header {
+    color: #442A07;
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
   }
 
   .product-template {
@@ -46,19 +64,23 @@ body {
     margin-bottom: 20px;
   }
   
-  .edit-link {
-    font-size: 0.8em;
-    color: #d97673;
+  .profile__edit-link {
+    font-size: 1.1em;
+    color: black;
     cursor: pointer;
+    font-family: 'Afacad', sans-serif;
   }
   
-  .profile-form {
+  .profile__form {
     max-width: 450px;
     margin-top: 20px;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .form-group {
+  .profile__form-group {
+    width: 300px;
     font-family: 'Afacad', sans-serif;
     display: flex;
     align-items: center;
@@ -69,11 +91,11 @@ body {
     background-color: #FCF6EE;
   }
   
-  .icon {
+  .profile__form-group .profile__icon {
     margin-right: 10px;
   }
   
-  input {
+  .profile__form-group .profile__input {
     font-family: 'Afacad', sans-serif;
     background-color: #FCF6EE;
     border: none;
@@ -82,7 +104,7 @@ body {
     font-size: 1.2em;
   }
   
-  .save-button {
+  .profile__save-button {
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
@@ -94,7 +116,7 @@ body {
     cursor: pointer;
   }
   
-  .social-icons span {
+  .social-icons__icon {
     margin: 0 10px;
     font-size: 1.2em;
     cursor: pointer;

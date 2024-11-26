@@ -1,12 +1,29 @@
-import { createBrowserRouter } from "react-router-dom";
-import EditProfile from "../pages/Profile/EditProfile";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+import Header from "../components/layout/Header/Header";
+import Footer from "../components/layout/Footer/Footer";
 import Profile from "../pages/Profile/UserProfile";
-
+import EditProfile from "../pages/Profile/EditProfile";
+const Layout = () => {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <Login />,
-  // },
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      // {
+      //   path: "/login",
+      //   element: <Login />,
+      // },
+    ],
+  },
+
   // {
   //   path: "/home",
   //   element: <Home />,

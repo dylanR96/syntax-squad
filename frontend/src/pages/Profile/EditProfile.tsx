@@ -8,14 +8,16 @@ import EditProfileForm from "../../components/forms/EditProfileForm";
 const EditProfile: React.FC = () => {
   return <div className="wrapper">
     <Header />
-  <div className="profile-section">
-    <img className="profile-image" src={profilePicture} alt="Profile Picture" />
-    <h2 className="profile-name">John Dough</h2><span className="edit-link">Edit</span>
+  <main>
+    <div className="profile__container">
+    <img className="profile__image" src={profilePicture} alt="Profile Picture" />
+    <h2 className="profile__name">John Dough</h2><span className="profile__edit-link">Edit</span>
+    </div>
     <EditProfileForm />
-  </div>
+  </main>
 
   <Footer />
-</div>
+  </div>
 };
 
 export default EditProfile;
