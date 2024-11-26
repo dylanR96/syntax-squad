@@ -125,7 +125,7 @@ resources:
         TableName: easybake_products
         AttributeDefinitions:
           - AttributeName: productID
-            AttributeType: S
+            AttributeType: N
         KeySchema:
           - AttributeName: productID
             KeyType: HASH

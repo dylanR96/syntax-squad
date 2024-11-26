@@ -1,12 +1,13 @@
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
 import { db } from "../config/dynamoConfig.js";
+import { createID } from "../utils/dynamodbHelper.js";
 
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
     const params = {
       TableName: INGREDIENTS_TABLE,
       Item: {
-        ingredientID: await getNewId(),
+        ingredientID: await createID(INGREDIENTS_TABLE, "ingredientID", 10000),
         ingredientName: ingredientData.name,
         stock: ingredientData.stock,
         units: ingredientData.units,
@@ -32,12 +33,10 @@ export const ingredientModel = {
     return data;
   },
   getIngredientsByIds: async (ingredientIDs) => {
-    //const ingredientIDs = [10003, 10004];
-
     const params = {
       RequestItems: {
         [INGREDIENTS_TABLE]: {
-          Keys: ingredientIDs, // Pass the array of keys
+          Keys: ingredientIDs,
         },
       },
     };
@@ -49,7 +48,7 @@ export const ingredientModel = {
     const params = {
       TableName: INGREDIENTS_TABLE,
       Key: {
-        ingredientID: ingredientData.ingredientID, // Identify the item to update
+        ingredientID: ingredientData.ingredientID,
       },
       UpdateExpression: `SET 
         ingredientName = :name, 
@@ -69,18 +68,4 @@ export const ingredientModel = {
     const data = db.update(params);
     return data;
   },
-};
-
-// Vet inte om detta är rätt väg att gå.
-// Om vi använder den bör vi köra den dynamiskt så att vi kan använda denna funktion i fler tabeller
-const getNewId = async () => {
-  // Scan the table to get all existing IDs
-  const { Items } = await db.scan({ TableName: INGREDIENTS_TABLE });
-
-  // Extract the IDs and find the maximum
-  const ids = Items.map((item) => item.ingredientID);
-  const maxId = ids.length > 0 ? Math.max(...ids) : 10000;
-
-  // Return the next ID as a string
-  return maxId + 1;
 };
