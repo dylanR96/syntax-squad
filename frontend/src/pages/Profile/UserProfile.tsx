@@ -10,7 +10,7 @@ const UserProfile: React.FC = () => {
     <Header />
   <div className="profile-section">
     <img className="profile-image" src={profilePicture} alt="Profile Picture" />
-    <h2>John Dough <span className="edit-link">Edit</span></h2>
+    <h2 className="profile-name">John Dough</h2><span className="edit-link">Edit</span>
     <EditProfile />
   </div>
 
