@@ -1,5 +1,5 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: dylanr96
+org: fedandreas
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: syntax-squad
 
@@ -20,8 +20,10 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
+            - dynamodb:BatchGetItem
           Resource: "*"
 functions:
+  # Admin
   createAdmin:
     handler: src/handlers/adminHandler.createAdmin
     events:
@@ -34,6 +36,7 @@ functions:
       - httpApi:
           path: /getAdmin/{adminID}
           method: GET
+  # Customers
   createCustomer:
     handler: src/handlers/customerHandler.createCustomer
     events:
@@ -46,7 +49,37 @@ functions:
       - httpApi:
           path: /customers
           method: GET
-
+  # Ingredients
+  addIngredient:
+    handler: src/handlers/ingredientHandler.addIngredient
+    events:
+      - httpApi:
+          path: /addIngredient
+          method: POST
+  deleteIngredient:
+    handler: src/handlers/ingredientHandler.deleteIngredient
+    events:
+      - httpApi:
+          path: /deleteIngredient
+          method: POST
+  editIngredient:
+    handler: src/handlers/ingredientHandler.editIngredient
+    events:
+      - httpApi:
+          path: /editIngredient
+          method: POST
+  getIngredientsById:
+    handler: src/handlers/ingredientHandler.getIngredientsByIds
+    events:
+      - httpApi:
+          path: /getIngredients
+          method: POST
+  getAllIngredients:
+    handler: src/handlers/ingredientHandler.getAllIngredients
+    events:
+      - httpApi:
+          path: /getAllIngredients
+          method: GET
 
 resources:
   Resources:
@@ -103,10 +136,10 @@ resources:
       Properties:
         TableName: easybake_ingredients
         AttributeDefinitions:
-          - AttributeName: ingredientsID
-            AttributeType: S
+          - AttributeName: ingredientID
+            AttributeType: N
         KeySchema:
-          - AttributeName: ingredientsID
+          - AttributeName: ingredientID
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
 
@@ -116,7 +149,7 @@ resources:
         TableName: easybake_orders
         AttributeDefinitions:
           - AttributeName: orderNO
-            AttributeType: S
+            AttributeType: N
         KeySchema:
           - AttributeName: orderNO
             KeyType: HASH
