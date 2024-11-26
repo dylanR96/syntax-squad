@@ -10,6 +10,14 @@ const EditProfile = () => {
     <input type="text" placeholder="Hemadressvägen 14" />
   </div>
   <div className="form-group">
+    <span className="icon">📍</span>
+    <input type="text" maxLength={5} inputMode="numeric" placeholder="Postnummer" />
+  </div>
+  <div className="form-group">
+    <span className="icon">📍</span>
+    <input type="text" placeholder="Ort" />
+  </div>
+  <div className="form-group">
     <span className="icon">📞</span>
     <input type="tel" placeholder="07012345678" />
   </div>

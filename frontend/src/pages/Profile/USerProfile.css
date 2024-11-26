@@ -1,5 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Afacad:regular);
+
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fffaf5;
@@ -8,7 +9,7 @@ body {
   .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     min-height: 100svh;
   }
     
@@ -43,16 +44,18 @@ body {
   .profile-form {
     max-width: 450px;
     margin-top: 20px;
+
   }
   
   .form-group {
+    font-family: 'Afacad', sans-serif;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
     border: 1px solid #d97673;
     border-radius: 5px;
     padding: 10px;
-    background-color: #fff;
+    background-color: #FCF6EE;
   }
   
   .icon {
@@ -60,20 +63,22 @@ body {
   }
   
   input {
+    font-family: 'Afacad', sans-serif;
+    background-color: #FCF6EE;
     border: none;
     outline: none;
     flex: 1;
-    font-size: 1em;
+    font-size: 1.2em;
   }
   
   .save-button {
-    width: 100%;
+    width: 200px;
     padding: 10px;
-    background-color: #b2d4cf;
-    color: #fff;
+    background-color: #C3D5D9;
+    color: black;
     font-size: 1em;
     font-weight: bold;
-    border: none;
+    border: 1px solid #307383;
     border-radius: 5px;
     cursor: pointer;
   }
