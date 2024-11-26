@@ -19,7 +19,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    height: auto;
+    /* height: auto; */
   }
 
   .profile__container {
@@ -80,6 +80,7 @@ body {
   }
   
   .profile__form-group {
+    height: 25px;
     width: 300px;
     font-family: 'Afacad', sans-serif;
     display: flex;
@@ -98,20 +99,46 @@ body {
   .profile__form-group .profile__input {
     font-family: 'Afacad', sans-serif;
     background-color: #FCF6EE;
+    color:#442A07;
     border: none;
     outline: none;
     flex: 1;
     font-size: 1.2em;
   }
   
+  button {
+    font-family: 'Afacad', sans-serif;
+  }
   .profile__save-button {
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
     color: black;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: bold;
     border: 1px solid #307383;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .profile__edit-button {
+    width: 200px;
+    padding: 10px;
+    background-color: #C3D5D9;
+    color: #442A07;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #307383;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .profile__logout-button {
+    width: 200px;
+    padding: 10px;
+    background-color: #CC8D80;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 1px solid #442A07;
     border-radius: 5px;
     cursor: pointer;
   }

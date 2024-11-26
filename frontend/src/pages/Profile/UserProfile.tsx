@@ -5,19 +5,18 @@ import Header from "../../components/layout/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 
 const Profile: React.FC = () => {
-  return <>
+  return <div className="wrapper">
     <Header />
   <main>
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
     <h2 className="profile__name">John Dough</h2>
-    <h2 className="profile-header">Mina favoriter</h2>
-    <div className="product-template"></div>
-    <div className="product-template"></div>
-    <h2 className="profile-header">Orderhistorik</h2>
+    <h2 className="profile__header">Orderhistorik</h2>
+    <button className="profile__edit-button" type="submit">Ändra profil</button>
+    <button className="profile__logout-button" type="submit">Logga ut</button>
   </main>
 
   <Footer />
-</>
+</div>
 };
 
 export default Profile;
