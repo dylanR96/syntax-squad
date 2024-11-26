@@ -4,7 +4,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #fffaf5;
+    background-color: #fff;
   }
   
   .wrapper {
@@ -29,12 +29,21 @@ body {
     object-fit: cover;
   }
   
-  .profile-name {
+  .profile-name, .profile-header {
+    color: #442A07;
     margin-top: 10px;
     font-size: 1.5em;
     font-weight: bold;
     text-align: center;
     font-family: 'Aclonica', sans-serif;
+  }
+
+  .product-template {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    margin-bottom: 20px;
   }
   
   .edit-link {

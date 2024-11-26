@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import EditProfile from "../pages/Profile/EditProfile";
+import Profile from "../pages/Profile/UserProfile";
 
 const router = createBrowserRouter([
   // {
@@ -30,10 +31,10 @@ const router = createBrowserRouter([
   //   path: "/orders",
   //   element: <Orders />,
   // },
-  // {
-  //   path: "/profile",
-  //   element: <Profile />,
-  // },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
   {
     path: "/profile/edit",
     element: <EditProfile />,
