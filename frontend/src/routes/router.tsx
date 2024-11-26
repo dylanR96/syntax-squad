@@ -1,7 +1,7 @@
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Recipe from "../pages/Recipe/Recipe";
 
-const routes: RouteObject[] = [
+const router = createBrowserRouter([
   // {
   //   path: "/",
   //   element: <Login />,
@@ -10,10 +10,10 @@ const routes: RouteObject[] = [
   //   path: "/home",
   //   element: <Home />,
   // },
-  {
-    path: "/recipe/",
-    element: <Recipe/>,
-  },
+{
+  path: "/recipe",
+  element: <Recipe />,
+},
   // {
   //   path: "/checkout",
   //   element: <Checkout />,
@@ -30,10 +30,10 @@ const routes: RouteObject[] = [
   //   path: "/orders",
   //   element: <Orders />,
   // },
-  //{
-  //path: "/profile",
-  //element: <UserProfile />,
-  //},
+  // {
+  //   path: "/profile",
+  //   element: <Profile />,
+  // },
   // {
   //   path: "/profile/edit",
   //   element: <EditProfile />,
@@ -42,9 +42,6 @@ const routes: RouteObject[] = [
   //   path: "/about",
   //   element: <About />,
   // },
-];
-
-const router = createBrowserRouter(routes);
+]);
 
 export default router;
-

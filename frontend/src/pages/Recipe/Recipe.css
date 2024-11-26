@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1.25rem 1.25rem;
+}
+
+.recipe__upperbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipe__upperbox-img {
+  width: 100%;
+  height: 208px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.recipe__title {
+  font-family: "Aclonica", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1.25em;
+}
+
+.recipe__info-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 0.625rem;
+  margin-top: 1.25em;
+  gap: 20px;
+  text-align: center;
+  background: #c3d5d9;
+}
+
+.recipe__info-box-text {
+  font-family: "Afacad", sans-serif;
+  font-size: 1rem;
+  color: #442a07;
+}
+
+.recipe__body-text {
+  font-family: "Afacad", sans-serif;
+  font-size: 1rem;
+  color: #442a07;
+  margin-top: 1.25em;
+  line-height: 1.5;
+}
+
+.recipe__lowerbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  background: #fcf6ee;
+  border-radius: 5px;
+  padding: 0 1.25em 1.25em 1.25em;
+  border: 1px solid #ecdfce;
+  margin-top: 1.25em;
+}
+
+.recipe__sub-title {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #442a07;
+  margin-top: 1.25em;
+}
+
+.recipe__label {
+  display: flex;
+  align-items: center; /* Centrerar texten med checkboxen */
+  gap: 0.625em; /* Mellanrum mellan checkbox och text */
+  font-family: "Afacad", sans-serif;
+  font-size: 1rem;
+  color: #442a07;
+}
+
+.recipe__input-container {
+  margin-bottom: 10px; /* Mellanrum mellan varje checkbox och label */
+}
+
+.recipe__input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.recipe__input:checked {
+  background-color: #442a07;
+  border-color: #442a07;
+  position: relative;
+}
+
+.recipe__input:checked::after {
+  content: "✔";
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.recipe__form {
+  margin-top: 1.25em;
+}
+
+.recipe__button {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 0.3125em 1.25em;
+  width: 100%;
+  background: #cc8d80;
+  border-radius: 5px;
+  border: 1px solid #442a07;
+  cursor: pointer;
+}
+
+.recipe__lowerbox--upperbox-info {
+  width: 100%;
+}
+.recipe__lowerbox--lowerbox-info {
+  width: 100%;
+}
+
+.recipe__total-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.recipe__total-text {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  color: #442a07;
+  margin-top: 1.25em;
+  font-weight: 300;
+}
+
+.recipe__total-text--bold {
+  font-weight: 700;
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  color: #442a07;
+  margin-top: 1.25em;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin: 6.25em 1.25em;
+  }
+
+  .recipe__upperbox {
+    max-width: 900px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 80px;
+  }
+
+  .recipe__lowerbox {
+    max-width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 80px;
+  }
+
+  .recipe__lowerbox--upperbox-info {
+    width: 50%;
+  }
+  .recipe__lowerbox--lowerbox-info {
+    width: 50%;
+  }
+
+  .recipe__title {
+    margin-top: 0;
+    font-size: 2.25rem;
+  }
+}
