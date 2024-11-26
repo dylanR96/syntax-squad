@@ -11,6 +11,21 @@ const Profile: React.FC = () => {
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
     <h2 className="profile__name">John Dough</h2>
     <h2 className="profile__header">Orderhistorik</h2>
+    <div className="profile__order-history">
+    <a href="#"><p className="profile__order-number">874763472</p></a>
+      <p className="profile__order-amount">80 kr</p>
+      <p className="profile__order-date">2021-09-01 11:43</p>
+    </div>
+    <div className="profile__order-history">
+    <a href="#"><p className="profile__order-number">874763472</p></a>
+      <p className="profile__order-amount">180 kr</p>
+      <p className="profile__order-date">2021-10-15 12:54</p>
+    </div>
+    <div className="profile__order-history">
+    <a href="#"><p className="profile__order-number">874763472</p></a>
+      <p className="profile__order-amount">59 kr</p>
+      <p className="profile__order-date">2023-04-05 08:15</p>
+    </div>
     <button className="profile__edit-button" type="submit">Ändra profil</button>
     <button className="profile__logout-button" type="submit">Logga ut</button>
   </main>

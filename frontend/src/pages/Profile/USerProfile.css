@@ -1,17 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Afacad:regular);
 @import url(https://fonts.googleapis.com/css?family=Aclonica:regular);
 
-body {
+body, html {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    height: 100%;
   }
   
   .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 100svh;
+    height: 100%;
   }
     
   main {
@@ -19,7 +20,8 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    /* height: auto; */
+    height: 100%;
+    flex: 1;
   }
 
   .profile__container {
@@ -50,10 +52,19 @@ body {
   .profile__header {
     color: #442A07;
     font-family: 'Aclonica', sans-serif;
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1.3em;
+    font-weight: normal;
     margin-top: 10px;
     text-align: center;
+  }
+  .profile__order-history {
+    font-family: 'Afacad', sans-serif;
+    width: 370px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
   }
 
   .product-template {
@@ -121,6 +132,7 @@ body {
     cursor: pointer;
   }
   .profile__edit-button {
+    margin-bottom: 10px;
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
@@ -149,3 +161,31 @@ body {
     cursor: pointer;
   }
   
+  @media screen and (min-width: 768px) {
+    .profile__name {
+      color: #442A07;
+      margin-top: 10px;
+      font-size: 2.3em;
+      font-weight: bold;
+      text-align: center;
+    }
+    .profile__image {
+      width: 200px;
+      height: 200px;
+    }
+    .profile__container {
+      width: 600px;
+    }
+    .profile__header {
+      font-size: 1.8em;
+    }
+    .profile__order-history {
+      width: 470px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: -10px;
+      font-size: 1.3em;
+    }
+  }
