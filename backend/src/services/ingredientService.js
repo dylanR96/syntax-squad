@@ -34,8 +34,4 @@ export const IngredientService = {
     // Needs to check if the ingredientData.ingredientID exists
     return await ingredientModel.editIngredient(ingredientData);
   },
-  // getAdmin: async (data) => {
-  //     //validering(middleware)
-  //     return await adminModel.getAdmin(data);
-  //   }
 };
