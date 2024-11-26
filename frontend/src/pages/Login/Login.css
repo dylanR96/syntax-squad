@@ -1,10 +1,24 @@
 .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login__title {
+  color: #cc8d80;
+  font-family: "Aclonica";
+  font-size: 2rem;
+  margin: 0 0 2rem 0;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  margin: 0 2rem;
+  padding: 0 2rem;
+  width: 100%;
+  max-width: 364px;
 }
 
 .login-form__input {
@@ -76,4 +90,81 @@
 .social-media__icon {
   width: 2rem;
   height: 2rem;
+}
+
+.dotted-line {
+  display: none;
+}
+
+.slogan-top {
+  display: none;
+}
+.slogan-bottom {
+  display: none;
+}
+
+@media only screen and (min-width: 769px) {
+  .main-login {
+    display: flex;
+  }
+
+  .login {
+    flex: 1;
+  }
+
+  .slogan-background {
+    flex: 1;
+    background: url("../../assets/images/baking-background.jpg") no-repeat
+      center center;
+    background-size: cover;
+    clip-path: path(
+      "M188.69 599.764C3.31534 747.66 -11.1112 981.545 4.84734 1080H963V0H442.751C135.069 174.245 420.409 414.894 188.69 599.764Z"
+    );
+    /* filter: blur(4px); */
+    filter: brightness(50%);
+  }
+
+  .dotted-line {
+    display: block;
+    position: absolute;
+    top: 40%;
+    right: 5%;
+  }
+
+  .slogan-top {
+    display: block;
+    position: absolute;
+    top: 43%;
+    right: 8%;
+    color: #ffffff;
+    font-family: "Aclonica";
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .slogan-bottom {
+    display: block;
+    position: absolute;
+    top: 55%;
+    right: 15%;
+    color: #ffffff;
+    font-family: "Aclonica";
+    font-size: 2rem;
+    font-weight: 400;
+  }
+}
+
+@media only screen and (min-height: 1081px) {
+  .slogan-background {
+    clip-path: path(
+      "M251.587 799.685C4.42044 996.879 -14.815 1308.73 6.46312 1440H1284V0H590.334C180.092 232.327 560.545 553.192 251.587 799.685Z"
+    );
+  }
+}
+
+@media only screen and (min-height: 1441px) {
+  .slogan-background {
+    clip-path: path(
+      "M377.38 1199.53C6.63066 1495.32 -22.2225 1963.09 9.69468 2160H1926V0H885.501C270.139 348.49 840.817 829.788 377.38 1199.53Z"
+    );
+  }
 }

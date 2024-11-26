@@ -1,10 +1,11 @@
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/easybakelogo.svg";
 import { NavLink } from "react-router-dom";
 
 const Register = () => {
   return (
     <main className="login">
-      <img src={logo} alt="" />
+      <img src={logo} alt="Easybake logo" />
+      <h1 className="login__title">Easybake</h1>
       <form className="login-form" action="">
         <input
           className="login-form__input"
@@ -35,7 +36,7 @@ const Register = () => {
       <div className="alternative-login">
         <p className="alternative-login__text">
           Har du redan ett konto?{" "}
-          <NavLink to={"/login"} className="alternative-login__link">
+          <NavLink to={"/"} className="alternative-login__link">
             Logga in
           </NavLink>
         </p>
