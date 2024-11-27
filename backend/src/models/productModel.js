@@ -25,6 +25,49 @@ export const productModel = {
     const { Items } = await db.scan({ TableName: PRODUCTS_TABLE });
     return Items;
   },
-  deleteCustomer: async () => {},
-  editCustomer: async () => {},
+
+  getProduct: async (productID) => {
+    const params = {
+      TableName: PRODUCTS_TABLE,
+      Key: { productID },
+    };
+    const { Item: data } = await db.get(params);
+    return data;
+  },
+
+  editProduct: async (productData) => {
+    const params = {
+      TableName: PRODUCTS_TABLE,
+      Key: {
+        productID: productData.productID,
+      },
+      UpdateExpression: `SET 
+        productName = :productName,
+        ingredients = :ingredients,
+        tags = :tags,
+        price = :price,
+        specialOffer = :specialOffer,
+        description = :description`,
+      ExpressionAttributeValues: {
+        ":productName": productData.productName,
+        ":ingredients": productData.ingredients,
+        ":tags": productData.tags,
+        ":price": productData.price,
+        ":specialOffer": productData.specialOffer,
+        ":description": productData.description,
+      },
+      ReturnValues: "ALL_NEW", // Return the updated item
+    };
+    const data = db.update(params);
+    return data;
+  },
+
+  deleteProduct: async (productID) => {
+    const params = {
+      TableName: PRODUCTS_TABLE,
+      Key: { productID },
+    };
+    const data = await db.delete(params);
+    return data;
+  },
 };

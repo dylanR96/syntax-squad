@@ -13,19 +13,43 @@ export const adminModel = {
         createdAt: new Date().toISOString(),
       },
     };
-  
-    const data = await db.put(params)
+
+    const data = await db.put(params);
     return data;
   },
+
   getAdmin: async (adminID) => {
     const params = {
-        TableName: ADMIN_TABLE,
-        Key: {adminID}
-      };
-      const data = await db.get(params)
-      return data;
+      TableName: ADMIN_TABLE,
+      Key: { adminID },
+    };
+    const data = await db.get(params);
+    return data;
   },
-  deleteAdmin: async () => {
 
-  }
-}
+  changeEmail: async (adminData) => {
+    const params = {
+      TableName: ADMIN_TABLE,
+      Key: {
+        adminID: adminData.adminID,
+      },
+      UpdateExpression: `SET 
+        email = :email`,
+      ExpressionAttributeValues: {
+        ":email": adminData.email,
+      },
+      ReturnValues: "ALL_NEW", // Return the updated item
+    };
+    const data = db.update(params);
+    return data.Attributes.email;
+  },
+
+  deleteAdmin: async (adminID) => {
+    const params = {
+      TableName: ADMIN_TABLE,
+      Key: { adminID },
+    };
+    const data = await db.delete(params);
+    return data;
+  },
+};

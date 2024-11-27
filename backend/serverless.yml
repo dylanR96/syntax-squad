@@ -1,5 +1,5 @@
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: dylanr96
+org: fedandreas
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: syntax-squad
 
@@ -36,6 +36,18 @@ functions:
       - httpApi:
           path: /admin/{adminID}
           method: GET
+  changeEmailAdmin:
+    handler: src/handlers/adminHandler.changeEmail
+    events:
+      - httpApi:
+          path: /admin
+          method: PUT
+  deleteAdmin:
+    handler: src/handlers/adminHandler.deleteAdmin
+    events:
+      - httpApi:
+          path: /admin/{adminID}
+          method: DELETE
   # Customers
   createCustomer:
     handler: src/handlers/customerHandler.createCustomer
@@ -49,6 +61,24 @@ functions:
       - httpApi:
           path: /customers
           method: GET
+  getCustomer:
+    handler: src/handlers/customerHandler.getCustomer
+    events:
+      - httpApi:
+          path: /customer/{customerID}
+          method: GET
+  editCustomer:
+    handler: src/handlers/customerHandler.editCustomer
+    events:
+      - httpApi:
+          path: /customer
+          method: PUT
+  deleteCustomer:
+    handler: src/handlers/customerHandler.deleteCustomer
+    events:
+      - httpApi:
+          path: /customer/{customerID}
+          method: DELETE
   # Ingredients
   addIngredient:
     handler: src/handlers/ingredientHandler.addIngredient
@@ -87,12 +117,30 @@ functions:
       - httpApi:
           path: /products
           method: GET
+  getProduct:
+    handler: src/handlers/productHandler.getProduct
+    events:
+      - httpApi:
+          path: /product/{productID}
+          method: GET
   createProduct:
     handler: src/handlers/productHandler.createProduct
     events:
       - httpApi:
           path: /product
           method: POST
+  editProduct:
+    handler: src/handlers/productHandler.editProduct
+    events:
+      - httpApi:
+          path: /product
+          method: PUT
+  deleteProduct:
+    handler: src/handlers/productHandler.deleteProduct
+    events:
+      - httpApi:
+          path: /product/{productID}
+          method: DELETE
   # Orders
   createOrder:
     handler: src/handlers/orderHandler.createOrder
