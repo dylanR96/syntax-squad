@@ -5,6 +5,7 @@ import Profile from "../pages/Profile/UserProfile";
 import EditProfile from "../pages/Profile/EditProfile";
 import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
+import About from "../pages/About/About";
 
 
 const Layout = () => {
@@ -65,10 +66,10 @@ const router = createBrowserRouter([
     element: <EditProfile />,
   },
 
-  // {
-  //   path: "/about",
-  //   element: <About />,
-  // },
+  {
+    path: "/about",
+    element: <About />,
+  },
 ]);
 
 export default router;
