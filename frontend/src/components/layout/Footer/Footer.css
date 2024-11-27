@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Afacad:regular);
 
-footer {
+.footer__information {
     height: 150px;
     background-color: #fcf6ee;
     width: 100%;
@@ -8,19 +8,24 @@ footer {
     font-family: 'Afacad', sans-serif;
     color: #442A07;
   }
-  .social-icon {
+  .footer__social-icon {
     width: 40px;
     height: 40px;
   }
+  .footer__address, .footer__phone-no, .footer__email-address {
+    font-size: 1rem;
+  }
 
   @media screen and (min-width: 768px) {
-    footer {
+    .footer__information {
       height: auto;
       font-size: 1.7rem;
     }
-    .social-icon {
+    .footer__social-icon {
       width: 60px;
       height: 60px;
     }
-    
+    .footer__address, .footer__phone-no, .footer__email-address {
+      font-size: 1.5rem;
+    }
   }

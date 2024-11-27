@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Aclonica:regular);
+@import url(https://fonts.googleapis.com/css?family=Afacad:regular);
 
 * {
   box-sizing: border-box;
@@ -10,4 +11,8 @@ body {
 }
 h2 {
   font-family: 'Aclonica', sans-serif;
+}
+
+button {
+  font-family: 'Afacad', sans-serif;
 }

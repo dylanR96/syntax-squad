@@ -4,6 +4,8 @@ import profilePicture from "../../assets/images/profile_picture.png";
 import Header from "../../components/layout/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 import OrderEntry from "../../components/forms/OrderEntry";
+import ProfileEditButton from "../../components/ui/ProfileEditButton";
+import LogoutButton from "../../components/ui/LogoutButton";
 
 const Profile: React.FC = () => {
   return (
@@ -18,8 +20,12 @@ const Profile: React.FC = () => {
     <OrderEntry />
     <OrderEntry />
     <OrderEntry />
-    <button className="profile__edit-button" type="submit">Ändra profil</button>
-    <button className="profile__logout-button" type="submit">Logga ut</button>
+    <OrderEntry />
+    <OrderEntry />
+    <div className="profile__buttons">
+    <ProfileEditButton />
+    <LogoutButton />
+    </div>
   </main>
 
   <Footer />

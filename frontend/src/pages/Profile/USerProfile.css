@@ -61,7 +61,7 @@
     font-family: 'Aclonica', sans-serif;
     font-size: 1.3rem;
     font-weight: normal;
-    margin-top: 10px;
+    margin: 1em 0;
     text-align: center;
   }
   .profile__order-history {
@@ -71,6 +71,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin: 0.5em 0;
   }
 
   .product-template {
@@ -121,9 +122,11 @@
     flex: 1;
     font-size: 1.2rem;
   }
-  
-  button {
-    font-family: 'Afacad', sans-serif;
+  .profile__buttons {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .profile__save-button {
     width: 200px;
@@ -137,7 +140,7 @@
     cursor: pointer;
   }
   .profile__edit-button {
-    margin-bottom: 10px;
+    margin: 0.5em 0;
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
@@ -149,6 +152,7 @@
     cursor: pointer;
   }
   .profile__logout-button {
+    margin: 0.5em 0;
     width: 200px;
     padding: 10px;
     background-color: #CC8D80;
@@ -157,12 +161,6 @@
     font-weight: bold;
     border: 1px solid #442A07;
     border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .social-icons__icon {
-    margin: 0 10px;
-    font-size: 1.2rem;
     cursor: pointer;
   }
   
@@ -190,7 +188,21 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      margin-top: -10px;
       font-size: 1.3rem;
+    }
+    .profile__buttons {
+      width: 500px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+    }
+    .profile__logout-button {
+      margin: 2em 0;
+      width: 200px;
+      padding: 10px;
+      background-color: #CC8D80;
+      color: white;
+      font-size: 1.2rem;
     }
   }
