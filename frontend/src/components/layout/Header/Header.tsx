@@ -5,7 +5,7 @@ import Cart from "../../../assets/images/cart.svg";
 
 
 const Header = () => {
-  return <header>
+  return <header className="navbar__header">
     <img className="header-svg" src={Menu} />
 <div className="logo-plus-text">
     <img className="logo" src={Logo} alt="EasyBake Logo" />
