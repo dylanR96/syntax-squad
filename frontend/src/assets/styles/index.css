@@ -1,4 +1,5 @@
-/* Global element based styling */
+@import url(https://fonts.googleapis.com/css?family=Aclonica:regular);
+
 * {
   box-sizing: border-box;
 }
@@ -7,4 +8,8 @@ html {
 }
 body {
   margin: 0;
+  background-color: #FCF6EE;
+}
+h2 {
+  font-family: 'Aclonica', sans-serif;
 }

@@ -1,8 +1,12 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
-import Recipe from "../pages/Recipe/Recipe";
-import Login from "../pages/Login/Login";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
+import Profile from "../pages/Profile/UserProfile";
+import EditProfile from "../pages/Profile/EditProfile";
+import Recipe from "../pages/Recipe/Recipe";
+import Login from "../pages/Login/Login";
+
+
 const Layout = () => {
   return (
     <>
@@ -17,20 +21,24 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
+
       {
         path: "/login",
         element: <Login />,
       },
     ],
   },
+
   // {
   //   path: "/home",
   //   element: <Home />,
   // },
+
 {
   path: "/recipe",
   element: <Recipe />,
 },
+
   // {
   //   path: "/checkout",
   //   element: <Checkout />,
@@ -47,14 +55,16 @@ const router = createBrowserRouter([
   //   path: "/orders",
   //   element: <Orders />,
   // },
-  // {
-  //   path: "/profile",
-  //   element: <Profile />,
-  // },
-  // {
-  //   path: "/profile/edit",
-  //   element: <EditProfile />,
-  // },
+
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/profile/edit",
+    element: <EditProfile />,
+  },
+
   // {
   //   path: "/about",
   //   element: <About />,
