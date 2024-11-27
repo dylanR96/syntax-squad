@@ -3,12 +3,10 @@
 * {
   box-sizing: border-box;
 }
-html {
-  /* font-size: 10px; */
-}
+
 body {
   margin: 0;
-  background-color: #FCF6EE;
+  background-color: #fff;
 }
 h2 {
   font-family: 'Aclonica', sans-serif;

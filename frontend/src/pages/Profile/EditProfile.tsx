@@ -8,7 +8,7 @@ import EditProfileForm from "../../components/forms/EditProfileForm";
 const EditProfile: React.FC = () => {
   return <div className="wrapper">
     <Header />
-  <main>
+  <main className="container">
     <div className="profile__container">
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
     <h2 className="profile__name">John Dough</h2><span className="profile__edit-link">Edit</span>

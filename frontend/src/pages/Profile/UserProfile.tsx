@@ -5,11 +5,14 @@ import Header from "../../components/layout/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 
 const Profile: React.FC = () => {
-  return <div className="wrapper">
+  return (
+  <>
     <Header />
-  <main>
+  <main className="container">
+    <div className="profile__container">
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
     <h2 className="profile__name">John Dough</h2>
+    </div>
     <h2 className="profile__header">Orderhistorik</h2>
     <div className="profile__order-history">
     <a href="#"><p className="profile__order-number">874763472</p></a>
@@ -31,7 +34,7 @@ const Profile: React.FC = () => {
   </main>
 
   <Footer />
-</div>
-};
+  </>
+)};
 
 export default Profile;
