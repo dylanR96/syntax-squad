@@ -6,12 +6,16 @@ import Cart from "../../../assets/images/cart.svg";
 
 const Header = () => {
   return <header className="navbar__header">
-    <img className="header-svg" src={Menu} />
-<div className="logo-plus-text">
-    <img className="logo" src={Logo} alt="EasyBake Logo" />
+    <img className="navbar__menu" src={Menu} />
+    <div className="navbar__logo-and-text">
+    <img className="navbar__logo" src={Logo} alt="EasyBake Logo" />
     <h3>EasyBake</h3>
     </div>
-    <img className="header-svg" src={Cart} />
+    <nav className="navbar__nav">
+    <a href="#">Profil</a>
+    <a href="#">Om</a>
+    </nav>
+    <img className="navbar__cart" src={Cart} />
     </header>
 };
 

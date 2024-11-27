@@ -16,3 +16,7 @@ h2 {
 button {
   font-family: 'Afacad', sans-serif;
 }
+
+a {
+  text-decoration: none;
+}
