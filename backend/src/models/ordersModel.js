@@ -1,6 +1,7 @@
-import { db } from "../config/dynamoConfig";
-import { ORDERS_TABLE } from "../constants/tableNames";
+import { db } from "../config/dynamoConfig.js";
+import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { nanoid } from "nanoid";
+import { createID } from "../utils/dynamodbHelper.js";
 
 export const orderModel = {
     createOrder: async (orderData) => {
@@ -23,7 +24,7 @@ export const orderModel = {
     const data = await db.put(params);
     return data;
 },
-    changeOrder: async () => {
+    changeOrder: async (orderData) => {
         const params = {
             TableName: ORDERS_TABLE,
             Key: {
@@ -70,21 +71,28 @@ export const orderModel = {
     deleteOrder: async (orderData) => {
         const params = {
             TableName: ORDERS_TABLE,
-            Key: orderData.orderNO
+            Key: {
+                orderNO: orderData.orderNO
+            }
         }
         const data = await db.delete(params);
         return data;
     },
-    changeOrderStatus: async () => {
+    changeOrderStatus: async (orderData) => {
         const params = {
             TableName: ORDERS_TABLE,
             Key: {
               orderNO: orderData.orderNO,
             },
-            UpdateExpression: 'set #status = :status, #comment = :comment',
+            UpdateExpression: 
+            `
+                set 
+                    #status = :status,
+                    #comment = :comment
+            `,
             ExpressionAttributeNames: {
                 '#status': 'status',
-                '"comment': 'comment',
+                '#comment': 'comment',
             },
             ExpressionAttributeValues: {
                 ':status': orderData.status,

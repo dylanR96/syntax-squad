@@ -80,6 +80,7 @@ functions:
       - httpApi:
           path: /ingredients
           method: GET
+  # Products
   getAllProducts:
     handler: src/handlers/productHandler.getAllProducts
     events:
@@ -92,7 +93,31 @@ functions:
       - httpApi:
           path: /product
           method: POST
-
+  # Orders
+  createOrder:
+    handler: src/handlers/orderHandler.createOrder
+    events:
+      - httpApi:
+          path: /order
+          method: POST
+  changeOrder:
+    handler: src/handlers/orderHandler.changeOrder
+    events:
+      - httpApi:
+          path: /order
+          method: PUT
+  deleteOrder:
+    handler: src/handlers/orderHandler.deleteOrder
+    events:
+      - httpApi:
+          path: /order
+          method: DELETE
+  changeOrderStatus:
+    handler: src/handlers/orderHandler.changeOrderStatus
+    events:
+      - httpApi:
+          path: /orderById
+          method: PUT
 resources:
   Resources:
     AdminTable:
