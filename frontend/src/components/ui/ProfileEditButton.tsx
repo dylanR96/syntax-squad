@@ -4,7 +4,7 @@ const ProfileEditButton = () => {
   const navigate = useNavigate();
 
   const handleEditClick = () => {
-    navigate("/profile/edit"); // Navigera till profile/edit
+    navigate("/profile/edit");
   };
 
   return (

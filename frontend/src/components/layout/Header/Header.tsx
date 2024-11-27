@@ -2,6 +2,7 @@ import "./Header.css";
 import Logo from "../../../assets/images/logo.png";
 import Menu from "../../../assets/images/menu.svg";
 import Cart from "../../../assets/images/cart.svg";
+import { Link } from "react-router-dom";
 
 
 const Header = () => {
@@ -12,8 +13,8 @@ const Header = () => {
     <h3>EasyBake</h3>
     </div>
     <nav className="navbar__nav">
-    <a href="#">Profil</a>
-    <a href="#">Om</a>
+    <Link to="/profile">Profil</Link>
+    <Link to="/about">Om</Link>
     </nav>
     <img className="navbar__cart" src={Cart} />
     </header>
