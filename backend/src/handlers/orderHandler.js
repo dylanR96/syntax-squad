@@ -1,5 +1,5 @@
-import { orderService } from "../services/ordersService";
-import { sendResponse, sendError } from "../utils/responseHelper";
+import { orderService } from "../services/orderService.js";
+import { sendResponse, sendError } from "../utils/responseHelper.js";
 
 export const createOrder = async(event) => {
 try {
