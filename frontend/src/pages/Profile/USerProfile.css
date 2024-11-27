@@ -13,6 +13,7 @@ body, html {
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    width: 100%;
   }
     
   main {
@@ -170,8 +171,8 @@ body, html {
       text-align: center;
     }
     .profile__image {
-      width: 200px;
-      height: 200px;
+      width: 175px;
+      height: 175px;
     }
     .profile__container {
       width: 600px;
