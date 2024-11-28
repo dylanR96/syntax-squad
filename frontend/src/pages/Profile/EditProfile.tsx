@@ -1,13 +1,10 @@
 import React from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
-import Header from "../../components/layout/Header/Header";
-import Footer from "../../components/layout/Footer/Footer";
 import EditProfileForm from "./EditProfileForm";
 
 const EditProfile: React.FC = () => {
   return <div className="wrapper">
-    <Header />
   <main className="container">
     <div className="profile__container">
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
@@ -15,8 +12,6 @@ const EditProfile: React.FC = () => {
     </div>
     <EditProfileForm />
   </main>
-
-  <Footer />
   </div>
 };
 
