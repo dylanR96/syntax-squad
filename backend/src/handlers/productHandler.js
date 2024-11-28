@@ -1,10 +1,15 @@
 import { ProductService } from "../services/productService.js";
 import { sendError, sendResponse } from "../utils/responseHelper.js";
+import { createProductSchema, deleteProductSchema, editProductSchema, getProductSchema } from "../validations/productValidations.js";
 
 export const createProduct = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    await ProductService.createProduct(body);
+    const { error, value } = createProductSchema.validate(body);
+    if (error) {
+      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
+    }
+    await ProductService.createProduct(value);
     return sendResponse(200, "Product successfully created");
   } catch (error) {
     return sendError(error.statusCode || 500, error.message);
@@ -24,7 +29,12 @@ export const getAllProducts = async () => {
 export const getProduct = async (event) => {
   try {
     const { productID } = event.pathParameters;
-    const data = await ProductService.getProduct(parseInt(productID));
+    const { error, value } = getProductSchema.validate(productID);
+    if (error) {
+      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
+    }
+    await ProductService.createProduct(value);
+    const data = await ProductService.getProduct(parseInt(value));
     console.log(data);
     return sendResponse(200, data);
   } catch (error) {
@@ -35,7 +45,11 @@ export const getProduct = async (event) => {
 export const editProduct = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    await ProductService.editProduct(body);
+    const { error, value } = editProductSchema.validate(body);
+    if (error) {
+      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
+    }
+    await ProductService.editProduct(value);
     return sendResponse(200, "Product successfully changed");
   } catch (error) {
     return sendError(error.statusCode || 500, error.message);
@@ -45,7 +59,11 @@ export const editProduct = async (event) => {
 export const deleteProduct = async (event) => {
   try {
     const { productID } = event.pathParameters;
-    await ProductService.deleteProduct(parseInt(productID));
+    const { error, value } = deleteProductSchema.validate(productID);
+    if (error) {
+      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
+    }
+    await ProductService.deleteProduct(parseInt(value));
     return sendResponse(200, "Product successfully deleted");
   } catch (error) {
     return sendError(error.statusCode || 500, error.message);

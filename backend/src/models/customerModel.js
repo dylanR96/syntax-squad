@@ -72,7 +72,7 @@ export const customerModel = {
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };
-    const data = await db.update(params);
+    const data = db.update(params);
     return data;
   },
 };
