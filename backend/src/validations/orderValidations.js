@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const createOrderSchema = Joi.object({
-  status: Joi.string().valid("pending").required(),
+  userID: Joi.string().required(),
   products: Joi.array()
     .items(
       Joi.object().pattern(
@@ -69,8 +69,10 @@ export const deleteOrderSchema = Joi.object({
   orderNO: Joi.number().integer().min(1000).max(9999).required(),
 });
 
-export const changeOrderIdSchema = Joi.object({
-  orderNO: Joi.number().integer().min(1000).max(9999).required(),
-  status: Joi.string().valid("pending").required(),
-  comment: Joi.string().optional(),
+export const changeStatusSchema = Joi.object({
+  status: Joi.string().required()
+});
+
+export const getOrderSchema = Joi.object({
+  orderNO: Joi.number().integer().min(1000).max(9999).required()
 });

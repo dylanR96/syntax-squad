@@ -29,7 +29,7 @@ export const deleteCustomerSchema = Joi.object({
     address: Joi.string().optional(),
     zipcode: Joi.string().optional(),
     city: Joi.string().optional(),
-    phoneNumber: Joi.optional()
+    phoneNumber: Joi.string()
       .pattern(/^\d{10}$/)
-      .required(),
+      .optional(),
    });

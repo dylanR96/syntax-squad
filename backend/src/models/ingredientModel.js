@@ -1,7 +1,7 @@
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
 import { db } from "../config/dynamoConfig.js";
 import { createID } from "../utils/dynamodbHelper.js";
-// Test
+
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
     const params = {
@@ -62,7 +62,7 @@ export const ingredientModel = {
         ":priceForExtra": ingredientData.priceForExtra,
         ":exchangeFor": ingredientData.exchangeFor,
       },
-      ReturnValues: "ALL_NEW", // Return the updated item
+      ReturnValues: "ALL_NEW", 
     };
     const data = db.update(params);
     return data;

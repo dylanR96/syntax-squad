@@ -1,6 +1,7 @@
 import { CustomerService } from "../services/customerService.js";
 import { sendError, sendResponse } from "../utils/responseHelper.js";
-import { createCustomerSchema, deleteCustomerSchema, editCustomerSchema, getCustomerSchema } from "../validations/CustomerValidations.js";
+import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
+import { createCustomerSchema, deleteCustomerSchema, editCustomerSchema, getCustomerSchema } from "../validations/customerValidations.js";
 
 export const createCustomer = async (event) => {
   try {
@@ -17,26 +18,19 @@ export const createCustomer = async (event) => {
 };
 
 export const getCustomers = async () => {
-  try {
+  tryCatchWrapper(async () => {
     const getCustomers = await CustomerService.getCustomers();
     return sendResponse(200, getCustomers);
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  })
 };
 
 export const getCustomer = async (event) => {
-  try {
-    const { customerID } = event.pathParameters;
-    const { error, value } = getCustomerSchema.validate(customerID);
-    if (error) {
-      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
-    }
-    const customer = await CustomerService.getCustomer(value);
-    return sendResponse(200, customer);
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  tryCatchWrapper(async () => {
+  const { customerID } = event.pathParameters;
+  const value = validateRequest(changeStatusSchema, {customerID})
+  const customer = await CustomerService.getCustomer(value.customerID);
+  return sendResponse(200, customer); 
+})
 };
 
 export const editCustomer = async (event) => {

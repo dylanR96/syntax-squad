@@ -4,7 +4,8 @@
     "@aws-sdk/client-dynamodb": "^3.699.0",
     "@aws-sdk/lib-dynamodb": "^3.699.0",
     "aws-sdk": "^2.1692.0",
-    "nanoid": "^5.0.8",
-    "zod": "^3.23.8"
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "nanoid": "^5.0.8"
   }
 }

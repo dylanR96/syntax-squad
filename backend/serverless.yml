@@ -158,14 +158,26 @@ functions:
     handler: src/handlers/orderHandler.deleteOrder
     events:
       - httpApi:
-          path: /order
+          path: /order/{orderNO}
           method: DELETE
   changeOrderStatus:
     handler: src/handlers/orderHandler.changeOrderStatus
     events:
       - httpApi:
-          path: /orderById
+          path: /orderStatus
           method: PUT
+  getOrder:
+    handler: src/handlers/orderHandler.getOrder
+    events:
+      - httpApi:
+          path: /order/{orderNO}
+          method: GET
+  getAllOrders:
+    handler: src/handlers/orderHandler.getAllOrders
+    events:
+      - httpApi:
+          path: /orders
+          method: GET
 resources:
   Resources:
     AdminTable:

@@ -1,6 +1,5 @@
 import { db } from "../config/dynamoConfig.js";
 import { ORDERS_TABLE } from "../constants/tableNames.js";
-import { nanoid } from "nanoid";
 import { createID } from "../utils/dynamodbHelper.js";
 
 export const orderModel = {
@@ -9,9 +8,9 @@ export const orderModel = {
         TableName: ORDERS_TABLE,
         Item: {
           orderNO: await createID(ORDERS_TABLE, "orderNO", 1000),
-          userID: nanoid(),
+          userID: orderData.userID,
           orderDate: new Date().toISOString(),
-          status: orderData.status,
+          status: "pending",
           products: orderData.products,
           comment: orderData.comment,
           price: orderData.price,
@@ -103,5 +102,17 @@ export const orderModel = {
 
         const data = db.update(params);
         return data;
-    }
+    },
+    getOrder: async (orderNO) => {
+        const params = {
+          TableName: ORDERS_TABLE,
+          Key: {orderNO}, 
+        };
+        const { Item: data } = await db.get(params);
+        return data;
+      },
+      getAllOrders: async () => {
+        const { Items } = await db.scan({ TableName: ORDERS_TABLE });
+        return Items;
+      },
 }

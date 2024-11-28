@@ -1,19 +1,15 @@
 import { ProductService } from "../services/productService.js";
 import { sendError, sendResponse } from "../utils/responseHelper.js";
+import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
 import { createProductSchema, deleteProductSchema, editProductSchema, getProductSchema } from "../validations/productValidations.js";
 
 export const createProduct = async (event) => {
-  try {
+  return tryCatchWrapper(async () => {
     const body = JSON.parse(event.body);
-    const { error, value } = createProductSchema.validate(body);
-    if (error) {
-      return sendError(error.statuscode, `Validation Error: ${error.details[0].message}`);
-    }
+    const value = validateRequest(createProductSchema, body)
     await ProductService.createProduct(value);
     return sendResponse(200, "Product successfully created");
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  })
 };
 
 export const getAllProducts = async () => {

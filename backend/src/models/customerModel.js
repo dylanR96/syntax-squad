@@ -1,6 +1,5 @@
 import { db } from "../config/dynamoConfig.js";
 import { nanoid } from "nanoid";
-
 import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
 
 export const customerModel = {
