@@ -1,8 +1,6 @@
 import React from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
-import Header from "../../components/layout/Header/Header";
-import Footer from "../../components/layout/Footer/Footer";
 import OrderEntry from "./OrderEntry";
 import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
@@ -10,7 +8,6 @@ import LogoutButton from "../../components/ui/LogoutButton";
 const Profile: React.FC = () => {
   return (
   <>
-    <Header />
   <main className="container">
     <div className="profile__container">
     <img className="profile__image" src={profilePicture} alt="Profile Picture" />
@@ -27,8 +24,6 @@ const Profile: React.FC = () => {
     <LogoutButton />
     </div>
   </main>
-
-  <Footer />
   </>
 )};
 
