@@ -1,11 +1,11 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
+import Home from "../pages/Home/Home";
 import Profile from "../pages/Profile/UserProfile";
 import EditProfile from "../pages/Profile/EditProfile";
 import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
-
 
 const Layout = () => {
   return (
@@ -26,18 +26,23 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/recipe",
+        element: <Recipe />,
+      },
+      
     ],
-  },
+  },  
 
-  // {
-  //   path: "/home",
-  //   element: <Home />,
-  // },
-
+  {
+    path: "/home",
+    element: <Home/>,
+    },
 {
   path: "/recipe",
   element: <Recipe />,
 },
+
 
   // {
   //   path: "/checkout",

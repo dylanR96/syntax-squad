@@ -1,0 +1,52 @@
+.card-container {
+  width: 100%;
+  margin-top: 1.25em;
+}
+
+.card-image {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  height: 217px;
+  object-fit: cover;
+  margin-bottom: -10px;
+}
+
+.card-info-plate {
+  background: #fcf6ee;
+  padding: 1.25em;
+  border: solid 1px #ecdfce;
+  border-radius: 0 0 5px 5px;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* liten card mobil */
+
+.card-container-small {
+  width: 200px;
+  margin-top: 1.25em;
+}
+
+.card-image-small {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: -10px;
+}
+
+@media (min-width: 768px) {
+  .card-container {
+    width: 625px;
+    margin-top: 1.25em;
+  }
+
+  .card-container-small {
+    width: 345px;
+    margin-top: 1.25em;
+  }
+}

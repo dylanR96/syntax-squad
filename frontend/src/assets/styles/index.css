@@ -1,15 +1,88 @@
-@import url(https://fonts.googleapis.com/css?family=Aclonica:regular);
-
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
-html {
-  /* font-size: 10px; */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1.25rem;
 }
-body {
-  margin: 0;
-  background-color: #FCF6EE;
+
+.h1--dark {
+  font-family: "Aclonica", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 1.25em;
 }
-h2 {
-  font-family: 'Aclonica', sans-serif;
+
+.h2--light {
+  font-family: "Aclonica", sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
 }
+
+.h3--dark {
+  font-family: "Aclonica", sans-serif;
+  font-size: 1.25rem;
+  color: #442a07;
+}
+
+.h4--dark {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.5rem;
+  color: #442a07;
+}
+
+.h5--dark {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #442a07;
+}
+
+.h6--dark {
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #442a07;
+  margin-top: 1.25em;
+}
+
+.body-text--dark {
+  font-family: "Afacad", sans-serif;
+  font-size: 1rem;
+  color: #442a07;
+  margin-top: 1.25em;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .container {
+    margin: 6.25em;
+  }
+
+  .h1--dark {
+    margin-top: 0;
+    font-size: 2.25rem;
+  }
+
+  .h2--light {
+    font-family: "Aclonica", sans-serif;
+    font-size: 2.25rem;
+    color: #fff;
+  }
+
+  .h3--dark {
+    font-size: 1.5rem;
+  }
+
+  .h6--dark {
+    font-size: 1.5rem;
+  }
+
+  .p--dark {
+    font-size: 1.25rem;
+  }
