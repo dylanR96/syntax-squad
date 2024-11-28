@@ -8,6 +8,7 @@ import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
+import Stock from "../pages/Stock/Stock";
 
 const Layout = () => {
   return (
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/admin/stock",
+        element: <Stock />,
       },
     ],
   },
