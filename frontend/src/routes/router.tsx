@@ -3,6 +3,7 @@ import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
+import Home from "../pages/Home/Home";
 const Layout = () => {
   return (
     <>
@@ -21,16 +22,19 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/recipe",
+        element: <Recipe />,
+      },
+      
     ],
   },
-  // {
-  //   path: "/home",
-  //   element: <Home />,
-  // },
-{
-  path: "/recipe",
-  element: <Recipe />,
-},
+    
+
+  {
+    path: "/home",
+    element: <Home/>,
+    },
   // {
   //   path: "/checkout",
   //   element: <Checkout />,

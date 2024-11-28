@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleIngredient, addRecipeIngredients } from "../../features/ingredients/ingredientsSlice";
 import './Recipe.css';
+import "../../assets/styles/index.css"
 import { recipes } from "./recipes";
 
 const Recipe = () => {
@@ -48,7 +49,7 @@ const Recipe = () => {
 
   return (
     <>
-      <section className="container">
+      <main className="container">
         <article className="recipe__upperbox">
           <img
             src="https://images.unsplash.com/photo-1607920591413-4ec007e70023?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -57,20 +58,20 @@ const Recipe = () => {
           />
 
           <article className="upperbox-info">
-            <h1 className="recipe__title">Kladdkaka</h1>
+            <h1 className="h1--dark">Kladdkaka</h1>
             <article className="recipe__info-box">
               <p className='recipe__info-box-text'>20 min <br /> <strong>Tillagningstid</strong></p>
               <p className='recipe__info-box-text'>14 <br /> <strong>Ingredienser</strong></p>
               <p className='recipe__info-box-text'>60 kr <br /><strong>Pris</strong></p>
             </article>
-            <p className="recipe__body-text">
+            <p className="body-text--dark">
               Lorem ipsum dolor sit amet consectetur. Ante senectus id id nisl sapien volutpat auctor feugiat. In sit velit gravida vitae amet volutpat nibh adipiscing sagittis. Morbi sem ac pharetra.
             </p>
           </article>
         </article>
         <article className="recipe__lowerbox">
           <article className="recipe__lowerbox--upperbox-info">
-            <h6 className="recipe__sub-title">Ingredienser</h6>
+            <h6 className="h6--dark">Ingredienser</h6>
             <form onSubmit={handleSubmit} className="recipe__form">
             {localIngredients.map(ingredient => (
                 <div key={ingredient.id} className="recipe__input-container">
@@ -99,8 +100,8 @@ const Recipe = () => {
             </form>
           </article>
           <article className="recipe__lowerbox--lowerbox-info">
-            <h6 className="recipe__sub-title">Gör såhär</h6>
-            <p className="recipe__body-text">
+            <h6 className="h6--dark">Gör såhär</h6>
+            <p className="body-text--dark">
               <strong>1. </strong>
               Lorem ipsum dolor sit amet consectetur. Ante senectus id id nisl sapien volutpat auctor feugiat. In sit velit gravida vitae amet volutpat nibh adipiscing sagittis. Morbi sem ac pharetra.<br /><br />
               <strong>2. </strong>
@@ -108,7 +109,7 @@ const Recipe = () => {
             </p>
           </article>
         </article>
-      </section>
+      </main>
     </>
   );
 };
