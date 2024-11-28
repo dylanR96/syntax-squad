@@ -1,5 +1,5 @@
 import "./Footer.css";
-import Facebook from "../../../assets/images/facebook.svg";
+import Facebook from "../../../assets/images/facebook-small.svg";
 import Instagram from "../../../assets/images/instagram.svg";
 
 const Footer = () => {
