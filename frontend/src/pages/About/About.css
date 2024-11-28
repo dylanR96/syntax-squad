@@ -1,30 +1,26 @@
-.about__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #fff;
-}
 .about__info {
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin-top: 40px;
     position: relative;
     height: 800px;
+    width: 500px;
+    /* border: 1px solid #442A07; */
 }
 
 .about__textbox {
     position: absolute;
-    top: 150px;
+    top: 170px;
     left: 20px;
     right: 20px;
     background-color: #C3D5D9;
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 1.5em;
     border-radius: 10px;
-    /* z-index: 1; */
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+    /* border: 1px solid #442A07; */
 }
 .about__header {
     text-align: center;
@@ -34,10 +30,11 @@
     padding: 1em;
 }
 .about__image-img {
-    width: 350px;
+    width: 75%;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
 .about__infotext {
@@ -45,6 +42,71 @@
     font-family: 'Afacad', sans-serif;
     color: #442A07;
 }
+.gallery__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.gallery__image-img {
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 500px;
+    height: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .carousel__slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .carousel__button.left {
+    left: 10px;
+  }
+  
+  .carousel__button.right {
+    right: 10px;
+  }
+  
+  .carousel__button:hover {
+    color: #000;
+  }
+  
 
 @media (min-width: 768px) {
     .about__info {
