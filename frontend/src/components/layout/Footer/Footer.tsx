@@ -14,3 +14,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+// Lägg in loggan istället för texten

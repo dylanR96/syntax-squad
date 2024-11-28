@@ -30,7 +30,7 @@
   @media screen and (min-width: 768px) {
     .navbar__header {
       height: 120px;
-      font-size: 2rem;
+      font-size: 1.6rem;
     }
     .navbar__nav {
       width: 100%;

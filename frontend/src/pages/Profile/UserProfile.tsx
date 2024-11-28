@@ -3,7 +3,7 @@ import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import Header from "../../components/layout/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
-import OrderEntry from "../../components/forms/OrderEntry";
+import OrderEntry from "./OrderEntry";
 import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
 
