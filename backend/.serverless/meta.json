@@ -1,7 +1,7 @@
 {
-  "C:\\Users\\aintf\\Documents\\Github-repositories\\syntax-squad-main\\backend": {
+  "E:\\Skola\\TypeScript\\syntax-squad\\backend": {
     "versionSfCore": null,
-    "versionFramework": "4.4.12",
+    "versionFramework": "4.4.13",
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
@@ -11,7 +11,7 @@
         "instance": {
           "credentials": "<REDACTED>",
           "serviceConfigFile": {
-            "org": "dylanr96",
+            "org": "fedandreas",
             "service": "syntax-squad",
             "provider": {
               "name": "aws",
@@ -57,6 +57,18 @@
                       "LogGroupName": "/aws/lambda/syntax-squad-dev-getAdmin"
                     }
                   },
+                  "ChangeEmailAdminLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-changeEmailAdmin"
+                    }
+                  },
+                  "DeleteAdminLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteAdmin"
+                    }
+                  },
                   "CreateCustomerLogGroup": {
                     "Type": "AWS::Logs::LogGroup",
                     "Properties": {
@@ -67,6 +79,24 @@
                     "Type": "AWS::Logs::LogGroup",
                     "Properties": {
                       "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomers"
+                    }
+                  },
+                  "GetCustomerLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomer"
+                    }
+                  },
+                  "EditCustomerLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-editCustomer"
+                    }
+                  },
+                  "DeleteCustomerLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteCustomer"
                     }
                   },
                   "AddIngredientLogGroup": {
@@ -105,10 +135,28 @@
                       "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllProducts"
                     }
                   },
+                  "GetProductLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-getProduct"
+                    }
+                  },
                   "CreateProductLogGroup": {
                     "Type": "AWS::Logs::LogGroup",
                     "Properties": {
                       "LogGroupName": "/aws/lambda/syntax-squad-dev-createProduct"
+                    }
+                  },
+                  "EditProductLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-editProduct"
+                    }
+                  },
+                  "DeleteProductLogGroup": {
+                    "Type": "AWS::Logs::LogGroup",
+                    "Properties": {
+                      "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteProduct"
                     }
                   },
                   "CreateOrderLogGroup": {
@@ -230,8 +278,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/adminHandler.createAdmin",
                       "Runtime": "nodejs20.x",
@@ -253,8 +301,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/adminHandler.getAdmin",
                       "Runtime": "nodejs20.x",
@@ -272,12 +320,58 @@
                       "GetAdminLogGroup"
                     ]
                   },
+                  "ChangeEmailAdminLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/adminHandler.changeEmail",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-changeEmailAdmin",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "ChangeEmailAdminLogGroup"
+                    ]
+                  },
+                  "DeleteAdminLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/adminHandler.deleteAdmin",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-deleteAdmin",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "DeleteAdminLogGroup"
+                    ]
+                  },
                   "CreateCustomerLambdaFunction": {
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/customerHandler.createCustomer",
                       "Runtime": "nodejs20.x",
@@ -299,8 +393,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/customerHandler.getCustomers",
                       "Runtime": "nodejs20.x",
@@ -318,12 +412,81 @@
                       "GetCustomersLogGroup"
                     ]
                   },
+                  "GetCustomerLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/customerHandler.getCustomer",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-getCustomer",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "GetCustomerLogGroup"
+                    ]
+                  },
+                  "EditCustomerLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/customerHandler.editCustomer",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-editCustomer",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "EditCustomerLogGroup"
+                    ]
+                  },
+                  "DeleteCustomerLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/customerHandler.deleteCustomer",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-deleteCustomer",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "DeleteCustomerLogGroup"
+                    ]
+                  },
                   "AddIngredientLambdaFunction": {
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.addIngredient",
                       "Runtime": "nodejs20.x",
@@ -345,8 +508,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.deleteIngredient",
                       "Runtime": "nodejs20.x",
@@ -368,8 +531,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.editIngredient",
                       "Runtime": "nodejs20.x",
@@ -391,8 +554,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.getIngredientsByIds",
                       "Runtime": "nodejs20.x",
@@ -414,8 +577,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/ingredientHandler.getAllIngredients",
                       "Runtime": "nodejs20.x",
@@ -437,8 +600,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/productHandler.getAllProducts",
                       "Runtime": "nodejs20.x",
@@ -456,12 +619,35 @@
                       "GetAllProductsLogGroup"
                     ]
                   },
+                  "GetProductLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/productHandler.getProduct",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-getProduct",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "GetProductLogGroup"
+                    ]
+                  },
                   "CreateProductLambdaFunction": {
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/productHandler.createProduct",
                       "Runtime": "nodejs20.x",
@@ -479,12 +665,58 @@
                       "CreateProductLogGroup"
                     ]
                   },
+                  "EditProductLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/productHandler.editProduct",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-editProduct",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "EditProductLogGroup"
+                    ]
+                  },
+                  "DeleteProductLambdaFunction": {
+                    "Type": "AWS::Lambda::Function",
+                    "Properties": {
+                      "Code": {
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                      },
+                      "Handler": "src/handlers/productHandler.deleteProduct",
+                      "Runtime": "nodejs20.x",
+                      "FunctionName": "syntax-squad-dev-deleteProduct",
+                      "MemorySize": 1024,
+                      "Timeout": 6,
+                      "Role": {
+                        "Fn::GetAtt": [
+                          "IamRoleLambdaExecution",
+                          "Arn"
+                        ]
+                      }
+                    },
+                    "DependsOn": [
+                      "DeleteProductLogGroup"
+                    ]
+                  },
                   "CreateOrderLambdaFunction": {
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/orderHandler.createOrder",
                       "Runtime": "nodejs20.x",
@@ -506,8 +738,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/orderHandler.changeOrder",
                       "Runtime": "nodejs20.x",
@@ -529,8 +761,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/orderHandler.deleteOrder",
                       "Runtime": "nodejs20.x",
@@ -552,8 +784,8 @@
                     "Type": "AWS::Lambda::Function",
                     "Properties": {
                       "Code": {
-                        "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                        "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                        "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                        "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                       },
                       "Handler": "src/handlers/orderHandler.changeOrderStatus",
                       "Runtime": "nodejs20.x",
@@ -571,154 +803,234 @@
                       "ChangeOrderStatusLogGroup"
                     ]
                   },
-                  "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I": {
+                  "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateAdminLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs": {
+                  "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetAdminLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4": {
+                  "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "ChangeEmailAdminLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "DeleteAdminLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateCustomerLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s": {
+                  "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetCustomersLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E": {
+                  "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "GetCustomerLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "EditCustomerLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "DeleteCustomerLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AddIngredientLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk": {
+                  "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "DeleteIngredientLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA": {
+                  "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "EditIngredientLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA": {
+                  "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetIngredientsByIdLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54": {
+                  "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetAllIngredientsLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M": {
+                  "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "GetAllProductsLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA": {
+                  "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "GetProductLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateProductLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4": {
+                  "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "EditProductLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ": {
+                    "Type": "AWS::Lambda::Version",
+                    "DeletionPolicy": "Retain",
+                    "Properties": {
+                      "FunctionName": {
+                        "Ref": "DeleteProductLambdaFunction"
+                      },
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+                    }
+                  },
+                  "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "CreateOrderLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY": {
+                  "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "ChangeOrderLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ": {
+                  "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "DeleteOrderLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
-                  "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY": {
+                  "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "ChangeOrderStatusLambdaFunction"
                       },
-                      "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                      "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
                     }
                   },
                   "HttpApi": {
@@ -741,8 +1053,8 @@
                           "OPTIONS",
                           "POST",
                           "GET",
-                          "DELETE",
-                          "PUT"
+                          "PUT",
+                          "DELETE"
                         ],
                         "AllowOrigins": [
                           "*"
@@ -913,6 +1225,156 @@
                     },
                     "DependsOn": "HttpApiIntegrationGetAdmin"
                   },
+                  "ChangeEmailAdminLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "ChangeEmailAdminLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationChangeEmailAdmin": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "ChangeEmailAdminLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePutAdmin": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "PUT /admin",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationChangeEmailAdmin"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationChangeEmailAdmin"
+                  },
+                  "DeleteAdminLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "DeleteAdminLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationDeleteAdmin": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "DeleteAdminLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteDeleteAdminAdminidVar": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "DELETE /admin/{adminID}",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationDeleteAdmin"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationDeleteAdmin"
+                  },
                   "CreateCustomerLambdaPermissionHttpApi": {
                     "Type": "AWS::Lambda::Permission",
                     "Properties": {
@@ -1062,6 +1524,231 @@
                       }
                     },
                     "DependsOn": "HttpApiIntegrationGetCustomers"
+                  },
+                  "GetCustomerLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "GetCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationGetCustomer": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "GetCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetCustomerCustomeridVar": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /customer/{customerID}",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationGetCustomer"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationGetCustomer"
+                  },
+                  "EditCustomerLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "EditCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationEditCustomer": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "EditCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePutCustomer": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "PUT /customer",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationEditCustomer"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationEditCustomer"
+                  },
+                  "DeleteCustomerLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "DeleteCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationDeleteCustomer": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "DeleteCustomerLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteDeleteCustomerCustomeridVar": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "DELETE /customer/{customerID}",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationDeleteCustomer"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationDeleteCustomer"
                   },
                   "AddIngredientLambdaPermissionHttpApi": {
                     "Type": "AWS::Lambda::Permission",
@@ -1513,6 +2200,81 @@
                     },
                     "DependsOn": "HttpApiIntegrationGetAllProducts"
                   },
+                  "GetProductLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "GetProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationGetProduct": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "GetProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteGetProductProductidVar": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "GET /product/{productID}",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationGetProduct"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationGetProduct"
+                  },
                   "CreateProductLambdaPermissionHttpApi": {
                     "Type": "AWS::Lambda::Permission",
                     "Properties": {
@@ -1587,6 +2349,156 @@
                       }
                     },
                     "DependsOn": "HttpApiIntegrationCreateProduct"
+                  },
+                  "EditProductLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "EditProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationEditProduct": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "EditProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRoutePutProduct": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "PUT /product",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationEditProduct"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationEditProduct"
+                  },
+                  "DeleteProductLambdaPermissionHttpApi": {
+                    "Type": "AWS::Lambda::Permission",
+                    "Properties": {
+                      "FunctionName": {
+                        "Fn::GetAtt": [
+                          "DeleteProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "Action": "lambda:InvokeFunction",
+                      "Principal": "apigateway.amazonaws.com",
+                      "SourceArn": {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":execute-api:",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            ":",
+                            {
+                              "Ref": "AWS::AccountId"
+                            },
+                            ":",
+                            {
+                              "Ref": "HttpApi"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    }
+                  },
+                  "HttpApiIntegrationDeleteProduct": {
+                    "Type": "AWS::ApiGatewayV2::Integration",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "IntegrationType": "AWS_PROXY",
+                      "IntegrationUri": {
+                        "Fn::GetAtt": [
+                          "DeleteProductLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "PayloadFormatVersion": "2.0",
+                      "TimeoutInMillis": 30000
+                    }
+                  },
+                  "HttpApiRouteDeleteProductProductidVar": {
+                    "Type": "AWS::ApiGatewayV2::Route",
+                    "Properties": {
+                      "ApiId": {
+                        "Ref": "HttpApi"
+                      },
+                      "RouteKey": "DELETE /product/{productID}",
+                      "Target": {
+                        "Fn::Join": [
+                          "/",
+                          [
+                            "integrations",
+                            {
+                              "Ref": "HttpApiIntegrationDeleteProduct"
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    "DependsOn": "HttpApiIntegrationDeleteProduct"
                   },
                   "CreateOrderLambdaPermissionHttpApi": {
                     "Type": "AWS::Lambda::Permission",
@@ -2005,7 +2917,7 @@
                 },
                 "Outputs": {
                   "ServerlessDeploymentBucketName": {
-                    "Value": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
+                    "Value": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
                     "Export": {
                       "Name": "sls-syntax-squad-dev-ServerlessDeploymentBucketName"
                     }
@@ -2013,7 +2925,7 @@
                   "CreateAdminLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I"
+                      "Ref": "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
@@ -2022,16 +2934,34 @@
                   "GetAdminLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs"
+                      "Ref": "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
                     }
                   },
+                  "ChangeEmailAdminLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-ChangeEmailAdminLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "DeleteAdminLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-DeleteAdminLambdaFunctionQualifiedArn"
+                    }
+                  },
                   "CreateCustomerLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4"
+                      "Ref": "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -2040,16 +2970,43 @@
                   "GetCustomersLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s"
+                      "Ref": "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
                     }
                   },
+                  "GetCustomerLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-GetCustomerLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "EditCustomerLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-EditCustomerLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "DeleteCustomerLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-DeleteCustomerLambdaFunctionQualifiedArn"
+                    }
+                  },
                   "AddIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E"
+                      "Ref": "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
@@ -2058,7 +3015,7 @@
                   "DeleteIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk"
+                      "Ref": "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
@@ -2067,7 +3024,7 @@
                   "EditIngredientLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA"
+                      "Ref": "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
@@ -2076,7 +3033,7 @@
                   "GetIngredientsByIdLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA"
+                      "Ref": "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
@@ -2085,7 +3042,7 @@
                   "GetAllIngredientsLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54"
+                      "Ref": "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
@@ -2094,25 +3051,52 @@
                   "GetAllProductsLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M"
+                      "Ref": "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
                     }
                   },
+                  "GetProductLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-GetProductLambdaFunctionQualifiedArn"
+                    }
+                  },
                   "CreateProductLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA"
+                      "Ref": "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
                     }
                   },
+                  "EditProductLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-EditProductLambdaFunctionQualifiedArn"
+                    }
+                  },
+                  "DeleteProductLambdaFunctionQualifiedArn": {
+                    "Description": "Current Lambda function version",
+                    "Value": {
+                      "Ref": "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ"
+                    },
+                    "Export": {
+                      "Name": "sls-syntax-squad-dev-DeleteProductLambdaFunctionQualifiedArn"
+                    }
+                  },
                   "CreateOrderLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4"
+                      "Ref": "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-CreateOrderLambdaFunctionQualifiedArn"
@@ -2121,7 +3105,7 @@
                   "ChangeOrderLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY"
+                      "Ref": "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-ChangeOrderLambdaFunctionQualifiedArn"
@@ -2130,7 +3114,7 @@
                   "DeleteOrderLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ"
+                      "Ref": "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-DeleteOrderLambdaFunctionQualifiedArn"
@@ -2139,7 +3123,7 @@
                   "ChangeOrderStatusLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY"
+                      "Ref": "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs"
                     },
                     "Export": {
                       "Name": "sls-syntax-squad-dev-ChangeOrderStatusLambdaFunctionQualifiedArn"
@@ -2202,7 +3186,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I"
+                "versionLogicalId": "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE"
               },
               "getAdmin": {
                 "handler": "src/handlers/adminHandler.getAdmin",
@@ -2222,7 +3206,47 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs"
+                "versionLogicalId": "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w"
+              },
+              "changeEmailAdmin": {
+                "handler": "src/handlers/adminHandler.changeEmail",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/admin",
+                      "method": "PUT"
+                    },
+                    "resolvedMethod": "PUT",
+                    "resolvedPath": "/admin"
+                  }
+                ],
+                "name": "syntax-squad-dev-changeEmailAdmin",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60"
+              },
+              "deleteAdmin": {
+                "handler": "src/handlers/adminHandler.deleteAdmin",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/admin/{adminID}",
+                      "method": "DELETE"
+                    },
+                    "resolvedMethod": "DELETE",
+                    "resolvedPath": "/admin/{adminID}"
+                  }
+                ],
+                "name": "syntax-squad-dev-deleteAdmin",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys"
               },
               "createCustomer": {
                 "handler": "src/handlers/customerHandler.createCustomer",
@@ -2242,7 +3266,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4"
+                "versionLogicalId": "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA"
               },
               "getCustomers": {
                 "handler": "src/handlers/customerHandler.getCustomers",
@@ -2262,7 +3286,67 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s"
+                "versionLogicalId": "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0"
+              },
+              "getCustomer": {
+                "handler": "src/handlers/customerHandler.getCustomer",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/customer/{customerID}",
+                      "method": "GET"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/customer/{customerID}"
+                  }
+                ],
+                "name": "syntax-squad-dev-getCustomer",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY"
+              },
+              "editCustomer": {
+                "handler": "src/handlers/customerHandler.editCustomer",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/customer",
+                      "method": "PUT"
+                    },
+                    "resolvedMethod": "PUT",
+                    "resolvedPath": "/customer"
+                  }
+                ],
+                "name": "syntax-squad-dev-editCustomer",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg"
+              },
+              "deleteCustomer": {
+                "handler": "src/handlers/customerHandler.deleteCustomer",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/customer/{customerID}",
+                      "method": "DELETE"
+                    },
+                    "resolvedMethod": "DELETE",
+                    "resolvedPath": "/customer/{customerID}"
+                  }
+                ],
+                "name": "syntax-squad-dev-deleteCustomer",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg"
               },
               "addIngredient": {
                 "handler": "src/handlers/ingredientHandler.addIngredient",
@@ -2282,7 +3366,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E"
+                "versionLogicalId": "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ"
               },
               "deleteIngredient": {
                 "handler": "src/handlers/ingredientHandler.deleteIngredient",
@@ -2302,7 +3386,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk"
+                "versionLogicalId": "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc"
               },
               "editIngredient": {
                 "handler": "src/handlers/ingredientHandler.editIngredient",
@@ -2322,7 +3406,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA"
+                "versionLogicalId": "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE"
               },
               "getIngredientsById": {
                 "handler": "src/handlers/ingredientHandler.getIngredientsByIds",
@@ -2342,7 +3426,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA"
+                "versionLogicalId": "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8"
               },
               "getAllIngredients": {
                 "handler": "src/handlers/ingredientHandler.getAllIngredients",
@@ -2362,7 +3446,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54"
+                "versionLogicalId": "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM"
               },
               "getAllProducts": {
                 "handler": "src/handlers/productHandler.getAllProducts",
@@ -2382,7 +3466,27 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M"
+                "versionLogicalId": "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM"
+              },
+              "getProduct": {
+                "handler": "src/handlers/productHandler.getProduct",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/product/{productID}",
+                      "method": "GET"
+                    },
+                    "resolvedMethod": "GET",
+                    "resolvedPath": "/product/{productID}"
+                  }
+                ],
+                "name": "syntax-squad-dev-getProduct",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo"
               },
               "createProduct": {
                 "handler": "src/handlers/productHandler.createProduct",
@@ -2402,7 +3506,47 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA"
+                "versionLogicalId": "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw"
+              },
+              "editProduct": {
+                "handler": "src/handlers/productHandler.editProduct",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/product",
+                      "method": "PUT"
+                    },
+                    "resolvedMethod": "PUT",
+                    "resolvedPath": "/product"
+                  }
+                ],
+                "name": "syntax-squad-dev-editProduct",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70"
+              },
+              "deleteProduct": {
+                "handler": "src/handlers/productHandler.deleteProduct",
+                "events": [
+                  {
+                    "httpApi": {
+                      "path": "/product/{productID}",
+                      "method": "DELETE"
+                    },
+                    "resolvedMethod": "DELETE",
+                    "resolvedPath": "/product/{productID}"
+                  }
+                ],
+                "name": "syntax-squad-dev-deleteProduct",
+                "package": {},
+                "memory": 1024,
+                "timeout": 6,
+                "runtime": "nodejs20.x",
+                "vpc": {},
+                "versionLogicalId": "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ"
               },
               "createOrder": {
                 "handler": "src/handlers/orderHandler.createOrder",
@@ -2422,7 +3566,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4"
+                "versionLogicalId": "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY"
               },
               "changeOrder": {
                 "handler": "src/handlers/orderHandler.changeOrder",
@@ -2442,7 +3586,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY"
+                "versionLogicalId": "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA"
               },
               "deleteOrder": {
                 "handler": "src/handlers/orderHandler.deleteOrder",
@@ -2462,7 +3606,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ"
+                "versionLogicalId": "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU"
               },
               "changeOrderStatus": {
                 "handler": "src/handlers/orderHandler.changeOrderStatus",
@@ -2482,7 +3626,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY"
+                "versionLogicalId": "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs"
               }
             },
             "resources": {
@@ -2605,7 +3749,7 @@
               "Outputs": {}
             }
           },
-          "configFileDirPath": "C:\\Users\\aintf\\Documents\\Github-repositories\\syntax-squad-main\\backend",
+          "configFileDirPath": "E:\\Skola\\TypeScript\\syntax-squad\\backend",
           "config": {
             "type": "sls"
           },
@@ -2623,10 +3767,10 @@
       }
     },
     "composeServiceName": null,
-    "servicePath": "C:\\Users\\aintf\\Documents\\Github-repositories\\syntax-squad-main\\backend",
+    "servicePath": "E:\\Skola\\TypeScript\\syntax-squad\\backend",
     "serviceConfigFileName": "serverless.yml",
     "service": {
-      "org": "dylanr96",
+      "org": "fedandreas",
       "service": "syntax-squad",
       "provider": {
         "name": "aws",
@@ -2672,6 +3816,18 @@
                 "LogGroupName": "/aws/lambda/syntax-squad-dev-getAdmin"
               }
             },
+            "ChangeEmailAdminLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-changeEmailAdmin"
+              }
+            },
+            "DeleteAdminLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteAdmin"
+              }
+            },
             "CreateCustomerLogGroup": {
               "Type": "AWS::Logs::LogGroup",
               "Properties": {
@@ -2682,6 +3838,24 @@
               "Type": "AWS::Logs::LogGroup",
               "Properties": {
                 "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomers"
+              }
+            },
+            "GetCustomerLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomer"
+              }
+            },
+            "EditCustomerLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-editCustomer"
+              }
+            },
+            "DeleteCustomerLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteCustomer"
               }
             },
             "AddIngredientLogGroup": {
@@ -2720,10 +3894,28 @@
                 "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllProducts"
               }
             },
+            "GetProductLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-getProduct"
+              }
+            },
             "CreateProductLogGroup": {
               "Type": "AWS::Logs::LogGroup",
               "Properties": {
                 "LogGroupName": "/aws/lambda/syntax-squad-dev-createProduct"
+              }
+            },
+            "EditProductLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-editProduct"
+              }
+            },
+            "DeleteProductLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteProduct"
               }
             },
             "CreateOrderLogGroup": {
@@ -2845,8 +4037,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/adminHandler.createAdmin",
                 "Runtime": "nodejs20.x",
@@ -2868,8 +4060,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/adminHandler.getAdmin",
                 "Runtime": "nodejs20.x",
@@ -2887,12 +4079,58 @@
                 "GetAdminLogGroup"
               ]
             },
+            "ChangeEmailAdminLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/adminHandler.changeEmail",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-changeEmailAdmin",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "ChangeEmailAdminLogGroup"
+              ]
+            },
+            "DeleteAdminLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/adminHandler.deleteAdmin",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-deleteAdmin",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "DeleteAdminLogGroup"
+              ]
+            },
             "CreateCustomerLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/customerHandler.createCustomer",
                 "Runtime": "nodejs20.x",
@@ -2914,8 +4152,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/customerHandler.getCustomers",
                 "Runtime": "nodejs20.x",
@@ -2933,12 +4171,81 @@
                 "GetCustomersLogGroup"
               ]
             },
+            "GetCustomerLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/customerHandler.getCustomer",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-getCustomer",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetCustomerLogGroup"
+              ]
+            },
+            "EditCustomerLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/customerHandler.editCustomer",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-editCustomer",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "EditCustomerLogGroup"
+              ]
+            },
+            "DeleteCustomerLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/customerHandler.deleteCustomer",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-deleteCustomer",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "DeleteCustomerLogGroup"
+              ]
+            },
             "AddIngredientLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.addIngredient",
                 "Runtime": "nodejs20.x",
@@ -2960,8 +4267,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.deleteIngredient",
                 "Runtime": "nodejs20.x",
@@ -2983,8 +4290,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.editIngredient",
                 "Runtime": "nodejs20.x",
@@ -3006,8 +4313,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.getIngredientsByIds",
                 "Runtime": "nodejs20.x",
@@ -3029,8 +4336,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/ingredientHandler.getAllIngredients",
                 "Runtime": "nodejs20.x",
@@ -3052,8 +4359,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/productHandler.getAllProducts",
                 "Runtime": "nodejs20.x",
@@ -3071,12 +4378,35 @@
                 "GetAllProductsLogGroup"
               ]
             },
+            "GetProductLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/productHandler.getProduct",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-getProduct",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetProductLogGroup"
+              ]
+            },
             "CreateProductLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/productHandler.createProduct",
                 "Runtime": "nodejs20.x",
@@ -3094,12 +4424,58 @@
                 "CreateProductLogGroup"
               ]
             },
+            "EditProductLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/productHandler.editProduct",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-editProduct",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "EditProductLogGroup"
+              ]
+            },
+            "DeleteProductLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
+                },
+                "Handler": "src/handlers/productHandler.deleteProduct",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "syntax-squad-dev-deleteProduct",
+                "MemorySize": 1024,
+                "Timeout": 6,
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "DeleteProductLogGroup"
+              ]
+            },
             "CreateOrderLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/orderHandler.createOrder",
                 "Runtime": "nodejs20.x",
@@ -3121,8 +4497,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/orderHandler.changeOrder",
                 "Runtime": "nodejs20.x",
@@ -3144,8 +4520,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/orderHandler.deleteOrder",
                 "Runtime": "nodejs20.x",
@@ -3167,8 +4543,8 @@
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
-                  "S3Bucket": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
-                  "S3Key": "serverless/syntax-squad/dev/1732699765330-2024-11-27T09:29:25.330Z/syntax-squad.zip"
+                  "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                  "S3Key": "serverless/syntax-squad/dev/1732736331896-2024-11-27T19:38:51.896Z/syntax-squad.zip"
                 },
                 "Handler": "src/handlers/orderHandler.changeOrderStatus",
                 "Runtime": "nodejs20.x",
@@ -3186,154 +4562,234 @@
                 "ChangeOrderStatusLogGroup"
               ]
             },
-            "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I": {
+            "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateAdminLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs": {
+            "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAdminLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4": {
+            "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "ChangeEmailAdminLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "DeleteAdminLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateCustomerLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s": {
+            "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetCustomersLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E": {
+            "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetCustomerLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "EditCustomerLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "DeleteCustomerLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AddIngredientLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk": {
+            "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "DeleteIngredientLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA": {
+            "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EditIngredientLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA": {
+            "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetIngredientsByIdLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54": {
+            "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAllIngredientsLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M": {
+            "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAllProductsLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA": {
+            "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetProductLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateProductLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4": {
+            "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "EditProductLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "DeleteProductLambdaFunction"
+                },
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
+              }
+            },
+            "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "CreateOrderLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY": {
+            "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ChangeOrderLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ": {
+            "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "DeleteOrderLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
-            "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY": {
+            "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ChangeOrderStatusLambdaFunction"
                 },
-                "CodeSha256": "tY6toRh9koBhF+9YUi5e87MEg40pwu++a29KsX7PU6g="
+                "CodeSha256": "a6bdoJhesSBN+x/nJb4TkhiYcYWASXI/r4CE/CXbLs8="
               }
             },
             "HttpApi": {
@@ -3356,8 +4812,8 @@
                     "OPTIONS",
                     "POST",
                     "GET",
-                    "DELETE",
-                    "PUT"
+                    "PUT",
+                    "DELETE"
                   ],
                   "AllowOrigins": [
                     "*"
@@ -3528,6 +4984,156 @@
               },
               "DependsOn": "HttpApiIntegrationGetAdmin"
             },
+            "ChangeEmailAdminLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "ChangeEmailAdminLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationChangeEmailAdmin": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "ChangeEmailAdminLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRoutePutAdmin": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "PUT /admin",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationChangeEmailAdmin"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationChangeEmailAdmin"
+            },
+            "DeleteAdminLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "DeleteAdminLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationDeleteAdmin": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "DeleteAdminLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteDeleteAdminAdminidVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "DELETE /admin/{adminID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationDeleteAdmin"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationDeleteAdmin"
+            },
             "CreateCustomerLambdaPermissionHttpApi": {
               "Type": "AWS::Lambda::Permission",
               "Properties": {
@@ -3677,6 +5283,231 @@
                 }
               },
               "DependsOn": "HttpApiIntegrationGetCustomers"
+            },
+            "GetCustomerLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationGetCustomer": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "GetCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteGetCustomerCustomeridVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "GET /customer/{customerID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationGetCustomer"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationGetCustomer"
+            },
+            "EditCustomerLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "EditCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationEditCustomer": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "EditCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRoutePutCustomer": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "PUT /customer",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationEditCustomer"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationEditCustomer"
+            },
+            "DeleteCustomerLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "DeleteCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationDeleteCustomer": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "DeleteCustomerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteDeleteCustomerCustomeridVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "DELETE /customer/{customerID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationDeleteCustomer"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationDeleteCustomer"
             },
             "AddIngredientLambdaPermissionHttpApi": {
               "Type": "AWS::Lambda::Permission",
@@ -4128,6 +5959,81 @@
               },
               "DependsOn": "HttpApiIntegrationGetAllProducts"
             },
+            "GetProductLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationGetProduct": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "GetProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteGetProductProductidVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "GET /product/{productID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationGetProduct"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationGetProduct"
+            },
             "CreateProductLambdaPermissionHttpApi": {
               "Type": "AWS::Lambda::Permission",
               "Properties": {
@@ -4202,6 +6108,156 @@
                 }
               },
               "DependsOn": "HttpApiIntegrationCreateProduct"
+            },
+            "EditProductLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "EditProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationEditProduct": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "EditProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRoutePutProduct": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "PUT /product",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationEditProduct"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationEditProduct"
+            },
+            "DeleteProductLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "DeleteProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationDeleteProduct": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "DeleteProductLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteDeleteProductProductidVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "DELETE /product/{productID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationDeleteProduct"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationDeleteProduct"
             },
             "CreateOrderLambdaPermissionHttpApi": {
               "Type": "AWS::Lambda::Permission",
@@ -4620,7 +6676,7 @@
           },
           "Outputs": {
             "ServerlessDeploymentBucketName": {
-              "Value": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
+              "Value": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
               "Export": {
                 "Name": "sls-syntax-squad-dev-ServerlessDeploymentBucketName"
               }
@@ -4628,7 +6684,7 @@
             "CreateAdminLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I"
+                "Ref": "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
@@ -4637,16 +6693,34 @@
             "GetAdminLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs"
+                "Ref": "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
               }
             },
+            "ChangeEmailAdminLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-ChangeEmailAdminLambdaFunctionQualifiedArn"
+              }
+            },
+            "DeleteAdminLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-DeleteAdminLambdaFunctionQualifiedArn"
+              }
+            },
             "CreateCustomerLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4"
+                "Ref": "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
@@ -4655,16 +6729,43 @@
             "GetCustomersLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s"
+                "Ref": "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
               }
             },
+            "GetCustomerLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-GetCustomerLambdaFunctionQualifiedArn"
+              }
+            },
+            "EditCustomerLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-EditCustomerLambdaFunctionQualifiedArn"
+              }
+            },
+            "DeleteCustomerLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-DeleteCustomerLambdaFunctionQualifiedArn"
+              }
+            },
             "AddIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E"
+                "Ref": "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
@@ -4673,7 +6774,7 @@
             "DeleteIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk"
+                "Ref": "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
@@ -4682,7 +6783,7 @@
             "EditIngredientLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA"
+                "Ref": "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
@@ -4691,7 +6792,7 @@
             "GetIngredientsByIdLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA"
+                "Ref": "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
@@ -4700,7 +6801,7 @@
             "GetAllIngredientsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54"
+                "Ref": "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
@@ -4709,25 +6810,52 @@
             "GetAllProductsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M"
+                "Ref": "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
               }
             },
+            "GetProductLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-GetProductLambdaFunctionQualifiedArn"
+              }
+            },
             "CreateProductLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA"
+                "Ref": "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
               }
             },
+            "EditProductLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-EditProductLambdaFunctionQualifiedArn"
+              }
+            },
+            "DeleteProductLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ"
+              },
+              "Export": {
+                "Name": "sls-syntax-squad-dev-DeleteProductLambdaFunctionQualifiedArn"
+              }
+            },
             "CreateOrderLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4"
+                "Ref": "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-CreateOrderLambdaFunctionQualifiedArn"
@@ -4736,7 +6864,7 @@
             "ChangeOrderLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY"
+                "Ref": "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-ChangeOrderLambdaFunctionQualifiedArn"
@@ -4745,7 +6873,7 @@
             "DeleteOrderLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ"
+                "Ref": "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-DeleteOrderLambdaFunctionQualifiedArn"
@@ -4754,7 +6882,7 @@
             "ChangeOrderStatusLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY"
+                "Ref": "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs"
               },
               "Export": {
                 "Name": "sls-syntax-squad-dev-ChangeOrderStatusLambdaFunctionQualifiedArn"
@@ -4817,7 +6945,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateAdminLambdaVersionEecLt5ppTOWsQdaSBwgfSGt8SQ21GOCrrZUZj7I"
+          "versionLogicalId": "CreateAdminLambdaVersion9EjoGgBnvgCWqWBN47XSLBsVqNFY4UDE0eB5A2lwE"
         },
         "getAdmin": {
           "handler": "src/handlers/adminHandler.getAdmin",
@@ -4837,7 +6965,47 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAdminLambdaVersionqyUrCq6g7NmfuS2qwYHFjjdzwdEtvcIl870qVWrIjs"
+          "versionLogicalId": "GetAdminLambdaVersionbjhBYyV4SXrlMjwVn6abg4GGgen84icuC2sUc5w"
+        },
+        "changeEmailAdmin": {
+          "handler": "src/handlers/adminHandler.changeEmail",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/admin",
+                "method": "PUT"
+              },
+              "resolvedMethod": "PUT",
+              "resolvedPath": "/admin"
+            }
+          ],
+          "name": "syntax-squad-dev-changeEmailAdmin",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "ChangeEmailAdminLambdaVersion4BVCGX1bLdbsjeJnCsrkG4UJiPQWqYZwHuDj84PI60"
+        },
+        "deleteAdmin": {
+          "handler": "src/handlers/adminHandler.deleteAdmin",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/admin/{adminID}",
+                "method": "DELETE"
+              },
+              "resolvedMethod": "DELETE",
+              "resolvedPath": "/admin/{adminID}"
+            }
+          ],
+          "name": "syntax-squad-dev-deleteAdmin",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "DeleteAdminLambdaVersionhnV2fYBq4tRyfsLegsDZ5dCCXGUYiB9U6WsUNMEkys"
         },
         "createCustomer": {
           "handler": "src/handlers/customerHandler.createCustomer",
@@ -4857,7 +7025,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateCustomerLambdaVersionYCZKdX41eclqL72hQSx50oE2WQrgE5QydxHft3u1T4"
+          "versionLogicalId": "CreateCustomerLambdaVersionkcjKVEX047cNhFh9Lu3hOdisF0VTXLmtGRaB5rRFA"
         },
         "getCustomers": {
           "handler": "src/handlers/customerHandler.getCustomers",
@@ -4877,7 +7045,67 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetCustomersLambdaVersionlxA3fRyZWdvFdFVu64XCdAx5KdBnhWoyerKdQiRKP5s"
+          "versionLogicalId": "GetCustomersLambdaVersioncvn04EJyvDXdaIhxvRZNiim8xFsyzSW0yGVfyVjAm0"
+        },
+        "getCustomer": {
+          "handler": "src/handlers/customerHandler.getCustomer",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/customer/{customerID}",
+                "method": "GET"
+              },
+              "resolvedMethod": "GET",
+              "resolvedPath": "/customer/{customerID}"
+            }
+          ],
+          "name": "syntax-squad-dev-getCustomer",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "GetCustomerLambdaVersionqhXhGMcwRr28T1jtwqE7AQJXOQRDYkypFNiHks2AsY"
+        },
+        "editCustomer": {
+          "handler": "src/handlers/customerHandler.editCustomer",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/customer",
+                "method": "PUT"
+              },
+              "resolvedMethod": "PUT",
+              "resolvedPath": "/customer"
+            }
+          ],
+          "name": "syntax-squad-dev-editCustomer",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "EditCustomerLambdaVersion7J7QWCXyq8upzQNjeEwqxYQeq3ziH64TeSN5fRqKg"
+        },
+        "deleteCustomer": {
+          "handler": "src/handlers/customerHandler.deleteCustomer",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/customer/{customerID}",
+                "method": "DELETE"
+              },
+              "resolvedMethod": "DELETE",
+              "resolvedPath": "/customer/{customerID}"
+            }
+          ],
+          "name": "syntax-squad-dev-deleteCustomer",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "DeleteCustomerLambdaVersionSR0nM6zA2MaMga9TtmTobH8d5nJlHptXtJ8uoeSXOg"
         },
         "addIngredient": {
           "handler": "src/handlers/ingredientHandler.addIngredient",
@@ -4897,7 +7125,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AddIngredientLambdaVersionHT7c1safxANzEH8FCC4aehk8tdcFTDAbUVSXLg4E"
+          "versionLogicalId": "AddIngredientLambdaVersionlGQU7eJcbyZtEEAiQvgmKGXTF4yuT7yZMXeYw4RQ"
         },
         "deleteIngredient": {
           "handler": "src/handlers/ingredientHandler.deleteIngredient",
@@ -4917,7 +7145,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "DeleteIngredientLambdaVersion5zkg7V6zTvDADCMgEKNDkUpCBto30CA5RD0Txx6ytk"
+          "versionLogicalId": "DeleteIngredientLambdaVersionwm10UVjqzXm6K2ONSerQKSGxROBTpq8yryutg4yrjc"
         },
         "editIngredient": {
           "handler": "src/handlers/ingredientHandler.editIngredient",
@@ -4937,7 +7165,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EditIngredientLambdaVersionBUZ0I4ctE16z8lnwsy5VUWwOdbXnUtMMd9YSv6vA"
+          "versionLogicalId": "EditIngredientLambdaVersionVRBY4qiTwXZdImVodj4DsoxC8JZNVPJW8Q6rOL6OCE"
         },
         "getIngredientsById": {
           "handler": "src/handlers/ingredientHandler.getIngredientsByIds",
@@ -4957,7 +7185,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetIngredientsByIdLambdaVersionw9G2F9kjxHzxaOsyvh4KwSS8RLMqJNgkBPS0ATloagA"
+          "versionLogicalId": "GetIngredientsByIdLambdaVersionCkGvOlYCEnko26KhfSGJ9Bw841sj6CTn8GfhcQfsV8"
         },
         "getAllIngredients": {
           "handler": "src/handlers/ingredientHandler.getAllIngredients",
@@ -4977,7 +7205,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAllIngredientsLambdaVersionC5osSFWFDsSvYc5E99To4zqLh4okIbveFbOTquB54"
+          "versionLogicalId": "GetAllIngredientsLambdaVersionNFpm3bVwbi2ggiK85TgxqqRb60yNXhk2K7jkGsm3TM"
         },
         "getAllProducts": {
           "handler": "src/handlers/productHandler.getAllProducts",
@@ -4997,7 +7225,27 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAllProductsLambdaVersion7BVeyYeTNcGUJaGQ6U7WoWkayVT3bwGGi4CBW88e2M"
+          "versionLogicalId": "GetAllProductsLambdaVersionp6Lt5wcytJS2lP2H871v7sPPiMU4Ulx6yay3uGgdDM"
+        },
+        "getProduct": {
+          "handler": "src/handlers/productHandler.getProduct",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/product/{productID}",
+                "method": "GET"
+              },
+              "resolvedMethod": "GET",
+              "resolvedPath": "/product/{productID}"
+            }
+          ],
+          "name": "syntax-squad-dev-getProduct",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "GetProductLambdaVersionusaBLNnEMO4mhlnM82YC2ndwWrIi664lW0SMzuixOHo"
         },
         "createProduct": {
           "handler": "src/handlers/productHandler.createProduct",
@@ -5017,7 +7265,47 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateProductLambdaVersionp1yVtUBDxMN6l33tvhTmieJbLQKuc33TycSH9oBIoA"
+          "versionLogicalId": "CreateProductLambdaVersiondmfsg60HhzUOokNWU9tROvaygTEdxABpnevjRag5Asw"
+        },
+        "editProduct": {
+          "handler": "src/handlers/productHandler.editProduct",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/product",
+                "method": "PUT"
+              },
+              "resolvedMethod": "PUT",
+              "resolvedPath": "/product"
+            }
+          ],
+          "name": "syntax-squad-dev-editProduct",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "EditProductLambdaVersionxSkUdLflt7YTZ1g8CfM6FroMH6vw3uyDs1Wv9lQ70"
+        },
+        "deleteProduct": {
+          "handler": "src/handlers/productHandler.deleteProduct",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/product/{productID}",
+                "method": "DELETE"
+              },
+              "resolvedMethod": "DELETE",
+              "resolvedPath": "/product/{productID}"
+            }
+          ],
+          "name": "syntax-squad-dev-deleteProduct",
+          "package": {},
+          "memory": 1024,
+          "timeout": 6,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "DeleteProductLambdaVersiongBeFmuRNRvQ1fhKv0zg0nlmrw8aK5D7TwDCTf8sQ"
         },
         "createOrder": {
           "handler": "src/handlers/orderHandler.createOrder",
@@ -5037,7 +7325,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "CreateOrderLambdaVersioneylJTBKGljbGo3AkGEfQ1e05i72T5V1362WoGCu8bs4"
+          "versionLogicalId": "CreateOrderLambdaVersiontI38YDeKmYsIDEUaKdoFXqsr0NFdnVFutzDkNXLoTY"
         },
         "changeOrder": {
           "handler": "src/handlers/orderHandler.changeOrder",
@@ -5057,7 +7345,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ChangeOrderLambdaVersion7t28fZg6Ot6ajIGtqhZNClteCPZAPaZXG8yEFDzoPY"
+          "versionLogicalId": "ChangeOrderLambdaVersionigLHZY8qEHX2IGkZca33uIXGCOHhfArlKTYny3iCA"
         },
         "deleteOrder": {
           "handler": "src/handlers/orderHandler.deleteOrder",
@@ -5077,7 +7365,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "DeleteOrderLambdaVersionxmR600J4piLa8bxRkTSFjJtxa3IlqtBmZX8iQqp7iQ"
+          "versionLogicalId": "DeleteOrderLambdaVersionqrDEl9Lq1cThbQLhvduBv0Ws9aQ2Hkn1OsXxLmKOIU"
         },
         "changeOrderStatus": {
           "handler": "src/handlers/orderHandler.changeOrderStatus",
@@ -5097,7 +7385,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ChangeOrderStatusLambdaVersionG8vjCfI7B7EWet690pNYeGRawORAMA1BgvQCSeb4TNY"
+          "versionLogicalId": "ChangeOrderStatusLambdaVersionoWLbhOyXIcG4RHzmfnjixJhiD5D6WKsIoIeduuosYs"
         }
       },
       "resources": {
@@ -5220,20 +7508,20 @@
         "Outputs": {}
       }
     },
-    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: dylanr96\r\n# \"service\" is the name of this project. This will also be added to your AWS resource names.\r\nservice: syntax-squad\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  region: eu-north-1\r\n  httpApi:\r\n    cors: true\r\n  iam:\r\n    role:\r\n      statements:\r\n        - Effect: \"Allow\"\r\n          Action:\r\n            - dynamodb:Query\r\n            - dynamodb:Scan\r\n            - dynamodb:GetItem\r\n            - dynamodb:PutItem\r\n            - dynamodb:UpdateItem\r\n            - dynamodb:DeleteItem\r\n            - dynamodb:BatchGetItem\r\n          Resource: \"*\"\r\nfunctions:\r\n  # Admin\r\n  createAdmin:\r\n    handler: src/handlers/adminHandler.createAdmin\r\n    events:\r\n      - httpApi:\r\n          path: /admin\r\n          method: POST\r\n  getAdmin:\r\n    handler: src/handlers/adminHandler.getAdmin\r\n    events:\r\n      - httpApi:\r\n          path: /admin/{adminID}\r\n          method: GET\r\n  # Customers\r\n  createCustomer:\r\n    handler: src/handlers/customerHandler.createCustomer\r\n    events:\r\n      - httpApi:\r\n          path: /customer\r\n          method: POST\r\n  getCustomers:\r\n    handler: src/handlers/customerHandler.getCustomers\r\n    events:\r\n      - httpApi:\r\n          path: /customers\r\n          method: GET\r\n  # Ingredients\r\n  addIngredient:\r\n    handler: src/handlers/ingredientHandler.addIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: POST\r\n  deleteIngredient:\r\n    handler: src/handlers/ingredientHandler.deleteIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: DELETE\r\n  editIngredient:\r\n    handler: src/handlers/ingredientHandler.editIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: PUT\r\n  getIngredientsById:\r\n    handler: src/handlers/ingredientHandler.getIngredientsByIds\r\n    events:\r\n      - httpApi:\r\n          path: /ingredientsById\r\n          method: POST\r\n  getAllIngredients:\r\n    handler: src/handlers/ingredientHandler.getAllIngredients\r\n    events:\r\n      - httpApi:\r\n          path: /ingredients\r\n          method: GET\r\n  # Products\r\n  getAllProducts:\r\n    handler: src/handlers/productHandler.getAllProducts\r\n    events:\r\n      - httpApi:\r\n          path: /products\r\n          method: GET\r\n  createProduct:\r\n    handler: src/handlers/productHandler.createProduct\r\n    events:\r\n      - httpApi:\r\n          path: /product\r\n          method: POST\r\n  # Orders\r\n  createOrder:\r\n    handler: src/handlers/orderHandler.createOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: POST\r\n  changeOrder:\r\n    handler: src/handlers/orderHandler.changeOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: PUT\r\n  deleteOrder:\r\n    handler: src/handlers/orderHandler.deleteOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: DELETE\r\n  changeOrderStatus:\r\n    handler: src/handlers/orderHandler.changeOrderStatus\r\n    events:\r\n      - httpApi:\r\n          path: /orderById\r\n          method: PUT\r\nresources:\r\n  Resources:\r\n    AdminTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_admins\r\n        AttributeDefinitions:\r\n          - AttributeName: adminID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: adminID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    CustomerTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_customers\r\n        AttributeDefinitions:\r\n          - AttributeName: customerID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: customerID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    InfoTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_info\r\n        AttributeDefinitions:\r\n          - AttributeName: shopID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: shopID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    ProductsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_products\r\n        AttributeDefinitions:\r\n          - AttributeName: productID\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: productID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    IngredientsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_ingredients\r\n        AttributeDefinitions:\r\n          - AttributeName: ingredientID\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: ingredientID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    OrdersTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_orders\r\n        AttributeDefinitions:\r\n          - AttributeName: orderNO\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: orderNO\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n",
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: fedandreas\r\n# \"service\" is the name of this project. This will also be added to your AWS resource names.\r\nservice: syntax-squad\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  region: eu-north-1\r\n  httpApi:\r\n    cors: true\r\n  iam:\r\n    role:\r\n      statements:\r\n        - Effect: \"Allow\"\r\n          Action:\r\n            - dynamodb:Query\r\n            - dynamodb:Scan\r\n            - dynamodb:GetItem\r\n            - dynamodb:PutItem\r\n            - dynamodb:UpdateItem\r\n            - dynamodb:DeleteItem\r\n            - dynamodb:BatchGetItem\r\n          Resource: \"*\"\r\nfunctions:\r\n  # Admin\r\n  createAdmin:\r\n    handler: src/handlers/adminHandler.createAdmin\r\n    events:\r\n      - httpApi:\r\n          path: /admin\r\n          method: POST\r\n  getAdmin:\r\n    handler: src/handlers/adminHandler.getAdmin\r\n    events:\r\n      - httpApi:\r\n          path: /admin/{adminID}\r\n          method: GET\r\n  changeEmailAdmin:\r\n    handler: src/handlers/adminHandler.changeEmail\r\n    events:\r\n      - httpApi:\r\n          path: /admin\r\n          method: PUT\r\n  deleteAdmin:\r\n    handler: src/handlers/adminHandler.deleteAdmin\r\n    events:\r\n      - httpApi:\r\n          path: /admin/{adminID}\r\n          method: DELETE\r\n  # Customers\r\n  createCustomer:\r\n    handler: src/handlers/customerHandler.createCustomer\r\n    events:\r\n      - httpApi:\r\n          path: /customer\r\n          method: POST\r\n  getCustomers:\r\n    handler: src/handlers/customerHandler.getCustomers\r\n    events:\r\n      - httpApi:\r\n          path: /customers\r\n          method: GET\r\n  getCustomer:\r\n    handler: src/handlers/customerHandler.getCustomer\r\n    events:\r\n      - httpApi:\r\n          path: /customer/{customerID}\r\n          method: GET\r\n  editCustomer:\r\n    handler: src/handlers/customerHandler.editCustomer\r\n    events:\r\n      - httpApi:\r\n          path: /customer\r\n          method: PUT\r\n  deleteCustomer:\r\n    handler: src/handlers/customerHandler.deleteCustomer\r\n    events:\r\n      - httpApi:\r\n          path: /customer/{customerID}\r\n          method: DELETE\r\n  # Ingredients\r\n  addIngredient:\r\n    handler: src/handlers/ingredientHandler.addIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: POST\r\n  deleteIngredient:\r\n    handler: src/handlers/ingredientHandler.deleteIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: DELETE\r\n  editIngredient:\r\n    handler: src/handlers/ingredientHandler.editIngredient\r\n    events:\r\n      - httpApi:\r\n          path: /ingredient\r\n          method: PUT\r\n  getIngredientsById:\r\n    handler: src/handlers/ingredientHandler.getIngredientsByIds\r\n    events:\r\n      - httpApi:\r\n          path: /ingredientsById\r\n          method: POST\r\n  getAllIngredients:\r\n    handler: src/handlers/ingredientHandler.getAllIngredients\r\n    events:\r\n      - httpApi:\r\n          path: /ingredients\r\n          method: GET\r\n  # Products\r\n  getAllProducts:\r\n    handler: src/handlers/productHandler.getAllProducts\r\n    events:\r\n      - httpApi:\r\n          path: /products\r\n          method: GET\r\n  getProduct:\r\n    handler: src/handlers/productHandler.getProduct\r\n    events:\r\n      - httpApi:\r\n          path: /product/{productID}\r\n          method: GET\r\n  createProduct:\r\n    handler: src/handlers/productHandler.createProduct\r\n    events:\r\n      - httpApi:\r\n          path: /product\r\n          method: POST\r\n  editProduct:\r\n    handler: src/handlers/productHandler.editProduct\r\n    events:\r\n      - httpApi:\r\n          path: /product\r\n          method: PUT\r\n  deleteProduct:\r\n    handler: src/handlers/productHandler.deleteProduct\r\n    events:\r\n      - httpApi:\r\n          path: /product/{productID}\r\n          method: DELETE\r\n  # Orders\r\n  createOrder:\r\n    handler: src/handlers/orderHandler.createOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: POST\r\n  changeOrder:\r\n    handler: src/handlers/orderHandler.changeOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: PUT\r\n  deleteOrder:\r\n    handler: src/handlers/orderHandler.deleteOrder\r\n    events:\r\n      - httpApi:\r\n          path: /order\r\n          method: DELETE\r\n  changeOrderStatus:\r\n    handler: src/handlers/orderHandler.changeOrderStatus\r\n    events:\r\n      - httpApi:\r\n          path: /orderById\r\n          method: PUT\r\nresources:\r\n  Resources:\r\n    AdminTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_admins\r\n        AttributeDefinitions:\r\n          - AttributeName: adminID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: adminID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    CustomerTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_customers\r\n        AttributeDefinitions:\r\n          - AttributeName: customerID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: customerID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    InfoTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_info\r\n        AttributeDefinitions:\r\n          - AttributeName: shopID\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: shopID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    ProductsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_products\r\n        AttributeDefinitions:\r\n          - AttributeName: productID\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: productID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    IngredientsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_ingredients\r\n        AttributeDefinitions:\r\n          - AttributeName: ingredientID\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: ingredientID\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\n    OrdersTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: easybake_orders\r\n        AttributeDefinitions:\r\n          - AttributeName: orderNO\r\n            AttributeType: N\r\n        KeySchema:\r\n          - AttributeName: orderNO\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n",
     "command": [
       "deploy"
     ],
     "options": {},
     "error": null,
     "params": {},
-    "machineId": "186217182d04cca02cfb83dde26f2744",
+    "machineId": "2cfb7ad70249526ef09b603de71447b9",
     "stage": "dev",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
-    "orgId": "6a1b92c2-adf2-48be-8931-cc6dc69070a6",
-    "orgName": "dylanr96",
-    "userId": "xBStRKHGYzGKWhCczX",
+    "orgId": "2a01563c-21f5-4c53-b253-4ff4afd20861",
+    "orgName": "fedandreas",
+    "userId": "7C8Hf4GcngrZGjvsHD",
     "dashboard": {
       "isEnabledForService": false,
       "requiredAuthentication": false,
@@ -5243,128 +7531,176 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "userName": "dylanr96",
+    "userName": "fedandreas",
     "subscription": null,
-    "userEmail": "dylan.ravenson@gmail.com",
+    "userEmail": "skrap@andreasb.se",
     "serviceProviderAwsRegion": "eu-north-1",
     "serviceProviderAwsCredentials": "<REDACTED>",
-    "serviceProviderAwsAccountId": "992382623759",
+    "serviceProviderAwsAccountId": "686255964174",
     "projectType": "traditional",
-    "versionSf": "4.4.12",
+    "versionSf": "4.4.13",
     "serviceProviderAwsCfStackName": "syntax-squad-dev",
     "integrations": {},
-    "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:992382623759:stack/syntax-squad-dev/dfbfa110-ab17-11ef-9007-0a67b1f58465",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:992382623759:stack/syntax-squad-dev/dfbfa110-ab17-11ef-9007-0a67b1f58465",
-    "serviceProviderAwsCfStackCreated": "2024-11-25T10:27:29.908Z",
-    "serviceProviderAwsCfStackUpdated": "2024-11-27T09:29:31.954Z",
+    "serviceUniqueId": "arn:aws:cloudformation:eu-north-1:686255964174:stack/syntax-squad-dev/6bdc5600-abbf-11ef-a7e4-0e156b11bde1",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:686255964174:stack/syntax-squad-dev/6bdc5600-abbf-11ef-a7e4-0e156b11bde1",
+    "serviceProviderAwsCfStackCreated": "2024-11-26T06:26:50.958Z",
+    "serviceProviderAwsCfStackUpdated": "2024-11-27T19:38:56.628Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
-        "OutputKey": "CreateOrderLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-createOrder:9",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-CreateOrderLambdaFunctionQualifiedArn"
-      },
-      {
         "OutputKey": "CreateAdminLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-createAdmin:21",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createAdmin:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
       },
       {
-        "OutputKey": "GetAllProductsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-getAllProducts:10",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
-      },
-      {
         "OutputKey": "GetAllIngredientsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-getAllIngredients:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAllIngredients:43",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ChangeOrderStatusLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-changeOrderStatus:9",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-changeOrderStatus:13",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-ChangeOrderStatusLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "AddIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-addIngredient:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-addIngredient:43",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
       },
       {
-        "OutputKey": "CreateProductLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-createProduct:10",
+        "OutputKey": "GetCustomerLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getCustomer:5",
         "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
+        "ExportName": "sls-syntax-squad-dev-GetCustomerLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
-        "OutputValue": "rm48l4rhzk",
+        "OutputValue": "ez7mtpao6i",
         "Description": "Id of the HTTP API",
         "ExportName": "sls-syntax-squad-dev-HttpApiId"
       },
       {
         "OutputKey": "GetAdminLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-getAdmin:21",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAdmin:44",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ServerlessDeploymentBucketName",
-        "OutputValue": "serverless-framework-deployments-eu-north-1-e867d45f-d008",
+        "OutputValue": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
         "ExportName": "sls-syntax-squad-dev-ServerlessDeploymentBucketName"
       },
       {
+        "OutputKey": "GetProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getProduct:9",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetProductLambdaFunctionQualifiedArn"
+      },
+      {
         "OutputKey": "HttpApiUrl",
-        "OutputValue": "https://rm48l4rhzk.execute-api.eu-north-1.amazonaws.com",
+        "OutputValue": "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-syntax-squad-dev-HttpApiUrl"
       },
       {
-        "OutputKey": "CreateCustomerLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-createCustomer:18",
+        "OutputKey": "DeleteCustomerLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteCustomer:5",
         "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
+        "ExportName": "sls-syntax-squad-dev-DeleteCustomerLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "DeleteOrderLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-deleteOrder:9",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteOrder:13",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-DeleteOrderLambdaFunctionQualifiedArn"
       },
       {
-        "OutputKey": "GetCustomersLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-getCustomers:14",
+        "OutputKey": "DeleteProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteProduct:7",
         "Description": "Current Lambda function version",
-        "ExportName": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
+        "ExportName": "sls-syntax-squad-dev-DeleteProductLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetIngredientsByIdLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-getIngredientsById:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getIngredientsById:29",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "DeleteIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-deleteIngredient:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteIngredient:34",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EditIngredientLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-editIngredient:10",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-editIngredient:35",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ChangeOrderLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-north-1:992382623759:function:syntax-squad-dev-changeOrder:9",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-changeOrder:13",
         "Description": "Current Lambda function version",
         "ExportName": "sls-syntax-squad-dev-ChangeOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ChangeEmailAdminLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-changeEmailAdmin:10",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-ChangeEmailAdminLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createOrder:13",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-CreateOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetAllProductsLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getAllProducts:21",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createProduct:20",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "EditCustomerLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-editCustomer:3",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-EditCustomerLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateCustomerLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-createCustomer:44",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetCustomersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-getCustomers:44",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteAdminLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-deleteAdmin:13",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-DeleteAdminLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "EditProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:686255964174:function:syntax-squad-dev-editProduct:1",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-syntax-squad-dev-EditProductLambdaFunctionQualifiedArn"
       }
     ]
   }
