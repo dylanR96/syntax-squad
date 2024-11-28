@@ -9,7 +9,6 @@ import Login from "../pages/Login/Login";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
 
-
 const Layout = () => {
   return (
     <>
@@ -20,6 +19,10 @@ const Layout = () => {
   );
 };
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <Layout />,
@@ -47,13 +50,9 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
     path: "/register",
     element: <Register />,
-  }
+  },
 
   // {
   //   path: "/checkout",
@@ -71,8 +70,6 @@ const router = createBrowserRouter([
   //   path: "/orders",
   //   element: <Orders />,
   // },
-
-
 ]);
 
 export default router;
