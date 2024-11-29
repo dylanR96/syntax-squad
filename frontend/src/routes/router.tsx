@@ -9,10 +9,13 @@ import Login from "../pages/Login/Login";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
 import Stock from "../pages/Stock/Stock";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = () => {
   return (
     <>
+      <ToastContainer />
       <Header />
       <Outlet />
       <Footer />

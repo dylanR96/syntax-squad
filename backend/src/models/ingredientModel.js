@@ -11,8 +11,9 @@ export const ingredientModel = {
         ingredientName: ingredientData.name,
         stock: ingredientData.stock,
         units: ingredientData.units,
-        pricePerUnit: ingredientData.pricePerUnit,
-        exchangeFor: ingredientData.exchangeFor,
+        pricePerUnit: ingredientData.pricePerUnit
+          ? ingredientData.pricePerUnit
+          : 0,
       },
     };
     const data = await db.put(params);
@@ -50,17 +51,17 @@ export const ingredientModel = {
         ingredientID: ingredientData.ingredientID,
       },
       UpdateExpression: `SET 
-        ingredientName = :name, 
+        ingredientName = :ingredientName, 
         stock = :stock, 
         units = :units,
-        priceForExtra = :priceForExtra, 
-        exchangeFor = :exchangeFor`,
+        pricePerUnit = :pricePerUnit`,
       ExpressionAttributeValues: {
-        ":name": ingredientData.name,
+        ":ingredientName": ingredientData.ingredientName,
         ":stock": ingredientData.stock,
         ":units": ingredientData.units,
-        ":priceForExtra": ingredientData.priceForExtra,
-        ":exchangeFor": ingredientData.exchangeFor,
+        ":pricePerUnit": ingredientData.pricePerUnit
+          ? ingredientData.pricePerUnit
+          : 0,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };
