@@ -1,24 +1,68 @@
-header {
+.navbar__header {
+  width: 100%;
+  height: 96px;
+  font-family: "Aclonica", sans-serif;
+  font-size: 1.6rem;
+  color: #cc8d80;
+  background-color: #fcf6ee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__nav {
+  display: none;
+}
+
+.navbar__logo {
+  width: 70px;
+}
+
+.navbar__title {
+  color: #cc8d80;
+}
+
+.navbar__logo-and-text {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__menu {
+  padding: 0 20px;
+}
+
+.navbar__cart {
+  padding: 0 20px;
+  z-index: 3;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar__header {
+    height: 120px;
+    font-size: 1.6rem;
+  }
+  .navbar__nav {
     width: 100%;
-    height: 96px;
-    font-family: 'Aclonica', sans-serif;
-    font-size: 1.6em;
-    color: #CC8D80;
-    background-color: #fcf6ee;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    font-family: "Afacad", sans-serif;
+  }
+  .navbar__nav a {
+    padding: 0 1em;
+    color: #442a07;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .navbar__logo {
+    width: 100px;
   }
 
-  .logo {
-    width: 70px;
+  .navbar__menu {
+    padding: 0 40px;
+    display: none;
   }
-
-  .logo-plus-text {
-    display: flex;
-    align-items: center;
+  .navbar__cart {
+    padding: 0 40px;
   }
-
-  .header-svg {
-    padding: 0 20px;
-  }
+}

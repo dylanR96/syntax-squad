@@ -7,7 +7,8 @@ import EditProfile from "../pages/Profile/EditProfile";
 import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
 import Orders from "../pages/Orders/Orders";
-
+import About from "../pages/About/About";
+import Register from "../pages/Register/Register";
 
 const Layout = () => {
   return (
@@ -21,30 +22,43 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/",
     element: <Layout />,
     children: [
-
       {
-        path: "/login",
-        element: <Login />,
+        path: "/home",
+        element: <Home />,
       },
       {
         path: "/recipe",
         element: <Recipe />,
       },
-
       {
-        path: "/home",
-        element: <Home/>,
-        },
-
-        {
-          path: "/orders",
-         element: <Orders/>,
-         },
-      
+        path: "/orders",
+        element: <Orders/>,
+      },   
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/profile/edit",
+        element: <EditProfile />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
     ],
   },  
+
 
   // {
   //   path: "/checkout",
@@ -56,23 +70,13 @@ const router = createBrowserRouter([
   // },
  //{
   //path: "/stock",
-  //element: <Stock/>,
+  //element: <Stock />,
  //},
 
 
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/profile/edit",
-    element: <EditProfile />,
-  },
 
-  // {
-  //   path: "/about",
-  //   element: <About />,
-  // },
+
+
 ]);
 
 export default router;

@@ -1,0 +1,28 @@
+.menu {
+  background-color: #fcf6ee;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  gap: 2rem;
+}
+
+.menu__close {
+  position: absolute;
+  top: 30px;
+  left: 24px;
+  height: 32px;
+  width: 32px;
+}
+
+.menu__link {
+  font-family: "Aclonica", sans-serif;
+  font-size: 2.5rem;
+  color: #442a07;
+}

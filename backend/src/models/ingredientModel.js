@@ -53,13 +53,13 @@ export const ingredientModel = {
         ingredientName = :name, 
         stock = :stock, 
         units = :units,
-        priceForExtra = :priceForExtra, 
+        pricePerUnit = :pricePerUnit, 
         exchangeFor = :exchangeFor`,
       ExpressionAttributeValues: {
         ":name": ingredientData.name,
         ":stock": ingredientData.stock,
         ":units": ingredientData.units,
-        ":priceForExtra": ingredientData.priceForExtra,
+        ":pricePerUnit": ingredientData.pricePerUnit,
         ":exchangeFor": ingredientData.exchangeFor,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
