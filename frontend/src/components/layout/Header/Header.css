@@ -18,6 +18,10 @@
   width: 70px;
 }
 
+.navbar__title {
+  color: #cc8d80;
+}
+
 .navbar__logo-and-text {
   display: flex;
   align-items: center;

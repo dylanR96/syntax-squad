@@ -1,19 +1,19 @@
 import "./Cart.css";
 import remove from "../../assets/images/remove.svg";
 import edit from "../../assets/images/edit.svg";
-import { easeInOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const cartVariants = {
   open: {
     x: 0,
     transition: {
-      ease: easeInOut,
+      ease: "easeInOut",
     },
   },
   closed: {
     x: "100%",
     transition: {
-      ease: easeInOut,
+      ease: "easeInOut",
     },
   },
 };
