@@ -48,14 +48,12 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: #442a07;
-  margin-top: 1.25em;
 }
 
 .body-text--dark {
   font-family: "Afacad", sans-serif;
   font-size: 1rem;
   color: #442a07;
-  margin-top: 1.25em;
   line-height: 1.5;
 }
 
@@ -86,3 +84,4 @@
   .p--dark {
     font-size: 1.25rem;
   }
+}

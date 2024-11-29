@@ -6,6 +6,8 @@ import Profile from "../pages/Profile/UserProfile";
 import EditProfile from "../pages/Profile/EditProfile";
 import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
+import Orders from "../pages/Orders/Orders";
+
 
 const Layout = () => {
   return (
@@ -30,19 +32,19 @@ const router = createBrowserRouter([
         path: "/recipe",
         element: <Recipe />,
       },
+
+      {
+        path: "/home",
+        element: <Home/>,
+        },
+
+        {
+          path: "/orders",
+         element: <Orders/>,
+         },
       
     ],
   },  
-
-  {
-    path: "/home",
-    element: <Home/>,
-    },
-{
-  path: "/recipe",
-  element: <Recipe />,
-},
-
 
   // {
   //   path: "/checkout",
@@ -52,14 +54,11 @@ const router = createBrowserRouter([
   //   path: "/confirmation",
   //   element: <Confirmation />,
   // },
-  // {
-  //   path: "/stock",
-  //   element: <Stock />,
-  // },
-  // {
-  //   path: "/orders",
-  //   element: <Orders />,
-  // },
+ //{
+  //path: "/stock",
+  //element: <Stock/>,
+ //},
+
 
   {
     path: "/profile",

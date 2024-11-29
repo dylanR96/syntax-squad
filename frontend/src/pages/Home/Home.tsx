@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-    <header className='home__header'>
+    <section className='home__header'>
         <h2 className='h2--light'>Vad vill du baka idag?</h2>
 <article className="home__header-form-container">
 <form onSubmit={handleSubmit}>
@@ -42,7 +42,7 @@ const Home = () => {
     <i className="fa-solid fa-filter home__fa-filter"></i>
 </article>
         
-    </header>
+    </section>
        <main className="container">
 
 <article className="home__card-container">
@@ -51,7 +51,30 @@ const Home = () => {
 </article>
 <article className="home__card-container">
     <h3 className="h3--dark">Trending</h3>
-    <CardSmall/>
+    <div className="cards-wrapper">
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+    </div>
+</article>
+<article className="home__card-container">
+    <h3 className="h3--dark">Under 15 min</h3>
+    <div className="cards-wrapper">
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+    </div>
+</article>
+<article className="home__card-container">
+    <h3 className="h3--dark">Jul</h3>
+    <div className="cards-wrapper">
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+        <CardSmall />
+    </div>
 </article>
             
        </main> 
