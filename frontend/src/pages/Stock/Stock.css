@@ -30,6 +30,9 @@ article {
 .stock__checkbox {
   width: 20px;
 }
+.stock__buttons {
+  width: 40px;
+}
 .stock__ingredient {
   flex: 1;
 }
@@ -40,4 +43,19 @@ article {
 .stock__unit {
   width: 60px;
   text-align: right;
+}
+.stock__button {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0.1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid #cc8d80;
+  border-radius: 4px;
+}
+.stock__button--icon {
+  width: 100%;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import editIcon from "../../assets/images/icons/edit.svg";
 import "./Stock.css";
 type IngredientType = {
   createdAt: string;
@@ -28,33 +29,35 @@ const Stock = () => {
     };
     fetchIngredients();
   }, []);
-  console.log(ingredients);
+
   return (
     <main className="stock-container">
       <h1 className="h1--dark stock-heading">Lagersaldo</h1>
       <article>
-        <label className="stock-wrapper stock-wrapper--title">
-          <div className="stock__checkbox"></div>
+        <div className="stock-wrapper stock-wrapper--title">
+          <div className="stock__buttons"></div>
           <div className="stock__ingredient">Ingrediens</div>
           <div className="stock__number">Antal</div>
           <div className="stock__unit">Enhet</div>
-        </label>
+        </div>
         {ingredients &&
           ingredients.map((ingredient) => {
+            // ingredient.ingredientID
             return (
               <>
-                {" "}
-                <label className="stock-wrapper">
-                  <input
-                    type="checkbox"
-                    className="stock__checkbox recipe__input"
-                  />
+                <div className="stock-wrapper">
+                  <div className="stock__buttons">
+                    <button className="stock__button">
+                      <img src={editIcon} className="stock__button--icon" />
+                    </button>
+                  </div>
+
                   <div className="stock__ingredient">
                     {ingredient.ingredientName}
                   </div>
                   <div className="stock__number">{ingredient.stock}</div>
                   <div className="stock__unit">{ingredient.units}</div>
-                </label>
+                </div>
               </>
             );
           })}
@@ -64,3 +67,16 @@ const Stock = () => {
 };
 
 export default Stock;
+
+// OLD
+// <label className="stock-wrapper">
+// <input
+//   type="checkbox"
+//   className="stock__checkbox recipe__input"
+// />
+// <div className="stock__ingredient">
+//   {ingredient.ingredientName}
+// </div>
+// <div className="stock__number">{ingredient.stock}</div>
+// <div className="stock__unit">{ingredient.units}</div>
+// </label>
