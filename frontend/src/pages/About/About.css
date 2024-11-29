@@ -20,7 +20,6 @@
     padding: 1.5em;
     border-radius: 10px;
     box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
-    /* border: 1px solid #442A07; */
 }
 .about__header {
     text-align: center;
@@ -35,7 +34,7 @@
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 1;
 }
 .about__infotext {
     font-size: 1.2rem;
@@ -49,6 +48,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 2em;
 }
 .gallery__image-img {
     margin: 5px;
@@ -58,29 +58,45 @@
     border-radius: 10px;
 }
 .carousel {
+    background-color: #fcf6ee;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 500px;
-    height: 400px;
-    margin: 0 auto;
+    width: 450px;
+    min-height: 400px;
+    margin: 2em auto;
+    padding: 1em;
     overflow: hidden;
-    border: 2px solid #ccc;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
   }
   
   .carousel__slide {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 1.5em;
-    color: white;
+  }
+  .carousel__text {
+    font-size: 1.2em;
+    font-weight: 100;
+    font-style: italic;
+    line-height: 1.5;
+    color: #866436;
+    padding: 2em;
+    text-align: center;
+    font-family: 'Afacad', sans-serif;
+    text-transform: none;
+  }
+  .carousel__author {
+    font-size: 1.2rem;
     font-weight: bold;
-    text-transform: uppercase;
+    text-align: center;
+    color: #866436;
+    margin-top: 10px;
   }
   
   .carousel__button {
@@ -107,14 +123,34 @@
     color: #000;
   }
   
-
 @media (min-width: 768px) {
-    .about__info {
-        display: flex;
-        flex-direction: row;
-        margin-top: 40px;
-        position: relative;
-        height: 800px;
+  .about__info {
+    display: flex;
+    flex-direction: row;
+    padding: 0 100px;
+    width: 800px;
+    height: 800px;
     }
+  .about__image-img {
+    position: absolute;
+    top: 120px;
+    left: -100px;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+  .about__textbox {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: -210px;
+    width: 500px;
+    padding: 2em 4em;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+}
 }
     
