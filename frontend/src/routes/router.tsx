@@ -9,7 +9,7 @@ import Login from "../pages/Login/Login";
 import Orders from "../pages/Orders/Orders";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
-import Stock from "../pages/Stock/Stock";
+import Stock from "../pages/Admin/Stock/Stock";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

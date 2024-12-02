@@ -8,7 +8,7 @@ export const ingredientModel = {
       TableName: INGREDIENTS_TABLE,
       Item: {
         ingredientID: await createID(INGREDIENTS_TABLE, "ingredientID", 10000),
-        ingredientName: ingredientData.name,
+        ingredientName: ingredientData.ingredientName,
         stock: ingredientData.stock,
         units: ingredientData.units,
         pricePerUnit: ingredientData.pricePerUnit

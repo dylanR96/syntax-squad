@@ -1,17 +1,18 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { EditIngredientType } from "./types";
+import { EditIngredientType, EventFn } from "./types";
 import { toast } from "react-toastify";
 
 type Ingredient = {
   editIngredient: EditIngredientType;
   setEditIngredient: Dispatch<SetStateAction<EditIngredientType | null>>;
+  units: string[];
 };
-type EventFn = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
 const StockModal: React.FC<Ingredient> = ({
   editIngredient,
   setEditIngredient,
+  units,
 }) => {
   const handleChange = (e: EventFn) => {
     setEditIngredient({ ...editIngredient, [e.target.name]: e.target.value });
@@ -41,7 +42,6 @@ const StockModal: React.FC<Ingredient> = ({
     console.log(data);
   };
   console.log(editIngredient);
-  const units: string[] = ["gram", "milliliter", "styck"];
   return (
     <section className="stock-modal">
       <article className="stock-modal__ingredient">
@@ -51,7 +51,7 @@ const StockModal: React.FC<Ingredient> = ({
         <label className="stock-modal__label">
           <div className="stock-modal__column">Namn</div>
           <input
-            type=""
+            className="ingredient__input"
             placeholder="name"
             name="ingredientName"
             value={editIngredient.ingredientName}
@@ -61,6 +61,7 @@ const StockModal: React.FC<Ingredient> = ({
         <label className="stock-modal__label">
           <div className="stock-modal__column">Antal</div>
           <input
+            className="ingredient__input"
             type="number"
             name="stock"
             value={editIngredient.stock}
@@ -70,6 +71,7 @@ const StockModal: React.FC<Ingredient> = ({
         <label className="stock-modal__label">
           <div className="stock-modal__column">Enhet</div>
           <select
+            className="ingredient__input"
             name="units"
             value={editIngredient.units}
             onChange={handleChange}

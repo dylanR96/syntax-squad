@@ -14,3 +14,9 @@ export type EditIngredientType = {
   stock: number;
   units: string;
 };
+export type NewIngredientType = {
+  ingredientName: string;
+  stock: number;
+  units: string;
+};
+export type EventFn = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>;
