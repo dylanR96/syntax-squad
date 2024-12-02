@@ -16,6 +16,10 @@ const AboutUs = () => {
         EasyBake grundades 2020 av två passionerade hemmabagare, Helga och Augustus, som delade en vision om att göra bakning enklare och roligare för alla. Idén föddes en regnig söndag när de båda frustrerat letade efter recept som passade det lilla som fanns kvar i skafferiet.
         </p>
         <br />
+        <p className='about__infotext'>
+        "Varför inte skapa en tjänst där användare enkelt kan hitta inspirerande recept och samtidigt beställa exakt de ingredienser som behövs, direkt hem till dörren?" tänkte de.
+        </p>
+        <br />
         <p className="about__infotext">
         Med denna idé i grunden föddes EasyBake – en plattform som kombinerar receptsökning med ingrediensleverans. Oavsett om du är nybörjare eller en erfaren bagare, erbjuder EasyBake både inspiration och bekvämlighet. Med en passion för kvalitet ser företaget till att endast leverera noggrant utvalda ingredienser, så att du kan fokusera på det viktiga: att skapa magiska bakverk.
         </p>
