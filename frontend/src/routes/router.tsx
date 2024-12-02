@@ -9,6 +9,7 @@ import Login from "../pages/Login/Login";
 import Orders from "../pages/Orders/Orders";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
+import Confirmation from "../pages/Confirmation/Confirmation";
 
 const Layout = () => {
   return (
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+        path: "/confirmation",
+        element: <Confirmation />,
+      },
     ],
   },  
 
@@ -64,10 +69,7 @@ const router = createBrowserRouter([
   //   path: "/checkout",
   //   element: <Checkout />,
   // },
-  // {
-  //   path: "/confirmation",
-  //   element: <Confirmation />,
-  // },
+
  //{
   //path: "/stock",
   //element: <Stock />,
