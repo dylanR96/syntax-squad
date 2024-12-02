@@ -19,7 +19,7 @@
     padding: 1.5em;
     border-radius: 10px;
     box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
-
+}
 .about__container {
   display: flex;
   flex-direction: column;
@@ -167,4 +167,5 @@
     padding: 2em 4em;
     border-radius: 10px;
     box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+}
 }
