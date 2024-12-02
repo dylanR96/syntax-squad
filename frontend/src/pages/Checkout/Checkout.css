@@ -1,0 +1,42 @@
+.checkout-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout {
+  margin: 2rem 1rem;
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+}
+
+.checkout__back-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.checkout__heading {
+  font-family: "Aclonica", sans-serif;
+}
+
+.special-request {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.special-request__input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 769px) {
+  .checkout {
+    min-height: calc(100vh - 184px);
+  }
+}

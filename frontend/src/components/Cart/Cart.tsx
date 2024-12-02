@@ -1,6 +1,6 @@
 import "./Cart.css";
 import remove from "../../assets/images/remove.svg";
-import edit from "../../assets/images/edit.svg";
+// import edit from "../../assets/images/edit.svg";
 import { motion } from "framer-motion";
 
 const cartVariants = {
@@ -44,17 +44,17 @@ const Cart = () => {
         <h4 className="cart-ingredients__title">Ingredienser:</h4>
         <div className="cart-ingredients__ingredient-container">
           <h5 className="cart-ingredients__ingredient">Ingrediens</h5>
-          <img className="cart-ingredients__edit" src={edit} />
+          {/* <img className="cart-ingredients__edit" src={edit} /> */}
         </div>
       </div>
 
-      <div className="cart-additions">
+      {/* <div className="cart-additions">
         <h4 className="cart-additions__title">Tillval:</h4>
         <div className="cart-additions__ingredient-container">
           <h5 className="cart-additions__ingredient">Ingrediens</h5>
           <img className="cart-additions__remove" src={remove} />
         </div>
-      </div>
+      </div> */}
 
       <div className="cart-total">
         <div className="cart-total__price-container">
