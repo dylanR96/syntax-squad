@@ -33,8 +33,6 @@ const Stock = () => {
   const outOfStock = ingredients.filter((ingredient) => {
     return ingredient.stock == 0;
   });
-  console.log({ lowStock });
-  console.log({ outOfStock });
 
   const initEditIngredient = (ingredient: IngredientType) => {
     const data = {
