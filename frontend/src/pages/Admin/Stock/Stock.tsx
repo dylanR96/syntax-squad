@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import "./Stock.css";
 import { EditIngredientType, IngredientType } from "./types";
 import StockModal from "./StockModal";
+import NewIngredient from "./NewIngredient";
 
 const Stock = () => {
   const [ingredients, setIngredients] = useState<IngredientType[]>([]);
   const [editIngredient, setEditIngredient] =
     useState<EditIngredientType | null>(null);
+  const [rerender, setRerender] = useState<number>(0);
+  const units: string[] = ["gram", "milliliter", "styck"];
+
   const ENDPOINT_INGREDIENTS =
     "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients";
   useEffect(() => {
@@ -25,7 +29,7 @@ const Stock = () => {
       }
     };
     fetchIngredients();
-  }, [editIngredient]);
+  }, [editIngredient, rerender]);
 
   const lowStock = ingredients.filter((ingredient) => {
     return ingredient.stock < 1000 && ingredient.stock > 0;
@@ -49,6 +53,7 @@ const Stock = () => {
         <StockModal
           editIngredient={editIngredient}
           setEditIngredient={setEditIngredient}
+          units={units}
         />
       )}
       <main className="stock-container">
@@ -66,7 +71,7 @@ const Stock = () => {
                     return (
                       <div
                         className="alert__ingredient alert__ingredient--zero"
-                        key={ingredient.ingredientName}
+                        key={`${ingredient.ingredientName}-oos`}
                         onClick={() => {
                           initEditIngredient(ingredient);
                         }}
@@ -83,7 +88,7 @@ const Stock = () => {
                     return (
                       <div
                         className="alert__ingredient alert__ingredient--low"
-                        key={ingredient.ingredientName}
+                        key={`${ingredient.ingredientName}-low`}
                         onClick={() => {
                           initEditIngredient(ingredient);
                         }}
@@ -126,6 +131,7 @@ const Stock = () => {
             </article>
           </section>
         </div>
+        <NewIngredient units={units} setRerender={setRerender} />
       </main>
     </>
   );
