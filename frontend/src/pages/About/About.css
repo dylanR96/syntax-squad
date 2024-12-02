@@ -1,58 +1,171 @@
-.about__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #fff;
-}
 .about__info {
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin-top: 40px;
     position: relative;
     height: 800px;
+    width: 500px;
 }
 
 .about__textbox {
     position: absolute;
-    top: 150px;
+    top: 170px;
     left: 20px;
     right: 20px;
     background-color: #C3D5D9;
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 1.5em;
     border-radius: 10px;
-    /* z-index: 1; */
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
 }
+.about__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+}
+  
 .about__header {
-    text-align: center;
-    color: #442A07;
-    font-size: 2rem;
-    font-family: 'Aclonica', sans-serif;
-    padding: 1em;
+  text-align: center;
+  color: #442a07;
+  font-size: 2rem;
+  font-family: "Aclonica", sans-serif;
+  padding: 1em;
 }
+  
 .about__image-img {
-    width: 350px;
+    width: 75%;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;
-    z-index: 100;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
+  
 .about__infotext {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
+  font-family: "Afacad", sans-serif;
+  color: #442a07;
+}
+  
+.gallery__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2em;
+}
+  
+.gallery__image-img {
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+  
+.carousel {
+    background-color: #fcf6ee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 450px;
+    min-height: 400px;
+    margin: 2em auto;
+    padding: 1em;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .carousel__slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .carousel__text {
+    font-size: 1.2em;
+    font-weight: 100;
+    font-style: italic;
+    line-height: 1.5;
+    color: #866436;
+    padding: 2em;
+    text-align: center;
     font-family: 'Afacad', sans-serif;
-    color: #442A07;
-}
-
+    text-transform: none;
+  }
+  .carousel__author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #866436;
+    margin-top: 10px;
+  }
+  
+  .carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #ccc;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .carousel__button.left {
+    left: 10px;
+  }
+  
+  .carousel__button.right {
+    right: 10px;
+  }
+  
+  .carousel__button:hover {
+    color: #000;
+  }
+  
 @media (min-width: 768px) {
-    .about__info {
-        display: flex;
-        flex-direction: row;
-        margin-top: 40px;
-        position: relative;
-        height: 800px;
+  .about__info {
+    display: flex;
+    flex-direction: row;
+    padding: 0 100px;
+    width: 800px;
+    height: 800px;
     }
+  
+  .about__image-img {
+    position: absolute;
+    top: 120px;
+    left: -100px;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+  
+  .about__textbox {
+    position: absolute;
+    top: 0;
+    left: 200px;
+    right: -210px;
+    width: 500px;
+    padding: 2em 4em;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px 1px rgba(0, 0, 0, 0.5);
 }
-    
+}

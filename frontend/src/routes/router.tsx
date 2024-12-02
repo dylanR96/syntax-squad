@@ -6,6 +6,7 @@ import Profile from "../pages/Profile/UserProfile";
 import EditProfile from "../pages/Profile/EditProfile";
 import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
+import Orders from "../pages/Orders/Orders";
 import About from "../pages/About/About";
 import Register from "../pages/Register/Register";
 import Stock from "../pages/Stock/Stock";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/register",
+    element: <Register />,
+  },
+  {
     path: "/",
     element: <Layout />,
     children: [
@@ -39,6 +44,10 @@ const router = createBrowserRouter([
         path: "/recipe",
         element: <Recipe />,
       },
+      {
+        path: "/orders",
+        element: <Orders/>,
+      },   
       {
         path: "/profile",
         element: <Profile />,
@@ -56,11 +65,8 @@ const router = createBrowserRouter([
         element: <Stock />,
       },
     ],
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
+  },  
+
 
   // {
   //   path: "/checkout",
@@ -70,14 +76,15 @@ const router = createBrowserRouter([
   //   path: "/confirmation",
   //   element: <Confirmation />,
   // },
-  // {
-  //   path: "/stock",
-  //   element: <Stock />,
-  // },
-  // {
-  //   path: "/orders",
-  //   element: <Orders />,
-  // },
+ //{
+  //path: "/stock",
+  //element: <Stock />,
+ //},
+
+
+
+
+
 ]);
 
 export default router;

@@ -61,6 +61,8 @@ export const productModel = {
         ":image": productData.image ? productData.image : "",
         ":bakingTime": productData.bakingTime,
         ":description": productData.description,
+        ":bakingTime": productData.bakingTime,
+        ":image": productData.image,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };

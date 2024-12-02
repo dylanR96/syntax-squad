@@ -55,10 +55,12 @@ export const ingredientModel = {
         stock = :stock, 
         units = :units,
         pricePerUnit = :pricePerUnit`,
+
       ExpressionAttributeValues: {
         ":ingredientName": ingredientData.ingredientName,
         ":stock": ingredientData.stock,
         ":units": ingredientData.units,
+
         ":pricePerUnit": ingredientData.pricePerUnit
           ? ingredientData.pricePerUnit
           : 0,

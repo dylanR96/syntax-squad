@@ -7,22 +7,6 @@
   box-sizing: border-box;
 }
   
-  /* .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  } */
-  
-  /* main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    height: 100%;
-    flex: 1;
-  } */
   .container {
     display: flex;
     flex-direction: column;
@@ -151,17 +135,26 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .profile__edit-button:hover {
+    background-color: #307383;
+    color: white;
+  }
   .profile__logout-button {
     margin: 0.5em 0;
     width: 200px;
     padding: 10px;
     background-color: #CC8D80;
-    color: white;
+    color: #442A07;
     font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #442A07;
     border-radius: 5px;
     cursor: pointer;
+  }
+  .profile__logout-button:hover {
+    background-color: #da6851;
+    color: white;
   }
   
   @media screen and (min-width: 768px) {
@@ -202,7 +195,6 @@
       width: 200px;
       padding: 10px;
       background-color: #CC8D80;
-      color: white;
       font-size: 1.2rem;
     }
   }

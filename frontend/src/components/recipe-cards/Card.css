@@ -27,7 +27,7 @@
 /* liten card mobil */
 
 .card-container-small {
-  width: 200px;
+  min-width: 200px;
   margin-top: 1.25em;
 }
 
