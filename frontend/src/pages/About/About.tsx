@@ -12,22 +12,12 @@ const AboutUs = () => {
       className="about__image-img"/>
     <article className="about__textbox">
       <h1 className="about__header">Om oss</h1>
-      <p className="about__infotext">
-        Vi på EasyBake tror att bakning är en konstform som alla kan njuta av. Därför har vi skapat en plattform där du kan hitta inspiration, recept och ingredienser för att skapa ditt eget mästerverk.
+        <p className="about__infotext">
+        EasyBake grundades 2020 av två passionerade hemmabagare, Helga och Augustus, som delade en vision om att göra bakning enklare och roligare för alla. Idén föddes en regnig söndag när de båda frustrerat letade efter recept som passade det lilla som fanns kvar i skafferiet.
         </p>
         <br />
         <p className="about__infotext">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-        scelerisque, risus et consectetur laoreet, lacus libero fermentum
-        ligula, vitae ultricies nunc nisl nec nunc. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Ea, porro culpa! Corrupti earum quo voluptas ducimus excepturi consequuntur nihil fugiat.
-        </p>
-        <br />
-        <p className="about__infotext">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-        scelerisque, risus et consectetur laoreet, lacus libero fermentum
-        ligula, vitae ultricies nunc nisl nec nunc. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Ea, porro culpa! Corrupti earum quo voluptas ducimus excepturi consequuntur nihil fugiat.
+        Med denna idé i grunden föddes EasyBake – en plattform som kombinerar receptsökning med ingrediensleverans. Oavsett om du är nybörjare eller en erfaren bagare, erbjuder EasyBake både inspiration och bekvämlighet. Med en passion för kvalitet ser företaget till att endast leverera noggrant utvalda ingredienser, så att du kan fokusera på det viktiga: att skapa magiska bakverk.
         </p>
     </article>
     </section>
