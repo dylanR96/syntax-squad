@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Afacad:regular);
 
 .footer__information {
+    padding: 1em;
     height: 150px;
     background-color: #fcf6ee;
     width: 100%;
@@ -16,6 +17,12 @@
     font-size: 1rem;
   }
 
+  .footer__company-title {
+    font-size: 1.5rem;
+    font-family: 'Aclonica', sans-serif;
+    color: #CC8D80;
+  }
+
   @media screen and (min-width: 768px) {
     .footer__information {
       height: auto;
@@ -27,5 +34,8 @@
     }
     .footer__address, .footer__phone-no, .footer__email-address {
       font-size: 1.5rem;
+    }
+    .footer__company-title {
+      font-size: 2rem;
     }
   }

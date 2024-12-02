@@ -54,15 +54,20 @@
     font-size: 1.2rem;
     font-weight: bold;
   }
-  .navbar__logo {
-    width: 100px;
+  .navbar__h3 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.6rem;
+    padding: 0 20px;
   }
-
-  .navbar__menu {
-    padding: 0 40px;
-    display: none;
+    .navbar__logo {
+      width: 70px;
+  }
+    .navbar__menu {
+      padding: 0 40px;
+      display: none;
   }
   .navbar__cart {
     padding: 0 40px;
+
   }
 }
