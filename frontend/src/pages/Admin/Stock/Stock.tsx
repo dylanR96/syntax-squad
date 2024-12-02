@@ -66,6 +66,7 @@ const Stock = () => {
                     return (
                       <div
                         className="alert__ingredient alert__ingredient--zero"
+                        key={ingredient.ingredientName}
                         onClick={() => {
                           initEditIngredient(ingredient);
                         }}
@@ -82,6 +83,7 @@ const Stock = () => {
                     return (
                       <div
                         className="alert__ingredient alert__ingredient--low"
+                        key={ingredient.ingredientName}
                         onClick={() => {
                           initEditIngredient(ingredient);
                         }}
