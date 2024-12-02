@@ -134,7 +134,7 @@
   .slogan-top {
     display: block;
     position: absolute;
-    top: 43%;
+    top: 46%;
     right: 8%;
     color: #ffffff;
     font-family: "Aclonica";
@@ -144,7 +144,7 @@
   .slogan-bottom {
     display: block;
     position: absolute;
-    top: 56%;
+    top: 58%;
     right: 15%;
     color: #ffffff;
     font-family: "Aclonica";
@@ -164,11 +164,11 @@
     right: 7%;
   }
   .slogan-top {
-    top: 42%;
+    top: 44%;
     right: 9%;
   }
   .slogan-bottom {
-    top: 52%;
+    top: 54%;
     right: 14%;
   }
 }
@@ -184,11 +184,11 @@
     right: 11%;
   }
   .slogan-top {
-    top: 41%;
+    top: 43%;
     right: 12%;
   }
   .slogan-bottom {
-    top: 47%;
+    top: 49%;
     right: 16%;
   }
 }
