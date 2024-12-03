@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Stock.css";
 import { EditIngredientType, IngredientType } from "./types";
-import StockModal from "./StockModal";
+import StockModal from "./IngredientModal";
 import NewIngredient from "./NewIngredient";
 
 const Stock = () => {
