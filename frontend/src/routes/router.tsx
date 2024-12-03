@@ -10,9 +10,11 @@ import Orders from "../pages/Orders/Orders";
 import About from "../pages/About/About";
 import Checkout from "../pages/Checkout/Checkout";
 import Register from "../pages/Register/Register";
+import Confirmation from "../pages/Confirmation/Confirmation";
 import Stock from "../pages/Admin/Stock/Ingredients";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 const Layout = () => {
   return (
@@ -73,20 +75,18 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
+
+        path: "/confirmation",
+        element: <Confirmation />,
+       },
+      {
         path: "/admin/stock",
         element: <Stock />,
+
       },
     ],
   },
 
-  // {
-  //   path: "/confirmation",
-  //   element: <Confirmation />,
-  // },
-  //{
-  //path: "/stock",
-  //element: <Stock />,
-  //},
   {
     path: "/",
     element: <NoFooterLayout />,
