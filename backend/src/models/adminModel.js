@@ -38,22 +38,22 @@ export const adminModel = {
       TableName: ADMIN_TABLE,
       Key: { adminID },
     };
-    const data = await db.get(params);
+    const { Item: data } = await db.get(params);
     return data;
   },
 
-  changeEmail: async (adminData) => {
+  changeEmail: async (adminData, adminID) => {
     const params = {
       TableName: ADMIN_TABLE,
       Key: {
-        adminID: adminData.adminID,
+        adminID: adminID,
       },
       UpdateExpression: `SET 
         email = :email`,
       ExpressionAttributeValues: {
         ":email": adminData.email,
       },
-      ReturnValues: "ALL_NEW", // Return the updated item
+      ReturnValues: "ALL_NEW",
     };
     const data = db.update(params);
     return data.Attributes.email;

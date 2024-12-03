@@ -1,7 +1,7 @@
 import { OrderService } from "../services/orderService.js";
 import { sendError, sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
+import { validateRequest } from "../middlewares/validateRequest.js";
 import {
   createOrderSchema,
   changeOrderSchema,
@@ -9,7 +9,7 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
-import { verifyToken } from "../validations/verifyToken.js";
+import { verifyToken } from "../utils/verifyToken.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
@@ -19,7 +19,7 @@ export const createOrder = async (event) => {
     }
     const body = JSON.parse(event.body);
     const value = validateRequest(createOrderSchema, body);
-    await OrderService.createOrder(value);
+    await OrderService.createOrder(value, user.id);
     return sendResponse(200, "Order created successfully");
   });
 };

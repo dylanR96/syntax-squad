@@ -1,7 +1,6 @@
 import Joi from "joi";
 
 export const createOrderSchema = Joi.object({
-  userID: Joi.string().required(),
   products: Joi.array()
     .items(
       Joi.object().pattern(
