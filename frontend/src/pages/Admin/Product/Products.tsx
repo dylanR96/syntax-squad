@@ -2,26 +2,30 @@ import { useEffect, useState } from "react";
 import "./Product.css";
 import { initProduct, ProductType } from "./productTypes";
 import imgPlaceholder from "../../../assets/images/products/placeholder.png";
-import ProductModal from "./ProductModal";
+import UpdateProductModal from "./UpdateProductModal";
+import Loader from "../../../components/ui/Loader";
+import NewProductModal from "./NewProductModal";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([initProduct]);
   const [editProduct, setEditProduct] = useState<ProductType | null>(null);
-
+  const [newProduct, setNewProduct] = useState<boolean>(false);
   useEffect(() => {
-    const ENDPOINT_PRODUCTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products`;
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(ENDPOINT_PRODUCTS);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    if (!editProduct) {
+      const ENDPOINT_PRODUCTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products`;
+      const fetchProducts = async () => {
+        try {
+          const response = await fetch(ENDPOINT_PRODUCTS);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data: ProductType[] = await response.json();
+          setProducts(data);
+        } catch (error) {
+          console.error("Failed", error);
         }
-        const data: ProductType[] = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Failed", error);
-      }
-    };
-    fetchProducts();
+      };
+      fetchProducts();
+    }
   }, [editProduct]);
   return (
     <main className="product-container">
@@ -66,16 +70,17 @@ const Products = () => {
             );
           })
         ) : (
-          <div style={{ backgroundColor: "#ccc" }}>he</div>
+          <Loader />
         )}
-        <div style={{ backgroundColor: "#ccc" }}>he</div>
       </section>
+
       {editProduct && (
-        <ProductModal
+        <UpdateProductModal
           editProduct={editProduct}
           setEditProduct={setEditProduct}
         />
       )}
+      {newProduct && <NewProductModal setNewProduct={setNewProduct} />}
     </main>
   );
 };

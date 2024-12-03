@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
+import { toast } from "react-toastify";
 // Import this later
 type IngredientType = {
   createdAt: string;
@@ -84,20 +85,29 @@ const ProductModal: React.FC<ProductPropsType> = ({
     });
     setNewIngredient(null);
   };
+
   const updateProduct = async () => {
     const ENDPOINT_CHANGE_PRODUCT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product`;
     try {
-      const response = await fetch(ENDPOINT_CHANGE_PRODUCT, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const response: Response = await toast.promise(
+        fetch(ENDPOINT_CHANGE_PRODUCT, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editProduct),
+        }),
+        {
+          pending: "Uppdaterar produkt",
+          success: "Produkt uppdaterad",
+          error: "Can not connect to API",
         },
-        body: JSON.stringify(editProduct),
-      });
+        { hideProgressBar: true }
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      await response.json();
       setEditProduct(null);
     } catch (error) {
       console.error("Failed", error);
@@ -197,6 +207,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                 })}
           </select>
           <button
+            className="recipe__button stock-modal__button button--blue button--small"
             onClick={() => {
               if (newIngredient) addIngredient();
             }}
@@ -263,21 +274,25 @@ const ProductModal: React.FC<ProductPropsType> = ({
             />
           </div>
         </label>
+        <footer className="stock-modal__footer">
+          <button
+            className="recipe__button stock-modal__button button--blue"
+            onClick={() => {
+              updateProduct();
+            }}
+          >
+            Spara
+          </button>
+          <button
+            className="recipe__button stock-modal__button"
+            onClick={() => {
+              setEditProduct(null);
+            }}
+          >
+            Stäng
+          </button>
+        </footer>
       </div>
-      <button
-        onClick={() => {
-          setEditProduct(null);
-        }}
-      >
-        Stäng
-      </button>{" "}
-      <button
-        onClick={() => {
-          updateProduct();
-        }}
-      >
-        Spara
-      </button>
     </div>
   );
 };
