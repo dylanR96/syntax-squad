@@ -30,6 +30,12 @@ functions:
       - httpApi:
           path: /admin
           method: POST
+  loginAdmin:
+    handler: src/handlers/adminHandler.loginAdmin
+    events:
+      - httpApi:
+          path: /admin/login
+          method: POST
   getAdmin:
     handler: src/handlers/adminHandler.getAdmin
     events:
@@ -54,6 +60,12 @@ functions:
     events:
       - httpApi:
           path: /customer
+          method: POST
+  loginCustomer:
+    handler: src/handlers/customerHandler.loginCustomer
+    events:
+      - httpApi:
+          path: /customer/login
           method: POST
   getCustomers:
     handler: src/handlers/customerHandler.getCustomers
@@ -158,14 +170,26 @@ functions:
     handler: src/handlers/orderHandler.deleteOrder
     events:
       - httpApi:
-          path: /order
+          path: /order/{orderNO}
           method: DELETE
   changeOrderStatus:
     handler: src/handlers/orderHandler.changeOrderStatus
     events:
       - httpApi:
-          path: /orderById
+          path: /orderStatus
           method: PUT
+  getOrder:
+    handler: src/handlers/orderHandler.getOrder
+    events:
+      - httpApi:
+          path: /order/{orderNO}
+          method: GET
+  getAllOrders:
+    handler: src/handlers/orderHandler.getAllOrders
+    events:
+      - httpApi:
+          path: /orders
+          method: GET
 resources:
   Resources:
     AdminTable:
