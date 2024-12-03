@@ -146,6 +146,22 @@
 .stock--h4 {
   margin: 0 0 0.4em;
 }
+.add-ingredient {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.add-ingredient__h4 {
+  margin: 0 0 0.5em;
+}
+.add-ingredient label {
+  display: flex;
+}
+.add-ingredient div {
+  width: 50px;
+}
 @media only screen and (min-width: 768px) {
   .stock-wrapper {
     flex-direction: row-reverse;
@@ -176,18 +192,4 @@
   .alert__ingredient--low {
     background-color: transparent;
   }
-}
-.add-ingredient {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
-}
-.add-ingredient input,
-.add-ingredient select {
-  margin-left: 0.5em;
-}
-.add-ingredient__h4 {
-  margin: 0 0 0.5em;
 }

@@ -51,7 +51,7 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
       <h4 className="h4--dark add-ingredient__h4">Lägg till ingrediens</h4>
       <article className="add-ingredient">
         <label>
-          Name{" "}
+          <div>Namn</div>
           <input
             className="ingredient__input"
             type="text"
@@ -62,7 +62,7 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
           />
         </label>
         <label>
-          Antal{" "}
+          <div>Antal</div>
           <input
             className="ingredient__input"
             type="number"
@@ -73,7 +73,7 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
           />
         </label>
         <label>
-          Enhet{" "}
+          <div>Enhet</div>
           <select
             name="units"
             className="ingredient__input"
