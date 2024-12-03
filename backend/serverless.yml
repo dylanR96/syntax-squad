@@ -65,7 +65,7 @@ functions:
     handler: src/handlers/customerHandler.loginCustomer
     events:
       - httpApi:
-          path: /admin/login
+          path: /customer/login
           method: POST
   getCustomers:
     handler: src/handlers/customerHandler.getCustomers

@@ -44,7 +44,7 @@ export const loginAdmin = async (event) => {
         return sendError(401, "Wrong username or password");
       } else {
         const data = await AdminService.loginAdmin(value);
-        const token = validateUser({ id: data.adminID });
+        const token = validateUser({id: data.adminID}, "admin" );
         return sendResponse(200, { token });
       }
     }

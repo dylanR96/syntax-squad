@@ -9,7 +9,7 @@ export const verifyToken = async (event) => {
     event.headers?.Authorization || event.headers?.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    throw sendError(401, "Missing or invalid token");
+    return sendError(401, "Missing or invalid token");
   }
 
   const token = authHeader.split(" ")[1];

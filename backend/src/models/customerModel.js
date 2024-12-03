@@ -1,6 +1,7 @@
 import { db } from "../config/dynamoConfig.js";
 import { nanoid } from "nanoid";
 import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
+import { passwordHasher } from "../utils/passwordHasher.js";
 
 export const customerModel = {
   createCustomer: async (customerData) => {
@@ -22,7 +23,6 @@ export const customerModel = {
     };
 
     const data = await db.put(params);
-    console.log(data);
     return data;
   },
 

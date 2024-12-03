@@ -5,7 +5,7 @@ export const CustomerService = {
     //validering(middleware)
     return await customerModel.createCustomer(customerData);
   },
-  loginCustomer: async () => {
+  loginCustomer: async (customerData) => {
     return await customerModel.loginCustomer(customerData);
   },
   getCustomers: async () => {

@@ -1,5 +1,6 @@
+import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
 import { CustomerService } from "../services/customerService.js";
-import { sendResponse } from "../utils/responseHelper.js";
+import { sendResponse, sendError } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
 import { validateRequest } from "../validations/validateRequest.js";
 import {
@@ -9,6 +10,9 @@ import {
   getCustomerSchema,
   customerLoginSchema,
 } from "../validations/customerValidations.js";
+import { scanTable } from "../utils/dbTableScan.js";
+import { verifyPassword } from "../utils/passwordHasher.js";
+import { validateUser } from "../validations/verifyUser.js";
 
 export const createCustomer = async (event) => {
   return tryCatchWrapper(async () => {
@@ -19,7 +23,7 @@ export const createCustomer = async (event) => {
       return sendError(404, "User exists");
     } else {
       await CustomerService.createCustomer(value);
-      sendResponse(200, "Customer created successfully");
+      return sendResponse(200, "Customer created successfully");
     }
   });
 };
@@ -40,7 +44,7 @@ export const loginCustomer = async (event) => {
         return sendError(401, "Wrong username or password");
       } else {
         const data = await CustomerService.loginCustomer(value);
-        const token = validateUser({ id: data.customerID });
+        const token = validateUser({id: data.customerID}, "customer" );
         return sendResponse(200, { token });
       }
     }

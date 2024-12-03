@@ -1,5 +1,5 @@
 import { OrderService } from "../services/orderService.js";
-import { sendResponse } from "../utils/responseHelper.js";
+import { sendError, sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
 import { validateRequest } from "../validations/validateRequest.js";
 import {
@@ -14,7 +14,8 @@ import { verifyToken } from "../validations/verifyToken.js";
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
     const user = await verifyToken(event);
-    if (user.role !== "customer") {
+    if (user.role !== "customer" && user.role !== "admin") {
+      return sendError(403, "Forbidden: Please login")
     }
     const body = JSON.parse(event.body);
     const value = validateRequest(createOrderSchema, body);
