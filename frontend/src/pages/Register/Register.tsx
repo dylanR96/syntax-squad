@@ -10,22 +10,22 @@ type UserData = {
   firstname: string;
   surname: string;
   address: string;
-  zipcode: number;
+  zipcode: string;
   city: string;
-  phoneNumber: number;
+  phoneNumber: string;
 };
 
 const Register = () => {
-  const [userData, setuserData] = useState<UserData>({
+  const [userData, setUserData] = useState<UserData>({
     email: "",
     password: "",
     confirmPassword: "",
     firstname: "",
     surname: "",
     address: "",
-    zipcode: 0,
+    zipcode: "",
     city: "",
-    phoneNumber: 0,
+    phoneNumber: "",
   });
 
   const navigate = useNavigate();
@@ -33,13 +33,13 @@ const Register = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    // Convert phoneNumber and zipcode to numbers if applicable
-    const numericFields = ["phoneNumber", "zipcode"];
-    const parsedValue = numericFields.includes(name)
-      ? parseInt(value, 10)
-      : value;
+    // const numericFields = ["phoneNumber", "zipcode"];
+    // const parsedValue = numericFields.includes(name)
+    //   ? parseInt(value, 10)
+    //   : value;
 
-    setUserData((prev) => ({ ...prev, [name]: parsedValue }));
+    // setUserData((prev) => ({ ...prev, [name]: parsedValue }));
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
   const submitHandler = (e: React.FormEvent) => {
@@ -73,8 +73,7 @@ const Register = () => {
       phoneNumber,
     };
 
-    // Example API call
-    fetch("https://your-backend-api.com/register", {
+    fetch("https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/customer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +82,7 @@ const Register = () => {
     })
       .then((response) => {
         if (response.ok) {
-          navigate("/success");
+          navigate("/home");
         } else {
           throw new Error("Registration failed.");
         }
@@ -99,59 +98,86 @@ const Register = () => {
       <section className="login">
         <img src={logo} alt="Easybake logo" />
         <h1 className="login__title">Easybake</h1>
-        <form className="login-form" action="">
+        <form className="login-form" onSubmit={submitHandler}>
           <input
             className="login-form__input"
             type="text"
+            name="firstname"
             placeholder="Förnamn"
+            value={userData.firstname}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="text"
+            name="surname"
             placeholder="Efternamn"
+            value={userData.surname}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="text"
+            name="address"
             placeholder="Adress"
+            value={userData.address}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="number"
+            name="zipcode"
             placeholder="Postkod"
+            value={userData.zipcode}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="text"
+            name="city"
             placeholder="Stad"
+            value={userData.city}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="number"
+            name="phoneNumber"
             placeholder="Telefonnummer"
+            value={userData.phoneNumber}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="email"
+            name="email"
             placeholder="Email"
+            value={userData.email}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="password"
+            name="password"
             placeholder="Lösenord"
+            value={userData.password}
+            onChange={handleChange}
             required
           />
           <input
             className="login-form__input"
             type="password"
+            name="confirmPassword"
             placeholder="Bekräfta lösenord"
+            value={userData.confirmPassword}
+            onChange={handleChange}
             required
           />
           <button className="login-form__button" type="submit">
