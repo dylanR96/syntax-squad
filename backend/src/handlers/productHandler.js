@@ -1,53 +1,53 @@
 import { ProductService } from "../services/productService.js";
-import { sendResponse } from "../utils/responseHelper.js";
-import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
-import {
-  createProductSchema,
-  deleteProductSchema,
-  editProductSchema,
-  getProductSchema,
-} from "../validations/productValidations.js";
+import { sendError, sendResponse } from "../utils/responseHelper.js";
 
 export const createProduct = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(createProductSchema, body);
-    await ProductService.createProduct(value);
+    await ProductService.createProduct(body);
     return sendResponse(200, "Product successfully created");
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
 
 export const getAllProducts = async () => {
-  return tryCatchWrapper(async () => {
+  try {
     const getAllProducts = await ProductService.getAllProducts();
+    console.log(getAllProducts);
     return sendResponse(200, getAllProducts);
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
 
 export const getProduct = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const { productID } = event.pathParameters;
-    const value = validateRequest(getProductSchema, { productID });
-    const data = await ProductService.getProduct(parseInt(value.productID));
-    return sendResponse(data, 200);
-  });
+    const data = await ProductService.getProduct(parseInt(productID));
+    console.log(data);
+    return sendResponse(200, data);
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
 
 export const editProduct = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(editProductSchema, body);
-    await ProductService.editProduct(value);
+    await ProductService.editProduct(body);
     return sendResponse(200, "Product successfully changed");
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
 
 export const deleteProduct = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const { productID } = event.pathParameters;
-    const value = validateRequest(deleteProductSchema, { productID });
-    await ProductService.deleteProduct(parseInt(value.productID));
+    await ProductService.deleteProduct(parseInt(productID));
     return sendResponse(200, "Product successfully deleted");
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };

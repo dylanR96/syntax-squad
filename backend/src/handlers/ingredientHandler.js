@@ -1,53 +1,50 @@
 import { IngredientService } from "../services/ingredientService.js";
-import { sendResponse } from "../utils/responseHelper.js";
-import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
-import {
-  addIngredientSchema,
-  deleteIngredientSchema,
-  editIngredientSchema,
-  getIngredientsByIdsSchema,
-} from "../validations/ingredientsValidations.js";
+import { sendError, sendResponse } from "../utils/responseHelper.js";
 
 export const addIngredient = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(addIngredientSchema, body);
-    await IngredientService.addIngredient(value);
+    await IngredientService.addIngredient(body);
     return sendResponse(200, "Ingredient successfully added");
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
-
 export const deleteIngredient = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(deleteIngredientSchema, body);
-    await IngredientService.deleteIngredient(value);
-    sendResponse(200, "Ingredient successfully removed");
-  });
+    await IngredientService.deleteIngredient(body);
+    return sendResponse(200, "Ingredient successfully removed");
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
-
 export const editIngredient = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(editIngredientSchema, body);
-    const editedItem = await IngredientService.editIngredient(value);
+    const editedItem = await IngredientService.editIngredient(body);
     return sendResponse(200, editedItem);
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
-
 export const getIngredientsByIds = async (event) => {
-  return tryCatchWrapper(async () => {
+  try {
     const body = JSON.parse(event.body);
-    const value = validateRequest(getIngredientsByIdsSchema, body);
-    const getIngredients = await IngredientService.getIngredientsByIds(value);
-    sendResponse(200, getIngredients);
-  });
+    const getIngredients = await IngredientService.getIngredientsByIds(body);
+    return sendResponse(200, getIngredients);
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
 };
-
 export const getAllIngredients = async () => {
-  return tryCatchWrapper(async () => {
+  try {
     const getAllIngredients = await IngredientService.getAllIngredients();
     return sendResponse(200, getAllIngredients);
-  });
+  } catch (error) {
+    return sendError(error.statusCode || 500, error.message);
+  }
+};
+const test = {
+  ingredientIDs: [10004, 10005],
 };

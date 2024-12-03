@@ -1,6 +1,6 @@
 import { orderModel } from "../models/ordersModel.js";
 
-export const OrderService = {
+export const orderService = {
     createOrder: async(orderData) => {
         return await orderModel.createOrder(orderData);
     },
@@ -12,11 +12,5 @@ export const OrderService = {
     },
     changeOrderStatus: async(orderData) => {
         return await orderModel.changeOrderStatus(orderData);
-    },
-    getOrder: async(orderData) => {
-        return await orderModel.getOrder(orderData);
-    },
-    getAllOrders: async(orderData) => {
-        return await orderModel.getAllOrders(orderData);
     }
 }

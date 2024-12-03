@@ -50,7 +50,7 @@ export const productModel = {
         price = :price,
         specialOffer = :specialOffer,
         image = :image,
-        bakingTime = :bakingTime
+        bakingTime = :bakingTime,
         description = :description`,
       ExpressionAttributeValues: {
         ":productName": productData.productName,

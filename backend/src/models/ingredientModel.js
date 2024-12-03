@@ -1,14 +1,14 @@
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
 import { db } from "../config/dynamoConfig.js";
 import { createID } from "../utils/dynamodbHelper.js";
-
+// Test
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
     const params = {
       TableName: INGREDIENTS_TABLE,
       Item: {
         ingredientID: await createID(INGREDIENTS_TABLE, "ingredientID", 10000),
-        ingredientName: ingredientData.ingredientName,
+        ingredientName: ingredientData.name,
         stock: ingredientData.stock,
         units: ingredientData.units,
         pricePerUnit: ingredientData.pricePerUnit
@@ -65,7 +65,7 @@ export const ingredientModel = {
           ? ingredientData.pricePerUnit
           : 0,
       },
-      ReturnValues: "ALL_NEW",
+      ReturnValues: "ALL_NEW", // Return the updated item
     };
     const data = db.update(params);
     return data;

@@ -1,17 +1,16 @@
 import { db } from "../config/dynamoConfig.js";
 import { nanoid } from "nanoid";
+
 import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
-import { passwordHasher } from "../utils/passwordHasher.js";
 
 export const customerModel = {
   createCustomer: async (customerData) => {
-    const hashedPassword = await passwordHasher(customerData);
     const params = {
       TableName: CUSTOMERS_TABLE,
       Item: {
         customerID: nanoid(),
         email: customerData.email,
-        password: hashedPassword,
+        password: customerData.password,
         firstname: customerData.firstname,
         surname: customerData.surname,
         address: customerData.address,
@@ -23,22 +22,9 @@ export const customerModel = {
     };
 
     const data = await db.put(params);
+    console.log(data);
     return data;
   },
-
-  loginCustomer: async (customerData) => {
-    const params = {
-      TableName: CUSTOMERS_TABLE,
-      FilterExpression: "email = :email",
-      ExpressionAttributeValues: {
-        ":email": customerData.email,
-      },
-    };
-
-    const data = await db.scan(params);
-    return data.Items[0];
-  },
-
   getCustomers: async () => {
     const { Items } = await db.scan({ TableName: CUSTOMERS_TABLE });
     return Items;
@@ -86,7 +72,7 @@ export const customerModel = {
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };
-    const data = db.update(params);
+    const data = await db.update(params);
     return data;
   },
 };
