@@ -13,26 +13,55 @@ const Register = () => {
             className="login-form__input"
             type="text"
             placeholder="Förnamn"
+            required
           />
           <input
             className="login-form__input"
             type="text"
             placeholder="Efternamn"
+            required
+          />
+          <input
+            className="login-form__input"
+            type="text"
+            placeholder="Adress"
+            required
+          />
+          <input
+            className="login-form__input"
+            type="text"
+            placeholder="Postkod"
+            required
+          />
+          <input
+            className="login-form__input"
+            type="text"
+            placeholder="Stad"
+            required
+          />
+          <input
+            className="login-form__input"
+            type="text"
+            placeholder="Telefonnummer"
+            required
           />
           <input
             className="login-form__input"
             type="email"
             placeholder="Email"
+            required
           />
           <input
             className="login-form__input"
             type="password"
             placeholder="Lösenord"
+            required
           />
           <input
             className="login-form__input"
             type="password"
             placeholder="Bekräfta lösenord"
+            required
           />
           <button className="login-form__button" type="submit">
             Registrera
