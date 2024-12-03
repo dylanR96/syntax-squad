@@ -1,28 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Afacad:regular);
 @import url(https://fonts.googleapis.com/css?family=Aclonica:regular);
 
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    height: 100%;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
   
-  .wrapper {
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
-    
-  main {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 20px;
-    height: 100%;
-    flex: 1;
+    margin: 1.25em 1.25em;
   }
 
   .profile__container {
@@ -44,7 +34,7 @@ body, html {
   .profile__name {
     color: #442A07;
     margin-top: 10px;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
     font-family: 'Aclonica', sans-serif;
@@ -53,9 +43,9 @@ body, html {
   .profile__header {
     color: #442A07;
     font-family: 'Aclonica', sans-serif;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: normal;
-    margin-top: 10px;
+    margin: 1em 0;
     text-align: center;
   }
   .profile__order-history {
@@ -65,7 +55,7 @@ body, html {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: -10px;
+    margin: 0.5em 0;
   }
 
   .product-template {
@@ -77,7 +67,7 @@ body, html {
   }
   
   .profile__edit-link {
-    font-size: 1.1em;
+    font-size: 1.1rem;
     color: black;
     cursor: pointer;
     font-family: 'Afacad', sans-serif;
@@ -92,7 +82,6 @@ body, html {
   }
   
   .profile__form-group {
-    height: 25px;
     width: 300px;
     font-family: 'Afacad', sans-serif;
     display: flex;
@@ -115,58 +104,64 @@ body, html {
     border: none;
     outline: none;
     flex: 1;
-    font-size: 1.2em;
+    font-size: 1.2rem;
   }
-  
-  button {
-    font-family: 'Afacad', sans-serif;
+  .profile__buttons {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .profile__save-button {
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
     color: black;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #307383;
     border-radius: 5px;
     cursor: pointer;
   }
   .profile__edit-button {
-    margin-bottom: 10px;
+    margin: 0.5em 0;
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
     color: #442A07;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #307383;
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .profile__edit-button:hover {
+    background-color: #307383;
+    color: white;
+  }
   .profile__logout-button {
+    margin: 0.5em 0;
     width: 200px;
     padding: 10px;
     background-color: #CC8D80;
-    color: white;
-    font-size: 1.2em;
+    color: #442A07;
+    font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #442A07;
     border-radius: 5px;
     cursor: pointer;
   }
-  
-  .social-icons__icon {
-    margin: 0 10px;
-    font-size: 1.2em;
-    cursor: pointer;
+  .profile__logout-button:hover {
+    background-color: #da6851;
+    color: white;
   }
   
   @media screen and (min-width: 768px) {
     .profile__name {
       color: #442A07;
       margin-top: 10px;
-      font-size: 2.3em;
+      font-size: 2.3rem;
       font-weight: bold;
       text-align: center;
     }
@@ -175,10 +170,10 @@ body, html {
       height: 175px;
     }
     .profile__container {
-      width: 600px;
+      width: 500px;
     }
     .profile__header {
-      font-size: 1.8em;
+      font-size: 1.8rem;
     }
     .profile__order-history {
       width: 470px;
@@ -186,7 +181,20 @@ body, html {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      margin-top: -10px;
-      font-size: 1.3em;
+      font-size: 1.3rem;
+    }
+    .profile__buttons {
+      width: 500px;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+    }
+    .profile__logout-button {
+      margin: 2em 0;
+      width: 200px;
+      padding: 10px;
+      background-color: #CC8D80;
+      font-size: 1.2rem;
     }
   }
