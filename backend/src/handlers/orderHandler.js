@@ -9,9 +9,13 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
+import { verifyToken } from "../validations/verifyToken.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
+    const user = await verifyToken(event);
+    if (user.role !== "customer") {
+    }
     const body = JSON.parse(event.body);
     const value = validateRequest(createOrderSchema, body);
     await OrderService.createOrder(value);

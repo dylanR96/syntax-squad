@@ -30,6 +30,12 @@ functions:
       - httpApi:
           path: /admin
           method: POST
+  loginAdmin:
+    handler: src/handlers/adminHandler.loginAdmin
+    events:
+      - httpApi:
+          path: /admin/login
+          method: POST
   getAdmin:
     handler: src/handlers/adminHandler.getAdmin
     events:
@@ -54,6 +60,12 @@ functions:
     events:
       - httpApi:
           path: /customer
+          method: POST
+  loginCustomer:
+    handler: src/handlers/customerHandler.loginCustomer
+    events:
+      - httpApi:
+          path: /admin/login
           method: POST
   getCustomers:
     handler: src/handlers/customerHandler.getCustomers

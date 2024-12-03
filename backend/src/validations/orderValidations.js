@@ -70,9 +70,9 @@ export const deleteOrderSchema = Joi.object({
 });
 
 export const changeStatusSchema = Joi.object({
-  status: Joi.string().required()
+  status: Joi.string().required(),
 });
 
 export const getOrderSchema = Joi.object({
-  orderNO: Joi.number().integer().min(1000).max(9999).required()
+  orderNO: Joi.number().integer().min(1000).max(9999).required(),
 });

@@ -62,7 +62,7 @@ export const ingredientModel = {
         ":priceForExtra": ingredientData.priceForExtra,
         ":exchangeFor": ingredientData.exchangeFor,
       },
-      ReturnValues: "ALL_NEW", 
+      ReturnValues: "ALL_NEW",
     };
     const data = db.update(params);
     return data;

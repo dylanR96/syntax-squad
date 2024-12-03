@@ -6,6 +6,10 @@ export const AdminService = {
     return await adminModel.createAdmin(userData);
   },
 
+  loginAdmin: async (userData) => {
+    return await adminModel.loginAdmin(userData);
+  },
+
   getAdmin: async (data) => {
     //validering(middleware)
     return await adminModel.getAdmin(data);

@@ -7,14 +7,43 @@ import {
   deleteCustomerSchema,
   editCustomerSchema,
   getCustomerSchema,
+  customerLoginSchema,
 } from "../validations/customerValidations.js";
 
 export const createCustomer = async (event) => {
   return tryCatchWrapper(async () => {
     const body = JSON.parse(event.body);
     const value = validateRequest(createCustomerSchema, body);
-    await CustomerService.createCustomer(value);
-    sendResponse(200, "Customer created successfully");
+    const result = await scanTable(value.email, CUSTOMERS_TABLE, "email");
+    if (result) {
+      return sendError(404, "User exists");
+    } else {
+      await CustomerService.createCustomer(value);
+      sendResponse(200, "Customer created successfully");
+    }
+  });
+};
+
+export const loginCustomer = async (event) => {
+  return tryCatchWrapper(async () => {
+    const body = JSON.parse(event.body);
+    const value = validateRequest(customerLoginSchema, body);
+    const result = await scanTable(value.email, CUSTOMERS_TABLE, "email");
+    if (!result) {
+      return sendError(404, "User does not exist");
+    } else {
+      const isPasswordValid = await verifyPassword(
+        value.password,
+        result.password
+      );
+      if (!isPasswordValid) {
+        return sendError(401, "Wrong username or password");
+      } else {
+        const data = await CustomerService.loginCustomer(value);
+        const token = validateUser({ id: data.customerID });
+        return sendResponse(200, { token });
+      }
+    }
   });
 };
 
