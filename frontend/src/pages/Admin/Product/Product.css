@@ -1,0 +1,145 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 1.25em 1.25em;
+  max-width: 1440px;
+}
+.product-table {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  padding: 0.5em;
+  gap: 0 1em;
+  align-items: center;
+  cursor: pointer;
+}
+.product__heading {
+  font-weight: 700;
+}
+.product__image-container {
+  height: 30px;
+}
+.product__image {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+}
+.product__name {
+  width: 120px;
+  flex: 1;
+}
+.product__tags {
+  display: none;
+}
+.product__time {
+  display: none;
+}
+.product__price {
+  width: 80px;
+  text-align: right;
+}
+
+.product-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.product-modal__product {
+  width: calc(100% - 2em);
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 2px 2px 20px #ccc;
+  border-radius: 8px;
+  padding: 1em 1em 1em;
+  border: 1px solid #cc8d80;
+  border-bottom: 2px solid #cc8d80;
+  border-right: 2px solid #cc8d80;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.product-modal__label {
+  display: flex;
+  gap: 0em;
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.product-modal__column {
+  width: 100%;
+  color: #393939;
+}
+.product-modal__input {
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  border: 0;
+  border-bottom: 2px solid #cc8d80;
+
+  padding: 0.2em 0.2em;
+}
+.product-modal__input--textarea {
+  height: 150px;
+  border-bottom: 2px solid #cc8d80;
+  border-right: 2px solid #cc8d80;
+  resize: none;
+}
+.product-modal__input--number {
+  width: 50px;
+  text-align: right;
+}
+/* Chrome, Safari, Edge, Opera */
+.product-modal__input--number::-webkit-outer-spin-button,
+.product-modal__input--number::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.product-modal__input--number[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+.product-modal__tags {
+  display: flex;
+  gap: 1em;
+}
+.product-modal__ingredients {
+  display: flex;
+  width: 100%;
+  gap: 0.5em;
+  padding: 0.2em;
+}
+.product-ingredients__name {
+  flex: 1;
+}
+.product-ingredients__units {
+  width: 70px;
+  text-align: right;
+}
+/* 500px as limit? */
+@media only screen and (min-width: 768px) {
+  .product__name {
+    flex: none;
+  }
+  .product__time {
+    width: 90px;
+    display: block;
+  }
+  .product__tags {
+    flex: 1;
+    display: block;
+  }
+}

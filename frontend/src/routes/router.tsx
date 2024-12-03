@@ -12,6 +12,7 @@ import Register from "../pages/Register/Register";
 import Stock from "../pages/Stock/Stock";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Products from "../pages/Admin/Product/Products";
 
 const Layout = () => {
   return (
@@ -46,8 +47,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <Orders/>,
-      },   
+        element: <Orders />,
+      },
       {
         path: "/profile",
         element: <Profile />,
@@ -64,9 +65,12 @@ const router = createBrowserRouter([
         path: "/admin/stock",
         element: <Stock />,
       },
+      {
+        path: "/admin/products",
+        element: <Products />,
+      },
     ],
-  },  
-
+  },
 
   // {
   //   path: "/checkout",
@@ -76,15 +80,10 @@ const router = createBrowserRouter([
   //   path: "/confirmation",
   //   element: <Confirmation />,
   // },
- //{
+  //{
   //path: "/stock",
   //element: <Stock />,
- //},
-
-
-
-
-
+  //},
 ]);
 
 export default router;
