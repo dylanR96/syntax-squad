@@ -6,9 +6,9 @@ import { productParams } from "./products.js";
 // Batch write requests
 const writeData = async () => {
   try {
-    // await db.batchWrite(customerParams);
+    await db.batchWrite(customerParams);
     console.log("Customers batch write succeeded!");
-    // await db.batchWrite(ingredientParams);
+    await db.batchWrite(ingredientParams);
     console.log("Ingredients batch write succeeded!");
     await db.batchWrite(productParams);
     console.log("Products batch write succeeded!");

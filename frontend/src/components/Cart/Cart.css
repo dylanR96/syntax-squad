@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* inte säker på justify-content */
+  /* inte säker på justify-content eller flex för den delen */
   justify-content: space-between;
   position: absolute;
   top: 0;
@@ -21,10 +21,22 @@
   width: 100%;
 }
 
+.cart__title {
+  font-size: 2rem;
+}
+
 .cart-product {
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.cart-product__title {
+  font-size: 1.5rem;
+}
+
+.cart-product__price {
+  font-size: 1.5rem;
 }
 
 .cart-product__price-container {
@@ -39,11 +51,17 @@
 }
 
 .cart-ingredients {
+  margin-top: 2rem;
   width: 100%;
+}
+
+.cart-ingredients__title {
+  font-size: 1.5rem;
 }
 
 .cart-ingredients__ingredient {
   font-weight: 400;
+  font-size: 1rem;
 }
 
 .cart-ingredients__ingredient-container {
@@ -78,6 +96,14 @@
 
 .cart-total {
   width: 100%;
+}
+
+.cart-total__title {
+  font-size: 2rem;
+}
+
+.cart-total__price {
+  font-size: 2rem;
 }
 
 .cart-total__price-container {
