@@ -1,8 +1,99 @@
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import logo from "../../assets/images/easybakelogo.svg";
 import dottedLine from "../../assets/images/dotted-line.svg";
-import { Link } from "react-router-dom";
+
+type UserData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstname: string;
+  surname: string;
+  address: string;
+  zipcode: number;
+  city: string;
+  phoneNumber: number;
+};
 
 const Register = () => {
+  const [userData, setuserData] = useState<UserData>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstname: "",
+    surname: "",
+    address: "",
+    zipcode: 0,
+    city: "",
+    phoneNumber: 0,
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    // Convert phoneNumber and zipcode to numbers if applicable
+    const numericFields = ["phoneNumber", "zipcode"];
+    const parsedValue = numericFields.includes(name)
+      ? parseInt(value, 10)
+      : value;
+
+    setUserData((prev) => ({ ...prev, [name]: parsedValue }));
+  };
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const {
+      email,
+      password,
+      confirmPassword,
+      firstname,
+      surname,
+      address,
+      zipcode,
+      city,
+      phoneNumber,
+    } = userData;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const payload = {
+      email,
+      password,
+      firstname,
+      surname,
+      address,
+      zipcode,
+      city,
+      phoneNumber,
+    };
+
+    // Example API call
+    fetch("https://your-backend-api.com/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate("/success");
+        } else {
+          throw new Error("Registration failed.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during registration:", error);
+        alert("An error occurred. Please try again.");
+      });
+  };
+
   return (
     <main className="main-login">
       <section className="login">
@@ -29,7 +120,7 @@ const Register = () => {
           />
           <input
             className="login-form__input"
-            type="text"
+            type="number"
             placeholder="Postkod"
             required
           />
@@ -41,7 +132,7 @@ const Register = () => {
           />
           <input
             className="login-form__input"
-            type="text"
+            type="number"
             placeholder="Telefonnummer"
             required
           />
