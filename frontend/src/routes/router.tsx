@@ -67,6 +67,7 @@ const router = createBrowserRouter([
         path: "/confirmation",
         element: <Confirmation />,
        },
+      {
         path: "/admin/stock",
         element: <Stock />,
 
