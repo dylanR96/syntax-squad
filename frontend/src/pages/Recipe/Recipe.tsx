@@ -29,7 +29,7 @@ interface Product {
   tags: string[];
   ingredients: ProductIngredient[];
   recipe: Recipe[];
-  quantity: number;
+  
   
 }
 
@@ -40,8 +40,10 @@ interface Ingredient{
   ingredientName: string;
   stock: number;
   units: string;
+  quantity: number | null;
   pricePerUnit: number;
-  exchangeFor: string
+  exchangeFor: string;
+  checked: boolean;
 }
 
 const Recipe = () => {
@@ -98,6 +100,7 @@ const Recipe = () => {
       return{
         ...ing,
         quantity: matchingRecipeIng ? matchingRecipeIng.quantity : null,
+        checked: true,
       }
 
     })
@@ -115,27 +118,38 @@ console.log("Current ingredients", currentIngredients)
 /* -------------------Redux för att lägga till beställning --------------------------*/
 
   // Hämta receptets ingredienser från `recipes`
-  const originalIngredients =
-    recipes.find(r => r.recipe === currentRecipe?.productName)?.ingredients || [];
+  /* const originalIngredients =
+    recipes.find(r => r.recipe === currentRecipe?.productName)?.ingredients || []; */
 
   // Lokal state för att hantera `checked`-status
-  const [localIngredients, setLocalIngredients] = useState(originalIngredients);
+  
+  const [localIngredients, setLocalIngredients] = useState<Ingredient[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
+  // Uppdatera lokal state
+  useEffect(() => {
+    if (currentIngredients) {
+      setLocalIngredients(currentIngredients); // Synkronisera med currentIngredients
+    }
+  }, [currentIngredients]);
 
-    // Uppdatera lokal state
-    const updatedIngredients = localIngredients.map(ingredient =>
-      ingredient.name === name
-        ? { ...ingredient, checked: !ingredient.checked }
-        : ingredient
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
+    const { checked } = e.target;
+  
+    // Hämta den aktuella ingrediensen från localIngredients
+    const ingredient = localIngredients.find((ing) => ing.ingredientID === id);
+    if (!ingredient) {
+      console.error("Ingrediens hittades inte");
+      return;
+    }
+  
+    const updatedIngredients = localIngredients.map((ing) =>
+      ing.ingredientID === id ? { ...ing, checked } : ing
     );
+  
     setLocalIngredients(updatedIngredients);
-
+  
     // Dispatcha till Redux
-    /* dispatch(toggleIngredient({ recipe: currentRecipe?.productName, ingredientName: name })); */
-
-    
+    dispatch(toggleIngredient({ recipe: currentRecipe?.productName, ingredientName: ingredient.ingredientName }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -148,8 +162,8 @@ console.log("Current ingredients", currentIngredients)
     }
 
     // Skicka markerade ingredienser till Redux
-    /* dispatch(addRecipeIngredients({ recipe: currentRecipe?.productName, ingredients: checkedIngredients }));
-    console.log("Markerade ingredienser skickade:", checkedIngredients); */
+    dispatch(addRecipeIngredients({ recipe: currentRecipe?.productName, ingredients: checkedIngredients }));
+    console.log("Markerade ingredienser skickade:", checkedIngredients);
   };
 
 
@@ -179,20 +193,25 @@ console.log("Current ingredients", currentIngredients)
           <article className="recipe__lowerbox--upperbox-info">
             <h6 className="h6--dark">Ingredienser</h6>
             <form onSubmit={handleSubmit} className="recipe__form">
-            {currentIngredients && currentIngredients.map(ingredient => (
+            
+            {/* Checkbox form */}
+            
+            {localIngredients && localIngredients.map(ingredient => (
                 <div key={ingredient.ingredientID} className="recipe__input-container">
                   <label className="recipe__label">
                     <input
                       type="checkbox"
                       name={ingredient.ingredientName}
                       checked={ingredient.checked}
-                      onChange={handleChange}
+                      onChange={(e) => handleChange(e, ingredient.ingredientID)}
                       className="recipe__input"
                     />
                     {`${ingredient.quantity} ${ingredient.units} ${ingredient.ingredientName}`}
                   </label>
                 </div>
               ))}
+
+
               <div className="recipe__total-div">
                 <h6 className="recipe__total-text">Totalt</h6>
                 <h6 className="recipe__total-text--bold">

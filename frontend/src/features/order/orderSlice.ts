@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { recipes } from '../../pages/Recipe/recipes';
 
-interface Ingredient {
-  id: string;
-  name: string;
-  quantity: string;
+interface Ingredient{
+  ingredientID: number;
+  ingredientName: string;
+  stock: number;
+  units: string;
+  quantity: number | null;
+  pricePerUnit: number;
+  exchangeFor: string;
   checked: boolean;
 }
 
@@ -27,9 +31,15 @@ const orderSlice = createSlice({
   reducers: {
     addRecipeIngredients: (
   state,
-  action: PayloadAction<{ recipe: string; ingredients: Ingredient[] }>
+  action: PayloadAction<{ recipe: string | undefined; ingredients: Ingredient[] }>
 ) => {
   const { recipe, ingredients } = action.payload;
+
+    // Kontrollera att receptet har ett namn
+    if (!recipe) {
+      console.error("Receptnamn saknas!");
+      return;
+    }
 
   // Filtrera ingredienser som har `checked: true`
   const checkedIngredients = ingredients.filter(ingredient => ingredient.checked);
@@ -46,7 +56,7 @@ const orderSlice = createSlice({
       existingRecipe.ingredients = [
         ...existingRecipe.ingredients.filter(ing => ing.checked), // Behåll bara markerade ingredienser
         ...checkedIngredients.filter(
-          ing => !existingRecipe.ingredients.some(existingIng => existingIng.id === ing.id)
+          ing => !existingRecipe.ingredients.some(existingIng => existingIng.ingredientID === ing.ingredientID)
         ),
       ];
     }
@@ -58,12 +68,12 @@ const orderSlice = createSlice({
         JSON.stringify(state.items.filter(item => item.ingredients.length > 0), null, 2)
       );
     },
-    toggleIngredient: (state, action: PayloadAction<{ recipe: string; ingredientName: string }>) => {
+    toggleIngredient: (state, action: PayloadAction<{ recipe: string | undefined; ingredientName: string }>) => {
       const { recipe, ingredientName } = action.payload;
     
       const recipeItem = state.items.find(item => item.recipe === recipe);
       if (recipeItem) {
-        const ingredient = recipeItem.ingredients.find(i => i.name === ingredientName);
+        const ingredient = recipeItem.ingredients.find(i => i.ingredientName === ingredientName);
         if (ingredient) {
           ingredient.checked = !ingredient.checked; // Toggla `checked`
         }
