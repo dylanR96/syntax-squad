@@ -1,7 +1,7 @@
 import { CustomerService } from "../services/customerService.js";
 import { sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
+import { validateRequest } from "../middlewares/validateRequest.js";
 import {
   createCustomerSchema,
   deleteCustomerSchema,
@@ -11,6 +11,7 @@ import {
 } from "../validations/customerValidations.js";
 import { validateUser } from "../validations/verifyUser.js";
 import { authorizeAdmin } from "../middlewares/authMiddleware.js";
+import { CUSTOMER_ROLE } from "../constants/userRole.js";
 
 export const createCustomer = async (event) => {
   return tryCatchWrapper(async () => {
@@ -26,7 +27,7 @@ export const loginCustomer = async (event) => {
     const body = JSON.parse(event.body);
     const value = validateRequest(customerLoginSchema, body);
     const data = await CustomerService.loginCustomer(value);
-    const token = validateUser({ id: data.customerID }, "customer");
+    const token = validateUser({ id: data.customerID }, CUSTOMER_ROLE);
     return sendResponse(200, { token });
   });
 };

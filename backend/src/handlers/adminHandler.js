@@ -9,6 +9,7 @@ import {
 import { validateRequest } from "../middlewares/validateRequest.js";
 import { verifyUser } from "../utils/verifyUser.js";
 import { authorizeAdmin } from "../middlewares/authMiddleware.js";
+import { ADMIN_ROLE } from "../constants/userRole.js";
 
 export const createAdmin = async (event) => {
   return tryCatchWrapper(async () => {
@@ -24,7 +25,7 @@ export const loginAdmin = async (event) => {
     const body = JSON.parse(event.body);
     const value = validateRequest(loginAdminSchema, body);
     const data = await AdminService.loginAdmin(value);
-    const token = verifyUser({ id: data.adminID }, "admin");
+    const token = verifyUser({ id: data.adminID }, ADMIN_ROLE);
     return sendResponse(200, { token });
   });
 };

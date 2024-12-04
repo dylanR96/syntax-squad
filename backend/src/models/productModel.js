@@ -8,13 +8,16 @@ export const productModel = {
       TableName: PRODUCTS_TABLE,
       Item: {
         productID: await createID(PRODUCTS_TABLE, "productID", 100),
-        productName: productData.name,
+        productName: productData.productName,
         ingredients: productData.ingredients,
         tags: productData.tags,
         price: productData.price,
         specialOffer: productData.specialOffer,
+        image: productData.image,
+        bakingTime: productData.bakingTime,
         description: productData.description,
-        createdAt: new Date().toISOString(),
+        receipe: productData.receipe,
+        createdAt: new Date().toISOString(),      
       },
     };
 
@@ -47,14 +50,20 @@ export const productModel = {
         tags = :tags,
         price = :price,
         specialOffer = :specialOffer,
-        description = :description`,
+        image = :image,
+        bakingTime = :bakingTime,
+        description = :description,
+        receipe = :receipe`,
       ExpressionAttributeValues: {
         ":productName": productData.productName,
         ":ingredients": productData.ingredients,
         ":tags": productData.tags,
         ":price": productData.price,
         ":specialOffer": productData.specialOffer,
+        ":image": productData.image,
+        ":bakingTime": productData.bakingTime,
         ":description": productData.description,
+        ":receipe": productData.receipe,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };
