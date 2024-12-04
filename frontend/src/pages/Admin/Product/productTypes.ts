@@ -1,3 +1,4 @@
+// Kommentar
 export type ProductIngredientType = {
   id: number;
   quantity: number;

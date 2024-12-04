@@ -1,3 +1,4 @@
+// Kommentar
 import { useEffect, useState } from "react";
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
 import { toast } from "react-toastify";

@@ -8,7 +8,7 @@ export const productModel = {
       TableName: PRODUCTS_TABLE,
       Item: {
         productID: await createID(PRODUCTS_TABLE, "productID", 100),
-        productName: productData.name,
+        productName: productData.productName,
         ingredients: productData.ingredients,
         tags: productData.tags,
         price: productData.price,
