@@ -73,6 +73,13 @@
   margin: 1.25em 0;
 }
 
+.home__search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25em;
+}
+
 .cards-wrapper {
   display: flex;
   gap: 1rem;
