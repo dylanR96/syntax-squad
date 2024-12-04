@@ -1,7 +1,9 @@
+// Lägg till recipe
+
 import { useEffect, useState } from "react";
 import "./Product.css";
 import { initProduct, ProductType } from "./productTypes";
-import imgPlaceholder from "../../../assets/images/products/placeholder.png";
+// import imgPlaceholder from "../../../assets/images/products/placeholder.png";
 import UpdateProductModal from "./UpdateProductModal";
 import Loader from "../../../components/ui/Loader";
 import NewProductModal from "./NewProductModal";
@@ -54,7 +56,7 @@ const Products = () => {
                 <div className="product__image-container">
                   <img
                     className="product__image"
-                    src={product.image ? product.image : imgPlaceholder}
+                    src={product.image ? product.image : ""}
                   />
                 </div>
                 <div className="product__name">{product.productName}</div>
