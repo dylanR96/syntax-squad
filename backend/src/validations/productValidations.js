@@ -13,11 +13,11 @@ export const createProductSchema = Joi.object({
     .required(),
   tags: Joi.array().items(Joi.string()).required(),
   price: Joi.number().required(),
-  specialOffer: Joi.string().required(),
+  specialOffer: Joi.number().required(),
   image: Joi.string().required(),
   bakingTime: Joi.number().required(),
   description: Joi.string().required(),
-  receipe: Joi.array().items(Joi.string().required()).required(),
+  recipe: Joi.array().items(Joi.string().required()).required(),
 });
 
 export const getProductSchema = Joi.object({
@@ -36,13 +36,13 @@ export const editProductSchema = Joi.object({
     )
     .min(1)
     .optional(),
-    tags: Joi.array().items(Joi.string()).optional(),
-    price: Joi.number().optional(),
-    specialOffer: Joi.string().optional(),
-    image: Joi.string().optional(),
-    bakingTime: Joi.number().optional(),
-    description: Joi.string().optional(),
-    receipe: Joi.array().items(Joi.string().optional()).optional(),
+  tags: Joi.array().items(Joi.string()).optional(),
+  price: Joi.number().optional(),
+  specialOffer: Joi.number().optional(),
+  image: Joi.string().optional(),
+  bakingTime: Joi.number().optional(),
+  description: Joi.string().optional(),
+  recipe: Joi.array().items(Joi.string().optional()).optional(),
 });
 
 export const deleteProductSchema = Joi.object({
