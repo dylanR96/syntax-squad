@@ -23,17 +23,7 @@ const productBatchWriteRequests = [
         description: "Krispiga och kryddiga pepparkakor, en klassisk julfavorit.",
 
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -58,17 +48,7 @@ const productBatchWriteRequests = [
         bakingTime: 25,
         description: "Mjuka och gyllene lussekatter med doft av saffran.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -92,17 +72,7 @@ const productBatchWriteRequests = [
         bakingTime: 20,
         description: "Sött och segt knäck, en självklarhet på julbordet.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -126,17 +96,7 @@ const productBatchWriteRequests = [
         bakingTime: 15,
         description: "En snabb och kladdig chokladkaka som smälter i munnen.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -159,17 +119,7 @@ const productBatchWriteRequests = [
         bakingTime: 15,
         description: "Spröda havrekakor som passar perfekt till fikat.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -194,17 +144,7 @@ const productBatchWriteRequests = [
         description: "Fudgy brownies med en djup chokladsmak.",
 
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -229,17 +169,7 @@ const productBatchWriteRequests = [
         bakingTime: 40,
         description: "Mjuka och smakrika kanelbullar som passar året om.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -262,17 +192,7 @@ const productBatchWriteRequests = [
         bakingTime: 12,
         description: "Knapriga kakor fyllda med chokladbitar.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -296,17 +216,7 @@ const productBatchWriteRequests = [
         bakingTime: 20,
         description: "Fluffiga muffins med en mild vaniljsmak.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -329,17 +239,7 @@ const productBatchWriteRequests = [
         bakingTime: 10,
         description: "Små eleganta kakor med fransk touch.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -363,17 +263,7 @@ const productBatchWriteRequests = [
         bakingTime: 30,
         description: "Saftig morotskaka med härlig glasyr.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -396,17 +286,7 @@ const productBatchWriteRequests = [
         bakingTime: 15,
         description: "Knapriga småkakor med mandel för julens fika.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -430,17 +310,7 @@ const productBatchWriteRequests = [
         bakingTime: 15,
         description: "Chokladrutor som är både mjuka och smakrika.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -462,17 +332,7 @@ const productBatchWriteRequests = [
         bakingTime: 25,
         description: "Knapriga saffransskorpor, perfekta till julens kaffe.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },
@@ -495,17 +355,7 @@ const productBatchWriteRequests = [
         bakingTime: 10,
         description: "Små och söta snöbollar som smälter i munnen.",
         createdAt: new Date().toISOString(),
-        recipe: [
-          { 
-            step: "Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." 
-          },
-          { 
-            step: "Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg." 
-          },
-          { 
-            step: "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet." 
-          } 
-          
+        recipe: ["Sätt på ugnen på 175 grader Celsius och förbered en rund bakform med löstagbar kant genom att smörja formen och eventuellt klä den med bakplåtspapper." ,"Smält smöret i en kastrull på medelvärme tills det är helt flytande. Ställ åt sidan och låt smöret svalna något för att undvika att det koagulerar äggen i nästa steg.", "I en stor skål, vispa ihop socker, ägg och vaniljsocker tills blandningen är lätt och fluffig. Använd gärna en handvisp eller elvisp på låg hastighet."
         ],
       },
     },

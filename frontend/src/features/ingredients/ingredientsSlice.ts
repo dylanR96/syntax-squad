@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export interface Ingredient{
-    ingredientID: number;
-    ingredientName: string;
-    stock: number;
-    units: string;
-    pricePerUnit: number;
-    exchangeFor: string
-    quantity: number;
+  ingredientID: number;
+  ingredientName: string;
+  stock: number;
+  units: string;
+  quantity: number | null;
+  pricePerUnit: number;
+  exchangeFor: string;
+  checked: boolean;
 }
 
 interface IngredientState {
