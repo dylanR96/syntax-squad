@@ -1,51 +1,86 @@
+import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
 import { CustomerService } from "../services/customerService.js";
-import { sendError, sendResponse } from "../utils/responseHelper.js";
+import { sendResponse, sendError } from "../utils/responseHelper.js";
+import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
+import { validateRequest } from "../validations/validateRequest.js";
+import {
+  createCustomerSchema,
+  deleteCustomerSchema,
+  editCustomerSchema,
+  getCustomerSchema,
+  customerLoginSchema,
+} from "../validations/customerValidations.js";
+import { scanTable } from "../utils/dbTableScan.js";
+import { verifyPassword } from "../utils/passwordHasher.js";
+import { validateUser } from "../validations/verifyUser.js";
 
 export const createCustomer = async (event) => {
-  try {
+  return tryCatchWrapper(async () => {
     const body = JSON.parse(event.body);
-    const createdCustomer = await CustomerService.createCustomer(body);
-    return sendResponse(200, "Customer created successfully");
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+    const value = validateRequest(createCustomerSchema, body);
+    const result = await scanTable(value.email, CUSTOMERS_TABLE, "email");
+    if (result) {
+      return sendError(404, "User exists");
+    } else {
+      await CustomerService.createCustomer(value);
+      return sendResponse(200, "Customer created successfully");
+    }
+  });
+};
+
+export const loginCustomer = async (event) => {
+  return tryCatchWrapper(async () => {
+    const body = JSON.parse(event.body);
+    const value = validateRequest(customerLoginSchema, body);
+    const result = await scanTable(value.email, CUSTOMERS_TABLE, "email");
+    if (!result) {
+      return sendError(404, "User does not exist");
+    } else {
+      const isPasswordValid = await verifyPassword(
+        value.password,
+        result.password
+      );
+      if (!isPasswordValid) {
+        return sendError(401, "Wrong username or password");
+      } else {
+        const data = await CustomerService.loginCustomer(value);
+        const token = validateUser({id: data.customerID}, "customer" );
+        return sendResponse(200, { token });
+      }
+    }
+  });
 };
 
 export const getCustomers = async () => {
-  try {
+  return tryCatchWrapper(async () => {
     const getCustomers = await CustomerService.getCustomers();
     return sendResponse(200, getCustomers);
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  });
 };
 
 export const getCustomer = async (event) => {
-  try {
+  return tryCatchWrapper(async () => {
     const { customerID } = event.pathParameters;
-    const customer = await CustomerService.getCustomer(customerID);
+    const value = validateRequest(getCustomerSchema, { customerID });
+    const customer = await CustomerService.getCustomer(value.customerID);
     return sendResponse(200, customer);
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  });
 };
 
 export const editCustomer = async (event) => {
-  try {
+  return tryCatchWrapper(async () => {
     const body = JSON.parse(event.body);
-    const editCustomer = await CustomerService.editCustomer(body);
+    const value = validateRequest(editCustomerSchema, body);
+    const editCustomer = await CustomerService.editCustomer(value);
     return sendResponse(200, editCustomer);
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  });
 };
 
 export const deleteCustomer = async (event) => {
-  try {
+  return tryCatchWrapper(async () => {
     const { customerID } = event.pathParameters;
-    await CustomerService.deleteCustomer(customerID);
+    const value = validateRequest(deleteCustomerSchema, { customerID });
+    await CustomerService.deleteCustomer(value.customerID);
     return sendResponse(200, "Customer successfully deleted");
-  } catch (error) {
-    return sendError(error.statusCode || 500, error.message);
-  }
+  });
 };

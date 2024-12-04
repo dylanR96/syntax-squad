@@ -14,12 +14,14 @@ const productBatchWriteRequests = [
           { id: 10007, quantity: 10 }, // Kanel (Cinnamon) - 10g
           { id: 10010, quantity: 1 }, // Ägg (Eggs) - 1 piece
         ],
+        
         tags: ["jul", "ägg", "gluten"],
         price: 45.0,
         specialOffer: 0,
         image: "https://images.unsplash.com/photo-1639590229762-3c9a8c98ca31?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         bakingTime: 15,
         description: "Krispiga och kryddiga pepparkakor, en klassisk julfavorit.",
+
         createdAt: new Date().toISOString(),
         recipe: [
           { 
@@ -190,6 +192,7 @@ const productBatchWriteRequests = [
         image: "https://images.cookforyourlife.org/wp-content/uploads/2020/06/Dark-Chocolate-Brownies-shutterstock_112430981.jpg",
         bakingTime: 30,
         description: "Fudgy brownies med en djup chokladsmak.",
+
         createdAt: new Date().toISOString(),
         recipe: [
           { 
@@ -352,6 +355,7 @@ const productBatchWriteRequests = [
           { id: 10003, quantity: 100 }, // Smör (Butter) - 100g
           { id: 10010, quantity: 2 },   // Ägg (Eggs) - 2 pieces
         ],
+
         tags: ["trending", "gluten", "ägg"],
         price: 60.0,
         specialOffer: 1,

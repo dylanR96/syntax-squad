@@ -1,18 +1,19 @@
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
 import { db } from "../config/dynamoConfig.js";
 import { createID } from "../utils/dynamodbHelper.js";
-// Test
+
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
     const params = {
       TableName: INGREDIENTS_TABLE,
       Item: {
         ingredientID: await createID(INGREDIENTS_TABLE, "ingredientID", 10000),
-        ingredientName: ingredientData.name,
+        ingredientName: ingredientData.ingredientName,
         stock: ingredientData.stock,
         units: ingredientData.units,
-        pricePerUnit: ingredientData.pricePerUnit,
-        exchangeFor: ingredientData.exchangeFor,
+        pricePerUnit: ingredientData.pricePerUnit
+          ? ingredientData.pricePerUnit
+          : 0,
       },
     };
     const data = await db.put(params);
@@ -50,19 +51,21 @@ export const ingredientModel = {
         ingredientID: ingredientData.ingredientID,
       },
       UpdateExpression: `SET 
-        ingredientName = :name, 
+        ingredientName = :ingredientName, 
         stock = :stock, 
         units = :units,
-        pricePerUnit = :pricePerUnit, 
-        exchangeFor = :exchangeFor`,
+        pricePerUnit = :pricePerUnit`,
+
       ExpressionAttributeValues: {
-        ":name": ingredientData.name,
+        ":ingredientName": ingredientData.ingredientName,
         ":stock": ingredientData.stock,
         ":units": ingredientData.units,
-        ":pricePerUnit": ingredientData.pricePerUnit,
-        ":exchangeFor": ingredientData.exchangeFor,
+
+        ":pricePerUnit": ingredientData.pricePerUnit
+          ? ingredientData.pricePerUnit
+          : 0,
       },
-      ReturnValues: "ALL_NEW", // Return the updated item
+      ReturnValues: "ALL_NEW",
     };
     const data = db.update(params);
     return data;

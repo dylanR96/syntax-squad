@@ -8,17 +8,35 @@ import Recipe from "../pages/Recipe/Recipe";
 import Login from "../pages/Login/Login";
 import Orders from "../pages/Orders/Orders";
 import About from "../pages/About/About";
+import Checkout from "../pages/Checkout/Checkout";
 import Register from "../pages/Register/Register";
+import Confirmation from "../pages/Confirmation/Confirmation";
+import Stock from "../pages/Admin/Stock/Ingredients";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Layout = () => {
   return (
     <>
+      <ToastContainer />
       <Header />
       <Outlet />
       <Footer />
     </>
   );
 };
+
+const NoFooterLayout = () => {
+  return (
+    <>
+      <ToastContainer />
+      <Header />
+      <Outlet />
+    </>
+  );
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,8 +60,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <Orders/>,
-      },   
+        element: <Orders />,
+      },
       {
         path: "/profile",
         element: <Profile />,
@@ -56,27 +74,29 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About />,
       },
+      {
+
+        path: "/confirmation",
+        element: <Confirmation />,
+       },
+      {
+        path: "/admin/stock",
+        element: <Stock />,
+
+      },
     ],
-  },  
+  },
 
-
-  // {
-  //   path: "/checkout",
-  //   element: <Checkout />,
-  // },
-  // {
-  //   path: "/confirmation",
-  //   element: <Confirmation />,
-  // },
- //{
-  //path: "/stock",
-  //element: <Stock />,
- //},
-
-
-
-
-
+  {
+    path: "/",
+    element: <NoFooterLayout />,
+    children: [
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+    ],
+  },
 ]);
 
 export default router;
