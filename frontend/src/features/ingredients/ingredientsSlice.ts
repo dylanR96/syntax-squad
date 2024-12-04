@@ -1,112 +1,65 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { recipes } from '../../pages/Recipe/recipes';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface Ingredient {
-  id: string;
-  name: string;
-  quantity: string;
+export interface Ingredient{
+  ingredientID: number;
+  ingredientName: string;
+  stock: number;
+  units: string;
+  quantity: number | null;
+  pricePerUnit: number;
+  exchangeFor: string;
   checked: boolean;
 }
 
-interface RecipeIngredients {
-  recipe: string;
-  ingredients: Ingredient[];
+interface IngredientState {
+    ingredients: Ingredient[] | null;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
 }
 
-interface IngredientsState {
-  items: RecipeIngredients[];
-}
-
-const initialState: IngredientsState = {
-  items: [],
-};
-
-const ingredientsSlice = createSlice({
-  name: 'ingredients',
-  initialState,
-  reducers: {
-    addRecipeIngredients: (
-  state,
-  action: PayloadAction<{ recipe: string; ingredients: Ingredient[] }>
-) => {
-  const { recipe, ingredients } = action.payload;
-
-  // Filtrera ingredienser som har `checked: true`
-  const checkedIngredients = ingredients.filter(ingredient => ingredient.checked);
-
-  if (checkedIngredients.length > 0) {
-    // Kontrollera om receptet redan finns i state
-    const existingRecipe = state.items.find(item => item.recipe === recipe);
-
-    if (!existingRecipe) {
-      // Lägg till ett nytt recept med endast de checkade ingredienserna
-      state.items.push({ recipe, ingredients: checkedIngredients });
-    } else {
-      // Om receptet redan finns, uppdatera endast med de checkade ingredienserna
-      existingRecipe.ingredients = [
-        ...existingRecipe.ingredients.filter(ing => ing.checked), // Behåll bara markerade ingredienser
-        ...checkedIngredients.filter(
-          ing => !existingRecipe.ingredients.some(existingIng => existingIng.id === ing.id)
-        ),
-      ];
-    }
-  }
-    
-      // Logga state efter uppdatering
-      console.log(
-        'State after adding recipe ingredients:',
-        JSON.stringify(state.items.filter(item => item.ingredients.length > 0), null, 2)
-      );
-    },
-    toggleIngredient: (state, action: PayloadAction<{ recipe: string; ingredientName: string }>) => {
-      const { recipe, ingredientName } = action.payload;
-    
-      const recipeItem = state.items.find(item => item.recipe === recipe);
-      if (recipeItem) {
-        const ingredient = recipeItem.ingredients.find(i => i.name === ingredientName);
-        if (ingredient) {
-          ingredient.checked = !ingredient.checked; // Toggla `checked`
-        }
-      }
-    },
-  },
-});
-
-export const { addRecipeIngredients, toggleIngredient } = ingredientsSlice.actions;
-export default ingredientsSlice.reducer;
-
-
-
-
-
-
-
-
-
-/* 
-
-
-
-const handleSubmit = () => {
-    dispatch(
-      addRecipeIngredients({
-        recipe: 'kladdkaka',
-        ingredients: [
-          { id: '1', name: '100 g smör', quantity: '100 g', checked: false },
-          { id: '2', name: '2 st ägg', quantity: '2 st', checked: false },
-          { id: '3', name: '2 1/2 dl strösocker', quantity: '2 1/2 dl', checked: false },
-          { id: '4', name: '3 msk kakao', quantity: '3 msk', checked: false },
-          { id: '5', name: '2 tsk vaniljsocker', quantity: '2 tsk', checked: false },
-          { id: '6', name: '1 1/2 dl vetemjöl', quantity: '1 1/2 dl', checked: false },
-          { id: '7', name: '1 krm salt', quantity: '1 krm', checked: false },
-        ],
-      })
-    );
+const initialState: IngredientState = {
+    ingredients: null,
+    status: 'idle',
+    error: null,
   };
 
+  
+  // Async thunk för att hämta produkter
+export const fetchIngredients = createAsyncThunk<Ingredient[], void, { rejectValue: string }>(
+    'ingredients/fetchIngredients',
+    async (_, { rejectWithValue }) => {
+      try {
+        const response = await fetch('https://4pewmd0k46.execute-api.eu-north-1.amazonaws.com/ingredients');
+        if (!response.ok) {
+          throw new Error(`Server responded with ${response.status}`);
+        }
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+      } catch (error) {
+        return rejectWithValue('Kunde inte ladda ingredienser. Försök igen senare.');
+      }
+    }
+  );
 
-
-
-
-
-*/
+  const ingredientsSlice = createSlice({
+    name: 'ingredients',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+      builder
+        .addCase(fetchIngredients.pending, (state) => {
+          state.status = 'loading';
+          state.error = null;
+        })
+        .addCase(fetchIngredients.fulfilled, (state, action) => {
+          state.status = 'succeeded';
+          state.ingredients = action.payload;
+        })
+        .addCase(fetchIngredients.rejected, (state, action) => {
+          state.status = 'failed';
+          state.error = action.payload || 'Något gick fel.';
+        });
+    },
+  });
+  
+  export default ingredientsSlice.reducer;

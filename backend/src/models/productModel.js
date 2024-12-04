@@ -18,6 +18,7 @@ export const productModel = {
         description: productData.description,
         receipe: productData.receipe,
         createdAt: new Date().toISOString(),      
+
       },
     };
 
@@ -54,6 +55,7 @@ export const productModel = {
         bakingTime = :bakingTime,
         description = :description,
         receipe = :receipe`,
+
       ExpressionAttributeValues: {
         ":productName": productData.productName,
         ":ingredients": productData.ingredients,
