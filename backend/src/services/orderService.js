@@ -1,8 +1,8 @@
 import { orderModel } from "../models/ordersModel.js";
 
 export const OrderService = {
-    createOrder: async(orderData) => {
-        return await orderModel.createOrder(orderData);
+    createOrder: async(orderData, tokenID) => {
+        return await orderModel.createOrder(orderData, tokenID);
     },
     changeOrder: async(orderData) => {
         return await orderModel.changeOrder(orderData);

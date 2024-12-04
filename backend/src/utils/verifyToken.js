@@ -1,5 +1,5 @@
-import { sendError } from "../utils/responseHelper.js";
-import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
+import { sendError } from "./responseHelper.js";
+import { tryCatchWrapper } from "./tryCatchUtil.js";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "secret_secret_secret";
@@ -9,7 +9,7 @@ export const verifyToken = async (event) => {
     event.headers?.Authorization || event.headers?.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return sendError(401, "Missing or invalid token");
+    throw new Error("Missing or invalid token");
   }
 
   const token = authHeader.split(" ")[1];

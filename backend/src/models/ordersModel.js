@@ -3,12 +3,12 @@ import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { createID } from "../utils/dynamodbHelper.js";
 
 export const orderModel = {
-  createOrder: async (orderData) => {
+  createOrder: async (orderData, userID) => {
     const params = {
       TableName: ORDERS_TABLE,
       Item: {
         orderNO: await createID(ORDERS_TABLE, "orderNO", 1000),
-        userID: orderData.userID,
+        userID: userID,
         orderDate: new Date().toISOString(),
         status: "pending",
         products: orderData.products,
