@@ -13,10 +13,12 @@ export const productModel = {
         tags: productData.tags,
         price: productData.price,
         specialOffer: productData.specialOffer,
-        description: productData.description,
-        image: productData.image ? productData.image : "",
+        image: productData.image,
         bakingTime: productData.bakingTime,
-        createdAt: new Date().toISOString(),
+        description: productData.description,
+        receipe: productData.receipe,
+        createdAt: new Date().toISOString(),      
+
       },
     };
 
@@ -50,19 +52,20 @@ export const productModel = {
         price = :price,
         specialOffer = :specialOffer,
         image = :image,
-        bakingTime = :bakingTime
-        description = :description`,
+        bakingTime = :bakingTime,
+        description = :description,
+        receipe = :receipe`,
+
       ExpressionAttributeValues: {
         ":productName": productData.productName,
         ":ingredients": productData.ingredients,
         ":tags": productData.tags,
         ":price": productData.price,
         ":specialOffer": productData.specialOffer,
-        ":image": productData.image ? productData.image : "",
+        ":image": productData.image,
         ":bakingTime": productData.bakingTime,
         ":description": productData.description,
-        ":bakingTime": productData.bakingTime,
-        ":image": productData.image,
+        ":receipe": productData.receipe,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };

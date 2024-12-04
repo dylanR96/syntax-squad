@@ -4,20 +4,17 @@ export interface ProductIngredient {
     id: number;      // ID för ingrediensen
     quantity: number; // Mängd av ingrediensen
   }
-export interface Recipe {
-    step: string[];
-  }
 
 export interface Product {
-    productID: number;
-    productName: string;
-    description: string;
-    price: number;
-    image: string;
-    bakingTime: string;
-    tags: string[];
-    ingredients: ProductIngredient[];
-    recipe: Recipe[];
+  productID: number;
+  productName: string;
+  description: string;
+  price: number;
+  image: string;
+  bakingTime: string;
+  tags: string[];
+  ingredients: ProductIngredient[];
+  recipe: string[];
 }
 
 interface ProductsState {
