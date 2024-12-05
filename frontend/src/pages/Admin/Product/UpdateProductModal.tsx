@@ -187,6 +187,14 @@ const ProductModal: React.FC<ProductPropsType> = ({
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (editProduct.ingredients.length === 0) {
+      toast.error("Du har inte valt några ingredienser");
+      return;
+    }
+    if (editProduct.recipe.length === 0) {
+      toast.error("Du har inte skrivit något recept");
+      return;
+    }
     updateProduct();
   };
   return (
