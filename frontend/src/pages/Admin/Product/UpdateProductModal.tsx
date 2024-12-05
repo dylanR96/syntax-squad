@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
 import { toast } from "react-toastify";
 // Import this later
@@ -59,6 +60,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
       };
     });
   };
+
   const handleIngredients = (index: number, value: string) => {
     setEditProduct((prev) => {
       if (!prev) return null;
@@ -83,6 +85,41 @@ const ProductModal: React.FC<ProductPropsType> = ({
       };
     });
     setNewIngredient(null);
+  };
+  const deleteIngredient = (ingredientIndex: number) => {
+    const updatedIngredients = editProduct.ingredients.filter(
+      (_, index) => index !== ingredientIndex
+    );
+    setEditProduct((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        ingredients: updatedIngredients,
+      };
+    });
+  };
+  const deleteStep = (stepIndex: number) => {
+    const updatedSteps = editProduct.recipe.filter(
+      (_, index) => index !== stepIndex
+    );
+    setEditProduct((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        recipe: updatedSteps,
+      };
+    });
+  };
+  const addStep = () => {
+    const recipe: string[] = editProduct.recipe;
+    recipe.push(`Steg ${editProduct.recipe.length + 1}`);
+    setEditProduct((prev) => {
+      if (!prev) return null;
+      return {
+        ...prev,
+        recipe: recipe,
+      };
+    });
   };
 
   const updateProduct = async () => {
@@ -156,6 +193,12 @@ const ProductModal: React.FC<ProductPropsType> = ({
                     </div>
                     <div className="product-ingredients__units">
                       {info.unit}
+                    </div>
+                    <div className="product-ingredients__delete">
+                      <button
+                        className="delete-button"
+                        onClick={() => deleteIngredient(index)}
+                      ></button>
                     </div>
                   </div>
                 );
@@ -235,7 +278,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
           />
         </label>
         <label className="product-modal__label">
-          <div className="product-modal__column">Recept</div>
+          <div className="product-modal__column">Beskrivning</div>
           <textarea
             className="product-modal__input product-modal__input--textarea"
             name="description"
@@ -244,6 +287,42 @@ const ProductModal: React.FC<ProductPropsType> = ({
             onChange={handleChange}
           ></textarea>
         </label>
+        <div className="product-modal__label">
+          <h5 className="h5--dark">Recept</h5>
+          {editProduct.recipe.map((step, index) => {
+            return (
+              <div
+                className="product-modal__column"
+                key={step.substring(0, 10)}
+              >
+                <div className="product-modal__column product-modal__column--col-2">
+                  <div>Steg {index + 1}</div>
+                  <div className="product-ingredients__delete">
+                    <button
+                      className="delete-button"
+                      onClick={() => deleteStep(index)}
+                    ></button>
+                  </div>
+                </div>
+
+                <textarea
+                  className="product-modal__input product-modal__input--textarea"
+                  name="steps"
+                  placeholder="Steg"
+                  value={step}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+            );
+          })}
+
+          <button
+            className="recipe__button stock-modal__button button--blue button--small"
+            onClick={addStep}
+          >
+            Lägg till steg
+          </button>
+        </div>
         <label className="product-modal__label">
           <div className="product-modal__column">Taggar</div>
           <div className="product-modal__tags">
