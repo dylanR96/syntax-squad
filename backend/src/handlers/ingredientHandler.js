@@ -1,7 +1,7 @@
 import { IngredientService } from "../services/ingredientService.js";
 import { sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
+import { validateRequest } from "../middlewares/validateRequest.js";
 import {
   addIngredientSchema,
   deleteIngredientSchema,

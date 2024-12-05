@@ -44,7 +44,6 @@ const ProductModal: React.FC<ProductPropsType> = ({
     };
     fetchIngredients();
   }, []);
-
   // Functions
   const handleChange = (e: EventFn) => {
     setEditProduct({ ...editProduct, [e.target.name]: e.target.value });

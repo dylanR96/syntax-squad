@@ -4,7 +4,7 @@ const JWT_EXPIRES_IN = "1h";
 
 const JWT_SECRET = "secret_secret_secret";
 
-export const validateUser = (data, role) => {
+export const verifyUser = (data, role) => {
   const payload = {
     id: data.id,
     role: role,
