@@ -4,15 +4,15 @@ import { createID } from "../utils/dynamodbHelper.js";
 
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
+    // 5 SEK for every ingredient for now, scalable for the future
     const params = {
       TableName: INGREDIENTS_TABLE,
       Item: {
         ingredientID: await createID(INGREDIENTS_TABLE, "ingredientID", 10000),
-        ingredientName: ingredientData.name,
+        ingredientName: ingredientData.ingredientName,
         stock: ingredientData.stock,
         units: ingredientData.units,
-        pricePerUnit: ingredientData.pricePerUnit,
-        exchangeFor: ingredientData.exchangeFor,
+        pricePerUnit: 5,
       },
     };
     const data = await db.put(params);
@@ -50,17 +50,19 @@ export const ingredientModel = {
         ingredientID: ingredientData.ingredientID,
       },
       UpdateExpression: `SET 
-        ingredientName = :name, 
+        ingredientName = :ingredientName, 
         stock = :stock, 
         units = :units,
-        priceForExtra = :priceForExtra, 
-        exchangeFor = :exchangeFor`,
+        pricePerUnit = :pricePerUnit`,
+
       ExpressionAttributeValues: {
-        ":name": ingredientData.name,
+        ":ingredientName": ingredientData.ingredientName,
         ":stock": ingredientData.stock,
         ":units": ingredientData.units,
-        ":priceForExtra": ingredientData.priceForExtra,
-        ":exchangeFor": ingredientData.exchangeFor,
+
+        ":pricePerUnit": ingredientData.pricePerUnit
+          ? ingredientData.pricePerUnit
+          : 0,
       },
       ReturnValues: "ALL_NEW",
     };

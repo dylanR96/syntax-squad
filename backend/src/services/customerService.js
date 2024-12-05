@@ -39,22 +39,34 @@ export const CustomerService = {
     return await customerModel.getCustomers();
   },
   getCustomer: async (customerID) => {
-    const existingUser = await scanTable(customerID, CUSTOMERS_TABLE, "customerID");
-    if(!existingUser) {
+    const existingUser = await scanTable(
+      customerID,
+      CUSTOMERS_TABLE,
+      "customerID"
+    );
+    if (!existingUser) {
       throw new Error("User does not exist.");
     }
     return await customerModel.getCustomer(customerID);
   },
   deleteCustomer: async (customerID) => {
-    const existingUser = await scanTable(customerID, CUSTOMERS_TABLE, "customerID");
-    if(!existingUser) {
+    const existingUser = await scanTable(
+      customerID,
+      CUSTOMERS_TABLE,
+      "customerID"
+    );
+    if (!existingUser) {
       throw new Error("User does not exist.");
     }
     return await customerModel.deleteCustomer(customerID);
   },
   editCustomer: async (customerID) => {
-    const existingUser = await scanTable(customerID, CUSTOMERS_TABLE, "customerID");
-    if(!existingUser) {
+    const existingUser = await scanTable(
+      customerID,
+      CUSTOMERS_TABLE,
+      "customerID"
+    );
+    if (!existingUser) {
       throw new Error("Login is incorrect");
     }
     return await customerModel.editCustomer(customerID);

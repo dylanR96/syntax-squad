@@ -1,0 +1,121 @@
+.home__header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/src/assets/images/baking.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home__header-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.home__header-search input {
+  width: 100%;
+  padding: 8px 40px 8px 12px;
+  border: 1px solid #cc8d80;
+  border-radius: 5px;
+  outline: none;
+  background: #fcf6ee;
+  font-family: "Afacad", sans-serif;
+  font-size: 1.25rem;
+  color: #442a07;
+}
+
+.home__header-search input:focus {
+  border-color: #007bff;
+}
+
+.home__header-search-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #442a07;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.home__header-form-container {
+  margin-top: 1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.home__header-search-button:hover {
+  color: #007bff;
+}
+
+.home__header-search-button i {
+  display: flex;
+}
+
+.home__fa-filter {
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.home__card-container {
+  width: 100%;
+  margin: 1.25em 0;
+}
+
+.home__search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.25em;
+}
+
+.cards-wrapper {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cards-wrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.cards-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+.p--dark {
+  font-family: "Afacad", sans-serif;
+  font-size: 1rem;
+  color: #442a07;
+}
+
+/* Media queries */
+
+@media (min-width: 768px) {
+  .p--dark {
+    font-size: 1.25rem;
+  }
+
+  .cards-wrapper {
+    gap: 1.5rem;
+  }
+}

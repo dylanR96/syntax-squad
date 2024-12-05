@@ -54,6 +54,7 @@ export const productModel = {
         bakingTime = :bakingTime,
         description = :description,
         recipe = :recipe`,
+
       ExpressionAttributeValues: {
         ":productName": productData.productName,
         ":ingredients": productData.ingredients,
