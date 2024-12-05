@@ -1,7 +1,7 @@
 import { ProductService } from "../services/productService.js";
 import { sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
-import { validateRequest } from "../validations/validateRequest.js";
+import { validateRequest } from "../middlewares/validateRequest.js";
 import {
   createProductSchema,
   deleteProductSchema,

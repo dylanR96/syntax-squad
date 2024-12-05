@@ -1,7 +1,6 @@
 import Joi from "joi";
 
 export const createOrderSchema = Joi.object({
-  userID: Joi.string().required(),
   products: Joi.array()
     .items(
       Joi.object().pattern(
@@ -23,7 +22,7 @@ export const createOrderSchema = Joi.object({
     .min(1)
     .required(),
   comment: Joi.string().optional(),
-  price: Joi.string().required(),
+  price: Joi.number().required(),
   address: Joi.string().required(),
   zipcode: Joi.string().required(),
   city: Joi.string().required(),
