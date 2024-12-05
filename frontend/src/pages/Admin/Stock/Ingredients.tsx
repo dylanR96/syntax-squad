@@ -47,6 +47,7 @@ const Stock = () => {
     };
     setEditIngredient(data);
   };
+
   return (
     <>
       {editIngredient && (

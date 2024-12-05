@@ -70,73 +70,85 @@ const StockModal: React.FC<Ingredient> = ({
       console.error("Failed", error);
     }
   };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    updateIngredient();
+  };
   return (
-    <section className="stock-modal">
-      <article className="stock-modal__ingredient">
-        <h1 className="h1--dark">
-          Ändra {editIngredient.ingredientName.toLowerCase()}
-        </h1>
-        <label className="stock-modal__label">
-          <div className="stock-modal__column">Namn</div>
-          <input
-            className="ingredient__input"
-            placeholder="name"
-            name="ingredientName"
-            value={editIngredient.ingredientName}
-            onChange={handleChange}
-          />
-        </label>
-        <label className="stock-modal__label">
-          <div className="stock-modal__column">Antal</div>
-          <input
-            className="ingredient__input"
-            type="number"
-            name="stock"
-            value={editIngredient.stock}
-            onChange={handleChange}
-          />
-        </label>
-        <label className="stock-modal__label">
-          <div className="stock-modal__column">Enhet</div>
-          <select
-            className="ingredient__input"
-            name="units"
-            value={editIngredient.units}
-            onChange={handleChange}
-          >
-            {units.map((unit) => (
-              <option key={unit} value={unit}>
-                {unit}
-              </option>
-            ))}
-          </select>
-        </label>
-        <footer className="stock-modal__footer">
-          <button
-            className="recipe__button stock-modal__button button--blue"
-            onClick={updateIngredient}
-          >
-            Spara
-          </button>
-          <button
-            className="recipe__button stock-modal__button button--warning"
-            onClick={() => {
-              if (confirm("Vill du ta bort ingrediensen?")) {
-                deleteIngredient();
-              }
-            }}
-          >
-            Ta bort
-          </button>
-          <button
-            className="recipe__button stock-modal__button"
-            onClick={() => setEditIngredient(null)}
-          >
-            Stäng
-          </button>
-        </footer>
-      </article>
-    </section>
+    <form
+      onSubmit={(e) => {
+        handleSubmit(e);
+      }}
+    >
+      <section className="stock-modal">
+        <article className="stock-modal__ingredient">
+          <h1 className="h1--dark">
+            Ändra {editIngredient.ingredientName.toLowerCase()}
+          </h1>
+          <label className="stock-modal__label">
+            <div className="stock-modal__column">Namn</div>
+            <input
+              className="ingredient__input"
+              placeholder="name"
+              name="ingredientName"
+              value={editIngredient.ingredientName}
+              required
+              onChange={handleChange}
+            />
+          </label>
+          <label className="stock-modal__label">
+            <div className="stock-modal__column">Antal</div>
+            <input
+              className="ingredient__input"
+              type="number"
+              name="stock"
+              value={editIngredient.stock}
+              required
+              onChange={handleChange}
+            />
+          </label>
+          <label className="stock-modal__label">
+            <div className="stock-modal__column">Enhet</div>
+            <select
+              className="ingredient__input"
+              name="units"
+              value={editIngredient.units}
+              onChange={handleChange}
+            >
+              {units.map((unit) => (
+                <option key={unit} value={unit}>
+                  {unit}
+                </option>
+              ))}
+            </select>
+          </label>
+          <footer className="stock-modal__footer">
+            <button
+              className="recipe__button stock-modal__button button--blue"
+              type="submit"
+            >
+              Spara
+            </button>
+            <button
+              className="recipe__button stock-modal__button button--warning"
+              onClick={() => {
+                if (confirm("Vill du ta bort ingrediensen?")) {
+                  deleteIngredient();
+                }
+              }}
+            >
+              Ta bort
+            </button>
+            <button
+              className="recipe__button stock-modal__button"
+              onClick={() => setEditIngredient(null)}
+            >
+              Stäng
+            </button>
+          </footer>
+        </article>
+      </section>{" "}
+    </form>
   );
 };
 

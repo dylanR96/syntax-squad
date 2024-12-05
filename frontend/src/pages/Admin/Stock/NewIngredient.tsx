@@ -46,56 +46,67 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
     console.log(data);
     console.log();
   };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addIngredient();
+  };
   return (
     <section>
-      <h4 className="h4--dark add-ingredient__h4">Lägg till ingrediens</h4>
-      <article className="add-ingredient">
-        <label>
-          <div>Namn</div>
-          <input
-            className="ingredient__input"
-            type="text"
-            name="ingredientName"
-            placeholder="Carrot.."
-            value={newIngredient.ingredientName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <div>Antal</div>
-          <input
-            className="ingredient__input"
-            type="number"
-            name="stock"
-            placeholder="e.g 2000"
-            value={newIngredient.stock}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <div>Enhet</div>
-          <select
-            name="units"
-            className="ingredient__input"
-            value={newIngredient.units}
-            onChange={handleChange}
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <h4 className="h4--dark add-ingredient__h4">Lägg till ingrediens</h4>
+        <article className="add-ingredient">
+          <label>
+            <div>Namn</div>
+            <input
+              className="ingredient__input"
+              type="text"
+              name="ingredientName"
+              placeholder="Carrot.."
+              required
+              value={newIngredient.ingredientName}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            <div>Antal</div>
+            <input
+              className="ingredient__input"
+              type="number"
+              name="stock"
+              placeholder="e.g 2000"
+              value={newIngredient.stock}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            <div>Enhet</div>
+            <select
+              name="units"
+              className="ingredient__input"
+              value={newIngredient.units}
+              onChange={handleChange}
+            >
+              {units.map((unit) => {
+                return (
+                  <option key={unit} value={unit}>
+                    {unit}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+          <button
+            className="recipe__button stock-modal__button button--blue button--small"
+            type="submit"
           >
-            {units.map((unit) => {
-              return (
-                <option key={unit} value={unit}>
-                  {unit}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <button
-          className="recipe__button stock-modal__button button--blue button--small"
-          onClick={addIngredient}
-        >
-          Lägg till
-        </button>
-      </article>
+            Lägg till
+          </button>
+        </article>
+      </form>
     </section>
   );
 };
