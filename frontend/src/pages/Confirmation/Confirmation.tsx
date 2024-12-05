@@ -22,8 +22,8 @@ const Confirmation: React.FC = () => {
     <article className="confirmation__part">
     <h3 className='h4--dark'>Specialönskemål/Allergier</h3>
     <p className='body-text--dark'>Allergisk mot nötter, mjölkprotein, gluten och ägg</p>
-    <OrderTotal />
     </article>
+    <OrderTotal />
     </section>
     <section className="confirmation__buttons">
     <button className='confirmation__cancel-button'>Avbryt order</button>
