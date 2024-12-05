@@ -1,3 +1,4 @@
+import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { orderModel } from "../models/ordersModel.js";
 
 export const OrderService = {
@@ -15,6 +16,9 @@ export const OrderService = {
     },
     getOrder: async(orderData) => {
         return await orderModel.getOrder(orderData);
+    },
+    getOrderByUserID: async(customerID) => {
+        return await orderModel.getOrderByUserID(customerID);
     },
     getAllOrders: async(orderData) => {
         return await orderModel.getAllOrders(orderData);

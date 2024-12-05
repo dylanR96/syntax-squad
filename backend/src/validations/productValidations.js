@@ -17,7 +17,7 @@ export const createProductSchema = Joi.object({
   image: Joi.string().required(),
   bakingTime: Joi.number().required(),
   description: Joi.string().required(),
-  receipe: Joi.array().items(Joi.string().required()).required(),
+  recipe: Joi.array().items(Joi.string().required()).required(),
 });
 
 export const getProductSchema = Joi.object({
@@ -42,7 +42,7 @@ export const editProductSchema = Joi.object({
     image: Joi.string().optional(),
     bakingTime: Joi.number().optional(),
     description: Joi.string().optional(),
-    receipe: Joi.array().items(Joi.string().optional()).optional(),
+    recipe: Joi.array().items(Joi.string().optional()).optional(),
 });
 
 export const deleteProductSchema = Joi.object({

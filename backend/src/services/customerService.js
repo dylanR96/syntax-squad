@@ -1,6 +1,7 @@
 import { CUSTOMERS_TABLE } from "../constants/tableNames.js";
 import { customerModel } from "../models/customerModel.js";
 import { scanTable } from "../utils/dbTableScan.js";
+import { verifyPassword } from "../utils/passwordHasher.js";
 
 export const CustomerService = {
   createCustomer: async (customerData) => {

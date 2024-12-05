@@ -9,7 +9,7 @@ import {
   getCustomerSchema,
   customerLoginSchema,
 } from "../validations/customerValidations.js";
-import { validateUser } from "../validations/verifyUser.js";
+import { verifyUser } from "../utils/verifyUser.js";
 import { authorizeAdmin } from "../middlewares/authMiddleware.js";
 import { CUSTOMER_ROLE } from "../constants/userRole.js";
 
@@ -27,7 +27,7 @@ export const loginCustomer = async (event) => {
     const body = JSON.parse(event.body);
     const value = validateRequest(customerLoginSchema, body);
     const data = await CustomerService.loginCustomer(value);
-    const token = validateUser({ id: data.customerID }, CUSTOMER_ROLE);
+    const token = verifyUser({ id: data.customerID }, CUSTOMER_ROLE);
     return sendResponse(200, { token });
   });
 };
