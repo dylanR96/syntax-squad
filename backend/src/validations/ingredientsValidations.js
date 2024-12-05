@@ -3,9 +3,9 @@ import Joi from "joi";
 export const addIngredientSchema = Joi.object({
   ingredientName: Joi.string().required(),
   stock: Joi.number().required(),
-  units: Joi.number().required(),
-  pricePerUnit: Joi.number().required(),
-  exchangeFor: Joi.string().required(),
+  units: Joi.string().required(),
+  pricePerUnit: Joi.number().optional(),
+  exchangeFor: Joi.string().optional(),
 });
 
 export const deleteIngredientSchema = Joi.object({
@@ -15,7 +15,7 @@ export const deleteIngredientSchema = Joi.object({
 export const editIngredientSchema = Joi.object({
   ingredientID: Joi.number().integer().min(1000).max(9999).required(),
   stock: Joi.number().optional(),
-  units: Joi.number().optional(),
+  units: Joi.string().optional(),
   pricePerUnit: Joi.number().optional(),
   exchangeFor: Joi.string().optional(),
 });

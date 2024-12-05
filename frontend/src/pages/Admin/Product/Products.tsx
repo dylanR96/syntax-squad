@@ -28,7 +28,7 @@ const Products = () => {
       };
       fetchProducts();
     }
-  }, [editProduct]);
+  }, [editProduct, newProduct]);
   return (
     <main className="product-container">
       <section>
@@ -75,7 +75,12 @@ const Products = () => {
           <Loader />
         )}
       </section>
-
+      <button
+        className="recipe__button stock-modal__button button--blue button--small"
+        onClick={() => setNewProduct(true)}
+      >
+        Lägg till produkt
+      </button>
       {editProduct && (
         <UpdateProductModal
           editProduct={editProduct}

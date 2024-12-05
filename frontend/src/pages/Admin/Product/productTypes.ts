@@ -12,6 +12,7 @@ export type ProductType = {
   price: number;
   productID?: number;
   specialOffer: number;
+  recipe: string[];
   tags: string[];
 };
 export type EventFn = React.ChangeEvent<
@@ -26,6 +27,7 @@ export const initProduct: ProductType = {
   price: 0,
   productID: 0,
   specialOffer: 0,
+  recipe: [],
   tags: ["", "", ""],
 };
 export type ChangeIngredientType = {
