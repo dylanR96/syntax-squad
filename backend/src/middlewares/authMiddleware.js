@@ -9,7 +9,6 @@ export const authorizeAdmin = async (event) => {
     return user;
 };
 
-
 export const authorizeCustomer = async (event) => {
     const user = await verifyToken(event);
     if(user.role !== CUSTOMER_ROLE) {
