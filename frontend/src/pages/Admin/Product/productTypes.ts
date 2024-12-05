@@ -27,7 +27,7 @@ export const initProduct: ProductType = {
   price: 0,
   productID: 0,
   specialOffer: 0,
-  recipe: ["hej"],
+  recipe: [],
   tags: ["", "", ""],
 };
 export type ChangeIngredientType = {
