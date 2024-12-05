@@ -17,8 +17,8 @@ export const createCustomer = async (event) => {
   return tryCatchWrapper(async () => {
     const body = JSON.parse(event.body);
     const value = validateRequest(createCustomerSchema, body);
-      await CustomerService.createCustomer(value);
-      return sendResponse(200, "Customer created successfully");
+    await CustomerService.createCustomer(value);
+    return sendResponse(200, "Customer created successfully");
   });
 };
 

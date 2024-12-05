@@ -73,7 +73,7 @@ const Register = () => {
       phoneNumber,
     };
 
-    fetch("https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/customer", {
+    fetch("https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
