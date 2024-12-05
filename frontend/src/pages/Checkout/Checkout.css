@@ -14,9 +14,26 @@
   max-width: 400px;
 }
 
+.checkout-product-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-change-quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .checkout__back-icon {
   height: 40px;
   width: 40px;
+}
+
+.quantity-icon {
+  cursor: pointer;
 }
 
 .checkout__heading {

@@ -2,6 +2,7 @@ import "./Cart.css";
 import remove from "../../assets/images/remove.svg";
 // import edit from "../../assets/images/edit.svg";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const cartVariants = {
   open: {
@@ -61,7 +62,9 @@ const Cart = () => {
           <h3 className="cart-total__title">Totalt</h3>
           <h3 className="cart-total__price">60 sek</h3>
         </div>
-        <button className="cart__button">Till kassan</button>
+        <Link to="/checkout">
+          <button className="cart__button">Till kassan</button>
+        </Link>
       </div>
     </motion.div>
   );
