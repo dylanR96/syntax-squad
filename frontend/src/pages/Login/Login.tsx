@@ -6,6 +6,7 @@ import google from "../../assets/images/google.svg";
 import x from "../../assets/images/x.svg";
 import dottedLine from "../../assets/images/dotted-line.svg";
 import { useNavigate, Link } from "react-router-dom";
+import { ENDPOINT_CUSTOMER } from "../../endpoints/apiEndpoints";
 
 // Bättre namn på css klasser
 
@@ -20,16 +21,13 @@ const Login = () => {
 
     setError(null);
     try {
-      const response = await fetch(
-        "https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/customer/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(ENDPOINT_CUSTOMER, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       if (!response.ok) {
         throw new Error("Login failed. Please check your credentials.");

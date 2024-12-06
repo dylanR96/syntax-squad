@@ -43,6 +43,7 @@ export const editProductSchema = Joi.object({
   bakingTime: Joi.number().optional(),
   description: Joi.string().optional(),
   recipe: Joi.array().items(Joi.string().optional()).optional(),
+
 });
 
 export const deleteProductSchema = Joi.object({

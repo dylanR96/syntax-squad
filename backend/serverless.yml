@@ -178,6 +178,12 @@ functions:
       - httpApi:
           path: /orderStatus
           method: PUT
+  getOrderByUserID:
+    handler: src/handlers/orderHandler.getOrderByUserID
+    events:
+      - httpApi:
+          path: /myOrders
+          method: GET
   getOrder:
     handler: src/handlers/orderHandler.getOrder
     events:
@@ -259,7 +265,17 @@ resources:
         AttributeDefinitions:
           - AttributeName: orderNO
             AttributeType: N
+          - AttributeName: userID
+            AttributeType: S
         KeySchema:
           - AttributeName: orderNO
             KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: UserIDIndex
+            KeySchema:
+              - AttributeName: userID
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
+

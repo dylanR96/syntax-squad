@@ -1,0 +1,4424 @@
+{
+  "service": {
+    "service": "syntax-squad",
+    "serviceObject": {
+      "name": "syntax-squad"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "eu-north-1",
+      "httpApi": {
+        "cors": true
+      },
+      "iam": {
+        "role": {
+          "statements": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:GetItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:BatchGetItem"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      },
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "CreateAdminLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-createAdmin"
+            }
+          },
+          "LoginAdminLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-loginAdmin"
+            }
+          },
+          "GetAdminLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getAdmin"
+            }
+          },
+          "ChangeEmailAdminLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-changeEmailAdmin"
+            }
+          },
+          "DeleteAdminLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteAdmin"
+            }
+          },
+          "CreateCustomerLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-createCustomer"
+            }
+          },
+          "LoginCustomerLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-loginCustomer"
+            }
+          },
+          "GetCustomersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomers"
+            }
+          },
+          "GetCustomerLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getCustomer"
+            }
+          },
+          "EditCustomerLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-editCustomer"
+            }
+          },
+          "DeleteCustomerLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteCustomer"
+            }
+          },
+          "AddIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-addIngredient"
+            }
+          },
+          "DeleteIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteIngredient"
+            }
+          },
+          "EditIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-editIngredient"
+            }
+          },
+          "GetIngredientsByIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getIngredientsById"
+            }
+          },
+          "GetAllIngredientsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllIngredients"
+            }
+          },
+          "GetAllProductsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllProducts"
+            }
+          },
+          "GetProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getProduct"
+            }
+          },
+          "CreateProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-createProduct"
+            }
+          },
+          "EditProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-editProduct"
+            }
+          },
+          "DeleteProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteProduct"
+            }
+          },
+          "CreateOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-createOrder"
+            }
+          },
+          "ChangeOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-changeOrder"
+            }
+          },
+          "DeleteOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-deleteOrder"
+            }
+          },
+          "ChangeOrderStatusLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-changeOrderStatus"
+            }
+          },
+          "GetOrderByUserIDLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getOrderByUserID"
+            }
+          },
+          "GetOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getOrder"
+            }
+          },
+          "GetAllOrdersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/syntax-squad-dev-getAllOrders"
+            }
+          },
+          "IamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "syntax-squad",
+                        "dev",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup",
+                          "logs:TagResource"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/syntax-squad-dev*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/syntax-squad-dev*:*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iam\"][\"role\"][\"statements\"][0]"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "syntax-squad",
+                    "dev",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              }
+            }
+          },
+          "CreateAdminLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/adminHandler.createAdmin",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-createAdmin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateAdminLogGroup"
+            ]
+          },
+          "LoginAdminLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/adminHandler.loginAdmin",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-loginAdmin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "LoginAdminLogGroup"
+            ]
+          },
+          "GetAdminLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/adminHandler.getAdmin",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getAdmin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAdminLogGroup"
+            ]
+          },
+          "ChangeEmailAdminLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/adminHandler.changeEmail",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-changeEmailAdmin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ChangeEmailAdminLogGroup"
+            ]
+          },
+          "DeleteAdminLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/adminHandler.deleteAdmin",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-deleteAdmin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteAdminLogGroup"
+            ]
+          },
+          "CreateCustomerLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.createCustomer",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-createCustomer",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateCustomerLogGroup"
+            ]
+          },
+          "LoginCustomerLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.loginCustomer",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-loginCustomer",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "LoginCustomerLogGroup"
+            ]
+          },
+          "GetCustomersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.getCustomers",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getCustomers",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetCustomersLogGroup"
+            ]
+          },
+          "GetCustomerLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.getCustomer",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getCustomer",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetCustomerLogGroup"
+            ]
+          },
+          "EditCustomerLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.editCustomer",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-editCustomer",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditCustomerLogGroup"
+            ]
+          },
+          "DeleteCustomerLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/customerHandler.deleteCustomer",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-deleteCustomer",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteCustomerLogGroup"
+            ]
+          },
+          "AddIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/ingredientHandler.addIngredient",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-addIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "AddIngredientLogGroup"
+            ]
+          },
+          "DeleteIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/ingredientHandler.deleteIngredient",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-deleteIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteIngredientLogGroup"
+            ]
+          },
+          "EditIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/ingredientHandler.editIngredient",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-editIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditIngredientLogGroup"
+            ]
+          },
+          "GetIngredientsByIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/ingredientHandler.getIngredientsByIds",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getIngredientsById",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetIngredientsByIdLogGroup"
+            ]
+          },
+          "GetAllIngredientsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/ingredientHandler.getAllIngredients",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getAllIngredients",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAllIngredientsLogGroup"
+            ]
+          },
+          "GetAllProductsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/productHandler.getAllProducts",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getAllProducts",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAllProductsLogGroup"
+            ]
+          },
+          "GetProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/productHandler.getProduct",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetProductLogGroup"
+            ]
+          },
+          "CreateProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/productHandler.createProduct",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-createProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateProductLogGroup"
+            ]
+          },
+          "EditProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/productHandler.editProduct",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-editProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "EditProductLogGroup"
+            ]
+          },
+          "DeleteProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/productHandler.deleteProduct",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-deleteProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteProductLogGroup"
+            ]
+          },
+          "CreateOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.createOrder",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-createOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateOrderLogGroup"
+            ]
+          },
+          "ChangeOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.changeOrder",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-changeOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ChangeOrderLogGroup"
+            ]
+          },
+          "DeleteOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.deleteOrder",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-deleteOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteOrderLogGroup"
+            ]
+          },
+          "ChangeOrderStatusLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.changeOrderStatus",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-changeOrderStatus",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ChangeOrderStatusLogGroup"
+            ]
+          },
+          "GetOrderByUserIDLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.getOrderByUserID",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getOrderByUserID",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetOrderByUserIDLogGroup"
+            ]
+          },
+          "GetOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.getOrder",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetOrderLogGroup"
+            ]
+          },
+          "GetAllOrdersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+                "S3Key": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z/syntax-squad.zip"
+              },
+              "Handler": "src/handlers/orderHandler.getAllOrders",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "syntax-squad-dev-getAllOrders",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetAllOrdersLogGroup"
+            ]
+          },
+          "CreateAdminLambdaVersion9CZmoMf4UgTRoGgEk7Rl9PERlo9bAS7w0mFEN86KY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateAdminLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "LoginAdminLambdaVersionhkX4fCQOAosPifo4mgzwMHYmKJB5E75tps84juuTDE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LoginAdminLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetAdminLambdaVersionuYLjXyCwCEGLenEOO3aqD1GQEaIxiPTWugKukzw0A": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAdminLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "ChangeEmailAdminLambdaVersionEX47h3XSrfX0ybsNFS6mT6E5gaAT8hZIxN4RAetUI": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ChangeEmailAdminLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "DeleteAdminLambdaVersiontYcdO8oyEQCAsDZOA7l6xS4h7arPtprVwk11wmQR9E": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteAdminLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "CreateCustomerLambdaVersionPUYmccBZj36YEPZWsU3421OAZCrDIOLDstKkqhoI": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateCustomerLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "LoginCustomerLambdaVersionJlEU63id5G8FPM9HeHL1LYAy53fcnKpBZegUFEbh42U": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LoginCustomerLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetCustomersLambdaVersion7JXAOEJ7hJTwTf7nBfhKw60eiGl1r9ZaG7ZeZYPmvkk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCustomersLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetCustomerLambdaVersionqplt3tAVXnwdJAbwMaYJ2jN1BBd7Oeleuhkwy3UbU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCustomerLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "EditCustomerLambdaVersion9Cfrlu3P65Ev07FT7OYLBGm8mHLpcD6WP2E5DttBBQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditCustomerLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "DeleteCustomerLambdaVersionf0NUBJjHPog4ykJwUvSD2tIcp3FOYhM1KYbFQ9Flafg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteCustomerLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "AddIngredientLambdaVersionedyE2ioPMf4rCtVqezKgKrCVAfsxquUJjW75ahc5F4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AddIngredientLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "DeleteIngredientLambdaVersionBrS9vAXa0UtlLO5Me4NO1YX8CgoXDzfoeQy2iRUIqwk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteIngredientLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "EditIngredientLambdaVersionB2XUcic6lpqB4XLtWVKWZSmuMiLGFTBfDmtejEvo": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditIngredientLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetIngredientsByIdLambdaVersiongmNbbRYBzptXuhUfpmgfBmSjip6BhEJaaHP8mLS3RY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetIngredientsByIdLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetAllIngredientsLambdaVersioniTv5miFTeC9xTiApvhvqTD9nj5vKu3Q5ksYpZbNUg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllIngredientsLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetAllProductsLambdaVersionKRqggSGYslZEAXSJhIIASOFBDwnUAz5BR8dXrKVryg": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllProductsLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetProductLambdaVersionMEPhdyndtI9azcrv2iugIpJSKCfAvnJGunyBSifbr4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetProductLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "CreateProductLambdaVersionVICIFuRnOSARq1hO3AaDVfIWEumcNL2zyuiXV5ATQGQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateProductLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "EditProductLambdaVersionhZ2FNCrvBGqufOTbo1V8evoO9JRGVQ8Kd8b83wJss": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditProductLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "DeleteProductLambdaVersione3kHbh6ilAKqm0wdiPoUaWMdGnlsXXVrQZiYKYhKY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteProductLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "CreateOrderLambdaVersionht15D8ZDctGDDt3zaOLlchtNw2wrZUh8qgS7dvlzbU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateOrderLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "ChangeOrderLambdaVersionW1hAv8xH1sFQ8Iv3VTgyEDjOo5WwNfA72QysMygvmM0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ChangeOrderLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "DeleteOrderLambdaVersionjQjknZYZ9yG7Fc0fOo6qzuLB2LWCVrEXNiSQ40MK8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteOrderLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "ChangeOrderStatusLambdaVersion0y4g9U2IUx0bVFrVSb9zuRi5riJyjEs27j2iMic18s": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ChangeOrderStatusLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetOrderByUserIDLambdaVersionNdEIs56WskbnRLNMEYKJT8HE8hUd0MR96k5DPQq4c": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetOrderByUserIDLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetOrderLambdaVersionuHmV5Q1YnyXaqd9oTnZCFVw9BmXKAuUmba7ahH2vc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetOrderLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "GetAllOrdersLambdaVersionpn5RQI3R3OBznI2IzWk5DJyDWIoBzerwgb41WfzHc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllOrdersLambdaFunction"
+              },
+              "CodeSha256": "t6VrxsP9S/UbzGPk0iJpu/yPPPODl9o17Bf4+0S1Wkw="
+            }
+          },
+          "HttpApi": {
+            "Type": "AWS::ApiGatewayV2::Api",
+            "Properties": {
+              "Name": "dev-syntax-squad",
+              "ProtocolType": "HTTP",
+              "CorsConfiguration": {
+                "AllowHeaders": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "AllowMethods": [
+                  "OPTIONS",
+                  "POST",
+                  "GET",
+                  "PUT",
+                  "DELETE"
+                ],
+                "AllowOrigins": [
+                  "*"
+                ]
+              }
+            }
+          },
+          "HttpApiStage": {
+            "Type": "AWS::ApiGatewayV2::Stage",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "StageName": "$default",
+              "AutoDeploy": true,
+              "DefaultRouteSettings": {
+                "DetailedMetricsEnabled": false
+              }
+            }
+          },
+          "CreateAdminLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateAdminLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateAdmin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateAdminLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostAdmin": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /admin",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateAdmin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateAdmin"
+          },
+          "LoginAdminLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "LoginAdminLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationLoginAdmin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"LoginAdminLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostAdminLogin": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /admin/login",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationLoginAdmin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationLoginAdmin"
+          },
+          "GetAdminLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAdminLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAdmin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAdminLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetAdminAdminidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /admin/{adminID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAdmin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAdmin"
+          },
+          "ChangeEmailAdminLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ChangeEmailAdminLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationChangeEmailAdmin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ChangeEmailAdminLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutAdmin": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /admin",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationChangeEmailAdmin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationChangeEmailAdmin"
+          },
+          "DeleteAdminLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteAdminLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteAdmin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteAdminLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteAdminAdminidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /admin/{adminID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteAdmin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteAdmin"
+          },
+          "CreateCustomerLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateCustomer": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateCustomerLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostCustomer": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /customer",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateCustomer"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateCustomer"
+          },
+          "LoginCustomerLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "LoginCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationLoginCustomer": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"LoginCustomerLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostCustomerLogin": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /customer/login",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationLoginCustomer"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationLoginCustomer"
+          },
+          "GetCustomersLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetCustomersLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetCustomers": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetCustomersLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetCustomers": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /customers",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetCustomers"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetCustomers"
+          },
+          "GetCustomerLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetCustomer": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetCustomerLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetCustomerCustomeridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /customer/{customerID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetCustomer"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetCustomer"
+          },
+          "EditCustomerLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationEditCustomer": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"EditCustomerLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutCustomer": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /customer",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationEditCustomer"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationEditCustomer"
+          },
+          "DeleteCustomerLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteCustomerLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteCustomer": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteCustomerLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteCustomerCustomeridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /customer/{customerID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteCustomer"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteCustomer"
+          },
+          "AddIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "AddIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationAddIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"AddIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostIngredient": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /ingredient",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationAddIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationAddIngredient"
+          },
+          "DeleteIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteIngredient": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /ingredient",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteIngredient"
+          },
+          "EditIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationEditIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"EditIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutIngredient": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /ingredient",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationEditIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationEditIngredient"
+          },
+          "GetIngredientsByIdLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetIngredientsByIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetIngredientsById": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetIngredientsByIdLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostIngredientsbyid": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /ingredientsById",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetIngredientsById"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetIngredientsById"
+          },
+          "GetAllIngredientsLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllIngredientsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAllIngredients": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAllIngredientsLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetIngredients": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /ingredients",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAllIngredients"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAllIngredients"
+          },
+          "GetAllProductsLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllProductsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAllProducts": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAllProductsLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetProducts": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /products",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAllProducts"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAllProducts"
+          },
+          "GetProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetProductProductidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /product/{productID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetProduct"
+          },
+          "CreateProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostProduct": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /product",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateProduct"
+          },
+          "EditProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationEditProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"EditProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutProduct": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /product",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationEditProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationEditProduct"
+          },
+          "DeleteProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteProductProductidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /product/{productID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteProduct"
+          },
+          "CreateOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostOrder": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /order",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateOrder"
+          },
+          "ChangeOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ChangeOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationChangeOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ChangeOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutOrder": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /order",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationChangeOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationChangeOrder"
+          },
+          "DeleteOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteOrderOrdernoVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /order/{orderNO}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteOrder"
+          },
+          "ChangeOrderStatusLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ChangeOrderStatusLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationChangeOrderStatus": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ChangeOrderStatusLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutOrderstatus": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /orderStatus",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationChangeOrderStatus"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationChangeOrderStatus"
+          },
+          "GetOrderByUserIDLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetOrderByUserIDLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetOrderByUserID": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetOrderByUserIDLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetMyorders": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /myOrders",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetOrderByUserID"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetOrderByUserID"
+          },
+          "GetOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetOrderOrdernoVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /order/{orderNO}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetOrder"
+          },
+          "GetAllOrdersLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllOrdersLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAllOrders": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAllOrdersLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetOrders": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /orders",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAllOrders"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAllOrders"
+          },
+          "AdminTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_admins",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "adminID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "adminID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "CustomerTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_customers",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "customerID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "customerID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "InfoTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_info",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "shopID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "shopID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "ProductsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_products",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "productID",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "productID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "IngredientsTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_ingredients",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "ingredientID",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "ingredientID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          },
+          "OrdersTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "easybake_orders",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "orderNO",
+                  "AttributeType": "N"
+                },
+                {
+                  "AttributeName": "userID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "orderNO",
+                  "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "UserIDIndex",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "userID",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-eu-north-1-43ca28f0-d653",
+            "Export": {
+              "Name": "sls-syntax-squad-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "CreateAdminLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateAdminLambdaVersion9CZmoMf4UgTRoGgEk7Rl9PERlo9bAS7w0mFEN86KY"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-CreateAdminLambdaFunctionQualifiedArn"
+            }
+          },
+          "LoginAdminLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "LoginAdminLambdaVersionhkX4fCQOAosPifo4mgzwMHYmKJB5E75tps84juuTDE"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-LoginAdminLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAdminLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAdminLambdaVersionuYLjXyCwCEGLenEOO3aqD1GQEaIxiPTWugKukzw0A"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetAdminLambdaFunctionQualifiedArn"
+            }
+          },
+          "ChangeEmailAdminLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ChangeEmailAdminLambdaVersionEX47h3XSrfX0ybsNFS6mT6E5gaAT8hZIxN4RAetUI"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-ChangeEmailAdminLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteAdminLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteAdminLambdaVersiontYcdO8oyEQCAsDZOA7l6xS4h7arPtprVwk11wmQR9E"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-DeleteAdminLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateCustomerLambdaVersionPUYmccBZj36YEPZWsU3421OAZCrDIOLDstKkqhoI"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-CreateCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "LoginCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "LoginCustomerLambdaVersionJlEU63id5G8FPM9HeHL1LYAy53fcnKpBZegUFEbh42U"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-LoginCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetCustomersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCustomersLambdaVersion7JXAOEJ7hJTwTf7nBfhKw60eiGl1r9ZaG7ZeZYPmvkk"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetCustomersLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCustomerLambdaVersionqplt3tAVXnwdJAbwMaYJ2jN1BBd7Oeleuhkwy3UbU"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditCustomerLambdaVersion9Cfrlu3P65Ev07FT7OYLBGm8mHLpcD6WP2E5DttBBQ"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-EditCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteCustomerLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteCustomerLambdaVersionf0NUBJjHPog4ykJwUvSD2tIcp3FOYhM1KYbFQ9Flafg"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-DeleteCustomerLambdaFunctionQualifiedArn"
+            }
+          },
+          "AddIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AddIngredientLambdaVersionedyE2ioPMf4rCtVqezKgKrCVAfsxquUJjW75ahc5F4"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-AddIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteIngredientLambdaVersionBrS9vAXa0UtlLO5Me4NO1YX8CgoXDzfoeQy2iRUIqwk"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-DeleteIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditIngredientLambdaVersionB2XUcic6lpqB4XLtWVKWZSmuMiLGFTBfDmtejEvo"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-EditIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetIngredientsByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetIngredientsByIdLambdaVersiongmNbbRYBzptXuhUfpmgfBmSjip6BhEJaaHP8mLS3RY"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetIngredientsByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllIngredientsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllIngredientsLambdaVersioniTv5miFTeC9xTiApvhvqTD9nj5vKu3Q5ksYpZbNUg"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllProductsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllProductsLambdaVersionKRqggSGYslZEAXSJhIIASOFBDwnUAz5BR8dXrKVryg"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetAllProductsLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetProductLambdaVersionMEPhdyndtI9azcrv2iugIpJSKCfAvnJGunyBSifbr4"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateProductLambdaVersionVICIFuRnOSARq1hO3AaDVfIWEumcNL2zyuiXV5ATQGQ"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-CreateProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditProductLambdaVersionhZ2FNCrvBGqufOTbo1V8evoO9JRGVQ8Kd8b83wJss"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-EditProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteProductLambdaVersione3kHbh6ilAKqm0wdiPoUaWMdGnlsXXVrQZiYKYhKY"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-DeleteProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateOrderLambdaVersionht15D8ZDctGDDt3zaOLlchtNw2wrZUh8qgS7dvlzbU"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-CreateOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "ChangeOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ChangeOrderLambdaVersionW1hAv8xH1sFQ8Iv3VTgyEDjOo5WwNfA72QysMygvmM0"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-ChangeOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteOrderLambdaVersionjQjknZYZ9yG7Fc0fOo6qzuLB2LWCVrEXNiSQ40MK8"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-DeleteOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "ChangeOrderStatusLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ChangeOrderStatusLambdaVersion0y4g9U2IUx0bVFrVSb9zuRi5riJyjEs27j2iMic18s"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-ChangeOrderStatusLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetOrderByUserIDLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetOrderByUserIDLambdaVersionNdEIs56WskbnRLNMEYKJT8HE8hUd0MR96k5DPQq4c"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetOrderByUserIDLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetOrderLambdaVersionuHmV5Q1YnyXaqd9oTnZCFVw9BmXKAuUmba7ahH2vc"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllOrdersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllOrdersLambdaVersionpn5RQI3R3OBznI2IzWk5DJyDWIoBzerwgb41WfzHc"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-GetAllOrdersLambdaFunctionQualifiedArn"
+            }
+          },
+          "HttpApiId": {
+            "Description": "Id of the HTTP API",
+            "Value": {
+              "Ref": "HttpApi"
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-HttpApiId"
+            }
+          },
+          "HttpApiUrl": {
+            "Description": "URL of the HTTP API",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "HttpApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  }
+                ]
+              ]
+            },
+            "Export": {
+              "Name": "sls-syntax-squad-dev-HttpApiUrl"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "pluginsData": {},
+    "functions": {
+      "createAdmin": {
+        "handler": "src/handlers/adminHandler.createAdmin",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/admin",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/admin"
+          }
+        ],
+        "name": "syntax-squad-dev-createAdmin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "CreateAdminLambdaVersion9CZmoMf4UgTRoGgEk7Rl9PERlo9bAS7w0mFEN86KY"
+      },
+      "loginAdmin": {
+        "handler": "src/handlers/adminHandler.loginAdmin",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/admin/login",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/admin/login"
+          }
+        ],
+        "name": "syntax-squad-dev-loginAdmin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "LoginAdminLambdaVersionhkX4fCQOAosPifo4mgzwMHYmKJB5E75tps84juuTDE"
+      },
+      "getAdmin": {
+        "handler": "src/handlers/adminHandler.getAdmin",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/admin/{adminID}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/admin/{adminID}"
+          }
+        ],
+        "name": "syntax-squad-dev-getAdmin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetAdminLambdaVersionuYLjXyCwCEGLenEOO3aqD1GQEaIxiPTWugKukzw0A"
+      },
+      "changeEmailAdmin": {
+        "handler": "src/handlers/adminHandler.changeEmail",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/admin",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/admin"
+          }
+        ],
+        "name": "syntax-squad-dev-changeEmailAdmin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "ChangeEmailAdminLambdaVersionEX47h3XSrfX0ybsNFS6mT6E5gaAT8hZIxN4RAetUI"
+      },
+      "deleteAdmin": {
+        "handler": "src/handlers/adminHandler.deleteAdmin",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/admin/{adminID}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/admin/{adminID}"
+          }
+        ],
+        "name": "syntax-squad-dev-deleteAdmin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteAdminLambdaVersiontYcdO8oyEQCAsDZOA7l6xS4h7arPtprVwk11wmQR9E"
+      },
+      "createCustomer": {
+        "handler": "src/handlers/customerHandler.createCustomer",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customer",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/customer"
+          }
+        ],
+        "name": "syntax-squad-dev-createCustomer",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "CreateCustomerLambdaVersionPUYmccBZj36YEPZWsU3421OAZCrDIOLDstKkqhoI"
+      },
+      "loginCustomer": {
+        "handler": "src/handlers/customerHandler.loginCustomer",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customer/login",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/customer/login"
+          }
+        ],
+        "name": "syntax-squad-dev-loginCustomer",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "LoginCustomerLambdaVersionJlEU63id5G8FPM9HeHL1LYAy53fcnKpBZegUFEbh42U"
+      },
+      "getCustomers": {
+        "handler": "src/handlers/customerHandler.getCustomers",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customers",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/customers"
+          }
+        ],
+        "name": "syntax-squad-dev-getCustomers",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetCustomersLambdaVersion7JXAOEJ7hJTwTf7nBfhKw60eiGl1r9ZaG7ZeZYPmvkk"
+      },
+      "getCustomer": {
+        "handler": "src/handlers/customerHandler.getCustomer",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customer/{customerID}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/customer/{customerID}"
+          }
+        ],
+        "name": "syntax-squad-dev-getCustomer",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetCustomerLambdaVersionqplt3tAVXnwdJAbwMaYJ2jN1BBd7Oeleuhkwy3UbU"
+      },
+      "editCustomer": {
+        "handler": "src/handlers/customerHandler.editCustomer",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customer",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/customer"
+          }
+        ],
+        "name": "syntax-squad-dev-editCustomer",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "EditCustomerLambdaVersion9Cfrlu3P65Ev07FT7OYLBGm8mHLpcD6WP2E5DttBBQ"
+      },
+      "deleteCustomer": {
+        "handler": "src/handlers/customerHandler.deleteCustomer",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/customer/{customerID}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/customer/{customerID}"
+          }
+        ],
+        "name": "syntax-squad-dev-deleteCustomer",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteCustomerLambdaVersionf0NUBJjHPog4ykJwUvSD2tIcp3FOYhM1KYbFQ9Flafg"
+      },
+      "addIngredient": {
+        "handler": "src/handlers/ingredientHandler.addIngredient",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/ingredient",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/ingredient"
+          }
+        ],
+        "name": "syntax-squad-dev-addIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "AddIngredientLambdaVersionedyE2ioPMf4rCtVqezKgKrCVAfsxquUJjW75ahc5F4"
+      },
+      "deleteIngredient": {
+        "handler": "src/handlers/ingredientHandler.deleteIngredient",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/ingredient",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/ingredient"
+          }
+        ],
+        "name": "syntax-squad-dev-deleteIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteIngredientLambdaVersionBrS9vAXa0UtlLO5Me4NO1YX8CgoXDzfoeQy2iRUIqwk"
+      },
+      "editIngredient": {
+        "handler": "src/handlers/ingredientHandler.editIngredient",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/ingredient",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/ingredient"
+          }
+        ],
+        "name": "syntax-squad-dev-editIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "EditIngredientLambdaVersionB2XUcic6lpqB4XLtWVKWZSmuMiLGFTBfDmtejEvo"
+      },
+      "getIngredientsById": {
+        "handler": "src/handlers/ingredientHandler.getIngredientsByIds",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/ingredientsById",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/ingredientsById"
+          }
+        ],
+        "name": "syntax-squad-dev-getIngredientsById",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetIngredientsByIdLambdaVersiongmNbbRYBzptXuhUfpmgfBmSjip6BhEJaaHP8mLS3RY"
+      },
+      "getAllIngredients": {
+        "handler": "src/handlers/ingredientHandler.getAllIngredients",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/ingredients",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/ingredients"
+          }
+        ],
+        "name": "syntax-squad-dev-getAllIngredients",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllIngredientsLambdaVersioniTv5miFTeC9xTiApvhvqTD9nj5vKu3Q5ksYpZbNUg"
+      },
+      "getAllProducts": {
+        "handler": "src/handlers/productHandler.getAllProducts",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/products",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/products"
+          }
+        ],
+        "name": "syntax-squad-dev-getAllProducts",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllProductsLambdaVersionKRqggSGYslZEAXSJhIIASOFBDwnUAz5BR8dXrKVryg"
+      },
+      "getProduct": {
+        "handler": "src/handlers/productHandler.getProduct",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/product/{productID}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/product/{productID}"
+          }
+        ],
+        "name": "syntax-squad-dev-getProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetProductLambdaVersionMEPhdyndtI9azcrv2iugIpJSKCfAvnJGunyBSifbr4"
+      },
+      "createProduct": {
+        "handler": "src/handlers/productHandler.createProduct",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/product",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/product"
+          }
+        ],
+        "name": "syntax-squad-dev-createProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "CreateProductLambdaVersionVICIFuRnOSARq1hO3AaDVfIWEumcNL2zyuiXV5ATQGQ"
+      },
+      "editProduct": {
+        "handler": "src/handlers/productHandler.editProduct",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/product",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/product"
+          }
+        ],
+        "name": "syntax-squad-dev-editProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "EditProductLambdaVersionhZ2FNCrvBGqufOTbo1V8evoO9JRGVQ8Kd8b83wJss"
+      },
+      "deleteProduct": {
+        "handler": "src/handlers/productHandler.deleteProduct",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/product/{productID}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/product/{productID}"
+          }
+        ],
+        "name": "syntax-squad-dev-deleteProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteProductLambdaVersione3kHbh6ilAKqm0wdiPoUaWMdGnlsXXVrQZiYKYhKY"
+      },
+      "createOrder": {
+        "handler": "src/handlers/orderHandler.createOrder",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/order",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/order"
+          }
+        ],
+        "name": "syntax-squad-dev-createOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "CreateOrderLambdaVersionht15D8ZDctGDDt3zaOLlchtNw2wrZUh8qgS7dvlzbU"
+      },
+      "changeOrder": {
+        "handler": "src/handlers/orderHandler.changeOrder",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/order",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/order"
+          }
+        ],
+        "name": "syntax-squad-dev-changeOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "ChangeOrderLambdaVersionW1hAv8xH1sFQ8Iv3VTgyEDjOo5WwNfA72QysMygvmM0"
+      },
+      "deleteOrder": {
+        "handler": "src/handlers/orderHandler.deleteOrder",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/order/{orderNO}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/order/{orderNO}"
+          }
+        ],
+        "name": "syntax-squad-dev-deleteOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteOrderLambdaVersionjQjknZYZ9yG7Fc0fOo6qzuLB2LWCVrEXNiSQ40MK8"
+      },
+      "changeOrderStatus": {
+        "handler": "src/handlers/orderHandler.changeOrderStatus",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/orderStatus",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/orderStatus"
+          }
+        ],
+        "name": "syntax-squad-dev-changeOrderStatus",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "ChangeOrderStatusLambdaVersion0y4g9U2IUx0bVFrVSb9zuRi5riJyjEs27j2iMic18s"
+      },
+      "getOrderByUserID": {
+        "handler": "src/handlers/orderHandler.getOrderByUserID",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/myOrders",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/myOrders"
+          }
+        ],
+        "name": "syntax-squad-dev-getOrderByUserID",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetOrderByUserIDLambdaVersionNdEIs56WskbnRLNMEYKJT8HE8hUd0MR96k5DPQq4c"
+      },
+      "getOrder": {
+        "handler": "src/handlers/orderHandler.getOrder",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/order/{orderNO}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/order/{orderNO}"
+          }
+        ],
+        "name": "syntax-squad-dev-getOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetOrderLambdaVersionuHmV5Q1YnyXaqd9oTnZCFVw9BmXKAuUmba7ahH2vc"
+      },
+      "getAllOrders": {
+        "handler": "src/handlers/orderHandler.getAllOrders",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/orders",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/orders"
+          }
+        ],
+        "name": "syntax-squad-dev-getAllOrders",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllOrdersLambdaVersionpn5RQI3R3OBznI2IzWk5DJyDWIoBzerwgb41WfzHc"
+      }
+    },
+    "resources": {
+      "Resources": {
+        "AdminTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_admins",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "adminID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "adminID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        },
+        "CustomerTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_customers",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "customerID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "customerID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        },
+        "InfoTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_info",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "shopID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "shopID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        },
+        "ProductsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_products",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "productID",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "productID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        },
+        "IngredientsTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_ingredients",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "ingredientID",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "ingredientID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        },
+        "OrdersTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "easybake_orders",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "orderNO",
+                "AttributeType": "N"
+              },
+              {
+                "AttributeName": "userID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "orderNO",
+                "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "UserIDIndex",
+                "KeySchema": [
+                  {
+                    "AttributeName": "userID",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
+          }
+        }
+      },
+      "Outputs": {}
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless.yml",
+    "initialServerlessConfig": {
+      "org": "fedandreas",
+      "service": "syntax-squad",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
+      }
+    },
+    "appId": null,
+    "org": "fedandreas",
+    "orgId": null,
+    "layers": {},
+    "artifact": "E:\\Skola\\TypeScript\\syntax-squad\\backend\\.serverless\\syntax-squad.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/syntax-squad/dev/1733478188981-2024-12-06T09:43:08.981Z",
+    "artifact": "syntax-squad.zip"
+  }
+}
