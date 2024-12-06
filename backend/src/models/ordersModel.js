@@ -77,6 +77,21 @@ export const orderModel = {
     const data = await db.delete(params);
     return data;
   },
+
+  getOrderByUserID: async (userID) => {
+    const params = {
+      TableName: ORDERS_TABLE,
+      IndexName: "UserIDIndex",
+      KeyConditionExpression: "userID = :userID",
+      ExpressionAttributeValues: {
+        ":userID": userID,
+      },
+    };
+
+    const data = await db.query(params);
+    return data.Items;
+  },
+
   changeOrderStatus: async (orderData) => {
     const params = {
       TableName: ORDERS_TABLE,
@@ -102,6 +117,7 @@ export const orderModel = {
     const data = db.update(params);
     return data;
   },
+
   getOrder: async (orderNO) => {
     const params = {
       TableName: ORDERS_TABLE,

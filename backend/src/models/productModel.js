@@ -16,7 +16,7 @@ export const productModel = {
         image: productData.image,
         bakingTime: productData.bakingTime,
         description: productData.description,
-        receipe: productData.receipe,
+        recipe: productData.recipe,
         createdAt: new Date().toISOString(),      
       },
     };
@@ -53,8 +53,7 @@ export const productModel = {
         image = :image,
         bakingTime = :bakingTime,
         description = :description,
-        receipe = :receipe`,
-
+        recipe = :recipe`,
 
       ExpressionAttributeValues: {
         ":productName": productData.productName,
@@ -65,8 +64,7 @@ export const productModel = {
         ":image": productData.image,
         ":bakingTime": productData.bakingTime,
         ":description": productData.description,
-        ":receipe": productData.receipe,
-
+        ":recipe": productData.recipe,
       },
       ReturnValues: "ALL_NEW", // Return the updated item
     };

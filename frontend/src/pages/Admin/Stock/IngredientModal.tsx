@@ -42,6 +42,34 @@ const StockModal: React.FC<Ingredient> = ({
     console.log(data);
   };
   console.log(editIngredient);
+  const deleteIngredient = async () => {
+    const ENDPOINT_DELETE_INGREDIENT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient`;
+    try {
+      const ingredientID = editIngredient.ingredientID;
+      const response: Response = await toast.promise(
+        fetch(ENDPOINT_DELETE_INGREDIENT, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ingredientID }),
+        }),
+        {
+          pending: "Tar bort ingrediens",
+          success: "Ingrediens borttagen",
+          error: "Can not connect to API",
+        },
+        { hideProgressBar: true }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      await response.json();
+      setEditIngredient(null);
+    } catch (error) {
+      console.error("Failed", error);
+    }
+  };
   return (
     <section className="stock-modal">
       <article className="stock-modal__ingredient">
@@ -89,6 +117,16 @@ const StockModal: React.FC<Ingredient> = ({
             onClick={updateIngredient}
           >
             Spara
+          </button>
+          <button
+            className="recipe__button stock-modal__button button--warning"
+            onClick={() => {
+              if (confirm("Vill du ta bort ingrediensen?")) {
+                deleteIngredient();
+              }
+            }}
+          >
+            Ta bort
           </button>
           <button
             className="recipe__button stock-modal__button"

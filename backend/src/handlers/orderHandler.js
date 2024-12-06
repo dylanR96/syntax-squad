@@ -10,6 +10,7 @@ import {
   getOrderSchema,
 } from "../validations/orderValidations.js";
 import { verifyToken } from "../utils/verifyToken.js";
+import { authorizeCustomer } from "../middlewares/authMiddleware.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
@@ -56,6 +57,14 @@ export const getOrder = async (event) => {
     const { orderNO } = event.pathParameters;
     const value = validateRequest(getOrderSchema, { orderNO });
     const data = await OrderService.getOrder(parseInt(value.orderNO));
+    return sendResponse(200, data);
+  });
+};
+
+export const getOrderByUserID = async (event) => {
+  return tryCatchWrapper(async () => {
+    const user = await authorizeCustomer(event);
+    const data = await OrderService.getOrderByUserID(user.id);
     return sendResponse(200, data);
   });
 };
