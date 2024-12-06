@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Orders.css";
 
 interface FormData {
@@ -11,22 +11,47 @@ interface FormData {
 const Orders = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormData>({
-    address: 'Väggatan 45',
-    postalCode: '859 95',
-    phone: '07074554846',
-    comment: 'Ingen ost',
+    address: "Väggatan 45",
+    postalCode: "859 95",
+    phone: "07074554846",
+    comment: "Ingen ost",
   });
 
-  const [status, setStatus] = useState<string>('obekräftad');
+  const [status, setStatus] = useState<string>("pending");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    setStatus(e.target.value);
-    console.log('Uppdaterad status:', status);
+  const handleStatusChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): Promise<void> => {
+    const newStatus = e.target.value;
+    setStatus(newStatus);
+
+    try {
+      //vet inte endpointen, vet inte hur ordern ser ut, vet inte om detta funkar
+      const response = await fetch(
+        "https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/order",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: newStatus }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Status updated on backend:", data);
+    } catch (error) {
+      console.error("Failed to update status on backend:", error);
+    }
   };
 
   const handleEditToggle = (): void => {
@@ -34,7 +59,7 @@ const Orders = () => {
   };
 
   const handleSubmit = (): void => {
-    console.log('Uppdaterad data:', formData);
+    console.log("Uppdaterad data:", formData);
     setIsEditing(false);
   };
 
@@ -56,48 +81,37 @@ const Orders = () => {
         </section>
         <section className="orders__all-orders-container">
           <article className="orders__card-container">
-
             {/* Ordernummer */}
 
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Ordernummer
-              </h6>
-                <p className="h5--dark">5464351458434</p>
+              <h6 className="h6--dark">Ordernummer</h6>
+              <p className="h5--dark">5464351458434</p>
             </article>
-            
+
             {/* Pris */}
 
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Pris
-              </h6>
-                <p className="h5--dark">60 kr</p>
+              <h6 className="h6--dark">Pris</h6>
+              <p className="h5--dark">60 kr</p>
             </article>
-            
+
             {/* Datum */}
 
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Datum
-              </h6>
-                <p className="h5--dark">2024-11-18, 12:13</p>
+              <h6 className="h6--dark">Datum</h6>
+              <p className="h5--dark">2024-11-18, 12:13</p>
             </article>
-            
+
             {/* Recept */}
 
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Recept
-              </h6>
-                <p className="h5--dark">Kladdkakor, Hallongrottor</p>
+              <h6 className="h6--dark">Recept</h6>
+              <p className="h5--dark">Kladdkakor, Hallongrottor</p>
             </article>
-           
+
             {/* Adress */}
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Adress
-              </h6>
+              <h6 className="h6--dark">Adress</h6>
               {isEditing ? (
                 <input
                   type="text"
@@ -111,9 +125,7 @@ const Orders = () => {
             </article>
             {/* Postnummer */}
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Postnummer
-              </h6>
+              <h6 className="h6--dark">Postnummer</h6>
               {isEditing ? (
                 <input
                   type="text"
@@ -127,9 +139,7 @@ const Orders = () => {
             </article>
             {/* Telefon nummer */}
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Telefon nummer
-              </h6>
+              <h6 className="h6--dark">Telefon nummer</h6>
               {isEditing ? (
                 <input
                   type="text"
@@ -143,9 +153,7 @@ const Orders = () => {
             </article>
             {/* Kommentar */}
             <article className="card-detail-info">
-              <h6 className="h6--dark">
-                Kommentar
-              </h6>
+              <h6 className="h6--dark">Kommentar</h6>
               {isEditing ? (
                 <input
                   type="text"
@@ -164,16 +172,17 @@ const Orders = () => {
                 name="status"
                 value={status}
                 onChange={handleStatusChange}
-                className={`orders__status-select ${status === 'obekräftad' 
-                ? 'obekräftad'
-                : status === 'bekräftad'
-                ? 'bekräftad'
-                : 'klar'
-                }`} 
+                className={`orders__status-select ${
+                  status === "pending"
+                    ? "pending"
+                    : status === "confirmed"
+                    ? "confirmed"
+                    : "done"
+                }`}
               >
-                <option value="obekräftad">Obekräftad</option>
-                <option value="bekräftad">Bekräftad</option>
-                <option value="klar">Klar</option>
+                <option value="pending">Obekräftad</option>
+                <option value="confirmed">Bekräftad</option>
+                <option value="done">Klar</option>
               </select>
             </article>
             {isEditing ? (
