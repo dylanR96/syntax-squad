@@ -105,7 +105,8 @@
 .stock-modal__footer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .button--blue {
@@ -191,5 +192,11 @@
   }
   .alert__ingredient--low {
     background-color: transparent;
+  }
+  .stock-modal__footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
   }
 }

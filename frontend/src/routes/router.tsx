@@ -11,7 +11,7 @@ import About from "../pages/About/About";
 import Checkout from "../pages/Checkout/Checkout";
 import Register from "../pages/Register/Register";
 import Confirmation from "../pages/Confirmation/Confirmation";
-import Stock from "../pages/Admin/Stock/Ingredients";
+import Stock from "../pages/Admin/Ingredients/Ingredients";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
@@ -79,7 +79,7 @@ const router = createBrowserRouter([
         element: <Confirmation />,
       },
       {
-        path: "/admin/stock",
+        path: "/admin/ingredients",
         element: <Stock />,
       },
       {
