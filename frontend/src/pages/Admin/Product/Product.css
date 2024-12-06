@@ -27,6 +27,7 @@
 }
 .product__name {
   width: 120px;
+  overflow: hidden;
   flex: 1;
 }
 .product__tags {

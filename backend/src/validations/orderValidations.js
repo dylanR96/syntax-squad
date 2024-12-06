@@ -3,21 +3,12 @@ import Joi from "joi";
 export const createOrderSchema = Joi.object({
   products: Joi.array()
     .items(
-      Joi.object().pattern(
-        Joi.string(),
-        Joi.object({
-          quantity: Joi.number().integer().min(1).required(),
-          exclude: Joi.array().items(Joi.string().optional()).required(),
-          extra: Joi.array()
-            .items(
-              Joi.object().pattern(
-                Joi.string().pattern(/^\d+$/),
-                Joi.string().pattern(/^\d+kr$/)
-              )
-            )
-            .required(),
-        })
-      )
+      Joi.object({
+        productID: Joi.number().integer().required(),
+        quantity: Joi.number().integer().min(1).required(),
+        exclude: Joi.array().items(Joi.number().integer()),
+        price: Joi.number().required(),
+      })
     )
     .min(1)
     .required(),
