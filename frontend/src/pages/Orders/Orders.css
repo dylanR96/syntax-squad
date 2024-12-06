@@ -74,16 +74,16 @@
   color: #442a07;
 }
 
-.klar {
-  background: #67cd31;
-}
-
-.obekräftad {
+.pending {
   background: #cc8d80;
 }
 
-.bekräftad {
+.confirmed {
   background: #c3d5d9;
+}
+
+.done {
+  background: #67cd31;
 }
 
 @media (min-width: 768px) {
