@@ -409,6 +409,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                 className="product-modal__input"
                 value={editProduct.tags[0]}
                 placeholder="Tagg 1"
+                required
                 onChange={(e) => {
                   handleTags(0, e.target.value);
                 }}
@@ -417,6 +418,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                 className="product-modal__input"
                 value={editProduct.tags[1]}
                 placeholder="Tagg 2"
+                required
                 onChange={(e) => {
                   handleTags(1, e.target.value);
                 }}
@@ -425,6 +427,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                 className="product-modal__input"
                 value={editProduct.tags[2]}
                 placeholder="Tagg 3"
+                required
                 onChange={(e) => {
                   handleTags(2, e.target.value);
                 }}
