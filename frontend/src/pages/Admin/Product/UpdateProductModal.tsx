@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
 import { toast } from "react-toastify";
 import {
-  ENDPOINT_CHANGE_PRODUCT,
-  ENDPOINT_DELETE_PRODUCT,
+  ENDPOINT_INGREDIENTS,
+  ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
 // Import this later
 type IngredientType = {
@@ -30,9 +30,8 @@ const ProductModal: React.FC<ProductPropsType> = ({
   const [newIngredient, setNewIngredient] = useState<number | null>(null);
   useEffect(() => {
     const fetchIngredients = async () => {
-      const ENDPOINT_ALL_INGREDIENTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients`;
       try {
-        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
+        const response = await fetch(ENDPOINT_INGREDIENTS, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -143,7 +142,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
   const deleteProduct = async () => {
     try {
       const response: Response = await toast.promise(
-        fetch(`${ENDPOINT_DELETE_PRODUCT}/${editProduct.productID}`, {
+        fetch(`${ENDPOINT_PRODUCT}/${editProduct.productID}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -168,7 +167,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
   const updateProduct = async () => {
     try {
       const response: Response = await toast.promise(
-        fetch(ENDPOINT_CHANGE_PRODUCT, {
+        fetch(ENDPOINT_PRODUCT, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

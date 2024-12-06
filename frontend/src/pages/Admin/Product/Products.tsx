@@ -7,16 +7,16 @@ import { initProduct, ProductType } from "./productTypes";
 import UpdateProductModal from "./UpdateProductModal";
 import Loader from "../../../components/ui/Loader";
 import NewProductModal from "./NewProductModal";
+import { ENDPOINT_ALL_PRODUCTS } from "../../../endpoints/apiEndpoints";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([initProduct]);
   const [editProduct, setEditProduct] = useState<ProductType | null>(null);
   const [newProduct, setNewProduct] = useState<boolean>(false);
   useEffect(() => {
     if (!editProduct) {
-      const ENDPOINT_PRODUCTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products`;
       const fetchProducts = async () => {
         try {
-          const response = await fetch(ENDPOINT_PRODUCTS);
+          const response = await fetch(ENDPOINT_ALL_PRODUCTS);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
