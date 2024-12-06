@@ -60,7 +60,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
     setEditProduct((prev) => {
       if (!prev) return null;
       const updatedTags: string[] = [...prev.tags];
-      updatedTags[index] = value; // Update the specific tag
+      updatedTags[index] = value.toLowerCase();
       return {
         ...prev,
         tags: updatedTags,

@@ -60,7 +60,7 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
   const handleTags = (index: number, value: string) => {
     setProduct((prev) => {
       const updatedTags: string[] = [...prev.tags];
-      updatedTags[index] = value; // Update the specific tag
+      updatedTags[index] = value.toLowerCase(); // Update the specific tag
       return {
         ...prev,
         tags: updatedTags,
