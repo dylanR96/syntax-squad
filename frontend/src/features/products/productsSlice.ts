@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { ENDPOINT_ALL_PRODUCTS } from "../../endpoints/apiEndpoints";
 
 export interface ProductIngredient {
   id: number; // ID för ingrediensen
@@ -36,9 +37,7 @@ export const fetchProducts = createAsyncThunk<
   { rejectValue: string }
 >("products/fetchProducts", async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch(
-      "https://4pewmd0k46.execute-api.eu-north-1.amazonaws.com/products"
-    );
+    const response = await fetch(ENDPOINT_ALL_PRODUCTS);
     if (!response.ok) {
       throw new Error(`Server responded with ${response.status}`);
     }

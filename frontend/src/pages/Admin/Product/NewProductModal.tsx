@@ -8,8 +8,8 @@ import {
 import { toast } from "react-toastify";
 import { IngredientType } from "../Ingredients/types";
 import {
-  ENDPOINT_CHANGE_PRODUCT,
   ENDPOINT_INGREDIENTS,
+  ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
 
 type ProductPropsType = {
@@ -135,7 +135,7 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
   const updateProduct = async () => {
     try {
       const response: Response = await toast.promise(
-        fetch(ENDPOINT_CHANGE_PRODUCT, {
+        fetch(ENDPOINT_PRODUCT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
