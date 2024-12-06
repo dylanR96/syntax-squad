@@ -1,11 +1,11 @@
 /* ADMIN */
-export const ENDPOINT_ALL_PRODUCTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products`;
-export const ENDPOINT_PRODUCT =
+export const ENDPOINT_ALL_PRODUCTS: string = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products`;
+export const ENDPOINT_PRODUCT: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product";
-export const ENDPOINT_INGREDIENTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients`;
+export const ENDPOINT_INGREDIENTS: string = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients`;
 
 /* LOGIN */
-export const ENDPOINT_CUSTOMER =
+export const ENDPOINT_CUSTOMER: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer/login";
 // endpoints:
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin
