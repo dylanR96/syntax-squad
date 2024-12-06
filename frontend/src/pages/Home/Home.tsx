@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
 import "./Home.css";
 import "../../assets/styles/index.css";
+import React, { useState, useEffect } from "react";
+import CardBig from "../../components/recipe-cards/CardBig";
+import CardSmall from "../../components/recipe-cards/CardSmall";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../features/products/productsSlice";
 import { RootState, AppDispatch } from "../../app/store";
-import CardBig from "../../components/recipe-cards/CardBig";
-import CardSmall from "../../components/recipe-cards/CardSmall";
 import SearchResults from "./SearchResults"; // Importera sökresultatkomponenten
 
 const Home = () => {
@@ -16,14 +16,16 @@ const Home = () => {
   const [showAllProducts, setShowAllProducts] = useState<boolean>(false); // Ny state för att visa alla produkter
 
   const dispatch = useDispatch<AppDispatch>();
-  const { products, status, error } = useSelector((state: RootState) => state.products);
+  const { products, status, error } = useSelector(
+    (state: RootState) => state.products
+  );
 
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchProducts());
     }
   }, [dispatch, status]);
-
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
   };
@@ -50,9 +52,15 @@ const Home = () => {
   const isLoading = !products && !error && status === "idle";
   const isEmpty = products && products.length === 0;
 
-  const julTag = (products || []).filter((product) => product.tags.includes("jul"));
-  const timeTag = (products || []).filter((product) => product.tags.includes("15 min"));
-  const trendingTag = (products || []).filter((product) => product.tags.includes("trending"));
+  const julTag = (products || []).filter((product) =>
+    product.tags.includes("jul")
+  );
+  const timeTag = (products || []).filter((product) =>
+    product.tags.includes("15 min")
+  );
+  const trendingTag = (products || []).filter((product) =>
+    product.tags.includes("trending")
+  );
 
   return (
     <>
@@ -96,6 +104,7 @@ const Home = () => {
             <h3 className="h3--dark">Beställ igen</h3>
             <CardBig />
           </article>
+          
           <article className="home__card-container">
             <h3 className="h3--dark">Trending</h3>
             <div className="cards-wrapper">

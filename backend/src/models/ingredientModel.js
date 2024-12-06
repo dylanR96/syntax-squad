@@ -4,6 +4,7 @@ import { createID } from "../utils/dynamodbHelper.js";
 
 export const ingredientModel = {
   addIngredient: async (ingredientData) => {
+    // 5 SEK for every ingredient for now, scalable for the future
     const params = {
       TableName: INGREDIENTS_TABLE,
       Item: {
@@ -11,9 +12,7 @@ export const ingredientModel = {
         ingredientName: ingredientData.ingredientName,
         stock: ingredientData.stock,
         units: ingredientData.units,
-        pricePerUnit: ingredientData.pricePerUnit
-          ? ingredientData.pricePerUnit
-          : 0,
+        pricePerUnit: 5,
       },
     };
     const data = await db.put(params);

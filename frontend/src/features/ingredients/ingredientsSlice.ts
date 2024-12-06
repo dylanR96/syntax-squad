@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { ENDPOINT_INGREDIENTS } from "../../endpoints/apiEndpoints";
 
-export interface Ingredient{
+export interface Ingredient {
   ingredientID: number;
   ingredientName: string;
   stock: number;
@@ -12,54 +13,56 @@ export interface Ingredient{
 }
 
 interface IngredientState {
-    ingredients: Ingredient[] | null;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
+  ingredients: Ingredient[] | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 }
 
 const initialState: IngredientState = {
-    ingredients: null,
-    status: 'idle',
-    error: null,
-  };
+  ingredients: null,
+  status: "idle",
+  error: null,
+};
 
-  
-  // Async thunk för att hämta produkter
-export const fetchIngredients = createAsyncThunk<Ingredient[], void, { rejectValue: string }>(
-    'ingredients/fetchIngredients',
-    async (_, { rejectWithValue }) => {
-      try {
-        const response = await fetch('https://4pewmd0k46.execute-api.eu-north-1.amazonaws.com/ingredients');
-        if (!response.ok) {
-          throw new Error(`Server responded with ${response.status}`);
-        }
-        const data = await response.json();
-        return Array.isArray(data) ? data : [];
-      } catch (error) {
-        return rejectWithValue('Kunde inte ladda ingredienser. Försök igen senare.');
-      }
+// Async thunk för att hämta produkter
+export const fetchIngredients = createAsyncThunk<
+  Ingredient[],
+  void,
+  { rejectValue: string }
+>("ingredients/fetchIngredients", async (_, { rejectWithValue }) => {
+  try {
+    const response = await fetch(ENDPOINT_INGREDIENTS);
+    if (!response.ok) {
+      throw new Error(`Server responded with ${response.status}`);
     }
-  );
+    const data = await response.json();
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    return rejectWithValue(
+      "Kunde inte ladda ingredienser. Försök igen senare."
+    );
+  }
+});
 
-  const ingredientsSlice = createSlice({
-    name: 'ingredients',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-      builder
-        .addCase(fetchIngredients.pending, (state) => {
-          state.status = 'loading';
-          state.error = null;
-        })
-        .addCase(fetchIngredients.fulfilled, (state, action) => {
-          state.status = 'succeeded';
-          state.ingredients = action.payload;
-        })
-        .addCase(fetchIngredients.rejected, (state, action) => {
-          state.status = 'failed';
-          state.error = action.payload || 'Något gick fel.';
-        });
-    },
-  });
-  
-  export default ingredientsSlice.reducer;
+const ingredientsSlice = createSlice({
+  name: "ingredients",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchIngredients.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(fetchIngredients.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.ingredients = action.payload;
+      })
+      .addCase(fetchIngredients.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Något gick fel.";
+      });
+  },
+});
+
+export default ingredientsSlice.reducer;

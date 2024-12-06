@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../../assets/images/easybakelogo.svg";
 import dottedLine from "../../assets/images/dotted-line.svg";
+import { ENDPOINT_CUSTOMER } from "../../endpoints/apiEndpoints";
 
 type UserData = {
   email: string;
@@ -73,7 +74,7 @@ const Register = () => {
       phoneNumber,
     };
 
-    fetch("https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/customer", {
+    fetch(ENDPOINT_CUSTOMER, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

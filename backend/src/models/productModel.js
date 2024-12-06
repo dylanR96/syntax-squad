@@ -17,7 +17,7 @@ export const productModel = {
         bakingTime: productData.bakingTime,
         description: productData.description,
         recipe: productData.recipe,
-        createdAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),      
       },
     };
 

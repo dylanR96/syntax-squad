@@ -39,14 +39,14 @@
   width: 80px;
   text-align: right;
 }
-
 .product-modal {
   position: absolute;
   left: 0;
   top: 0;
   z-index: 99;
   width: 100%;
-  min-height: 100%;
+  min-height: 100svh;
+  height: auto;
   padding: 1em;
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(6px);
@@ -81,6 +81,12 @@
 .product-modal__column {
   width: 100%;
   color: #393939;
+}
+.product-modal__column--col-2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 0.5em;
 }
 .product-modal__input {
   width: 100%;
@@ -125,12 +131,81 @@
 }
 .product-ingredients__name {
   flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .product-ingredients__units {
   width: 70px;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-/* 500px as limit? */
+.product-ingredients__delete {
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.delete-button {
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  position: relative;
+  border: 0;
+  cursor: pointer;
+}
+.delete-button::before,
+.delete-button::after {
+  content: "";
+  width: 15px;
+  height: 2px;
+  background-color: #ca0000;
+  position: absolute;
+  border-radius: 2px;
+  top: 48%;
+  left: 10%;
+}
+.delete-button::before {
+  transform: rotate(-45deg);
+}
+.delete-button::after {
+  transform: rotate(45deg);
+}
+.button--warning {
+  background-color: #ca0000;
+}
+.product-skeleton__ingredients {
+  height: 30px;
+  margin-top: 5px;
+  background-color: #ccc;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.product-skeleton__ingredients::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 1.5s infinite ease-in-out;
+}
+@keyframes shine {
+  0% {
+    left: -200%;
+  }
+  100% {
+    left: 200%;
+  }
+}
 @media only screen and (min-width: 768px) {
   .product__name {
     flex: none;
