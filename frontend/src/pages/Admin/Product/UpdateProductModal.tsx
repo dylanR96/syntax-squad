@@ -43,6 +43,10 @@ const ProductModal: React.FC<ProductPropsType> = ({
         console.error("Failed", error);
       }
     };
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
     fetchIngredients();
   }, []);
   // Functions
@@ -271,7 +275,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                         marginTop: 5,
                         backgroundColor: "#ccc",
                       }}
-                      className="product-modal__ingredients"
+                      className="product-modal__ingredients product-skeleton__ingredients"
                     ></div>
                   );
                 })}
@@ -308,6 +312,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
             </select>
             <button
               className="recipe__button stock-modal__button button--blue button--small"
+              type="button"
               onClick={() => {
                 if (newIngredient) addIngredient();
               }}
@@ -359,6 +364,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
                       <div className="product-ingredients__delete">
                         <button
                           className="delete-button"
+                          type="button"
                           onClick={() => deleteStep(index)}
                         ></button>
                       </div>
@@ -379,6 +385,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
               })}
 
             <button
+              type="button"
               className="recipe__button stock-modal__button button--blue button--small"
               onClick={addStep}
             >
@@ -433,6 +440,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
             </button>
             <button
               className="recipe__button stock-modal__button button--warning"
+              type="button"
               onClick={() => {
                 if (confirm("Vill du ta bort produkten?")) {
                   deleteProduct();
@@ -443,6 +451,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
             </button>
             <button
               className="recipe__button stock-modal__button"
+              type="button"
               onClick={() => {
                 setEditProduct(null);
               }}

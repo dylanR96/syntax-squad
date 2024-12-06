@@ -6,7 +6,7 @@ import {
   initProduct,
 } from "./productTypes";
 import { toast } from "react-toastify";
-import { IngredientType } from "../Stock/types";
+import { IngredientType } from "../Ingredients/types";
 
 type ProductPropsType = {
   setNewProduct: React.Dispatch<React.SetStateAction<boolean>>;
