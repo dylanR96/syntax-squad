@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
 import { toast } from "react-toastify";
+import {
+  ENDPOINT_CHANGE_PRODUCT,
+  ENDPOINT_DELETE_PRODUCT,
+} from "../../../endpoints/apiEndpoints";
 // Import this later
 type IngredientType = {
   createdAt: string;
@@ -137,10 +141,9 @@ const ProductModal: React.FC<ProductPropsType> = ({
     });
   };
   const deleteProduct = async () => {
-    const ENDPOINT_DELETE_PRODUCT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product/${editProduct.productID}`;
     try {
       const response: Response = await toast.promise(
-        fetch(ENDPOINT_DELETE_PRODUCT, {
+        fetch(`${ENDPOINT_DELETE_PRODUCT}/${editProduct.productID}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -163,7 +166,6 @@ const ProductModal: React.FC<ProductPropsType> = ({
     }
   };
   const updateProduct = async () => {
-    const ENDPOINT_CHANGE_PRODUCT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product`;
     try {
       const response: Response = await toast.promise(
         fetch(ENDPOINT_CHANGE_PRODUCT, {

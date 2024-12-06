@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EventFn, NewIngredientType } from "./types";
 import { toast } from "react-toastify";
+import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
 
 type NewIngredientPropsType = {
   units: string[];
@@ -23,16 +24,13 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
   };
   const addIngredient = async () => {
     const response: Response = await toast.promise(
-      fetch(
-        "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newIngredient), // Convert the data to JSON format
-        }
-      ),
+      fetch(ENDPOINT_INGREDIENTS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newIngredient), // Convert the data to JSON format
+      }),
       {
         pending: "Lägger till ingrediens",
         success: "Ingrediens tillagd",

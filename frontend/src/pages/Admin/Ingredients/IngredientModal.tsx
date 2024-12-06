@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { EditIngredientType, EventFn } from "./types";
 import { toast } from "react-toastify";
+import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
 
 type Ingredient = {
   editIngredient: EditIngredientType;
@@ -20,16 +21,13 @@ const StockModal: React.FC<Ingredient> = ({
 
   const updateIngredient = async () => {
     const response: Response = await toast.promise(
-      fetch(
-        "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editIngredient), // Convert the data to JSON format
-        }
-      ),
+      fetch(ENDPOINT_INGREDIENTS, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editIngredient), // Convert the data to JSON format
+      }),
       {
         pending: "Uppdaterar ingrediens",
         success: "Ingrediens uppdaterad",
@@ -43,11 +41,10 @@ const StockModal: React.FC<Ingredient> = ({
   };
   console.log(editIngredient);
   const deleteIngredient = async () => {
-    const ENDPOINT_DELETE_INGREDIENT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient`;
     try {
       const ingredientID = editIngredient.ingredientID;
       const response: Response = await toast.promise(
-        fetch(ENDPOINT_DELETE_INGREDIENT, {
+        fetch(ENDPOINT_INGREDIENTS, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

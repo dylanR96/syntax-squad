@@ -3,6 +3,7 @@ import "./Stock.css";
 import { EditIngredientType, IngredientType } from "./types";
 import StockModal from "./IngredientModal";
 import NewIngredient from "./NewIngredient";
+import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
 
 const Stock = () => {
   const [ingredients, setIngredients] = useState<IngredientType[]>([]);
@@ -11,8 +12,6 @@ const Stock = () => {
   const [rerender, setRerender] = useState<number>(0);
   const units: string[] = ["gram", "milliliter", "styck"];
 
-  const ENDPOINT_INGREDIENTS =
-    "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients";
   useEffect(() => {
     const fetchIngredients = async () => {
       if (!editIngredient) {
@@ -139,16 +138,3 @@ const Stock = () => {
 };
 
 export default Stock;
-
-// OLD
-// <label className="stock-wrapper">
-// <input
-//   type="checkbox"
-//   className="stock__checkbox recipe__input"
-// />
-// <div className="stock__ingredient">
-//   {ingredient.ingredientName}
-// </div>
-// <div className="stock__number">{ingredient.stock}</div>
-// <div className="stock__unit">{ingredient.units}</div>
-// </label>

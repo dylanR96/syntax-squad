@@ -7,6 +7,10 @@ import {
 } from "./productTypes";
 import { toast } from "react-toastify";
 import { IngredientType } from "../Ingredients/types";
+import {
+  ENDPOINT_CHANGE_PRODUCT,
+  ENDPOINT_INGREDIENTS,
+} from "../../../endpoints/apiEndpoints";
 
 type ProductPropsType = {
   setNewProduct: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,9 +26,8 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
 
   useEffect(() => {
     const fetchIngredients = async () => {
-      const ENDPOINT_ALL_INGREDIENTS = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients`;
       try {
-        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
+        const response = await fetch(ENDPOINT_INGREDIENTS, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -130,7 +133,6 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
     });
   };
   const updateProduct = async () => {
-    const ENDPOINT_CHANGE_PRODUCT = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product`;
     try {
       const response: Response = await toast.promise(
         fetch(ENDPOINT_CHANGE_PRODUCT, {
