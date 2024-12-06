@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Orders.css";
+import { ENDPOINT_UPDATE_ORDER_STATUS } from "../../endpoints/apiEndpoints";
 
 interface FormData {
   address: string;
@@ -31,17 +32,13 @@ const Orders = () => {
     setStatus(newStatus);
 
     try {
-      //vet inte endpointen, vet inte hur ordern ser ut, vet inte om detta funkar
-      const response = await fetch(
-        "https://i1g1r4ighf.execute-api.eu-north-1.amazonaws.com/order",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status: newStatus }),
-        }
-      );
+      const response = await fetch(ENDPOINT_UPDATE_ORDER_STATUS, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

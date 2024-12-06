@@ -7,6 +7,10 @@ export const ENDPOINT_INGREDIENT: string = `https://ez7mtpao6i.execute-api.eu-no
 /* LOGIN */
 export const ENDPOINT_CUSTOMER: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer/login";
+
+export const ENDPOINT_UPDATE_ORDER_STATUS: string =
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/orderStatus";
+
 // endpoints:
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin/login
