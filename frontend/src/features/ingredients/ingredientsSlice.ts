@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { ENDPOINT_INGREDIENTS } from "../../endpoints/apiEndpoints";
+import { ENDPOINT_ALL_INGREDIENTS } from "../../endpoints/apiEndpoints";
 
 export interface Ingredient {
   ingredientID: number;
@@ -31,7 +31,7 @@ export const fetchIngredients = createAsyncThunk<
   { rejectValue: string }
 >("ingredients/fetchIngredients", async (_, { rejectWithValue }) => {
   try {
-    const response = await fetch(ENDPOINT_INGREDIENTS);
+    const response = await fetch(ENDPOINT_ALL_INGREDIENTS);
     if (!response.ok) {
       throw new Error(`Server responded with ${response.status}`);
     }

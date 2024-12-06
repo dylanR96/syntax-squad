@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EventFn, NewIngredientType } from "./types";
 import { toast } from "react-toastify";
-import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
+import { ENDPOINT_INGREDIENT } from "../../../endpoints/apiEndpoints.js";
 
 type NewIngredientPropsType = {
   units: string[];
@@ -23,8 +23,9 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
     setNewIngredient({ ...newIngredient, [e.target.name]: e.target.value });
   };
   const addIngredient = async () => {
+    console.log(newIngredient);
     const response: Response = await toast.promise(
-      fetch(ENDPOINT_INGREDIENTS, {
+      fetch(ENDPOINT_INGREDIENT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

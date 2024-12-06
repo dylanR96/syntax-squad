@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { EditIngredientType, EventFn } from "./types";
 import { toast } from "react-toastify";
-import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
+import { ENDPOINT_INGREDIENT } from "../../../endpoints/apiEndpoints";
 
 type Ingredient = {
   editIngredient: EditIngredientType;
@@ -21,7 +21,7 @@ const StockModal: React.FC<Ingredient> = ({
 
   const updateIngredient = async () => {
     const response: Response = await toast.promise(
-      fetch(ENDPOINT_INGREDIENTS, {
+      fetch(ENDPOINT_INGREDIENT, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const StockModal: React.FC<Ingredient> = ({
     try {
       const ingredientID = editIngredient.ingredientID;
       const response: Response = await toast.promise(
-        fetch(ENDPOINT_INGREDIENTS, {
+        fetch(ENDPOINT_INGREDIENT, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -128,6 +128,7 @@ const StockModal: React.FC<Ingredient> = ({
             </button>
             <button
               className="recipe__button stock-modal__button button--warning"
+              type="button"
               onClick={() => {
                 if (confirm("Vill du ta bort ingrediensen?")) {
                   deleteIngredient();
@@ -138,6 +139,7 @@ const StockModal: React.FC<Ingredient> = ({
             </button>
             <button
               className="recipe__button stock-modal__button"
+              type="button"
               onClick={() => setEditIngredient(null)}
             >
               Stäng

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { EventFn, ProductIngredientType, ProductType } from "./productTypes";
 import { toast } from "react-toastify";
 import {
-  ENDPOINT_INGREDIENTS,
+  ENDPOINT_ALL_INGREDIENTS,
   ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
 // Import this later
@@ -31,7 +31,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(ENDPOINT_INGREDIENTS, {
+        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

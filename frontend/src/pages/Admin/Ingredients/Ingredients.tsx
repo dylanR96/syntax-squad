@@ -3,7 +3,7 @@ import "./Stock.css";
 import { EditIngredientType, IngredientType } from "./types";
 import StockModal from "./IngredientModal";
 import NewIngredient from "./NewIngredient";
-import { ENDPOINT_INGREDIENTS } from "../../../endpoints/apiEndpoints";
+import { ENDPOINT_ALL_INGREDIENTS } from "../../../endpoints/apiEndpoints";
 
 const Stock = () => {
   const [ingredients, setIngredients] = useState<IngredientType[]>([]);
@@ -16,7 +16,7 @@ const Stock = () => {
     const fetchIngredients = async () => {
       if (!editIngredient) {
         try {
-          const response = await fetch(ENDPOINT_INGREDIENTS);
+          const response = await fetch(ENDPOINT_ALL_INGREDIENTS);
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }

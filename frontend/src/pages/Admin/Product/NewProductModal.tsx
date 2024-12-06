@@ -8,7 +8,7 @@ import {
 import { toast } from "react-toastify";
 import { IngredientType } from "../Ingredients/types";
 import {
-  ENDPOINT_INGREDIENTS,
+  ENDPOINT_ALL_INGREDIENTS,
   ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
 
@@ -27,7 +27,7 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(ENDPOINT_INGREDIENTS, {
+        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
