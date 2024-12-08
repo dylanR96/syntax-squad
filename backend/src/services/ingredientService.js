@@ -26,7 +26,11 @@ export const IngredientService = {
     return enrichedIngredients;
   },
   deleteIngredient: async (ingredientData) => {
-    const existingIngredient = await scanTable(ingredientData.ingredientData,  INGREDIENTS_TABLE, "ingredientID");
+    const existingIngredient = await scanTable(
+      ingredientData.ingredientData,
+      INGREDIENTS_TABLE,
+      "ingredientID"
+    );
     if (!existingIngredient) {
       throw new Error("No such ingredient.");
     }
@@ -34,7 +38,11 @@ export const IngredientService = {
   },
 
   editIngredient: async (ingredientData) => {
-    const existingIngredient = await scanTable(ingredientData.ingredientData,  INGREDIENTS_TABLE, "ingredientID");
+    const existingIngredient = await scanTable(
+      ingredientData.ingredientData,
+      INGREDIENTS_TABLE,
+      "ingredientID"
+    );
     if (!existingIngredient) {
       throw new Error("No such ingredient.");
     }

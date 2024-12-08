@@ -127,7 +127,7 @@ export const orderModel = {
     return data;
   },
   
-  getAllOrders: async (adminID) => {
+  getAllOrders: async () => {
     const { Items } = await db.scan({ TableName: ORDERS_TABLE });
     return Items;
   },
