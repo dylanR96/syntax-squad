@@ -4,7 +4,6 @@ import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
 import {
   createCustomerSchema,
-  deleteCustomerSchema,
   editCustomerSchema,
   customerLoginSchema,
 } from "../validations/customerValidations.js";
@@ -61,7 +60,7 @@ export const deleteCustomer = async (event) => {
   return tryCatchWrapper(async () => {
     await authorizeAdmin(event);
     const { customerID } = event.pathParameters;
-    const value = validateRequest(deleteCustomerSchema, { customerID });
+    const value = validateRequest({ customerID });
     await CustomerService.deleteCustomer(value.customerID);
     return sendResponse(200, "Customer successfully deleted");
   });
