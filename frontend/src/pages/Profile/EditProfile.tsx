@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import EditProfileForm from "./EditProfileForm";
-import { ENDPOINT_CUSTOMER } from "../../endpoints/apiEndpoints";
+import { ENDPOINT_CUSTOMER, ENDPOINT_EDIT_CUSTOMER } from "../../endpoints/apiEndpoints";
 import profileIcon from "../../assets/images/icons/profileIcon.svg";
 import addressIcon from "../../assets/images/icons/addressIcon.svg";
 import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
 
-interface ApiResponseEdit {
-  email: string;
-  address: string;
-  zipcode: string;
-  city: string;
-  phoneNumber: string;
-}
+// interface ApiResponseEdit {
+//   email: string;
+//   address: string;
+//   zipcode: string;
+//   city: string;
+//   phoneNumber: string;
+// }
 
 interface ApiResponseGet {
   customerID: string;
@@ -60,29 +60,29 @@ const EditProfile: React.FC = () => {
     }
   };
 
-  const editCustomer = async (url: string): Promise<ApiResponseEdit> => {
-    try {
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        body: JSON.stringify(customers),
-      });
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
+  // const editCustomer = async (url: string): Promise<ApiResponseEdit> => {
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${jwtToken}`,
+  //       },
+  //       body: JSON.stringify(customers),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`Error: ${response.status}`);
+  //     }
 
-      const data: ApiResponseEdit = await response.json();
-      console.log(data);
+  //     const data: ApiResponseEdit = await response.json();
+  //     console.log(data);
 
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
-    }
-  };
+  //     return data;
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     throw error;
+  //   }
+  // };
 
   const handleChange = (key: string, value: string) => {
     setCustomer((prev) => (prev ? { ...prev, [key]: value } : null));
@@ -179,7 +179,7 @@ const EditProfile: React.FC = () => {
               <button
                 className="profile__save-button"
                 type="button"
-                onClick={editCustomer}
+                // onClick={editCustomer(ENDPOINT_EDIT_CUSTOMER)}
               >
                 Spara ändringar
               </button>
@@ -194,11 +194,3 @@ const EditProfile: React.FC = () => {
 };
 
 export default EditProfile;
-
-{
-  /* <img src={profileIcon} alt="Profile Icon"/><p className="profile__order-number">Email: {customers.email}</p>
-            <img src={addressIcon} alt="Address Icon"/><p className="profile__order-number">Email: {customers.address}</p>
-            <img src={addressIcon} alt="Address Icon"/><p className="profile__order-number">Email: {customers.zipcode}</p>
-            <img src={addressIcon} alt="Address Icon"/><p className="profile__order-number">Email: {customers.city}</p>
-            <img src={phoneIcon} alt="Phone Icon"/><p className="profile__order-number">Email: {customers.phoneNumber}</p> */
-}
