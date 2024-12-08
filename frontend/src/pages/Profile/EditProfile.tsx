@@ -45,7 +45,7 @@ const EditProfile: React.FC = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Imd6eWFTc0M4dEczbktTQldHTFNiayIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTczMzY3MzcyOCwiZXhwIjoxNzMzNjc3MzI4fQ.Qm6Fme11oZG3PE0muzsQX1ATq2N2_hbpzRWTXBadBr4`,
+          Authorization: `Bearer ${jwtToken}`,
         },
       });
       if (!response.ok) {
@@ -92,7 +92,7 @@ const EditProfile: React.FC = () => {
     const fetchCustomer = async () => {
       try {
         const customerData = await getCustomer(
-          "https://wzwua90z22.execute-api.eu-north-1.amazonaws.com/customer/gzyaSsC8tG3nKSBWGLSbk"
+          ENDPOINT_CUSTOMER
         );
         setCustomer(customerData);
       } catch (error) {
