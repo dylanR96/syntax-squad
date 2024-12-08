@@ -6,7 +6,7 @@ import google from "../../assets/images/google.svg";
 import x from "../../assets/images/x.svg";
 import dottedLine from "../../assets/images/dotted-line.svg";
 import { useNavigate, Link } from "react-router-dom";
-import { ENDPOINT_CUSTOMER } from "../../endpoints/apiEndpoints";
+import {ENDPOINT_CUSTOMER_LOGIN } from "../../endpoints/apiEndpoints";
 
 // Bättre namn på css klasser
 
@@ -16,12 +16,12 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => { 
     e.preventDefault();
 
     setError(null);
     try {
-      const response = await fetch(ENDPOINT_CUSTOMER, {
+      const response = await fetch(ENDPOINT_CUSTOMER_LOGIN, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +34,8 @@ const Login = () => {
       }
 
       const data = await response.json();
+      console.log(data);
+      
 
       // Kanske finns bättre sätt?
       // For higher security, many modern apps use sessionStorage or localStorage on the client and store session tokens in memory on the server for short-lived access.
