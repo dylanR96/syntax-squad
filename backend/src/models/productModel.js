@@ -65,7 +65,7 @@ export const productModel = {
         ":description": productData.description,
         ":recipe": productData.recipe,
       },
-      ReturnValues: "ALL_NEW", // Return the updated item
+      ReturnValues: "ALL_NEW",
     };
     const data = db.update(params);
     return data;

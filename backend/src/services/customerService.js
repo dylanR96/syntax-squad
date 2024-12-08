@@ -52,11 +52,11 @@ export const CustomerService = {
     }
     return await customerModel.deleteCustomer(customerID);
   },
-  editCustomer: async (customerID) => {
+  editCustomer: async (customerData, customerID) => {
     const existingUser = await scanTable(customerID, CUSTOMERS_TABLE, "customerID");
     if(!existingUser) {
       throw new Error("Login is incorrect");
     }
-    return await customerModel.editCustomer(customerID);
+    return await customerModel.editCustomer(customerData, customerID);
   },
 };

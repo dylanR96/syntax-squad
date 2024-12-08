@@ -126,7 +126,8 @@ export const orderModel = {
     const { Item: data } = await db.get(params);
     return data;
   },
-  getAllOrders: async () => {
+  
+  getAllOrders: async (adminID) => {
     const { Items } = await db.scan({ TableName: ORDERS_TABLE });
     return Items;
   },
