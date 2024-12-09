@@ -25,24 +25,3 @@ export const API_CALL_GET = async (API_ENDPOINT: string) => {
     throw error;
   }
 };
-export const API_CALL_POST = async (API_ENDPOINT: string, API_BODY: any) => {
-  try {
-    const response = await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      body: JSON.stringify(API_BODY),
-    });
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
-  }
-};
