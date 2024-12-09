@@ -1,4 +1,3 @@
-import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { orderModel } from "../models/ordersModel.js";
 
 export const OrderService = {
@@ -20,7 +19,7 @@ export const OrderService = {
     getOrderByUserID: async(customerID) => {
         return await orderModel.getOrderByUserID(customerID);
     },
-    getAllOrders: async(orderData) => {
-        return await orderModel.getAllOrders(orderData);
+    getAllOrders: async() => {
+        return await orderModel.getAllOrders();
     }
 }

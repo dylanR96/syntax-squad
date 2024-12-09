@@ -61,11 +61,11 @@ export const customerModel = {
     const data = await db.delete(params);
     return data;
   },
-  editCustomer: async (customerData) => {
+  editCustomer: async (customerData, customerID) => {
     const params = {
       TableName: CUSTOMERS_TABLE,
       Key: {
-        customerID: customerData.customerID,
+        customerID: customerID,
       },
       UpdateExpression: `SET 
       email = :email, 
