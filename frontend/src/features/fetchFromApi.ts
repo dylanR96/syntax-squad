@@ -25,14 +25,10 @@ export const API_CALL_GET = async (API_ENDPOINT: string) => {
     throw error;
   }
 };
-export const API_CALL_POST = async (
-  API_ENDPOINT: string,
-  API_METHOD: string = "POST",
-  API_BODY: any
-) => {
+export const API_CALL_POST = async (API_ENDPOINT: string, API_BODY: any) => {
   try {
     const response = await fetch(API_ENDPOINT, {
-      method: API_METHOD,
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwtToken}`,
@@ -49,9 +45,4 @@ export const API_CALL_POST = async (
     console.error("Error:", error);
     throw error;
   }
-};
-
-export const API_CALL_PUT = async (API_ENDPOINT: string, API_BODY: any) => {
-  const PUT_CALL = await API_CALL_POST(API_ENDPOINT, "PUT", API_BODY);
-  return PUT_CALL;
 };
