@@ -4,30 +4,20 @@ import profilePicture from "../../assets/images/profile_picture.png";
 import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
 import { ENDPOINT_GET_ORDERS_BY_ID } from "../../endpoints/apiEndpoints";
-
-interface ApiResponse {
-  orderNO: number;
-  price: number;
-  orderDate: string;
-  comment: string;
-  status: string;
-}
+import { GetOrdersByUserID } from "./types";
+import { getCookie } from "../../utils/getCookie";
 
 const Profile: React.FC = () => {
-  const [orders, setOrders] = useState<ApiResponse[]>([]);
+  const [orders, setOrders] = useState<GetOrdersByUserID[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [expandOrder, setExpandOrder] = useState<number | null>(null)
-
-  function getCookie(name: string): string | undefined {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
-  }
+  const [expandOrder, setExpandOrder] = useState<number | null>(null);
 
   const jwtToken = getCookie("userToken");
 
-  const getOrdersByUserID = async (url: string): Promise<ApiResponse[]> => {
+  const getOrdersByUserID = async (
+    url: string
+  ): Promise<GetOrdersByUserID[]> => {
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -40,7 +30,7 @@ const Profile: React.FC = () => {
         throw new Error(`Error: ${response.status}`);
       }
 
-      const data: ApiResponse[] = await response.json();
+      const data: GetOrdersByUserID[] = await response.json();
       console.log(data);
 
       return data;
@@ -71,8 +61,8 @@ const Profile: React.FC = () => {
   }, []);
 
   const openOrder = (orderNO: number) => {
-    setExpandOrder((prev) => (prev === orderNO ? null : orderNO))
-  }
+    setExpandOrder((prev) => (prev === orderNO ? null : orderNO));
+  };
 
   return (
     <>
@@ -102,13 +92,13 @@ const Profile: React.FC = () => {
             <p className="profile__order-amount">{order.price}kr</p>
             {expandOrder === order.orderNO && (
               <div>
-              <p>Status: {order.status}</p>
+                <p>Status: {order.status}</p>
                 <p>Comment: {order.comment}</p>
               </div>
             )}
-            </div>
+          </div>
         ))}
-      
+
         <div className="profile__buttons">
           <ProfileEditButton />
           <LogoutButton />
