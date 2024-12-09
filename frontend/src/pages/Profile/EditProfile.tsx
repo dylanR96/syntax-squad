@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import EditProfileForm from "./EditProfileForm";
-import { ENDPOINT_CUSTOMER, ENDPOINT_EDIT_CUSTOMER } from "../../endpoints/apiEndpoints";
+import {
+  ENDPOINT_CUSTOMER,
+  ENDPOINT_EDIT_CUSTOMER,
+} from "../../endpoints/apiEndpoints";
 import profileIcon from "../../assets/images/icons/profileIcon.svg";
 import addressIcon from "../../assets/images/icons/addressIcon.svg";
 import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
+import { API_CALL_GET, jwtToken } from "../../features/fetchFromApi";
 
 // interface ApiResponseEdit {
 //   email: string;
@@ -31,59 +35,6 @@ const EditProfile: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  function getCookie(name: string): string | undefined {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
-  }
-
-  const jwtToken = getCookie("userToken");
-
-  const getCustomer = async (url: string): Promise<ApiResponseGet> => {
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data: ApiResponseGet = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
-    }
-  };
-
-  // const editCustomer = async (url: string): Promise<ApiResponseEdit> => {
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${jwtToken}`,
-  //       },
-  //       body: JSON.stringify(customers),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error(`Error: ${response.status}`);
-  //     }
-
-  //     const data: ApiResponseEdit = await response.json();
-  //     console.log(data);
-
-  //     return data;
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //     throw error;
-  //   }
-  // };
-
   const handleChange = (key: string, value: string) => {
     setCustomer((prev) => (prev ? { ...prev, [key]: value } : null));
   };
@@ -91,9 +42,7 @@ const EditProfile: React.FC = () => {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const customerData = await getCustomer(
-          ENDPOINT_CUSTOMER
-        );
+        const customerData = await API_CALL_GET(ENDPOINT_CUSTOMER);
         setCustomer(customerData);
       } catch (error) {
         setError("Failed to fetch orders.");

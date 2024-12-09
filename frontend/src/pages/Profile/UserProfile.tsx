@@ -4,6 +4,7 @@ import profilePicture from "../../assets/images/profile_picture.png";
 import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
 import { ENDPOINT_GET_ORDERS_BY_ID } from "../../endpoints/apiEndpoints";
+import { jwtToken } from "../../features/fetchFromApi";
 
 interface ApiResponse {
   orderNO: number;
@@ -17,15 +18,7 @@ const Profile: React.FC = () => {
   const [orders, setOrders] = useState<ApiResponse[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [expandOrder, setExpandOrder] = useState<number | null>(null)
-
-  function getCookie(name: string): string | undefined {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(";").shift();
-  }
-
-  const jwtToken = getCookie("userToken");
+  const [expandOrder, setExpandOrder] = useState<number | null>(null);
 
   const getOrdersByUserID = async (url: string): Promise<ApiResponse[]> => {
     try {
@@ -71,8 +64,8 @@ const Profile: React.FC = () => {
   }, []);
 
   const openOrder = (orderNO: number) => {
-    setExpandOrder((prev) => (prev === orderNO ? null : orderNO))
-  }
+    setExpandOrder((prev) => (prev === orderNO ? null : orderNO));
+  };
 
   return (
     <>
@@ -102,13 +95,13 @@ const Profile: React.FC = () => {
             <p className="profile__order-amount">{order.price}kr</p>
             {expandOrder === order.orderNO && (
               <div>
-              <p>Status: {order.status}</p>
+                <p>Status: {order.status}</p>
                 <p>Comment: {order.comment}</p>
               </div>
             )}
-            </div>
+          </div>
         ))}
-      
+
         <div className="profile__buttons">
           <ProfileEditButton />
           <LogoutButton />

@@ -11,6 +11,7 @@ import {
   ENDPOINT_ALL_INGREDIENTS,
   ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
+import { API_CALL_GET, jwtToken } from "../../../features/fetchFromApi";
 
 type ProductPropsType = {
   setNewProduct: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,21 +27,8 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
 
   useEffect(() => {
     const fetchIngredients = async () => {
-      try {
-        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data: IngredientType[] = await response.json();
-        setAllIngredients(data);
-      } catch (error) {
-        console.error("Failed", error);
-      }
+      const ingredients = await API_CALL_GET(ENDPOINT_ALL_INGREDIENTS);
+      setAllIngredients(ingredients);
     };
     fetchIngredients();
     // Reset arrays when rendering newProduct
@@ -139,6 +127,7 @@ const NewProductModal: React.FC<ProductPropsType> = ({ setNewProduct }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
           body: JSON.stringify(product),
         }),

@@ -1,5 +1,6 @@
 import { ingredientModel } from "../models/ingredientModel.js";
 import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
+import { scanTable } from "../utils/dbTableScan.js";
 
 export const IngredientService = {
   addIngredient: async (ingredientData) => {

@@ -8,6 +8,7 @@ import UpdateProductModal from "./UpdateProductModal";
 import Loader from "../../../components/ui/Loader";
 import NewProductModal from "./NewProductModal";
 import { ENDPOINT_ALL_PRODUCTS } from "../../../endpoints/apiEndpoints";
+import { API_CALL_GET } from "../../../features/fetchFromApi";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([initProduct]);
   const [editProduct, setEditProduct] = useState<ProductType | null>(null);
@@ -15,16 +16,10 @@ const Products = () => {
   useEffect(() => {
     if (!editProduct) {
       const fetchProducts = async () => {
-        try {
-          const response = await fetch(ENDPOINT_ALL_PRODUCTS);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data: ProductType[] = await response.json();
-          setProducts(data);
-        } catch (error) {
-          console.error("Failed", error);
-        }
+        const products: ProductType[] = await API_CALL_GET(
+          ENDPOINT_ALL_PRODUCTS
+        );
+        setProducts(products);
       };
       fetchProducts();
     }

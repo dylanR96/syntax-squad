@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { EditIngredientType, EventFn } from "./types";
 import { toast } from "react-toastify";
 import { ENDPOINT_INGREDIENT } from "../../../endpoints/apiEndpoints";
+import { jwtToken } from "../../../features/fetchFromApi";
 
 type Ingredient = {
   editIngredient: EditIngredientType;
@@ -20,11 +21,13 @@ const StockModal: React.FC<Ingredient> = ({
   };
 
   const updateIngredient = async () => {
+    console.log(editIngredient);
     const response: Response = await toast.promise(
       fetch(ENDPOINT_INGREDIENT, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
         },
         body: JSON.stringify(editIngredient), // Convert the data to JSON format
       }),
