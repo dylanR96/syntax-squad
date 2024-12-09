@@ -1,6 +1,4 @@
 import "./Cart.css";
-import remove from "../../assets/images/remove.svg";
-// import edit from "../../assets/images/edit.svg";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
