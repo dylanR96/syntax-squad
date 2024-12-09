@@ -7,13 +7,23 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   increaseQuantity,
   decreaseQuantity,
-  addComment,
+  addInfo,
 } from "../../features/order/orderSlice";
 import { fetchProducts } from "../../features/products/productsSlice";
+import { address } from "framer-motion/client";
+
+//hämta användarens information
 
 const Checkout = () => {
-  const [commentValue, setCommentValue] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    comment: "",
+    address: "",
+    zipcode: "",
+    city: "",
+    phoneNumber: "",
+  });
   const dispatch = useDispatch<AppDispatch>();
+
   const { products, status: productsStatus } = useSelector(
     (state: RootState) => state.products
   );
@@ -35,13 +45,35 @@ const Checkout = () => {
   }, [dispatch, productsStatus]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentValue(e.target.value);
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => {
+      return {
+        ...prevUserInfo,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleUserInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => {
+      return {
+        ...prevUserInfo,
+        [name]: value,
+      };
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addComment(commentValue));
-    setCommentValue("");
+    dispatch(addInfo(userInfo));
+    setUserInfo({
+      comment: "",
+      address: "",
+      zipcode: "",
+      city: "",
+      phoneNumber: "",
+    });
   };
 
   return (
@@ -90,13 +122,56 @@ const Checkout = () => {
             <textarea
               id="comment"
               name="comment"
-              value={commentValue}
+              value={userInfo.comment}
               onChange={handleChange}
               className="special-request__input"
               rows={5}
               cols={33}
             />
           </label>
+          <label className="special-request">
+            Address
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={userInfo.address}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Postnummer
+            <input
+              type="text"
+              name="zipcode"
+              id="zipcode"
+              value={userInfo.zipcode}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Stad
+            <input
+              type="text"
+              id="address"
+              value={userInfo.city}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Telefon
+            <input
+              type="text"
+              id="address"
+              value={userInfo.phoneNumber}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+
           <div className="cart-total">
             <div className="cart-total__price-container">
               <h3 className="cart-total__title">Totalt</h3>

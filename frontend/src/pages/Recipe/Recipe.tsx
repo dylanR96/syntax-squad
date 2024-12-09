@@ -82,17 +82,12 @@ const Recipe = () => {
     }
   }, [dispatch, productsStatus]);
 
-  console.log("Products:", products);
-
   /* Dispatch Ingredients API */
   useEffect(() => {
     if (ingredientsStatus === "idle") {
       dispatch(fetchIngredients());
     }
   }, [dispatch, ingredientsStatus]);
-
-  console.log("Products:", products);
-  console.log("Ingredinets", ingredients);
 
   /* Hitta det specifika receptet för sidan */
   useEffect(() => {
@@ -128,9 +123,6 @@ const Recipe = () => {
     }
   }, [ingredients, currentRecipe]);
 
-  console.log("Current recipe", currentRecipe);
-  console.log("Current ingredients", currentIngredients);
-
   /* -------------------Redux för att lägga till beställning --------------------------*/
 
   // Lokal state för att hantera `checked`-status
@@ -153,6 +145,7 @@ const Recipe = () => {
     );
     setLocalIngredients(updatedIngredients);
 
+    //Konvertara productID till ett nummer(useParams som productID kommer ifrån ger alltid strängar)
     const recipeID = Number(productID);
     if (isNaN(recipeID)) {
       console.error("Ogiltigt productID: Kan inte konvertera till nummer");
@@ -182,10 +175,12 @@ const Recipe = () => {
       addRecipeIngredients({
         productID: Number(productID), // Konverterar alltid till nummer
         ingredients: localIngredients,
+        productPrice: currentRecipe?.price || 0,
       })
     );
-    console.log("Markerade ingredienser skickade:", checkedIngredients);
   };
+
+  const currentOrder = orderState.find((order) => order.productID === recipeID);
 
   return (
     <>
@@ -243,7 +238,11 @@ const Recipe = () => {
               <div className="recipe__total-div">
                 <h6 className="recipe__total-text">Totalt</h6>
                 <h6 className="recipe__total-text--bold">
-                  <strong>60kr</strong>
+                  <strong>
+                    {currentOrder
+                      ? `${currentOrder?.price} kr`
+                      : `${currentRecipe?.price} kr`}
+                  </strong>
                 </h6>
               </div>
 
