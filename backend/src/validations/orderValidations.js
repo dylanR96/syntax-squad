@@ -12,7 +12,7 @@ export const createOrderSchema = Joi.object({
     )
     .min(1)
     .required(),
-  comment: Joi.string().optional(),
+  comment: Joi.string().allow("").optional(),
   price: Joi.number().required(),
   address: Joi.string().required(),
   zipcode: Joi.string().required(),
