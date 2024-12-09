@@ -6,10 +6,19 @@ export const ENDPOINT_ALL_INGREDIENTS: string = `https://ez7mtpao6i.execute-api.
 export const ENDPOINT_INGREDIENT: string = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient`;
 /* LOGIN */
 export const ENDPOINT_CUSTOMER: string =
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer";
+
+  export const ENDPOINT_CUSTOMER_LOGIN: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer/login";
 
 export const ENDPOINT_UPDATE_ORDER_STATUS: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/orderStatus";
+
+  export const ENDPOINT_GET_ORDERS_BY_ID: string =
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/myOrders";
+
+  export const ENDPOINT_EDIT_CUSTOMER: string = 
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer";
 
 // endpoints:
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin
