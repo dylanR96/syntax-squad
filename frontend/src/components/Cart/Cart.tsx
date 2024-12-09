@@ -3,6 +3,9 @@ import remove from "../../assets/images/remove.svg";
 // import edit from "../../assets/images/edit.svg";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { getIngredientNameById } from "../../features/ingredients/ingredientFunctions";
 
 const cartVariants = {
   open: {
@@ -20,6 +23,9 @@ const cartVariants = {
 };
 
 const Cart = () => {
+  const cartState = useSelector((state: RootState) => state.order.products);
+  const { products } = useSelector((state: RootState) => state.products);
+
   return (
     <motion.div
       className="cart"
@@ -32,23 +38,42 @@ const Cart = () => {
         <h2 className="cart__title">Produkt</h2>
         <h2 className="cart__title">Pris</h2>
       </div>
+      <div className="cart__content">
+        {cartState.map((cartProduct) => {
+          if (products) {
+            const recipe =
+              products.find(
+                (product) => product.productID === Number(cartProduct.productID)
+              ) || null;
+            const excludedIngredient: string[] = [];
+            cartProduct.exclude.map((myIngredient) => {
+              const ingredientName = getIngredientNameById(myIngredient);
+              if (ingredientName) {
+                excludedIngredient.push(ingredientName);
+              }
+            });
 
-      <div className="cart-product">
-        <h3 className="cart-product__title">Muffins</h3>
-        <div className="cart-product__price-container">
-          <h3 className="cart-product__price">60 sek</h3>
-          <img className="cart-product__remove" src={remove} />
-        </div>
+            return (
+              <>
+                <div className="cart-product">
+                  <h3 className="cart-product__title">{recipe?.productName}</h3>
+                  <div className="cart-product__price-container">
+                    <h3 className="cart-product__price">
+                      {cartProduct.price} sek {}
+                    </h3>
+                  </div>
+                </div>
+                {excludedIngredient &&
+                  excludedIngredient.map((ingredient) => {
+                    return (
+                      <div className="body-text--dark">- {ingredient}</div>
+                    );
+                  })}
+              </>
+            );
+          }
+        })}
       </div>
-
-      <div className="cart-ingredients">
-        <h4 className="cart-ingredients__title">Ingredienser:</h4>
-        <div className="cart-ingredients__ingredient-container">
-          <h5 className="cart-ingredients__ingredient">Ingrediens</h5>
-          {/* <img className="cart-ingredients__edit" src={edit} /> */}
-        </div>
-      </div>
-
       {/* <div className="cart-additions">
         <h4 className="cart-additions__title">Tillval:</h4>
         <div className="cart-additions__ingredient-container">
