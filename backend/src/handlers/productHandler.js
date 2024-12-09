@@ -27,10 +27,10 @@ export const getAllProducts = async () => {
 
 export const getProduct = async (event) => {
   return tryCatchWrapper(async () => {
-    const { productID } = event.pathParameters;
+    const productID = Number(event.pathParameters.productID);
     const value = validateRequest(getProductSchema, { productID });
-    const data = await ProductService.getProduct(parseInt(value.productID));
-    return sendResponse(data, 200);
+    const data = await ProductService.getProduct(value.productID);
+    return sendResponse(200, data);
   });
 };
 
