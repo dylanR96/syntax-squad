@@ -4,6 +4,7 @@ import profilePicture from "../../assets/images/profile_picture.png";
 import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
 import { ENDPOINT_GET_ORDERS_BY_ID } from "../../endpoints/apiEndpoints";
+import { GetOrdersByUserID } from "./types";
 import { jwtToken } from "../../features/fetchFromApi";
 
 interface ApiResponse {
@@ -15,12 +16,15 @@ interface ApiResponse {
 }
 
 const Profile: React.FC = () => {
-  const [orders, setOrders] = useState<ApiResponse[]>([]);
+  const [orders, setOrders] = useState<GetOrdersByUserID[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [expandOrder, setExpandOrder] = useState<number | null>(null);
 
-  const getOrdersByUserID = async (url: string): Promise<ApiResponse[]> => {
+
+  const getOrdersByUserID = async (
+    url: string
+  ): Promise<GetOrdersByUserID[]> => {
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -33,7 +37,7 @@ const Profile: React.FC = () => {
         throw new Error(`Error: ${response.status}`);
       }
 
-      const data: ApiResponse[] = await response.json();
+      const data: GetOrdersByUserID[] = await response.json();
       console.log(data);
 
       return data;

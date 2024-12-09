@@ -2,41 +2,79 @@ import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import EditProfileForm from "./EditProfileForm";
+
+import profileIcon from "../../assets/images/icons/profileIcon.svg";
+import addressIcon from "../../assets/images/icons/addressIcon.svg";
+import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
+import { GetCustomer, EditCustomer } from "./types";
 import {
   ENDPOINT_CUSTOMER,
   ENDPOINT_EDIT_CUSTOMER,
 } from "../../endpoints/apiEndpoints";
-import profileIcon from "../../assets/images/icons/profileIcon.svg";
-import addressIcon from "../../assets/images/icons/addressIcon.svg";
-import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
+
 import { API_CALL_GET, jwtToken } from "../../features/fetchFromApi";
 
-// interface ApiResponseEdit {
-//   email: string;
-//   address: string;
-//   zipcode: string;
-//   city: string;
-//   phoneNumber: string;
-// }
-
-interface ApiResponseGet {
-  customerID: string;
-  phoneNumber: string;
-  city: string;
-  zipcode: string;
-  surname: string;
-  firstname: string;
-  address: string;
-  email: string;
-}
 
 const EditProfile: React.FC = () => {
-  const [customers, setCustomer] = useState<ApiResponseGet | null>();
+  const [customers, setCustomer] = useState<GetCustomer | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+
+
+  const getCustomer = async (url: string): Promise<GetCustomer> => {
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data: GetCustomer = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  const editCustomer = async (url: string): Promise<EditCustomer> => {
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify(customers),
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const data: EditCustomer = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    editCustomer(ENDPOINT_EDIT_CUSTOMER);
+  };
+
+
   const handleChange = (key: string, value: string) => {
-    setCustomer((prev) => (prev ? { ...prev, [key]: value } : null));
+    setCustomer((prev) => {
+      if (!prev) return null;
+      return { ...prev, [key]: value };
+    });
   };
 
   useEffect(() => {
@@ -45,13 +83,52 @@ const EditProfile: React.FC = () => {
         const customerData = await API_CALL_GET(ENDPOINT_CUSTOMER);
         setCustomer(customerData);
       } catch (error) {
-        setError("Failed to fetch orders.");
+        setError("Failed to fetch customer.");
       } finally {
         setLoading(false);
       }
     };
     fetchCustomer();
   }, []);
+
+  const formFields = [
+    {
+      label: "Email",
+      type: "email",
+      value: customers?.email,
+      key: "email",
+      icon: profileIcon,
+    },
+    {
+      label: "Address",
+      type: "text",
+      value: customers?.address,
+      key: "address",
+      icon: addressIcon,
+    },
+    {
+      label: "Zipcode",
+      type: "text",
+      value: customers?.zipcode,
+      key: "zipcode",
+      maxLength: 5,
+      icon: addressIcon,
+    },
+    {
+      label: "City",
+      type: "text",
+      value: customers?.city,
+      key: "city",
+      icon: addressIcon,
+    },
+    {
+      label: "Phone Number",
+      type: "tel",
+      value: customers?.phoneNumber,
+      key: "phoneNumber",
+      icon: phoneIcon,
+    },
+  ];
 
   return (
     <div className="wrapper">
@@ -68,68 +145,19 @@ const EditProfile: React.FC = () => {
         {error && <p>{error}</p>}
         {customers ? (
           <div className="profile__order-history" key={customers.customerID}>
-            <form className="profile__form">
-              <div className="profile__form-group">
-                <span className="profile__icon">
-                  <img src={profileIcon} alt="Profile Icon" />
-                </span>
-                <input
-                  className="profile__input"
-                  type="email"
-                  value={customers.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
+            <form className="profile__form" onSubmit={handleSubmit}>
+              {formFields.map((field) => (
+                <EditProfileForm
+                  key={field.key}
+                  label={field.label}
+                  type={field.type}
+                  value={field.value || ""}
+                  onChange={(e) => handleChange(field.key, e.target.value)}
+                  maxLength={field.maxLength}
+                  icon={field.icon}
                 />
-              </div>
-              <div className="profile__form-group">
-                <span className="profile__icon">
-                  <img src={addressIcon} alt="Address Icon" />
-                </span>
-                <input
-                  className="profile__input"
-                  type="text"
-                  value={customers.address}
-                  onChange={(e) => handleChange("address", e.target.value)}
-                />
-              </div>
-              <div className="profile__form-group">
-                <span className="profile__icon">
-                  <img src={addressIcon} alt="Address Icon" />
-                </span>
-                <input
-                  className="profile__input"
-                  type="text"
-                  maxLength={5}
-                  value={customers.zipcode}
-                  onChange={(e) => handleChange("zipcode", e.target.value)}
-                />
-              </div>
-              <div className="profile__form-group">
-                <span className="profile__icon">
-                  <img src={addressIcon} alt="Address Icon" />
-                </span>
-                <input
-                  className="profile__input"
-                  type="text"
-                  value={customers.city}
-                  onChange={(e) => handleChange("city", e.target.value)}
-                />
-              </div>
-              <div className="profile__form-group">
-                <span className="profile__icon">
-                  <img src={phoneIcon} alt="Phone Icon" />
-                </span>
-                <input
-                  className="profile__input"
-                  type="tel"
-                  value={customers.phoneNumber}
-                  onChange={(e) => handleChange("phoneNumber", e.target.value)}
-                />
-              </div>
-              <button
-                className="profile__save-button"
-                type="button"
-                // onClick={editCustomer(ENDPOINT_EDIT_CUSTOMER)}
-              >
+              ))}
+              <button className="profile__save-button" type="submit">
                 Spara ändringar
               </button>
             </form>
