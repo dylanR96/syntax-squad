@@ -17,9 +17,7 @@ export const createOrderSchema = Joi.object({
   address: Joi.string().required(),
   zipcode: Joi.string().required(),
   city: Joi.string().required(),
-  phoneNumber: Joi.string()
-    .pattern(/^\d{10}$/)
-    .required(),
+  phoneNumber: Joi.string().required(),
 });
 
 export const changeOrderSchema = Joi.object({
