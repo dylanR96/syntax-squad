@@ -50,7 +50,9 @@ export const customerModel = {
       Key: { customerID },
     };
     const { Item: data } = await db.get(params);
-    return data;
+
+    const { password, customerID: cID, createdAt, ...rest } = data; // Destructure to exclude password
+    return rest;
   },
 
   deleteCustomer: async (customerID) => {

@@ -13,7 +13,8 @@ export const deleteIngredientSchema = Joi.object({
 });
 
 export const editIngredientSchema = Joi.object({
-  ingredientID: Joi.number().integer().min(1000).max(9999).required(),
+  ingredientID: Joi.number().integer().min(1000).max(99999).required(),
+  ingredientName: Joi.string(),
   stock: Joi.number().optional(),
   units: Joi.string().optional(),
   pricePerUnit: Joi.number().optional(),

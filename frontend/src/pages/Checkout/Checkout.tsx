@@ -11,6 +11,7 @@ import {
 } from "../../features/order/orderSlice";
 import { fetchProducts } from "../../features/products/productsSlice";
 import { address } from "framer-motion/client";
+import { jwtToken } from "../../features/fetchFromApi";
 
 /* 
 
@@ -78,15 +79,6 @@ const Checkout = () => {
       city: "",
       phoneNumber: "",
     });
-
-    function getCookie(name: string): string | undefined {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(";").shift();
-    }
-
-    const jwtToken = getCookie("userToken");
-    console.log("JWT Token:", jwtToken);
 
     try {
       const response = await fetch(

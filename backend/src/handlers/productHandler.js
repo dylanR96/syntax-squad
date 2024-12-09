@@ -8,7 +8,10 @@ import {
   editProductSchema,
   getProductSchema,
 } from "../validations/productValidations.js";
-import { authorizeAdmin } from "../middlewares/authMiddleware.js";
+import {
+  authorizeAdmin,
+  authorizeCustomer,
+} from "../middlewares/authMiddleware.js";
 
 export const createProduct = async (event) => {
   return tryCatchWrapper(async () => {
@@ -20,9 +23,9 @@ export const createProduct = async (event) => {
   });
 };
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeAdmin(event);
+    await authorizeCustomer(event);
     const getAllProducts = await ProductService.getAllProducts();
     return sendResponse(200, getAllProducts);
   });
@@ -30,11 +33,11 @@ export const getAllProducts = async () => {
 
 export const getProduct = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeAdmin(event);
+    await authorizeCustomer(event);
     const { productID } = event.pathParameters;
     const value = validateRequest(getProductSchema, { productID });
     const data = await ProductService.getProduct(parseInt(value.productID));
-    return sendResponse(data, 200);
+    return sendResponse(200, data);
   });
 };
 

@@ -40,7 +40,7 @@ functions:
     handler: src/handlers/adminHandler.getAdmin
     events:
       - httpApi:
-          path: /admin/{adminID}
+          path: /admin
           method: GET
   changeEmailAdmin:
     handler: src/handlers/adminHandler.changeEmail
@@ -52,7 +52,7 @@ functions:
     handler: src/handlers/adminHandler.deleteAdmin
     events:
       - httpApi:
-          path: /admin/{adminID}
+          path: /admin
           method: DELETE
   # Customers
   createCustomer:
@@ -77,7 +77,7 @@ functions:
     handler: src/handlers/customerHandler.getCustomer
     events:
       - httpApi:
-          path: /customer/{customerID}
+          path: /customer
           method: GET
   editCustomer:
     handler: src/handlers/customerHandler.editCustomer
@@ -89,7 +89,7 @@ functions:
     handler: src/handlers/customerHandler.deleteCustomer
     events:
       - httpApi:
-          path: /customer/{customerID}
+          path: /customer
           method: DELETE
   # Ingredients
   addIngredient:
@@ -278,4 +278,3 @@ resources:
             Projection:
               ProjectionType: ALL
         BillingMode: PAY_PER_REQUEST
-
