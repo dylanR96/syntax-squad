@@ -12,7 +12,11 @@ import {
 import { fetchProducts } from "../../features/products/productsSlice";
 import { address } from "framer-motion/client";
 
-//hämta användarens information
+/* 
+
+När man klickar på beställ så görs ett post anrop till databasen för att skapa ordern
+
+*/
 
 const Checkout = () => {
   const [userInfo, setUserInfo] = useState({
@@ -34,7 +38,7 @@ const Checkout = () => {
   const fullOrder = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log("Global Order State:", JSON.stringify(fullOrder, null, 2));
+    console.log(JSON.stringify(fullOrder, null, 2));
   }, [fullOrder]);
 
   /* Dispatch Products API */
@@ -64,7 +68,7 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addInfo(userInfo));
     setUserInfo({
@@ -74,6 +78,37 @@ const Checkout = () => {
       city: "",
       phoneNumber: "",
     });
+
+    function getCookie(name: string): string | undefined {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(";").shift();
+    }
+
+    const jwtToken = getCookie("userToken");
+    console.log("JWT Token:", jwtToken);
+
+    try {
+      const response = await fetch(
+        "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify(fullOrder),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Order created successfully");
+      } else {
+        console.error("Failed to create order");
+      }
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   return (
@@ -155,7 +190,8 @@ const Checkout = () => {
             Stad
             <input
               type="text"
-              id="address"
+              name="city"
+              id="city"
               value={userInfo.city}
               onChange={handleUserInfoChange}
               className="special-request__input"
@@ -165,7 +201,8 @@ const Checkout = () => {
             Telefon
             <input
               type="text"
-              id="address"
+              name="phoneNumber"
+              id="phoneNumber"
               value={userInfo.phoneNumber}
               onChange={handleUserInfoChange}
               className="special-request__input"
