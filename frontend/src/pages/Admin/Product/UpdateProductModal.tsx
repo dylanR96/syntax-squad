@@ -6,7 +6,7 @@ import {
   ENDPOINT_ALL_INGREDIENTS,
   ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
-import { API_CALL_GET } from "../../../features/fetchFromApi";
+import { API_CALL_GET, jwtToken } from "../../../features/fetchFromApi";
 // Import this later
 type IngredientType = {
   createdAt: string;
@@ -134,6 +134,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
         }),
         {
@@ -159,6 +160,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
           body: JSON.stringify(editProduct),
         }),
