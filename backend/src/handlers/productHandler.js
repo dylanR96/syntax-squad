@@ -8,9 +8,11 @@ import {
   editProductSchema,
   getProductSchema,
 } from "../validations/productValidations.js";
+import { authorizeAdmin } from "../middlewares/authMiddleware.js";
 
 export const createProduct = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(createProductSchema, body);
     await ProductService.createProduct(value);
@@ -20,6 +22,7 @@ export const createProduct = async (event) => {
 
 export const getAllProducts = async () => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const getAllProducts = await ProductService.getAllProducts();
     return sendResponse(200, getAllProducts);
   });
@@ -27,15 +30,17 @@ export const getAllProducts = async () => {
 
 export const getProduct = async (event) => {
   return tryCatchWrapper(async () => {
-    const productID = Number(event.pathParameters.productID);
+    await authorizeAdmin(event);
+    const { productID } = event.pathParameters;
     const value = validateRequest(getProductSchema, { productID });
-    const data = await ProductService.getProduct(value.productID);
-    return sendResponse(200, data);
+    const data = await ProductService.getProduct(parseInt(value.productID));
+    return sendResponse(data, 200);
   });
 };
 
 export const editProduct = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(editProductSchema, body);
     await ProductService.editProduct(value);
@@ -45,6 +50,7 @@ export const editProduct = async (event) => {
 
 export const deleteProduct = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const { productID } = event.pathParameters;
     const value = validateRequest(deleteProductSchema, { productID });
     await ProductService.deleteProduct(parseInt(value.productID));

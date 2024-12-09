@@ -1,5 +1,5 @@
 import { OrderService } from "../services/orderService.js";
-import { sendError, sendResponse } from "../utils/responseHelper.js";
+import { sendResponse } from "../utils/responseHelper.js";
 import { tryCatchWrapper } from "../utils/tryCatchUtil.js";
 import { validateRequest } from "../middlewares/validateRequest.js";
 import {
@@ -9,15 +9,11 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
-import { verifyToken } from "../utils/verifyToken.js";
-import { authorizeCustomer } from "../middlewares/authMiddleware.js";
+import { authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    const user = await verifyToken(event);
-    if (user.role !== "customer" && user.role !== "admin") {
-      return sendError(403, "Forbidden: Please login")
-    }
+    const user = await authorizeCustomer(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(createOrderSchema, body);
     await OrderService.createOrder(value, user.id);
@@ -27,6 +23,7 @@ export const createOrder = async (event) => {
 
 export const changeOrder = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeCustomer(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(changeOrderSchema, body);
     await OrderService.changeOrder(value);
@@ -36,6 +33,7 @@ export const changeOrder = async (event) => {
 
 export const deleteOrder = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeCustomer(event);
     const { orderNO } = event.pathParameters;
     const value = validateRequest(deleteOrderSchema, { orderNO });
     await OrderService.deleteOrder(parseInt(value.orderNO));
@@ -45,6 +43,7 @@ export const deleteOrder = async (event) => {
 
 export const changeOrderStatus = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(changeStatusSchema, body);
     await OrderService.changeOrderStatus(value);
@@ -54,6 +53,7 @@ export const changeOrderStatus = async (event) => {
 
 export const getOrder = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeCustomer(event)
     const { orderNO } = event.pathParameters;
     const value = validateRequest(getOrderSchema, { orderNO });
     const data = await OrderService.getOrder(parseInt(value.orderNO));
@@ -69,8 +69,9 @@ export const getOrderByUserID = async (event) => {
   });
 };
 
-export const getAllOrders = async () => {
+export const getAllOrders = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event)
     const data = await OrderService.getAllOrders();
     return sendResponse(200, data);
   });

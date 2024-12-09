@@ -22,16 +22,15 @@ export const customerLoginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
-export const getCustomerSchema = Joi.object({
-  customerID: Joi.string().required(),
-});
+// export const getCustomerSchema = Joi.object({
+//   customerID: Joi.string().required(),
+// });
 
-export const deleteCustomerSchema = Joi.object({
-  customerID: Joi.number().required(),
-});
+// export const deleteCustomerSchema = Joi.object({
+//   customerID: Joi.number().required(),
+// });
 
 export const editCustomerSchema = Joi.object({
-  customerID: Joi.string().required(),
   email: Joi.string()
     .email({ tlds: { allow: true } })
     .optional(),
