@@ -5,7 +5,15 @@ import ProfileEditButton from "../../components/ui/ProfileEditButton";
 import LogoutButton from "../../components/ui/LogoutButton";
 import { ENDPOINT_GET_ORDERS_BY_ID } from "../../endpoints/apiEndpoints";
 import { GetOrdersByUserID } from "./types";
-import { getCookie } from "../../utils/getCookie";
+import { jwtToken } from "../../features/fetchFromApi";
+
+interface ApiResponse {
+  orderNO: number;
+  price: number;
+  orderDate: string;
+  comment: string;
+  status: string;
+}
 
 const Profile: React.FC = () => {
   const [orders, setOrders] = useState<GetOrdersByUserID[]>([]);
@@ -13,7 +21,6 @@ const Profile: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [expandOrder, setExpandOrder] = useState<number | null>(null);
 
-  const jwtToken = getCookie("userToken");
 
   const getOrdersByUserID = async (
     url: string

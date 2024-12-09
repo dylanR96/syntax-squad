@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import EditProfileForm from "./EditProfileForm";
+
 import profileIcon from "../../assets/images/icons/profileIcon.svg";
 import addressIcon from "../../assets/images/icons/addressIcon.svg";
 import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
-import { getCookie } from "../../utils/getCookie";
 import { GetCustomer, EditCustomer } from "./types";
 import {
   ENDPOINT_CUSTOMER,
   ENDPOINT_EDIT_CUSTOMER,
 } from "../../endpoints/apiEndpoints";
 
+import { API_CALL_GET, jwtToken } from "../../features/fetchFromApi";
+
+
 const EditProfile: React.FC = () => {
   const [customers, setCustomer] = useState<GetCustomer | null>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const jwtToken = getCookie("userToken");
+
 
   const getCustomer = async (url: string): Promise<GetCustomer> => {
     try {
@@ -66,6 +69,7 @@ const EditProfile: React.FC = () => {
     editCustomer(ENDPOINT_EDIT_CUSTOMER);
   };
 
+
   const handleChange = (key: string, value: string) => {
     setCustomer((prev) => {
       if (!prev) return null;
@@ -76,7 +80,7 @@ const EditProfile: React.FC = () => {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const customerData = await getCustomer(ENDPOINT_CUSTOMER);
+        const customerData = await API_CALL_GET(ENDPOINT_CUSTOMER);
         setCustomer(customerData);
       } catch (error) {
         setError("Failed to fetch customer.");

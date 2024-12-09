@@ -4,6 +4,7 @@ import { EditIngredientType, IngredientType } from "./types";
 import StockModal from "./IngredientModal";
 import NewIngredient from "./NewIngredient";
 import { ENDPOINT_ALL_INGREDIENTS } from "../../../endpoints/apiEndpoints";
+import { API_CALL_GET } from "../../../features/fetchFromApi";
 
 const Stock = () => {
   const [ingredients, setIngredients] = useState<IngredientType[]>([]);
@@ -15,16 +16,10 @@ const Stock = () => {
   useEffect(() => {
     const fetchIngredients = async () => {
       if (!editIngredient) {
-        try {
-          const response = await fetch(ENDPOINT_ALL_INGREDIENTS);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data: IngredientType[] = await response.json();
-          setIngredients(data);
-        } catch (error) {
-          console.error("Failed", error);
-        }
+        const data: IngredientType[] = await API_CALL_GET(
+          ENDPOINT_ALL_INGREDIENTS
+        );
+        setIngredients(data);
       }
     };
     fetchIngredients();

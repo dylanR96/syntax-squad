@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EventFn, NewIngredientType } from "./types";
 import { toast } from "react-toastify";
 import { ENDPOINT_INGREDIENT } from "../../../endpoints/apiEndpoints.js";
+import { jwtToken } from "../../../features/fetchFromApi.js";
 
 type NewIngredientPropsType = {
   units: string[];
@@ -29,6 +30,7 @@ const NewIngredient: React.FC<NewIngredientPropsType> = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
         },
         body: JSON.stringify(newIngredient), // Convert the data to JSON format
       }),
