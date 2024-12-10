@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../features/products/productsSlice";
 import { RootState, AppDispatch } from "../../app/store";
 import SearchResults from "./SearchResults"; // Importera sökresultatkomponenten
+import { jwtToken } from "../../features/fetchFromApi";
 
 const Home = () => {
   const [localError, setLocalError] = useState<string | null>(null);
@@ -19,13 +20,18 @@ const Home = () => {
   const { products, status, error } = useSelector(
     (state: RootState) => state.products
   );
-
+  useEffect(() => {
+    // Fullösning för att få jwtToken att laddas in
+    if (!jwtToken) {
+      window.location.reload();
+    }
+  }, []);
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchProducts());
     }
   }, [dispatch, status]);
-  
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setInputValue(event.target.value);
   };
@@ -81,11 +87,13 @@ const Home = () => {
               </button>
             </article>
           </form>
-          {searchResults.length === 0 && <i
-            className="fa-solid fa-filter home__fa-filter"
-            onClick={handleShowAll}
-            style={{ cursor: "pointer" }}
-          ></i>}
+          {searchResults.length === 0 && (
+            <i
+              className="fa-solid fa-filter home__fa-filter"
+              onClick={handleShowAll}
+              style={{ cursor: "pointer" }}
+            ></i>
+          )}
         </article>
       </section>
 
@@ -95,51 +103,56 @@ const Home = () => {
 
       {/* Visa sökresultat */}
       {(searchResults.length > 0 || showAllProducts) && (
-      <SearchResults searchResults={searchResults} showAll={showAllProducts} />
+        <SearchResults
+          searchResults={searchResults}
+          showAll={showAllProducts}
+        />
       )}
 
-      {!isLoading && !isEmpty && searchResults.length === 0 && !showAllProducts && (
-        <main className="container">
-          <article className="home__card-container">
-            <h3 className="h3--dark">Beställ igen</h3>
-            <CardBig />
-          </article>
-          
-          <article className="home__card-container">
-            <h3 className="h3--dark">Trending</h3>
-            <div className="cards-wrapper">
-              
-              {trendingTag.map((tag) => (
-                <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
-                  <CardSmall content={tag} />
-                </Link>
-              ))}
-            </div>
-          </article>
+      {!isLoading &&
+        !isEmpty &&
+        searchResults.length === 0 &&
+        !showAllProducts && (
+          <main className="container">
+            <article className="home__card-container">
+              <h3 className="h3--dark">Beställ igen</h3>
+              <CardBig />
+            </article>
 
-          <article className="home__card-container">
-            <h3 className="h3--dark">Under 15 min</h3>
-            <div className="cards-wrapper">
-              {timeTag.map((tag) => (
-                <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
-                  <CardSmall content={tag} />
-                </Link>
-              ))}
-            </div>
-          </article>
+            <article className="home__card-container">
+              <h3 className="h3--dark">Trending</h3>
+              <div className="cards-wrapper">
+                {trendingTag.map((tag) => (
+                  <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
+                    <CardSmall content={tag} />
+                  </Link>
+                ))}
+              </div>
+            </article>
 
-          <article className="home__card-container">
-            <h3 className="h3--dark">Jul</h3>
-            <div className="cards-wrapper">
-              {julTag.map((tag) => (
-                <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
-                  <CardSmall content={tag} />
-                </Link>
-              ))}
-            </div>
-          </article>
-        </main>
-      )}
+            <article className="home__card-container">
+              <h3 className="h3--dark">Under 15 min</h3>
+              <div className="cards-wrapper">
+                {timeTag.map((tag) => (
+                  <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
+                    <CardSmall content={tag} />
+                  </Link>
+                ))}
+              </div>
+            </article>
+
+            <article className="home__card-container">
+              <h3 className="h3--dark">Jul</h3>
+              <div className="cards-wrapper">
+                {julTag.map((tag) => (
+                  <Link to={`/recipe/${tag.productID}`} key={tag.productID}>
+                    <CardSmall content={tag} />
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </main>
+        )}
     </>
   );
 };

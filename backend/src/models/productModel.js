@@ -54,7 +54,6 @@ export const productModel = {
         bakingTime = :bakingTime,
         description = :description,
         recipe = :recipe`,
-
       ExpressionAttributeValues: {
         ":productName": productData.productName,
         ":ingredients": productData.ingredients,
@@ -66,7 +65,7 @@ export const productModel = {
         ":description": productData.description,
         ":recipe": productData.recipe,
       },
-      ReturnValues: "ALL_NEW", // Return the updated item
+      ReturnValues: "ALL_NEW",
     };
     const data = db.update(params);
     return data;

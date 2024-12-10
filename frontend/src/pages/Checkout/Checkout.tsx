@@ -7,13 +7,28 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   increaseQuantity,
   decreaseQuantity,
-  addComment,
+  addInfo,
 } from "../../features/order/orderSlice";
 import { fetchProducts } from "../../features/products/productsSlice";
+import { address } from "framer-motion/client";
+import { jwtToken } from "../../features/fetchFromApi";
+
+/* 
+
+När man klickar på beställ så görs ett post anrop till databasen för att skapa ordern
+
+*/
 
 const Checkout = () => {
-  const [commentValue, setCommentValue] = useState("");
+  const [userInfo, setUserInfo] = useState({
+    comment: "",
+    address: "",
+    zipcode: "",
+    city: "",
+    phoneNumber: "",
+  });
   const dispatch = useDispatch<AppDispatch>();
+
   const { products, status: productsStatus } = useSelector(
     (state: RootState) => state.products
   );
@@ -24,7 +39,7 @@ const Checkout = () => {
   const fullOrder = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log("Global Order State:", JSON.stringify(fullOrder, null, 2));
+    console.log(JSON.stringify(fullOrder, null, 2));
   }, [fullOrder]);
 
   /* Dispatch Products API */
@@ -35,13 +50,57 @@ const Checkout = () => {
   }, [dispatch, productsStatus]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentValue(e.target.value);
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => {
+      return {
+        ...prevUserInfo,
+        [name]: value,
+      };
+    });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleUserInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserInfo((prevUserInfo) => {
+      return {
+        ...prevUserInfo,
+        [name]: value,
+      };
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addComment(commentValue));
-    setCommentValue("");
+    dispatch(addInfo(userInfo));
+    setUserInfo({
+      comment: "",
+      address: "",
+      zipcode: "",
+      city: "",
+      phoneNumber: "",
+    });
+
+    try {
+      const response = await fetch(
+        "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/order",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify(fullOrder),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Order created successfully");
+      } else {
+        console.error("Failed to create order");
+      }
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   return (
@@ -90,13 +149,58 @@ const Checkout = () => {
             <textarea
               id="comment"
               name="comment"
-              value={commentValue}
+              value={userInfo.comment}
               onChange={handleChange}
               className="special-request__input"
               rows={5}
               cols={33}
             />
           </label>
+          <label className="special-request">
+            Address
+            <input
+              type="text"
+              id="address"
+              name="address"
+              value={userInfo.address}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Postnummer
+            <input
+              type="text"
+              name="zipcode"
+              id="zipcode"
+              value={userInfo.zipcode}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Stad
+            <input
+              type="text"
+              name="city"
+              id="city"
+              value={userInfo.city}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+          <label className="special-request">
+            Telefon
+            <input
+              type="text"
+              name="phoneNumber"
+              id="phoneNumber"
+              value={userInfo.phoneNumber}
+              onChange={handleUserInfoChange}
+              className="special-request__input"
+            />
+          </label>
+
           <div className="cart-total">
             <div className="cart-total__price-container">
               <h3 className="cart-total__title">Totalt</h3>

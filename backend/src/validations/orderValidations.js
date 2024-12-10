@@ -3,32 +3,21 @@ import Joi from "joi";
 export const createOrderSchema = Joi.object({
   products: Joi.array()
     .items(
-      Joi.object().pattern(
-        Joi.string(),
-        Joi.object({
-          quantity: Joi.number().integer().min(1).required(),
-          exclude: Joi.array().items(Joi.string().optional()).required(),
-          extra: Joi.array()
-            .items(
-              Joi.object().pattern(
-                Joi.string().pattern(/^\d+$/),
-                Joi.string().pattern(/^\d+kr$/)
-              )
-            )
-            .required(),
-        })
-      )
+      Joi.object({
+        productID: Joi.number().integer().required(),
+        quantity: Joi.number().integer().min(1).required(),
+        exclude: Joi.array().items(Joi.number().integer()),
+        price: Joi.number().required(),
+      })
     )
     .min(1)
     .required(),
-  comment: Joi.string().optional(),
+  comment: Joi.string().allow("").optional(),
   price: Joi.number().required(),
   address: Joi.string().required(),
   zipcode: Joi.string().required(),
   city: Joi.string().required(),
-  phoneNumber: Joi.string()
-    .pattern(/^\d{10}$/)
-    .required(),
+  phoneNumber: Joi.string().required(),
 });
 
 export const changeOrderSchema = Joi.object({
@@ -54,14 +43,12 @@ export const changeOrderSchema = Joi.object({
     )
     .min(1)
     .required(),
-  comment: Joi.string().optional(),
+  comment: Joi.string().allow("").optional(),
   price: Joi.number().positive().optional(),
   address: Joi.string().optional(),
   zipcode: Joi.string().optional(),
   city: Joi.string().optional(),
-  phoneNumber: Joi.string()
-    .pattern(/^\d{10}$/)
-    .optional(),
+  phoneNumber: Joi.string().optional(),
 });
 
 export const deleteOrderSchema = Joi.object({

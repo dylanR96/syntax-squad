@@ -5,7 +5,9 @@
   justify-content: center;
   height: 100vh;
 }
-
+.login--admin {
+  height: 500px;
+}
 .login__title {
   color: #cc8d80;
   font-family: "Aclonica";

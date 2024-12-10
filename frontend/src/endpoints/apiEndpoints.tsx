@@ -21,6 +21,8 @@ export const ENDPOINT_GET_ORDERS_BY_ID: string =
 export const ENDPOINT_EDIT_CUSTOMER: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer";
 
+export const ENDPOINT_ADMIN_LOGIN: string =
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin/login";
 // endpoints:
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin
 //   POST - https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/admin/login

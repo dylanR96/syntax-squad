@@ -1,8 +1,9 @@
 import { ingredientModel } from "../models/ingredientModel.js";
+import { INGREDIENTS_TABLE } from "../constants/tableNames.js";
+import { scanTable } from "../utils/dbTableScan.js";
 
 export const IngredientService = {
   addIngredient: async (ingredientData) => {
-    //validering(middleware)
     return await ingredientModel.addIngredient(ingredientData);
   },
   getAllIngredients: async () => {
@@ -26,12 +27,26 @@ export const IngredientService = {
     return enrichedIngredients;
   },
   deleteIngredient: async (ingredientData) => {
+    const existingIngredient = await scanTable(
+      ingredientData.ingredientData,
+      INGREDIENTS_TABLE,
+      "ingredientID"
+    );
+    if (!existingIngredient) {
+      throw new Error("No such ingredient.");
+    }
     return await ingredientModel.deleteIngredient(ingredientData);
   },
 
   editIngredient: async (ingredientData) => {
-    //validering(middleware)
-    // Needs to check if the ingredientData.ingredientID exists
+    const existingIngredient = await scanTable(
+      ingredientData.ingredientData,
+      INGREDIENTS_TABLE,
+      "ingredientID"
+    );
+    if (!existingIngredient) {
+      throw new Error("No such ingredient.");
+    }
     return await ingredientModel.editIngredient(ingredientData);
   },
 };

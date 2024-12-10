@@ -6,6 +6,7 @@ import {
   ENDPOINT_ALL_INGREDIENTS,
   ENDPOINT_PRODUCT,
 } from "../../../endpoints/apiEndpoints";
+import { API_CALL_GET, jwtToken } from "../../../features/fetchFromApi";
 // Import this later
 type IngredientType = {
   createdAt: string;
@@ -30,21 +31,8 @@ const ProductModal: React.FC<ProductPropsType> = ({
   const [newIngredient, setNewIngredient] = useState<number | null>(null);
   useEffect(() => {
     const fetchIngredients = async () => {
-      try {
-        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data: IngredientType[] = await response.json();
-        setAllIngredients(data);
-      } catch (error) {
-        console.error("Failed", error);
-      }
+      const ingredients = await API_CALL_GET(ENDPOINT_ALL_INGREDIENTS);
+      setAllIngredients(ingredients);
     };
     window.scroll({
       top: 0,
@@ -60,7 +48,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
     setEditProduct((prev) => {
       if (!prev) return null;
       const updatedTags: string[] = [...prev.tags];
-      updatedTags[index] = value; // Update the specific tag
+      updatedTags[index] = value.toLowerCase();
       return {
         ...prev,
         tags: updatedTags,
@@ -146,6 +134,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
         }),
         {
@@ -171,6 +160,7 @@ const ProductModal: React.FC<ProductPropsType> = ({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
           },
           body: JSON.stringify(editProduct),
         }),
