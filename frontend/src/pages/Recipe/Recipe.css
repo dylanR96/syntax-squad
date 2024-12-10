@@ -144,7 +144,9 @@
 .recipe-instruction {
   margin-top: 1.25em;
 }
-
+.recipe__button:disabled {
+  background-color: #ccc;
+}
 @media (min-width: 768px) {
   .recipe__upperbox {
     max-width: 900px;

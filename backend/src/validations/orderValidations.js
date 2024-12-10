@@ -56,6 +56,7 @@ export const deleteOrderSchema = Joi.object({
 });
 
 export const changeStatusSchema = Joi.object({
+  orderNO: Joi.number().required(),
   status: Joi.string().required(),
 });
 

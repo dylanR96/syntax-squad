@@ -4,6 +4,8 @@ export const ENDPOINT_PRODUCT: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/product";
 export const ENDPOINT_ALL_INGREDIENTS: string = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredients`;
 export const ENDPOINT_INGREDIENT: string = `https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredient`;
+export const ENDPOINT_INGREDIENTS_BYID: string =
+  "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/ingredientsById";
 /* LOGIN */
 export const ENDPOINT_CUSTOMER: string =
   "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/customer";

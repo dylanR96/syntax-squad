@@ -9,15 +9,19 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
-import { authorizeAccess, authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
+import {
+  authorizeAccess,
+  authorizeAdmin,
+  authorizeCustomer,
+} from "../middlewares/authMiddleware.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
     const user = await authorizeCustomer(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(createOrderSchema, body);
-    await OrderService.createOrder(value, user.id);
-    return sendResponse(200, "Order created successfully");
+    const data = await OrderService.createOrder(value, user.id);
+    return sendResponse(200, data);
   });
 };
 
@@ -54,7 +58,7 @@ export const changeOrderStatus = async (event) => {
 
 export const getOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeAccess(event)
+    await authorizeAccess(event);
     const { orderNO } = event.pathParameters;
     const value = validateRequest(getOrderSchema, { orderNO });
     const data = await OrderService.getOrder(parseInt(value.orderNO));
@@ -72,7 +76,7 @@ export const getOrderByUserID = async (event) => {
 
 export const getAllOrders = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeAdmin(event)
+    await authorizeAdmin(event);
     const data = await OrderService.getAllOrders();
     return sendResponse(200, data);
   });

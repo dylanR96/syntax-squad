@@ -4,10 +4,11 @@ import { createID } from "../utils/dynamodbHelper.js";
 
 export const orderModel = {
   createOrder: async (orderData, userID) => {
+    const orderID = await createID(ORDERS_TABLE, "orderNO", 1000);
     const params = {
       TableName: ORDERS_TABLE,
       Item: {
-        orderNO: await createID(ORDERS_TABLE, "orderNO", 1000),
+        orderNO: orderID,
         userID: userID,
         orderDate: new Date().toISOString(),
         status: "pending",
@@ -21,7 +22,7 @@ export const orderModel = {
       },
     };
     const data = await db.put(params);
-    return data;
+    return orderID;
   },
   changeOrder: async (orderData) => {
     const params = {

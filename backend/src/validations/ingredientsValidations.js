@@ -22,5 +22,5 @@ export const editIngredientSchema = Joi.object({
 });
 
 export const getIngredientsByIdsSchema = Joi.object({
-  ingredientID: Joi.number().integer().min(10000).max(99999).required(),
+  ingredients: Joi.array().required(),
 });
