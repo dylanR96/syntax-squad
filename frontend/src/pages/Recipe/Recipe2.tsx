@@ -5,8 +5,13 @@ import "./Recipe.css";
 import "../../assets/styles/index.css";
 import { AppDispatch, RootState } from "../../app/store";
 import { API_CALL_GET } from "../../features/fetchFromApi";
-import { ENDPOINT_PRODUCT } from "../../endpoints/apiEndpoints";
+import {
+  ENDPOINT_PRODUCT,
+  ENDPOINT_INGREDIENTS_BYID,
+} from "../../endpoints/apiEndpoints";
+import { jwtToken } from "../../features/fetchFromApi";
 import { fetchIngredients } from "../../features/ingredients/ingredientsSlice";
+import { addRecipeIngredients } from "../../features/order/orderSlice";
 import { motion } from "framer-motion";
 /* PRODUCT INTERFACES */
 interface ProductIngredient {
@@ -39,15 +44,37 @@ interface Ingredient {
   checked: boolean;
 }
 
+interface FullIngredients {
+  createdAt: string;
+  stock: number;
+  pricePerUnit: number;
+  ingredientID: number;
+  ingredientName: string;
+  units: string;
+  quantity: number;
+}
+
 const Recipe2 = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const orderState = useSelector((state: RootState) => state.order);
+
+  useEffect(() => {
+    console.log("Global Order State:", JSON.stringify(orderState, null, 2));
+  }, [orderState]); // Kör varje gång orderState uppdateras
 
   const { productID } = useParams();
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [fullIngredients, setFullIngredients] = useState<
+    FullIngredients[] | null
+  >(null);
   const [uncheckedIngredients, setUncheckedIngredients] = useState<number[]>(
     []
   );
+
+  console.log("FULL FAKKING INGREDINETS", fullIngredients);
+
   const [price, setPrice] = useState<number>(0);
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
 
@@ -76,6 +103,40 @@ const Recipe2 = () => {
     fetchData();
   }, []);
 
+  console.log("Products", product?.ingredients);
+
+  useEffect(() => {
+    console.log("TEST", product?.ingredients);
+    const fetchIngredients = async () => {
+      try {
+        const response = await fetch(`${ENDPOINT_INGREDIENTS_BYID}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+
+          body: JSON.stringify({
+            ingredients: product?.ingredients,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("DATAAAA", data);
+        setFullIngredients(data);
+        return data;
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+        throw error;
+      }
+    };
+    fetchIngredients();
+  }, [product, jwtToken]);
+
   useEffect(() => {
     if (product) {
       const newPrice = product.price - uncheckedIngredients.length * 5;
@@ -94,6 +155,7 @@ const Recipe2 = () => {
       };
       console.log(productToCart);
       setAddedToCart(true);
+      dispatch(addRecipeIngredients(productToCart));
     }
   };
 
@@ -142,23 +204,21 @@ const Recipe2 = () => {
             <form onSubmit={handleSubmit} className="recipe__form">
               {/* Checkbox form */}
 
-              {product?.ingredients.map((ingredient) => {
-                const myIngredient = ingredients?.find(
-                  (searchIngredient) =>
-                    searchIngredient.ingredientID == ingredient.id
-                );
-
+              {fullIngredients?.map((ingredient) => {
                 return (
-                  <div key={ingredient.id} className="recipe__input-container">
+                  <div
+                    key={ingredient.ingredientID}
+                    className="recipe__input-container"
+                  >
                     <label className="recipe__label">
                       <input
                         type="checkbox"
-                        name={`ingredient-${ingredient.id}`}
+                        name={`ingredient-${ingredient.ingredientID}`}
                         defaultChecked={true}
                         onChange={handleChange}
                         className="recipe__input"
                       />
-                      {`${ingredient.quantity} ${myIngredient?.units} ${myIngredient?.ingredientName}`}
+                      {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
                     </label>
                   </div>
                 );
