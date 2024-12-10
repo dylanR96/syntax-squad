@@ -15,14 +15,19 @@ import Stock from "../pages/Admin/Ingredients/Ingredients";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
+import AdminLogin from "../pages/Admin/Login/Login";
 
 const Layout = () => {
   return (
     <>
       <ToastContainer />
-      <Header />
-      <Outlet />
-      <Footer />
+      <section className="base-layout">
+        <Header />
+        <div className="flex1">
+          <Outlet />
+        </div>
+        <Footer />
+      </section>
     </>
   );
 };
@@ -77,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/confirmation",
         element: <Confirmation />,
+      },
+      {
+        path: "/admin",
+        element: <AdminLogin />,
       },
       {
         path: "/admin/ingredients",
