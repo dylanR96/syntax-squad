@@ -9,6 +9,7 @@ import {
   getProductSchema,
 } from "../validations/productValidations.js";
 import {
+  authorizeAccess,
   authorizeAdmin,
   authorizeCustomer,
 } from "../middlewares/authMiddleware.js";
@@ -25,7 +26,7 @@ export const createProduct = async (event) => {
 
 export const getAllProducts = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event);
+    await authorizeAccess(event);
     const getAllProducts = await ProductService.getAllProducts();
     return sendResponse(200, getAllProducts);
   });
@@ -33,7 +34,7 @@ export const getAllProducts = async (event) => {
 
 export const getProduct = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event);
+    await authorizeAccess(event);
     const { productID } = event.pathParameters;
     const value = validateRequest(getProductSchema, { productID });
     const data = await ProductService.getProduct(parseInt(value.productID));

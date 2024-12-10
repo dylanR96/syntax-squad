@@ -26,7 +26,7 @@ export const loginAdmin = async (event) => {
     const value = validateRequest(loginAdminSchema, body);
     const data = await AdminService.loginAdmin(value);
     const token = verifyUser({ id: data.adminID }, ADMIN_ROLE);
-    return sendResponse(200, { token });
+    return sendResponse(200, { token , role: ADMIN_ROLE});
   });
 };
 

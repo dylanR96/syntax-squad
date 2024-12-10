@@ -16,3 +16,11 @@ export const authorizeCustomer = async (event) => {
     }
     return user;
 }
+
+export const authorizeAccess = async (event) => {
+    const user = await verifyToken(event);
+    if(user.role !== CUSTOMER_ROLE && user.role !== ADMIN_ROLE) {
+        throw new Error("Forbidden: Unathorized access")
+    }
+    return user;
+}

@@ -26,7 +26,7 @@ export const loginCustomer = async (event) => {
     const value = validateRequest(customerLoginSchema, body);
     const data = await CustomerService.loginCustomer(value);
     const token = verifyUser({ id: data.customerID }, CUSTOMER_ROLE);
-    return sendResponse(200, { token });
+    return sendResponse(200, { token, role: CUSTOMER_ROLE });
   });
 };
 

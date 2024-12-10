@@ -53,7 +53,7 @@ export const changeOrderStatus = async (event) => {
 
 export const getOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event)
+    await authorizeAccess(event)
     const { orderNO } = event.pathParameters;
     const value = validateRequest(getOrderSchema, { orderNO });
     const data = await OrderService.getOrder(parseInt(value.orderNO));
@@ -63,7 +63,7 @@ export const getOrder = async (event) => {
 
 export const getOrderByUserID = async (event) => {
   return tryCatchWrapper(async () => {
-    const user = await authorizeCustomer(event);
+    const user = await authorizeAccess(event);
     const data = await OrderService.getOrderByUserID(user.id);
     return sendResponse(200, data);
   });
