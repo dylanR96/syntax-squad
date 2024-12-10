@@ -8,7 +8,10 @@ import {
   editIngredientSchema,
   getIngredientsByIdsSchema,
 } from "../validations/ingredientsValidations.js";
-import { authorizeAccess, authorizeAdmin } from "../middlewares/authMiddleware.js";
+import {
+  authorizeAccess,
+  authorizeAdmin,
+} from "../middlewares/authMiddleware.js";
 
 export const addIngredient = async (event) => {
   return tryCatchWrapper(async () => {
@@ -46,7 +49,7 @@ export const getIngredientsByIds = async (event) => {
     const body = JSON.parse(event.body);
     const value = validateRequest(getIngredientsByIdsSchema, body);
     const getIngredients = await IngredientService.getIngredientsByIds(value);
-    sendResponse(200, getIngredients);
+    return sendResponse(200, getIngredients);
   });
 };
 
