@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ENDPOINT_ALL_PRODUCTS } from "../../endpoints/apiEndpoints";
-import { jwtToken } from "../fetchFromApi";
 
 export interface ProductIngredient {
   id: number; // ID för ingrediensen
@@ -37,12 +36,13 @@ export const fetchProducts = createAsyncThunk<
   void,
   { rejectValue: string }
 >("products/fetchProducts", async (_, { rejectWithValue }) => {
+  const jwtToken = sessionStorage.getItem("userToken");
   try {
     const response = await fetch(ENDPOINT_ALL_PRODUCTS, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${jwtToken}`, // No need for reload if we do it like this
       },
     });
     if (!response.ok) {

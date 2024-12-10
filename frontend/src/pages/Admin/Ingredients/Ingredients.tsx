@@ -4,7 +4,6 @@ import { EditIngredientType, IngredientType } from "./types";
 import StockModal from "./IngredientModal";
 import NewIngredient from "./NewIngredient";
 import { ENDPOINT_ALL_INGREDIENTS } from "../../../endpoints/apiEndpoints";
-import { API_CALL_GET } from "../../../features/fetchFromApi";
 
 const Stock = () => {
   const [ingredients, setIngredients] = useState<IngredientType[]>([]);
@@ -15,11 +14,24 @@ const Stock = () => {
 
   useEffect(() => {
     const fetchIngredients = async () => {
-      if (!editIngredient) {
-        const data: IngredientType[] = await API_CALL_GET(
-          ENDPOINT_ALL_INGREDIENTS
-        );
+      try {
+        const jwtToken = sessionStorage.getItem("userToken");
+        const response = await fetch(ENDPOINT_ALL_INGREDIENTS, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
         setIngredients(data);
+      } catch (error) {
+        console.error("Error:", error);
+        throw error;
       }
     };
     fetchIngredients();

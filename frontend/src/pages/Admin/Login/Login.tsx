@@ -8,6 +8,7 @@ type AdminLoginType = {
 };
 type LoginResponseType = {
   token: string;
+  role: string;
 };
 const AdminLogin = () => {
   const [adminLogin, setAdminLogin] = useState<AdminLoginType>({
@@ -39,8 +40,9 @@ const AdminLogin = () => {
           return;
         }
         const data: LoginResponseType = await response.json();
-        const timeLimit = 60 * 60; // 1 hour
-        document.cookie = `userToken=${data.token}; path=/; secure; samesite=strict; max-age=${timeLimit}`;
+
+        sessionStorage.setItem("userToken", data.token);
+        sessionStorage.setItem("userRole", data.role);
         toast.success("Inloggad som admin");
         navigate("/admin/ingredients");
       } catch (error) {
