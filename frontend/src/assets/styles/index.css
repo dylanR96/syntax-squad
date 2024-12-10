@@ -65,7 +65,14 @@ a {
   color: #442a07;
   line-height: 1.5;
 }
-
+.base-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+}
+.flex1 {
+  flex: 1;
+}
 @media (min-width: 768px) {
   .container {
     margin: 6.25em;
