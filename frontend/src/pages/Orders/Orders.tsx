@@ -4,6 +4,7 @@ import {
   ENDPOINT_ALL_ORDERS,
   ENDPOINT_UPDATE_ORDER_STATUS,
 } from "../../endpoints/apiEndpoints";
+import { jwtToken } from "../../features/fetchFromApi";
 
 // interface FormData {
 //   address: string;
@@ -43,11 +44,18 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch(ENDPOINT_ALL_ORDERS);
+        const response = await fetch(ENDPOINT_ALL_ORDERS, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+        });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
         setOrders(data);
       } catch (error) {
         console.error("Failed to fetch orders:", error);
@@ -154,14 +162,19 @@ const Orders = () => {
               <article className="card-detail-info">
                 <h6 className="h6--dark">Recept</h6>
                 <ul>
-                  {order.products.map((product, index) => (
-                    <li key={index}>
-                      Produkt ID: {product.productID}, Antal: {product.quantity}
-                      {/* {product.exclude.length > 0 && (
-                        <p>Exkludera: {product.exclude.join(", ")}</p>
-                      )} */}
-                    </li>
-                  ))}
+                  {Array.isArray(order.products) ? (
+                    order.products.map((product, index) => (
+                      <li key={index}>
+                        Produkt ID: {product.productID}, Antal:{" "}
+                        {product.quantity}
+                        {product.exclude?.length > 0 && (
+                          <p>Exkludera: {product.exclude.join(", ")}</p>
+                        )}
+                      </li>
+                    ))
+                  ) : (
+                    <p>Hittar inga produkter</p>
+                  )}
                 </ul>
               </article>
 
