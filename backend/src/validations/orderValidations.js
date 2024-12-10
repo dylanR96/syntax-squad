@@ -43,7 +43,7 @@ export const changeOrderSchema = Joi.object({
     )
     .min(1)
     .required(),
-  comment: Joi.string().optional(),
+  comment: Joi.string().allow("").optional(),
   price: Joi.number().positive().optional(),
   address: Joi.string().optional(),
   zipcode: Joi.string().optional(),
