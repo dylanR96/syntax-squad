@@ -1,8 +1,5 @@
 import jwt from "jsonwebtoken";
-
-const JWT_EXPIRES_IN = "1h";
-
-const JWT_SECRET = "secret_secret_secret";
+import { JWT_SECRET, JWT_EXPIRES_IN } from "../constants/JWT.js";
 
 export const verifyUser = (data, role) => {
   const payload = {

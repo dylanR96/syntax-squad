@@ -1,8 +1,6 @@
-import { sendError } from "./responseHelper.js";
 import { tryCatchWrapper } from "./tryCatchUtil.js";
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = "secret_secret_secret";
+import { JWT_SECRET } from "../constants/JWT.js";
 
 export const verifyToken = async (event) => {
   const authHeader =

@@ -8,9 +8,11 @@ import {
   editIngredientSchema,
   getIngredientsByIdsSchema,
 } from "../validations/ingredientsValidations.js";
+import { authorizeAccess, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
 export const addIngredient = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(addIngredientSchema, body);
     await IngredientService.addIngredient(value);
@@ -20,6 +22,7 @@ export const addIngredient = async (event) => {
 
 export const deleteIngredient = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(deleteIngredientSchema, body);
     await IngredientService.deleteIngredient(value);
@@ -29,6 +32,7 @@ export const deleteIngredient = async (event) => {
 
 export const editIngredient = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAdmin(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(editIngredientSchema, body);
     const editedItem = await IngredientService.editIngredient(value);
@@ -38,6 +42,7 @@ export const editIngredient = async (event) => {
 
 export const getIngredientsByIds = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAccess(event);
     const body = JSON.parse(event.body);
     const value = validateRequest(getIngredientsByIdsSchema, body);
     const getIngredients = await IngredientService.getIngredientsByIds(value);
@@ -45,8 +50,9 @@ export const getIngredientsByIds = async (event) => {
   });
 };
 
-export const getAllIngredients = async () => {
+export const getAllIngredients = async (event) => {
   return tryCatchWrapper(async () => {
+    await authorizeAccess(event);
     const getAllIngredients = await IngredientService.getAllIngredients();
     return sendResponse(200, getAllIngredients);
   });

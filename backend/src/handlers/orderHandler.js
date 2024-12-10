@@ -9,7 +9,7 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
-import { authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
+import { authorizeAccess, authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
@@ -33,7 +33,8 @@ export const changeOrder = async (event) => {
 
 export const deleteOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event);
+    await authorizeAccess(event);
+    //check correct user
     const { orderNO } = event.pathParameters;
     const value = validateRequest(deleteOrderSchema, { orderNO });
     await OrderService.deleteOrder(parseInt(value.orderNO));
@@ -53,7 +54,7 @@ export const changeOrderStatus = async (event) => {
 
 export const getOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event)
+    await authorizeAccess(event)
     const { orderNO } = event.pathParameters;
     const value = validateRequest(getOrderSchema, { orderNO });
     const data = await OrderService.getOrder(parseInt(value.orderNO));
@@ -63,7 +64,7 @@ export const getOrder = async (event) => {
 
 export const getOrderByUserID = async (event) => {
   return tryCatchWrapper(async () => {
-    const user = await authorizeCustomer(event);
+    const user = await authorizeAccess(event);
     const data = await OrderService.getOrderByUserID(user.id);
     return sendResponse(200, data);
   });
