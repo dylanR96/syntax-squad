@@ -17,7 +17,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
 import AdminLogin from "../pages/Admin/Login/Login";
 import Recipe2 from "../pages/Recipe/Recipe2";
-import NoAuth from "../pages/NoAuth/NoAuth";
 type ProtectedTypeProps = {
   allowedRoles: string[];
 };
@@ -26,11 +25,11 @@ const ProtectedRoute: React.FC<ProtectedTypeProps> = ({ allowedRoles }) => {
 
   if (userRole) {
     if (!allowedRoles.includes(userRole)) {
-      return <Navigate to="/no-access" replace />;
+      return <Navigate to="/" replace />;
     }
-    return <Outlet />; // Render children if the role matches
+    return <Layout />; // Render children if the role matches
   } else {
-    return <Navigate to="/no-access" replace />;
+    return <Navigate to="/" replace />;
   }
 };
 
@@ -71,10 +70,6 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminLogin />,
-  },
-  {
-    path: "/no-access",
-    element: <NoAuth />,
   },
   {
     path: "/",
