@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
 import AdminLogin from "../pages/Admin/Login/Login";
+import Recipe2 from "../pages/Recipe/Recipe2";
 
 const Layout = () => {
   return (
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/recipe/:productID",
         element: <Recipe />,
+      },
+      {
+        path: "/recipe2/:productID",
+        element: <Recipe2 />,
       },
       {
         path: "/orders",
