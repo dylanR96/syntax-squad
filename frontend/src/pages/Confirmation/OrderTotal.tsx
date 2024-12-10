@@ -1,12 +1,17 @@
 import './Confirmation.css';
 
-const OrderTotal = () => {
+interface OrderTotalProps {
+    total: number;
+  }
+  
+  const OrderTotal: React.FC<OrderTotalProps> = ({ total }) => {
     return (
-        <section className='confirmation__order-total'>
-        <h3 className='h4--dark'>Totalt</h3>
-        <h3 className='h4--dark'>60 sek</h3>
-        </section>
+      <div className="confirmation__order-total">
+        <h3 className="h4--dark">Totalt pris</h3>
+        <h3 className="h4--dark">{total} SEK</h3>
+      </div>
     );
-    };
-
-export default OrderTotal;
+  };
+  
+  export default OrderTotal;
+  

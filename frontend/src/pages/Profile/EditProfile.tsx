@@ -144,7 +144,7 @@ const EditProfile: React.FC = () => {
         {loading && <p>Loading user information...</p>}
         {error && <p>{error}</p>}
         {customers ? (
-          <div className="profile__order-history" key={customers.customerID}>
+          <div className="profile__edit-container" key={customers.customerID}>
             <form className="profile__form" onSubmit={handleSubmit}>
               {formFields.map((field) => (
                 <EditProfileForm
