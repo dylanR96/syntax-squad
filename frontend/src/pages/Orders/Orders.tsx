@@ -1,24 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Orders.css";
-import { ENDPOINT_UPDATE_ORDER_STATUS } from "../../endpoints/apiEndpoints";
+import {
+  ENDPOINT_ALL_ORDERS,
+  ENDPOINT_UPDATE_ORDER_STATUS,
+} from "../../endpoints/apiEndpoints";
 
-interface FormData {
-  address: string;
-  postalCode: string;
-  phone: string;
+// interface FormData {
+//   address: string;
+//   postalCode: string;
+//   phone: string;
+//   comment: string;
+// }
+
+interface Product {
+  productID: number;
+  quantity: number;
+  price: number;
+  exclude: number[];
+}
+
+interface Order {
+  orderNO: number;
+  phoneNumber: string;
+  city: string;
+  orderDate: string;
+  zipcode: string;
+  products: Product[];
+  userID: string;
+  status: string;
   comment: string;
+  address: string;
+  price: number;
 }
 
 const Orders = () => {
+  const [orders, setOrders] = useState<Order[]>([]);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormData>({
-    address: "Väggatan 45",
-    postalCode: "859 95",
-    phone: "07074554846",
-    comment: "Ingen ost",
-  });
+  const [formData, setFormData] = useState<Partial<Order>>({});
 
   const [status, setStatus] = useState<string>("pending");
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(ENDPOINT_ALL_ORDERS);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -60,10 +97,21 @@ const Orders = () => {
     setIsEditing(false);
   };
 
+  const formatDate = (date: string): string => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    return new Date(date).toLocaleString("sv-SE", options);
+  };
+
   return (
     <main className="container">
       <section className="orders__container">
-        <h1 className="h1--dark">Order</h1>
+        <h1 className="h1--dark">Ordrar</h1>
         <section className="orders__status">
           <h6 className="h6--dark">Visa:</h6>
           <article className="orders__tag--green">
@@ -76,130 +124,142 @@ const Orders = () => {
             <h6 className="orders__tag-text">Bekräftad</h6>
           </article>
         </section>
+
         <section className="orders__all-orders-container">
-          <article className="orders__card-container">
-            {/* Ordernummer */}
+          {orders.map((order) => (
+            <article key={order.orderNO} className="orders__card-container">
+              {/* Ordernummer */}
 
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Ordernummer</h6>
-              <p className="h5--dark">5464351458434</p>
-            </article>
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Ordernummer</h6>
+                <p className="h5--dark">{order.orderNO}</p>
+              </article>
 
-            {/* Pris */}
+              {/* Pris */}
 
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Pris</h6>
-              <p className="h5--dark">60 kr</p>
-            </article>
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Pris</h6>
+                <p className="h5--dark">{order.price}</p>
+              </article>
 
-            {/* Datum */}
+              {/* Datum */}
 
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Datum</h6>
-              <p className="h5--dark">2024-11-18, 12:13</p>
-            </article>
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Datum</h6>
+                <p className="h5--dark">{formatDate(order.orderDate)}</p>
+              </article>
 
-            {/* Recept */}
+              {/* Recept */}
 
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Recept</h6>
-              <p className="h5--dark">Kladdkakor, Hallongrottor</p>
-            </article>
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Recept</h6>
+                <ul>
+                  {order.products.map((product, index) => (
+                    <li key={index}>
+                      Produkt ID: {product.productID}, Antal: {product.quantity}
+                      {/* {product.exclude.length > 0 && (
+                        <p>Exkludera: {product.exclude.join(", ")}</p>
+                      )} */}
+                    </li>
+                  ))}
+                </ul>
+              </article>
 
-            {/* Adress */}
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Adress</h6>
+              {/* Adress */}
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Adress</h6>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <p className="h5--dark">{formData.address}</p>
+                )}
+              </article>
+              {/* Postnummer */}
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Postnummer</h6>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="postalCode"
+                    value={formData.zipcode}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <p className="h5--dark">{formData.zipcode}</p>
+                )}
+              </article>
+              {/* Telefon nummer */}
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Telefon nummer</h6>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <p className="h5--dark">{formData.phoneNumber}</p>
+                )}
+              </article>
+              {/* Kommentar */}
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Kommentar</h6>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="comment"
+                    value={formData.comment}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <p className="h5--dark">{formData.comment}</p>
+                )}
+              </article>
+              {/* Status */}
+              <article className="card-detail-info">
+                <h6 className="h6--dark">Status</h6>
+                <select
+                  name="status"
+                  value={status}
+                  onChange={handleStatusChange}
+                  className={`orders__status-select ${
+                    status === "pending"
+                      ? "pending"
+                      : status === "confirmed"
+                      ? "confirmed"
+                      : "done"
+                  }`}
+                >
+                  <option value="pending">Obekräftad</option>
+                  <option value="confirmed">Bekräftad</option>
+                  <option value="done">Klar</option>
+                </select>
+              </article>
               {isEditing ? (
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                />
+                <button
+                  className="recipe__button"
+                  type="button"
+                  onClick={handleSubmit}
+                >
+                  Spara ändringar
+                </button>
               ) : (
-                <p className="h5--dark">{formData.address}</p>
+                <button
+                  className="recipe__button"
+                  type="button"
+                  onClick={handleEditToggle}
+                >
+                  Redigera
+                </button>
               )}
             </article>
-            {/* Postnummer */}
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Postnummer</h6>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="postalCode"
-                  value={formData.postalCode}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <p className="h5--dark">{formData.postalCode}</p>
-              )}
-            </article>
-            {/* Telefon nummer */}
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Telefon nummer</h6>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <p className="h5--dark">{formData.phone}</p>
-              )}
-            </article>
-            {/* Kommentar */}
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Kommentar</h6>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="comment"
-                  value={formData.comment}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <p className="h5--dark">{formData.comment}</p>
-              )}
-            </article>
-            {/* Status */}
-            <article className="card-detail-info">
-              <h6 className="h6--dark">Status</h6>
-              <select
-                name="status"
-                value={status}
-                onChange={handleStatusChange}
-                className={`orders__status-select ${
-                  status === "pending"
-                    ? "pending"
-                    : status === "confirmed"
-                    ? "confirmed"
-                    : "done"
-                }`}
-              >
-                <option value="pending">Obekräftad</option>
-                <option value="confirmed">Bekräftad</option>
-                <option value="done">Klar</option>
-              </select>
-            </article>
-            {isEditing ? (
-              <button
-                className="recipe__button"
-                type="button"
-                onClick={handleSubmit}
-              >
-                Spara ändringar
-              </button>
-            ) : (
-              <button
-                className="recipe__button"
-                type="button"
-                onClick={handleEditToggle}
-              >
-                Redigera
-              </button>
-            )}
-          </article>
+          ))}
         </section>
       </section>
     </main>
