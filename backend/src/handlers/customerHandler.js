@@ -8,7 +8,7 @@ import {
   customerLoginSchema,
 } from "../validations/customerValidations.js";
 import { verifyUser } from "../utils/verifyUser.js";
-import { authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
+import { authorizeAccess, authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
 import { CUSTOMER_ROLE } from "../constants/userRole.js";
 
 export const createCustomer = async (event) => {
@@ -40,7 +40,7 @@ export const getCustomers = async (event) => {
 
 export const getCustomer = async (event) => {
   return tryCatchWrapper(async () => {
-    const user = await authorizeCustomer(event);
+    const user = await authorizeAccess(event);
     const customer = await CustomerService.getCustomer(user.id);
     return sendResponse(200, customer);
   });

@@ -9,7 +9,7 @@ import {
   changeStatusSchema,
   getOrderSchema,
 } from "../validations/orderValidations.js";
-import { authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
+import { authorizeAccess, authorizeAdmin, authorizeCustomer } from "../middlewares/authMiddleware.js";
 
 export const createOrder = async (event) => {
   return tryCatchWrapper(async () => {
@@ -33,7 +33,8 @@ export const changeOrder = async (event) => {
 
 export const deleteOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeCustomer(event);
+    await authorizeAccess(event);
+    //check correct user
     const { orderNO } = event.pathParameters;
     const value = validateRequest(deleteOrderSchema, { orderNO });
     await OrderService.deleteOrder(parseInt(value.orderNO));

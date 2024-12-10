@@ -11,7 +11,6 @@ import {
 import {
   authorizeAccess,
   authorizeAdmin,
-  authorizeCustomer,
 } from "../middlewares/authMiddleware.js";
 
 export const createProduct = async (event) => {
