@@ -54,40 +54,21 @@ const orderSlice = createSlice({
       state,
       action: PayloadAction<{
         productID: number;
-        ingredients: Ingredient[];
-        productPrice: number;
+        quantity: number;
+        exclude: number[];
+        price: number;
       }>
     ) => {
-      const { productID, ingredients, productPrice } = action.payload;
-
-      // Skapa en exclude-lista baserat på de ingredienser som inte är markerade
-      const excludeList = ingredients
-        .filter((ing) => !ing.checked)
-        .map((ing) => ing.ingredientID);
-
-      //Räkna ut priset på beställd vara
-      const totalExludePrice = 5 * excludeList.length;
-      const totalCost = productPrice - totalExludePrice;
-
-      const existingProduct = state.products.find(
-        (item) => item.productID === productID
-      );
+      const { productID, quantity, price, exclude } = action.payload;
 
       // Om produkten inte finns i ordern, lägg till den
-      if (!existingProduct) {
-        state.products.push({
-          productID,
-          quantity: 1,
-          exclude: excludeList,
-          price: totalCost,
-        });
-        //Om produkten finns i ordern, uppdatera exclude-listan och priset
-      } else {
-        existingProduct.exclude = excludeList;
-        existingProduct.price = totalCost;
-      }
 
-      updateTotalPrice(state); // Uppdatera totala priset
+      state.products.push({
+        productID,
+        quantity: quantity,
+        exclude: exclude,
+        price: price,
+      });
     },
     toggleIngredient: (
       state,
