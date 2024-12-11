@@ -4,6 +4,26 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { getIngredientNameById } from "../../features/ingredients/ingredientFunctions";
+import { ENDPOINT_ALL_PRODUCTS } from "../../endpoints/apiEndpoints";
+import { useEffect, useState } from "react";
+import { jwtToken } from "../../features/fetchFromApi";
+
+interface ProductIngredient {
+  id: number; // ID för ingrediensen
+  quantity: number; // Mängd av ingrediensen
+}
+
+interface Product {
+  productID: number;
+  productName: string;
+  description: string;
+  price: number;
+  image: string;
+  bakingTime: string;
+  tags: string[];
+  ingredients: ProductIngredient[];
+  recipe: string[];
+}
 
 const cartVariants = {
   open: {
@@ -22,7 +42,42 @@ const cartVariants = {
 
 const Cart = () => {
   const cartState = useSelector((state: RootState) => state.order.products);
-  const { products } = useSelector((state: RootState) => state.products);
+
+  console.log("cartSate", cartState);
+
+  const [products, setProducts] = useState<Product[]>([]);
+  console.log("ALL PRODUCTS", products);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/products",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("All data", data);
+        setProducts(data);
+
+        return data;
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+        throw error;
+      }
+    };
+    fetchProducts();
+  }, [jwtToken]);
 
   return (
     <motion.div

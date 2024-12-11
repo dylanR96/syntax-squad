@@ -73,8 +73,6 @@ const Recipe2 = () => {
     []
   );
 
-  console.log("FULL FAKKING INGREDINETS", fullIngredients);
-
   const [price, setPrice] = useState<number>(0);
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
 
@@ -103,10 +101,7 @@ const Recipe2 = () => {
     fetchData();
   }, []);
 
-  console.log("Products", product?.ingredients);
-
   useEffect(() => {
-    console.log("TEST", product?.ingredients);
     const fetchIngredients = async () => {
       try {
         const response = await fetch(`${ENDPOINT_INGREDIENTS_BYID}`, {
@@ -126,7 +121,6 @@ const Recipe2 = () => {
         }
 
         const data = await response.json();
-        console.log("DATAAAA", data);
         setFullIngredients(data);
         return data;
       } catch (error) {
@@ -153,7 +147,6 @@ const Recipe2 = () => {
         exclude: [...uncheckedIngredients],
         price: price,
       };
-      console.log(productToCart);
       setAddedToCart(true);
       dispatch(addRecipeIngredients(productToCart));
     }
