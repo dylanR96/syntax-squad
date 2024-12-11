@@ -170,7 +170,7 @@ functions:
     handler: src/handlers/orderHandler.deleteOrder
     events:
       - httpApi:
-          path: /order/{orderNO}
+          path: /order
           method: DELETE
   changeOrderStatus:
     handler: src/handlers/orderHandler.changeOrderStatus

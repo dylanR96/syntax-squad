@@ -1,6 +1,7 @@
 import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { orderModel } from "../models/ordersModel.js";
 import { queryTable } from "../utils/dbQueryTable.js";
+import { scanTable } from "../utils/dbTableScan.js";
 
 export const OrderService = {
   createOrder: async (orderData, tokenID) => {

@@ -101,16 +101,13 @@ export const orderModel = {
       },
       UpdateExpression: `
                 set 
-                    #status = :status,
-                    #comment = :comment
+                    #status = :status
             `,
       ExpressionAttributeNames: {
         "#status": "status",
-        "#comment": "comment",
       },
       ExpressionAttributeValues: {
         ":status": orderData.status,
-        ":comment": orderData.comment,
       },
       ReturnValues: "UPDATED_NEW",
     };

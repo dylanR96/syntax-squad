@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ENDPOINT_ADMIN_LOGIN } from "../../../endpoints/apiEndpoints";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 type AdminLoginType = {
   email: string;
@@ -54,6 +54,7 @@ const AdminLogin = () => {
   };
   return (
     <section className="login login--admin">
+      <ToastContainer />
       <h1 className="login__title">Easybake - admin</h1>
       <form className="login-form" onSubmit={handleSubmit}>
         <input
