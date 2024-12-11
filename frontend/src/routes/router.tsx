@@ -16,21 +16,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
 import AdminLogin from "../pages/Admin/Login/Login";
-import Order from "../pages/Orders/Order";
 import Recipe2 from "../pages/Recipe/Recipe2";
 type ProtectedTypeProps = {
   allowedRoles: string[];
 };
 const ProtectedRoute: React.FC<ProtectedTypeProps> = ({ allowedRoles }) => {
   const userRole = sessionStorage.getItem("userRole");
-
   if (userRole) {
     if (!allowedRoles.includes(userRole)) {
-      return <Navigate to="/" replace />;
+      return (
+        <Navigate to={allowedRoles[0] != "admin" ? "/" : "/admin"} replace />
+      );
     }
     return <Layout />; // Render children if the role matches
   } else {
-    return <Navigate to="/" replace />;
+    return (
+      <Navigate to={allowedRoles[0] != "admin" ? "/" : "/admin"} replace />
+    );
   }
 };
 
@@ -109,23 +111,19 @@ const router = createBrowserRouter([
         path: "/confirmation",
         element: <Confirmation />,
       },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <ProtectedRoute allowedRoles={["admin"]} />,
+    children: [
       {
-        path: "/confirmation/:orderNO",
-        element: <Order />,
+        path: "/admin/ingredients",
+        element: <Stock />,
       },
       {
-        path: "/admin",
-        element: <ProtectedRoute allowedRoles={["admin"]} />,
-        children: [
-          {
-            path: "/admin/ingredients",
-            element: <Stock />,
-          },
-          {
-            path: "/admin/products",
-            element: <Products />,
-          },
-        ],
+        path: "/admin/products",
+        element: <Products />,
       },
     ],
   },
