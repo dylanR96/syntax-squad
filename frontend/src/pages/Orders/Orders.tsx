@@ -36,6 +36,9 @@ interface Order {
 
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
+  const [filterStatus, setFilterStatus] = useState<string>("");
+
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<Partial<Order>>({});
 
@@ -53,6 +56,7 @@ const Orders = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        setFilteredOrders(data);
         setOrders(data);
       } catch (error) {
         console.error("Failed to fetch orders:", error);
@@ -61,6 +65,20 @@ const Orders = () => {
 
     fetchOrders();
   }, []);
+
+  useEffect(() => {
+    if (filterStatus) {
+      setFilteredOrders(
+        orders.filter((order) => order.status === filterStatus)
+      );
+    } else {
+      setFilteredOrders(orders);
+    }
+  }, [orders, filterStatus]);
+
+  const filterOrdersByStatus = (status: string) => {
+    setFilterStatus(status);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -95,6 +113,7 @@ const Orders = () => {
 
       const data = await response.json();
       console.log("Status updated on backend:", data);
+      filterOrdersByStatus(filterStatus);
     } catch (error) {
       console.error("Failed to update status on backend:", error);
     }
@@ -126,17 +145,34 @@ const Orders = () => {
         <h1 className="h1--dark">Ordrar</h1>
         <section className="orders__status">
           <h6 className="h6--dark">Visa:</h6>
-          <button className="orders__tag--green orders__tag-text">Klar</button>
-          <button className="orders__tag--red orders__tag-text">
+          <button
+            className="orders__tag--green orders__tag-text"
+            onClick={() => filterOrdersByStatus("done")}
+          >
+            Klar
+          </button>
+          <button
+            className="orders__tag--red orders__tag-text"
+            onClick={() => filterOrdersByStatus("pending")}
+          >
             Obekräftad
           </button>
-          <button className="orders__tag--blue orders__tag-text">
+          <button
+            className="orders__tag--blue orders__tag-text"
+            onClick={() => filterOrdersByStatus("confirmed")}
+          >
             Bekräftad
+          </button>
+          <button
+            className="orders__tag--gray orders__tag-text"
+            onClick={() => filterOrdersByStatus("")}
+          >
+            Alla
           </button>
         </section>
 
         <section className="orders__all-orders-container">
-          {orders.map((order) => (
+          {filteredOrders.map((order) => (
             <article key={order.orderNO} className="orders__card-container">
               {/* Ordernummer */}
 

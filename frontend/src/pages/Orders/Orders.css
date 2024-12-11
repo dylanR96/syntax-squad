@@ -36,6 +36,13 @@
   cursor: pointer;
 }
 
+.orders__tag--gray {
+  background: #c4c4c4;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
 .orders__tag-text {
   font-family: "Afacad", sans-serif;
   font-size: 1.25rem;
