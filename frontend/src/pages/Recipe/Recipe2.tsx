@@ -13,6 +13,7 @@ import { jwtToken } from "../../features/fetchFromApi";
 import { fetchIngredients } from "../../features/ingredients/ingredientsSlice";
 import { addRecipeIngredients } from "../../features/order/orderSlice";
 import { motion } from "framer-motion";
+import Loader from "../../components/ui/Loader";
 /* PRODUCT INTERFACES */
 interface ProductIngredient {
   id: number; // ID för ingrediensen
@@ -60,7 +61,7 @@ const Recipe2 = () => {
   const orderState = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log("Global Order State:", JSON.stringify(orderState, null, 2));
+    // console.log("Global Order State:", JSON.stringify(orderState, null, 2));
   }, [orderState]); // Kör varje gång orderState uppdateras
 
   const { productID } = useParams();
@@ -73,7 +74,7 @@ const Recipe2 = () => {
     []
   );
 
-  console.log("FULL FAKKING INGREDINETS", fullIngredients);
+  // console.log("FULL FAKKING INGREDINETS", fullIngredients);
 
   const [price, setPrice] = useState<number>(0);
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
@@ -103,10 +104,10 @@ const Recipe2 = () => {
     fetchData();
   }, []);
 
-  console.log("Products", product?.ingredients);
+  // console.log("Products", product?.ingredients);
 
   useEffect(() => {
-    console.log("TEST", product?.ingredients);
+    // console.log("TEST", product?.ingredients);
     const fetchIngredients = async () => {
       try {
         const response = await fetch(`${ENDPOINT_INGREDIENTS_BYID}`, {
@@ -126,7 +127,7 @@ const Recipe2 = () => {
         }
 
         const data = await response.json();
-        console.log("DATAAAA", data);
+        // console.log("DATAAAA", data);
         setFullIngredients(data);
         return data;
       } catch (error) {
@@ -136,6 +137,33 @@ const Recipe2 = () => {
     };
     fetchIngredients();
   }, [product, jwtToken]);
+  const [outOfStock, setOutOfStock] = useState<number[]>([]);
+  const [uncheckedOutOfStock, setUncheckedOutOfStock] = useState<number[]>([]);
+  useEffect(() => {
+    // Check that both are set
+    if (product && fullIngredients) {
+      // Map the ingredients on the product
+      product.ingredients.map((prodIngredient) => {
+        console.log(uncheckedIngredients);
+        // Find the corresponding ingredient in fullIngredients
+        const fullIngredient = fullIngredients.find(
+          (ingredient) => ingredient.ingredientID === prodIngredient.id
+        );
+        if (fullIngredient) {
+          // If quantity is more than stock, set outOfStock to true
+          if (prodIngredient.quantity > fullIngredient.stock) {
+            setOutOfStock((prev) => {
+              if (!prev.includes(prodIngredient.id)) {
+                return [...prev, prodIngredient.id];
+              } else {
+                return prev;
+              }
+            });
+          }
+        }
+      });
+    }
+  }, [fullIngredients, product]);
 
   useEffect(() => {
     if (product) {
@@ -153,7 +181,7 @@ const Recipe2 = () => {
         exclude: [...uncheckedIngredients],
         price: price,
       };
-      console.log(productToCart);
+      // console.log(productToCart);
       setAddedToCart(true);
       dispatch(addRecipeIngredients(productToCart));
     }
@@ -163,97 +191,129 @@ const Recipe2 = () => {
     const ingredientID = Number(e.target.name.split("-")[1]);
     if (!e.target.checked) {
       setUncheckedIngredients((prev) => [...prev, ingredientID]);
+      if (outOfStock.includes(ingredientID)) {
+        // Add to uncheckedOutOfStock
+        setUncheckedOutOfStock((prev) => [...prev, ingredientID]);
+        // Remove from outOfStock
+        setOutOfStock((prev) => prev.filter((iID) => iID !== ingredientID));
+      }
     } else {
-      setUncheckedIngredients((prev) =>
-        prev.filter((id) => id !== ingredientID)
-      );
+      setUncheckedIngredients((prev) => {
+        return prev.filter((id) => id !== ingredientID);
+      });
+      if (uncheckedOutOfStock.includes(ingredientID)) {
+        // Add to outOfStock
+        setOutOfStock((prev) => [...prev, ingredientID]);
+        // Remove from uncheckedOutOfStock
+        setUncheckedOutOfStock((prev) =>
+          prev.filter((id) => id !== ingredientID)
+        );
+      }
     }
   };
+  console.log("OOS: ", outOfStock);
+  console.log("UOOS: ", uncheckedOutOfStock);
   return (
     <>
-      <main className="container">
-        <article className="recipe__upperbox">
-          <img
-            src={product?.image}
-            alt="image of recipe"
-            className="recipe__upperbox-img"
-          />
+      {product?.productName ? (
+        <main className="container">
+          <article className="recipe__upperbox">
+            <img
+              src={product?.image}
+              alt="image of recipe"
+              className="recipe__upperbox-img"
+            />
 
-          <article className="upperbox-info">
-            <h1 className="h1--dark">{product?.productName}</h1>
-            <article className="recipe__info-box">
-              <p className="recipe__info-box-text">
-                {`${product?.bakingTime} min`} <br />{" "}
-                <strong>Tillagningstid</strong>
-              </p>
-              <p className="recipe__info-box-text">
-                {product?.ingredients.length} <br />{" "}
-                <strong>Ingredienser</strong>
-              </p>
-              <p className="recipe__info-box-text">
-                {`${product?.price} kr`} <br />
-                <strong>Pris</strong>
-              </p>
+            <article className="upperbox-info">
+              <h1 className="h1--dark">{product?.productName}</h1>
+              <article className="recipe__info-box">
+                <p className="recipe__info-box-text">
+                  {`${product?.bakingTime} min`} <br />{" "}
+                  <strong>Tillagningstid</strong>
+                </p>
+                <p className="recipe__info-box-text">
+                  {product?.ingredients.length} <br />{" "}
+                  <strong>Ingredienser</strong>
+                </p>
+                <p className="recipe__info-box-text">
+                  {`${product?.price} kr`} <br />
+                  <strong>Pris</strong>
+                </p>
+              </article>
+              <p className="body-text--dark">{product?.description}</p>
             </article>
-            <p className="body-text--dark">{product?.description}</p>
           </article>
-        </article>
-        <article className="recipe__lowerbox">
-          <article className="recipe__lowerbox--upperbox-info">
-            <h6 className="h6--dark">Ingredienser</h6>
-            <form onSubmit={handleSubmit} className="recipe__form">
-              {/* Checkbox form */}
+          <article className="recipe__lowerbox">
+            <article className="recipe__lowerbox--upperbox-info">
+              <h6 className="h6--dark">Ingredienser</h6>
+              <form onSubmit={handleSubmit} className="recipe__form">
+                {/* Checkbox form */}
 
-              {fullIngredients?.map((ingredient) => {
-                return (
-                  <div
-                    key={ingredient.ingredientID}
-                    className="recipe__input-container"
-                  >
-                    <label className="recipe__label">
-                      <input
-                        type="checkbox"
-                        name={`ingredient-${ingredient.ingredientID}`}
-                        defaultChecked={true}
-                        onChange={handleChange}
-                        className="recipe__input"
-                      />
-                      {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
-                    </label>
-                  </div>
-                );
-              })}
+                {fullIngredients?.map((ingredient) => {
+                  return (
+                    <div
+                      key={ingredient.ingredientID}
+                      className="recipe__input-container"
+                    >
+                      <label className="recipe__label">
+                        <input
+                          type="checkbox"
+                          name={`ingredient-${ingredient.ingredientID}`}
+                          defaultChecked={true}
+                          onChange={handleChange}
+                          className="recipe__input"
+                        />
+                        {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
+                      </label>
+                    </div>
+                  );
+                })}
 
-              <div className="recipe__total-div">
-                <h6 className="recipe__total-text">Totalt</h6>
-                <h6 className="recipe__total-text--bold">
-                  <strong>{price} SEK</strong>
-                </h6>
-              </div>
+                <div className="recipe__total-div">
+                  <h6 className="recipe__total-text">Totalt</h6>
+                  <h6 className="recipe__total-text--bold">
+                    <strong>{price} SEK</strong>
+                  </h6>
+                </div>
 
-              <button
-                className="recipe__button"
-                type="submit"
-                style={{ backgroundColor: addedToCart ? "green" : "#cc8d80" }}
-                disabled={
-                  uncheckedIngredients.length === product?.ingredients.length ||
-                  addedToCart
-                }
-              >
-                {addedToCart ? "Tillagd" : "Lägg till i kundvagn"}
-              </button>
-            </form>
+                <button
+                  className="recipe__button"
+                  type="submit"
+                  style={{
+                    backgroundColor: addedToCart
+                      ? "green"
+                      : outOfStock.length > 0
+                      ? "#797979"
+                      : "#cc8d80",
+                  }}
+                  disabled={
+                    uncheckedIngredients.length ===
+                      product?.ingredients.length ||
+                    addedToCart ||
+                    outOfStock.length > 0
+                  }
+                >
+                  {outOfStock.length > 0
+                    ? "Slut på ingredienser"
+                    : addedToCart
+                    ? "Tillagd"
+                    : "Lägg till i kundvagn"}
+                </button>
+              </form>
+            </article>
+            <article className="recipe__lowerbox--lowerbox-info">
+              <h6 className="h6--dark">Gör såhär</h6>
+              {product?.recipe.map((rec, index) => (
+                <div key={index} className="recipe__steps">
+                  <p className="body-text--dark recipe-instruction">{rec}</p>
+                </div>
+              ))}
+            </article>
           </article>
-          <article className="recipe__lowerbox--lowerbox-info">
-            <h6 className="h6--dark">Gör såhär</h6>
-            {product?.recipe.map((rec, index) => (
-              <div key={index} className="recipe__steps">
-                <p className="body-text--dark recipe-instruction">{rec}</p>
-              </div>
-            ))}
-          </article>
-        </article>
-      </main>
+        </main>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };
