@@ -1,9 +1,4 @@
-function getCookie(name: string): string | undefined {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(";").shift();
-}
-export const jwtToken = getCookie("userToken");
+export const jwtToken = sessionStorage.getItem("userToken");
 
 export const API_CALL_GET = async (API_ENDPOINT: string) => {
   try {

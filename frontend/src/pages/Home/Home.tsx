@@ -20,12 +20,7 @@ const Home = () => {
   const { products, status, error } = useSelector(
     (state: RootState) => state.products
   );
-  useEffect(() => {
-    // Fullösning för att få jwtToken att laddas in
-    if (!jwtToken) {
-      window.location.reload();
-    }
-  }, []);
+
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchProducts());

@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import Header from "../components/layout/Header/Header";
 import Footer from "../components/layout/Footer/Footer";
 import Home from "../pages/Home/Home";
@@ -16,7 +16,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
 import AdminLogin from "../pages/Admin/Login/Login";
+import Order from "../pages/Orders/Order";
 import Recipe2 from "../pages/Recipe/Recipe2";
+type ProtectedTypeProps = {
+  allowedRoles: string[];
+};
+const ProtectedRoute: React.FC<ProtectedTypeProps> = ({ allowedRoles }) => {
+  const userRole = sessionStorage.getItem("userRole");
+
+  if (userRole) {
+    if (!allowedRoles.includes(userRole)) {
+      return <Navigate to="/" replace />;
+    }
+    return <Layout />; // Render children if the role matches
+  } else {
+    return <Navigate to="/" replace />;
+  }
+};
 
 const Layout = () => {
   return (
@@ -53,8 +69,13 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
+    path: "/admin",
+    element: <AdminLogin />,
+  },
+  {
     path: "/",
-    element: <Layout />,
+    // element: <Layout />,
+    element: <ProtectedRoute allowedRoles={["customer", "admin"]} />,
     children: [
       {
         path: "/home",
@@ -89,20 +110,25 @@ const router = createBrowserRouter([
         element: <Confirmation />,
       },
       {
+        path: "/confirmation/:orderNO",
+        element: <Order />,
+      },
+      {
         path: "/admin",
-        element: <AdminLogin />,
-      },
-      {
-        path: "/admin/ingredients",
-        element: <Stock />,
-      },
-      {
-        path: "/admin/products",
-        element: <Products />,
+        element: <ProtectedRoute allowedRoles={["admin"]} />,
+        children: [
+          {
+            path: "/admin/ingredients",
+            element: <Stock />,
+          },
+          {
+            path: "/admin/products",
+            element: <Products />,
+          },
+        ],
       },
     ],
   },
-
   {
     path: "/",
     element: <NoFooterLayout />,
@@ -114,5 +140,4 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
 export default router;

@@ -6,6 +6,8 @@ import LogoutButton from "../../components/ui/LogoutButton";
 import { ENDPOINT_GET_ORDERS_BY_ID } from "../../endpoints/apiEndpoints";
 import { GetOrdersByUserID } from "./types";
 import { jwtToken } from "../../features/fetchFromApi";
+import { Link } from "react-router-dom";
+import { formatDateTime } from "../../utils/formatters";
 
 interface ApiResponse {
   orderNO: number;
@@ -47,12 +49,6 @@ const Profile: React.FC = () => {
     }
   };
 
-  const formatDateTime = (orderDate: string): string => {
-    const [date, time] = orderDate.split("T");
-    const [hour, minute] = time.split(":");
-    return `${date} ${hour}:${minute}`;
-  };
-
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -92,7 +88,9 @@ const Profile: React.FC = () => {
             key={order.orderNO}
             onClick={() => openOrder(order.orderNO)}
           >
-            <p className="profile__order-number">Order: {order.orderNO}</p>
+            <Link to={`/confirmation/${order.orderNO}`} className="profile__order-link">
+            Order: {order.orderNO}
+            </Link>
             <p className="profile__order-date">
               {formatDateTime(order.orderDate)}
             </p>
