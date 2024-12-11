@@ -23,6 +23,11 @@
     justify-content: space-between;
     margin-bottom: 20px;
   }
+  .profile__edit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   .profile__image {
     width: 100px;
@@ -116,12 +121,16 @@
     width: 200px;
     padding: 10px;
     background-color: #C3D5D9;
-    color: black;
+    color: #442A07;
     font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #307383;
     border-radius: 5px;
     cursor: pointer;
+  }
+  .profile__save-button:hover {
+    background-color: #307383;
+    color: white;
   }
   .profile__edit-button {
     margin: 0.5em 0;

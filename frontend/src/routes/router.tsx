@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Products from "../pages/Admin/Product/Products";
 import AdminLogin from "../pages/Admin/Login/Login";
+import Order from "../pages/Orders/Order";
 import Recipe2 from "../pages/Recipe/Recipe2";
 type ProtectedTypeProps = {
   allowedRoles: string[];
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: "/confirmation",
         element: <Confirmation />,
+      },
+      {
+        path: "/confirmation/:orderNO",
+        element: <Order />,
       },
       {
         path: "/admin",
