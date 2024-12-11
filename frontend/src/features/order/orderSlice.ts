@@ -158,6 +158,8 @@ const orderSlice = createSlice({
       state.zipcode = action.payload.zipcode;
       state.city = action.payload.city;
       state.phoneNumber = action.payload.phoneNumber;
+
+      updateTotalPrice(state); // Uppdatera totala priset
     },
   },
 });

@@ -69,16 +69,22 @@ const Checkout = () => {
     });
   };
 
+  useEffect(() => {
+    if (userInfo) {
+      dispatch(addInfo(userInfo));
+    }
+  }, [userInfo, dispatch]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(addInfo(userInfo));
-    setUserInfo({
+
+    /* setUserInfo({
       comment: "",
       address: "",
       zipcode: "",
       city: "",
       phoneNumber: "",
-    });
+    }); */
 
     console.log("userInfo 1", userInfo);
     console.log("fullOrder test", fullOrder);
