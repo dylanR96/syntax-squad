@@ -61,7 +61,7 @@ const Recipe2 = () => {
   const orderState = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log("Global Order State:", JSON.stringify(orderState, null, 2));
+    // console.log("Global Order State:", JSON.stringify(orderState, null, 2));
   }, [orderState]); // Kör varje gång orderState uppdateras
 
   const { productID } = useParams();
@@ -74,7 +74,7 @@ const Recipe2 = () => {
     []
   );
 
-  console.log("FULL FAKKING INGREDINETS", fullIngredients);
+  // console.log("FULL FAKKING INGREDINETS", fullIngredients);
 
   const [price, setPrice] = useState<number>(0);
   const [addedToCart, setAddedToCart] = useState<boolean>(false);
@@ -104,10 +104,10 @@ const Recipe2 = () => {
     fetchData();
   }, []);
 
-  console.log("Products", product?.ingredients);
+  // console.log("Products", product?.ingredients);
 
   useEffect(() => {
-    console.log("TEST", product?.ingredients);
+    // console.log("TEST", product?.ingredients);
     const fetchIngredients = async () => {
       try {
         const response = await fetch(`${ENDPOINT_INGREDIENTS_BYID}`, {
@@ -127,7 +127,7 @@ const Recipe2 = () => {
         }
 
         const data = await response.json();
-        console.log("DATAAAA", data);
+        // console.log("DATAAAA", data);
         setFullIngredients(data);
         return data;
       } catch (error) {
@@ -137,6 +137,33 @@ const Recipe2 = () => {
     };
     fetchIngredients();
   }, [product, jwtToken]);
+  const [outOfStock, setOutOfStock] = useState<number[]>([]);
+  const [uncheckedOutOfStock, setUncheckedOutOfStock] = useState<number[]>([]);
+  useEffect(() => {
+    // Check that both are set
+    if (product && fullIngredients) {
+      // Map the ingredients on the product
+      product.ingredients.map((prodIngredient) => {
+        console.log(uncheckedIngredients);
+        // Find the corresponding ingredient in fullIngredients
+        const fullIngredient = fullIngredients.find(
+          (ingredient) => ingredient.ingredientID === prodIngredient.id
+        );
+        if (fullIngredient) {
+          // If quantity is more than stock, set outOfStock to true
+          if (prodIngredient.quantity > fullIngredient.stock) {
+            setOutOfStock((prev) => {
+              if (!prev.includes(prodIngredient.id)) {
+                return [...prev, prodIngredient.id];
+              } else {
+                return prev;
+              }
+            });
+          }
+        }
+      });
+    }
+  }, [fullIngredients, product]);
 
   useEffect(() => {
     if (product) {
@@ -154,7 +181,7 @@ const Recipe2 = () => {
         exclude: [...uncheckedIngredients],
         price: price,
       };
-      console.log(productToCart);
+      // console.log(productToCart);
       setAddedToCart(true);
       dispatch(addRecipeIngredients(productToCart));
     }
@@ -164,12 +191,28 @@ const Recipe2 = () => {
     const ingredientID = Number(e.target.name.split("-")[1]);
     if (!e.target.checked) {
       setUncheckedIngredients((prev) => [...prev, ingredientID]);
+      if (outOfStock.includes(ingredientID)) {
+        // Add to uncheckedOutOfStock
+        setUncheckedOutOfStock((prev) => [...prev, ingredientID]);
+        // Remove from outOfStock
+        setOutOfStock((prev) => prev.filter((iID) => iID !== ingredientID));
+      }
     } else {
-      setUncheckedIngredients((prev) =>
-        prev.filter((id) => id !== ingredientID)
-      );
+      setUncheckedIngredients((prev) => {
+        return prev.filter((id) => id !== ingredientID);
+      });
+      if (uncheckedOutOfStock.includes(ingredientID)) {
+        // Add to outOfStock
+        setOutOfStock((prev) => [...prev, ingredientID]);
+        // Remove from uncheckedOutOfStock
+        setUncheckedOutOfStock((prev) =>
+          prev.filter((id) => id !== ingredientID)
+        );
+      }
     }
   };
+  console.log("OOS: ", outOfStock);
+  console.log("UOOS: ", uncheckedOutOfStock);
   return (
     <>
       {product?.productName ? (
@@ -236,13 +279,25 @@ const Recipe2 = () => {
                 <button
                   className="recipe__button"
                   type="submit"
-                  style={{ backgroundColor: addedToCart ? "green" : "#cc8d80" }}
+                  style={{
+                    backgroundColor: addedToCart
+                      ? "green"
+                      : outOfStock.length > 0
+                      ? "#797979"
+                      : "#cc8d80",
+                  }}
                   disabled={
                     uncheckedIngredients.length ===
-                      product?.ingredients.length || addedToCart
+                      product?.ingredients.length ||
+                    addedToCart ||
+                    outOfStock.length > 0
                   }
                 >
-                  {addedToCart ? "Tillagd" : "Lägg till i kundvagn"}
+                  {outOfStock.length > 0
+                    ? "Slut på ingredienser"
+                    : addedToCart
+                    ? "Tillagd"
+                    : "Lägg till i kundvagn"}
                 </button>
               </form>
             </article>
