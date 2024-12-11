@@ -8,7 +8,6 @@ import UpdateProductModal from "./UpdateProductModal";
 import Loader from "../../../components/ui/Loader";
 import NewProductModal from "./NewProductModal";
 import { ENDPOINT_ALL_PRODUCTS } from "../../../endpoints/apiEndpoints";
-import { API_CALL_GET } from "../../../features/fetchFromApi";
 const Products = () => {
   const [products, setProducts] = useState<ProductType[]>([initProduct]);
   const [editProduct, setEditProduct] = useState<ProductType | null>(null);
@@ -16,11 +15,27 @@ const Products = () => {
   useEffect(() => {
     if (!editProduct) {
       const fetchProducts = async () => {
-        const products: ProductType[] = await API_CALL_GET(
-          ENDPOINT_ALL_PRODUCTS
-        );
-        setProducts(products);
+        try {
+          const jwtToken = sessionStorage.getItem("userToken");
+          const response = await fetch(ENDPOINT_ALL_PRODUCTS, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+          }
+
+          const data = await response.json();
+          setProducts(data);
+        } catch (error) {
+          console.error("Error:", error);
+          throw error;
+        }
       };
+
       fetchProducts();
     }
   }, [editProduct, newProduct]);

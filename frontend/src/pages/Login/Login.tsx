@@ -40,10 +40,12 @@ const Login = () => {
       // For higher security, many modern apps use sessionStorage or localStorage on the client and store session tokens in memory on the server for short-lived access.
       // Cookies set by the backend (e.g., via Set-Cookie headers) allow more secure options like HttpOnly, which is not available to client-side scripts.
       // Consider moving token handling to the backend for higher security.
-      document.cookie = `userToken=${
-        data.token
-      }; path=/; secure; samesite=strict; max-age=${7 * 24 * 60 * 60}`;
 
+      sessionStorage.setItem("userToken", data.token);
+      sessionStorage.setItem("userRole", data.role);
+      // document.cookie = `userToken=${
+      //   data.token
+      // }; path=/; secure; samesite=strict; max-age=${7 * 24 * 60 * 60}`;
       navigate("/home");
     } catch (err) {
       if (err instanceof Error) {
