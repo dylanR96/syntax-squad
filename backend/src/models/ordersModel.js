@@ -23,8 +23,7 @@ export const orderModel = {
         phoneNumber: orderData.phoneNumber,
       },
     };
-    // const data = await db.put(params);
-    // console.log(orderData);
+    const data = await db.put(params);
     changeStock(orderData.products, "minus");
     return orderID;
   },
