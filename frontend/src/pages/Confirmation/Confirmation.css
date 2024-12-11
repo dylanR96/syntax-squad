@@ -17,6 +17,29 @@
     justify-content: space-between;
     /* margin-bottom: 1.25em; */
   }
+  .confirmation__order-again {
+    font-family: "Afacad", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.3125em 1em;
+    margin-top: 0.5em;
+    color: white;
+    background-color: #cc8d80;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #99a7aa;
+    cursor: pointer;
+  }
+  .price-per-unit {
+    margin-bottom: 10px;
+  }
+  .confirmation__product {
+    margin: 1em 0;
+  }
+  .confirmation__part {
+    margin: 1em 0;
+    /* border-bottom: 1px solid #442a07; */
+  }
   .confirmation__buttons {
     height: 100px;
     display: flex;
@@ -47,21 +70,39 @@
     background: #b92f1c;
   }
   .confirmation__order-total {
-    margin-bottom: -50px;
+    margin: 1em 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
   @media (min-width: 768px) {
     .confirmation__textbox {
-      width: 500px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 800px;
+      min-height: 500px;
     }
     .confirmation__buttons {
-      width: 500px;
+      /* width: 500px; */
       display: flex;
+      gap: 1.25em;
       flex-direction: row;
       justify-content: space-between;
       margin-top: 1.25em;
+    }
+    .confirmation__left, .confirmation__right {
+      width: 400px;
+    }
+    .confirmation__left {
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-around; */
+    }
+    .confirmation__right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
     }
   }
 

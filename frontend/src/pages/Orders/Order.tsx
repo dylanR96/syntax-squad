@@ -106,7 +106,7 @@ const Order: React.FC = () => {
       }
 
       console.log("Order deleted successfully.");
-      navigate("/profile"); // Navigera till profilsidan
+      navigate("/profile");
     } catch (error) {
       console.error("Error deleting order:", error);
       setError("Kunde inte ta bort ordern.");
@@ -129,9 +129,11 @@ const Order: React.FC = () => {
   return (
     <div className="wrapper">
       <main className="container">
+      <h1 className="h1--dark">Orderbekräftelse</h1>
         <section className="confirmation__textbox">
+          <div className="confirmation__left">
           <article className="confirmation__part">
-            <h1 className="h1--dark">Orderbekräftelse</h1>
+          <h4 className="h4--dark">Din order</h4>
             <p className="h5--dark">Ordernummer: #{order.orderNO}</p>
             <p className="h5--dark">Datum: {formatDateTime(order.orderDate)}</p>
             <p className="h5--dark">Status: {order.status}</p>
@@ -139,32 +141,37 @@ const Order: React.FC = () => {
           <article className="confirmation__part">
             <h4 className="h4--dark">Produkter</h4>
             {order.products.map((product, index) => (
-              <div key={index}>
-                <p className="h5--dark">
-        {" "}
-        <Link to={`/recipe/${product.productID}`} className="product-link">
-          {product.name}
-        </Link>
-      </p>
+              <div className="confirmation__product" key={index}>
+                <p className="h5--dark">{" "}{product.name}
+        
+          </p>
                 <p className="h5--dark">Antal: {product.quantity}</p>
-                <p className="h5--dark">Pris per styck: {product.price} SEK</p>
+                <p className="h5--dark price-per-unit">Pris per styck: {product.price} SEK</p>
+                <Link to={`/recipe2/${product.productID}`} className="confirmation__order-again">
+          Gå till produkt
+          </Link>
               </div>
             ))}
-          </article>
-          <article className="confirmation__part">
-            <h4 className="h4--dark">Kommentar/meddelande</h4>
-            <p className="h5--dark">{order.comment || "Ingen kommentar"}</p>
           </article>
           <article className="confirmation__part">
             <h3 className="h4--dark">Leveransadress</h3>
             <p className="h5--dark">{order.address}</p>
             <p className="h5--dark">{order.zipcode} {order.city}</p>
+          </article>  
+          </div>
+          <div className="confirmation__right">
+          <article className="confirmation__part">
+            <h4 className="h4--dark">Kommentar/meddelande</h4>
+            <p className="h5--dark">{order.comment || "Ingen kommentar"}</p>
           </article>
+            <article className="confirmation__part">       
           <OrderTotal total={order.price} />
           <section className="confirmation__buttons">
             <button className="confirmation__cancel-button" onClick={handleDeleteOrder}>Avbryt order</button>
             <button className="confirmation__OK-button" onClick={() => navigate("/profile")}>Ok</button>
           </section>
+          </article>
+          </div>
         </section>
       </main>
     </div>
