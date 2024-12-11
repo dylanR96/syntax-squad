@@ -21,7 +21,6 @@ const Profile: React.FC = () => {
   const [orders, setOrders] = useState<GetOrdersByUserID[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [expandOrder, setExpandOrder] = useState<number | null>(null);
 
 
   const getOrdersByUserID = async (
@@ -63,10 +62,6 @@ const Profile: React.FC = () => {
     fetchOrders();
   }, []);
 
-  const openOrder = (orderNO: number) => {
-    setExpandOrder((prev) => (prev === orderNO ? null : orderNO));
-  };
-
   return (
     <>
       <main className="container">
@@ -86,21 +81,15 @@ const Profile: React.FC = () => {
           <div
             className="profile__order-history"
             key={order.orderNO}
-            onClick={() => openOrder(order.orderNO)}
           >
             <Link to={`/confirmation/${order.orderNO}`} className="profile__order-link">
             Order: {order.orderNO}
             </Link>
+            <p>{order.status}</p>
             <p className="profile__order-date">
               {formatDateTime(order.orderDate)}
             </p>
-            <p className="profile__order-amount">{order.price}kr</p>
-            {expandOrder === order.orderNO && (
-              <div>
-                <p>Status: {order.status}</p>
-                <p>Comment: {order.comment}</p>
-              </div>
-            )}
+            <p className="profile__order-amount">{order.price} kr</p>
           </div>
         ))}
 
