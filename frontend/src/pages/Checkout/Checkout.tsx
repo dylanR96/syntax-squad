@@ -39,7 +39,7 @@ const Checkout = () => {
   const fullOrder = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log(JSON.stringify(fullOrder, null, 2));
+    console.log("Full order start", JSON.stringify(fullOrder, null, 2));
   }, [fullOrder]);
 
   /* Dispatch Products API */
@@ -80,6 +80,8 @@ const Checkout = () => {
       phoneNumber: "",
     });
 
+    console.log("userInfo 1", userInfo);
+    console.log("fullOrder test", fullOrder);
     try {
       const response = await fetch(
         "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/order",
@@ -92,6 +94,8 @@ const Checkout = () => {
           body: JSON.stringify(fullOrder),
         }
       );
+
+      console.log("fullOrder test 22222", fullOrder);
 
       if (response.ok) {
         console.log("Order created successfully");
