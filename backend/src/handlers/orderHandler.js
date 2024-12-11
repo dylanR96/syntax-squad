@@ -37,11 +37,10 @@ export const changeOrder = async (event) => {
 
 export const deleteOrder = async (event) => {
   return tryCatchWrapper(async () => {
-    await authorizeAccess(event);
-    //check correct user
-    const { orderNO } = event.pathParameters;
-    const value = validateRequest(deleteOrderSchema, { orderNO });
-    await OrderService.deleteOrder(parseInt(value.orderNO));
+    const user = await authorizeAccess(event);
+    const body = JSON.parse(event.body);
+    const value = validateRequest(deleteOrderSchema, body);
+    await OrderService.deleteOrder(parseInt(value), user.id);
     return sendResponse(200, "Order deleted successfully");
   });
 };
