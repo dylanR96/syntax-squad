@@ -85,7 +85,7 @@ const Profile: React.FC = () => {
             <Link to={`/confirmation/${order.orderNO}`} className="profile__order-link">
             Order: {order.orderNO}
             </Link>
-            <p>{order.status}</p>
+            <p className="profile__order-status">{order.status}</p>
             <p className="profile__order-date">
               {formatDateTime(order.orderDate)}
             </p>

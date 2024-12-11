@@ -67,7 +67,14 @@
   .profile__order-date {
     text-align: left;
   }
-
+  .profile__order-status {
+    text-align: left;
+    min-width: 70px;
+  }
+  .profile__order-amount {
+    text-align: right;
+    min-width: 50px;
+  }
   .product-template {
     width: 200px;
     height: 200px;
@@ -193,10 +200,22 @@
       width: 700px;
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
-      gap: 5em;
+      justify-content: space-between;
+      gap: 2em;
       align-items: center;
       font-size: 1.3rem;
+    }
+    .profile__order-date {
+      text-align: left;
+      padding-right: 10px;
+    }
+    .profile__order-status {
+      text-align: left;
+      min-width: 100px;
+    }
+    .profile__order-amount {
+      text-align: right;
+      min-width: 100px;
     }
     .profile__buttons {
       width: 500px;

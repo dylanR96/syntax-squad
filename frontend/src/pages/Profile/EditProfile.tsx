@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import profilePicture from "../../assets/images/profile_picture.png";
 import EditProfileForm from "./EditProfileForm";
-
 import profileIcon from "../../assets/images/icons/profileIcon.svg";
 import addressIcon from "../../assets/images/icons/addressIcon.svg";
 import phoneIcon from "../../assets/images/icons/phoneIcon.svg";
@@ -11,7 +10,7 @@ import {
   ENDPOINT_CUSTOMER,
   ENDPOINT_EDIT_CUSTOMER,
 } from "../../endpoints/apiEndpoints";
-
+import { useNavigate } from "react-router-dom";
 import { API_CALL_GET, jwtToken } from "../../features/fetchFromApi";
 
 
@@ -64,10 +63,17 @@ const EditProfile: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    editCustomer(ENDPOINT_EDIT_CUSTOMER);
-  };
+  const navigate = useNavigate();
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    await editCustomer(ENDPOINT_EDIT_CUSTOMER);
+    navigate("/profile"); // Navigera till profilsidan
+  } catch (error) {
+    console.error("Error saving changes:", error);
+  }
+};
 
 
   const handleChange = (key: string, value: string) => {
