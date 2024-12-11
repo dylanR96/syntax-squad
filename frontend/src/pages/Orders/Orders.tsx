@@ -39,8 +39,6 @@ const Orders = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [formData, setFormData] = useState<Partial<Order>>({});
 
-  const [status, setStatus] = useState<string>("pending");
-
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -55,7 +53,6 @@ const Orders = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setOrders(data);
       } catch (error) {
         console.error("Failed to fetch orders:", error);
@@ -71,18 +68,25 @@ const Orders = () => {
   };
 
   const handleStatusChange = async (
-    e: React.ChangeEvent<HTMLSelectElement>
+    e: React.ChangeEvent<HTMLSelectElement>,
+    orderNO: number
   ): Promise<void> => {
     const newStatus = e.target.value;
-    setStatus(newStatus);
+
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.orderNO === orderNO ? { ...order, status: newStatus } : order
+      )
+    );
 
     try {
       const response = await fetch(ENDPOINT_UPDATE_ORDER_STATUS, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
         },
-        body: JSON.stringify({ status: newStatus }),
+        body: JSON.stringify({ orderNO, status: newStatus }),
       });
 
       if (!response.ok) {
@@ -122,15 +126,13 @@ const Orders = () => {
         <h1 className="h1--dark">Ordrar</h1>
         <section className="orders__status">
           <h6 className="h6--dark">Visa:</h6>
-          <article className="orders__tag--green">
-            <h6 className="orders__tag-text">Klar</h6>
-          </article>
-          <article className="orders__tag--red">
-            <h6 className="orders__tag-text">Obekräftad</h6>
-          </article>
-          <article className="orders__tag--blue">
-            <h6 className="orders__tag-text">Bekräftad</h6>
-          </article>
+          <button className="orders__tag--green orders__tag-text">Klar</button>
+          <button className="orders__tag--red orders__tag-text">
+            Obekräftad
+          </button>
+          <button className="orders__tag--blue orders__tag-text">
+            Bekräftad
+          </button>
         </section>
 
         <section className="orders__all-orders-container">
@@ -189,7 +191,7 @@ const Orders = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="h5--dark">{formData.address}</p>
+                  <p className="h5--dark">{order.address}</p>
                 )}
               </article>
               {/* Postnummer */}
@@ -203,7 +205,7 @@ const Orders = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="h5--dark">{formData.zipcode}</p>
+                  <p className="h5--dark">{order.zipcode}</p>
                 )}
               </article>
               {/* Telefon nummer */}
@@ -217,7 +219,7 @@ const Orders = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="h5--dark">{formData.phoneNumber}</p>
+                  <p className="h5--dark">{order.phoneNumber}</p>
                 )}
               </article>
               {/* Kommentar */}
@@ -231,20 +233,21 @@ const Orders = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  <p className="h5--dark">{formData.comment}</p>
+                  <p className="h5--dark">{order.comment}</p>
                 )}
               </article>
+
               {/* Status */}
               <article className="card-detail-info">
                 <h6 className="h6--dark">Status</h6>
                 <select
                   name="status"
-                  value={status}
-                  onChange={handleStatusChange}
+                  value={order.status}
+                  onChange={(e) => handleStatusChange(e, order.orderNO)}
                   className={`orders__status-select ${
-                    status === "pending"
+                    order.status === "pending"
                       ? "pending"
-                      : status === "confirmed"
+                      : order.status === "confirmed"
                       ? "confirmed"
                       : "done"
                   }`}

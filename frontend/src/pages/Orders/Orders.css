@@ -18,16 +18,22 @@
 .orders__tag--green {
   background: #67cd31;
   border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .orders__tag--red {
   background: #cc8d80;
   border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .orders__tag--blue {
   background: #c3d5d9;
   border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
 
 .orders__tag-text {
