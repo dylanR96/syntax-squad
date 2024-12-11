@@ -55,12 +55,17 @@
   }
   .profile__order-history {
     font-family: 'Afacad', sans-serif;
-    width: 370px;
+    width: 380px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 1em;
+    justify-content: flex-start;
     align-items: center;
-    margin: 0.5em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid #dee;
+  }
+  .profile__order-date {
+    text-align: left;
   }
 
   .product-template {
@@ -185,10 +190,11 @@
       font-size: 1.8rem;
     }
     .profile__order-history {
-      width: 470px;
+      width: 700px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
+      gap: 5em;
       align-items: center;
       font-size: 1.3rem;
     }
