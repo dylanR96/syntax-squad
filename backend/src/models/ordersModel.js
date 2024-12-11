@@ -1,6 +1,8 @@
 import { db } from "../config/dynamoConfig.js";
 import { ORDERS_TABLE } from "../constants/tableNames.js";
 import { createID } from "../utils/dynamodbHelper.js";
+import { ingredientModel } from "./ingredientModel.js";
+import { productModel } from "./productModel.js";
 
 export const orderModel = {
   createOrder: async (orderData, userID) => {
@@ -21,7 +23,9 @@ export const orderModel = {
         phoneNumber: orderData.phoneNumber,
       },
     };
-    const data = await db.put(params);
+    // const data = await db.put(params);
+    // console.log(orderData);
+    changeStock(orderData.products, "minus");
     return orderID;
   },
   changeOrder: async (orderData) => {
@@ -129,4 +133,27 @@ export const orderModel = {
     const { Items } = await db.scan({ TableName: ORDERS_TABLE });
     return Items;
   },
+};
+const changeStock = async (products, plusMinus = "minus") => {
+  // Loop products
+  products.map(async (product) => {
+    // Fetch ingredients from product table
+    const { ingredients } = await productModel.getProduct(product.productID);
+    // Variable for better readability
+    const excludeIngredients = product.exclude;
+    // Remove excluded ingredients from the products ingredients
+    const newIngredients = ingredients.filter((ingredient) => {
+      return !excludeIngredients.includes(ingredient.id);
+    });
+
+    // Loop the ingredients that's still on the product
+    newIngredients.map(async (ingredient) => {
+      // Call new function to change the quantity, prepared to be implemented on orderDelete
+      const data = await ingredientModel.changeStock(
+        ingredient.id,
+        ingredient.quantity,
+        plusMinus
+      );
+    });
+  });
 };

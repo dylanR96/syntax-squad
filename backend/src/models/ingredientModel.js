@@ -69,4 +69,22 @@ export const ingredientModel = {
     const data = db.update(params);
     return data;
   },
+  changeStock: async (ingredientID, value, plusMinus) => {
+    let updateExpression = "SET stock = stock - :decrement";
+    if (plusMinus === "add") {
+      updateExpression = "SET stock = stock + :decrement";
+    }
+    const params = {
+      TableName: INGREDIENTS_TABLE, // Replace with your table name
+      Key: { ingredientID: ingredientID }, // The primary key of the item to update
+      UpdateExpression: updateExpression, // Decrement the stock
+      ConditionExpression: "stock >= :decrement", // Ensure stock does not go below zero
+      ExpressionAttributeValues: {
+        ":decrement": value, // The amount to decrement
+      },
+      ReturnValues: "UPDATED_NEW", // Return the updated values
+    };
+    const data = db.update(params);
+    return data;
+  },
 };
