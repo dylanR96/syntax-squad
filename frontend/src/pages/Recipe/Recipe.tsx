@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  toggleIngredient,
-  addRecipeIngredients,
-} from "../../features/order/orderSlice";
-import { fetchProducts } from "../../features/products/productsSlice";
-import { fetchIngredients } from "../../features/ingredients/ingredientsSlice";
+import { useDispatch, useSelector } from "react-redux";
 import "./Recipe.css";
 import "../../assets/styles/index.css";
-import { RootState, AppDispatch } from "../../app/store";
-
+import { AppDispatch, RootState } from "../../app/store";
+import { API_CALL_GET } from "../../features/fetchFromApi";
+import {
+  ENDPOINT_PRODUCT,
+  ENDPOINT_INGREDIENTS_BYID,
+} from "../../endpoints/apiEndpoints";
+import { jwtToken } from "../../features/fetchFromApi";
+import { fetchIngredients } from "../../features/ingredients/ingredientsSlice";
+import { addRecipeIngredients } from "../../features/order/orderSlice";
+import { motion } from "framer-motion";
 /* PRODUCT INTERFACES */
 interface ProductIngredient {
   id: number; // ID för ingrediensen
@@ -42,8 +44,20 @@ interface Ingredient {
   checked: boolean;
 }
 
-const Recipe = () => {
-  const orderState = useSelector((state: RootState) => state.order.products);
+interface FullIngredients {
+  createdAt: string;
+  stock: number;
+  pricePerUnit: number;
+  ingredientID: number;
+  ingredientName: string;
+  units: string;
+  quantity: number;
+}
+
+const Recipe2 = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const orderState = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
     console.log("Global Order State:", JSON.stringify(orderState, null, 2));
@@ -51,164 +65,130 @@ const Recipe = () => {
 
   const { productID } = useParams();
 
-  // Konvertera productID till ett nummer
-  const recipeID = Number(productID); // Konverterar alltid till nummer
-  if (isNaN(recipeID)) {
-    console.error("Ogiltigt productID: Kan inte konvertera till nummer");
-    return null; // Avbryt renderingen om det är ogiltigt
-  }
+  const [product, setProduct] = useState<Product | null>(null);
+  const [fullIngredients, setFullIngredients] = useState<
+    FullIngredients[] | null
+  >(null);
+  const [uncheckedIngredients, setUncheckedIngredients] = useState<number[]>(
+    []
+  );
 
-  const dispatch = useDispatch<AppDispatch>();
-  const {
-    products,
-    status: productsStatus,
-    error: productError,
-  } = useSelector((state: RootState) => state.products);
+  const [price, setPrice] = useState<number>(0);
+  const [addedToCart, setAddedToCart] = useState<boolean>(false);
 
-  const {
+  /*   const {
     ingredients,
     status: ingredientsStatus,
     error: ingredientsError,
   } = useSelector((state: RootState) => state.ingredients);
-  const [currentRecipe, setCurrentRecipe] = useState<Product | null>(null);
-  const [currentIngredients, setCurrentIngredients] = useState<
-    Ingredient[] | null
-  >(null);
 
-  /* Dispatch Products API */
-  useEffect(() => {
-    if (productsStatus === "idle") {
-      dispatch(fetchProducts());
-    }
-  }, [dispatch, productsStatus]);
-
-  /* Dispatch Ingredients API */
   useEffect(() => {
     if (ingredientsStatus === "idle") {
       dispatch(fetchIngredients());
     }
-  }, [dispatch, ingredientsStatus]);
+  }, [dispatch, ingredientsStatus]); */
 
-  /* Hitta det specifika receptet för sidan */
   useEffect(() => {
-    if (products) {
-      const recipe =
-        products.find((product) => product.productID === Number(productID)) ||
-        null;
-      setCurrentRecipe(recipe);
-    }
-  }, [products, productID]);
+    const fetchData = async () => {
+      const fetchProduct = await API_CALL_GET(
+        `${ENDPOINT_PRODUCT}/${productID}`
+      );
+      if (fetchProduct) {
+        setProduct(fetchProduct);
+        setPrice(fetchProduct.price);
+      }
+    };
+    fetchData();
+  }, []);
 
-  /* Hitta det specifika ingredienserna för receptet */
   useEffect(() => {
-    if (ingredients && currentRecipe) {
-      const recipeIngredients = ingredients
-        .filter((ing) =>
-          currentRecipe.ingredients.some(
-            (recipeIng) => recipeIng.id === ing.ingredientID
-          )
-        )
-        .map((ing) => {
-          const matchingRecipeIng = currentRecipe.ingredients.find(
-            (recipeIng) => recipeIng.id === ing.ingredientID
-          );
+    const fetchIngredients = async () => {
+      try {
+        const response = await fetch(`${ENDPOINT_INGREDIENTS_BYID}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
 
-          return {
-            ...ing,
-            quantity: matchingRecipeIng ? matchingRecipeIng.quantity : null,
-            checked: true,
-          };
+          body: JSON.stringify({
+            ingredients: product?.ingredients,
+          }),
         });
-      setCurrentIngredients(recipeIngredients);
-    }
-  }, [ingredients, currentRecipe]);
 
-  /* -------------------Redux för att lägga till beställning --------------------------*/
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-  // Lokal state för att hantera `checked`-status
+        const data = await response.json();
+        setFullIngredients(data);
+        return data;
+      } catch (error) {
+        console.error("Error fetching ingredients:", error);
+        throw error;
+      }
+    };
+    fetchIngredients();
+  }, [product, jwtToken]);
 
-  const [localIngredients, setLocalIngredients] = useState<Ingredient[]>([]);
-
-  // Uppdatera lokal state
   useEffect(() => {
-    if (currentIngredients) {
-      setLocalIngredients(currentIngredients); // Synkronisera med currentIngredients
+    if (product) {
+      const newPrice = product.price - uncheckedIngredients.length * 5;
+      setPrice(newPrice);
     }
-  }, [currentIngredients]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
-    const { checked } = e.target;
-
-    // Uppdatera lokala ingredienser
-    const updatedIngredients = localIngredients.map((ing) =>
-      ing.ingredientID === id ? { ...ing, checked } : ing
-    );
-    setLocalIngredients(updatedIngredients);
-
-    //Konvertara productID till ett nummer(useParams som productID kommer ifrån ger alltid strängar)
-    const recipeID = Number(productID);
-    if (isNaN(recipeID)) {
-      console.error("Ogiltigt productID: Kan inte konvertera till nummer");
-      return;
-    }
-
-    // Dispatcha för att uppdatera exclude i Redux
-    dispatch(
-      toggleIngredient({ productID: recipeID, excludeIngredientID: id })
-    );
-  };
+  }, [uncheckedIngredients]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const checkedIngredients = localIngredients.filter(
-      (ingredient) => ingredient.checked
-    );
-
-    if (checkedIngredients.length === 0) {
-      console.log("Inga ingredienser markerade");
-      return;
+    if (product) {
+      const productToCart = {
+        productID: product.productID,
+        quantity: 1,
+        exclude: [...uncheckedIngredients],
+        price: price,
+      };
+      setAddedToCart(true);
+      dispatch(addRecipeIngredients(productToCart));
     }
-
-    // Skicka markerade ingredienser till Redux
-    console.log("Skickar recipeID:", currentRecipe?.productID);
-    dispatch(
-      addRecipeIngredients({
-        productID: Number(productID), // Konverterar alltid till nummer
-        ingredients: localIngredients,
-        productPrice: currentRecipe?.price || 0,
-      })
-    );
   };
 
-  const currentOrder = orderState.find((order) => order.productID === recipeID);
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const ingredientID = Number(e.target.name.split("-")[1]);
+    if (!e.target.checked) {
+      setUncheckedIngredients((prev) => [...prev, ingredientID]);
+    } else {
+      setUncheckedIngredients((prev) =>
+        prev.filter((id) => id !== ingredientID)
+      );
+    }
+  };
   return (
     <>
       <main className="container">
         <article className="recipe__upperbox">
           <img
-            src={currentRecipe?.image}
+            src={product?.image}
             alt="image of recipe"
             className="recipe__upperbox-img"
           />
 
           <article className="upperbox-info">
-            <h1 className="h1--dark">{currentRecipe?.productName}</h1>
+            <h1 className="h1--dark">{product?.productName}</h1>
             <article className="recipe__info-box">
               <p className="recipe__info-box-text">
-                {`${currentRecipe?.bakingTime} min`} <br />{" "}
+                {`${product?.bakingTime} min`} <br />{" "}
                 <strong>Tillagningstid</strong>
               </p>
               <p className="recipe__info-box-text">
-                {currentRecipe?.ingredients.length} <br />{" "}
+                {product?.ingredients.length} <br />{" "}
                 <strong>Ingredienser</strong>
               </p>
               <p className="recipe__info-box-text">
-                {`${currentRecipe?.price} kr`} <br />
+                {`${product?.price} kr`} <br />
                 <strong>Pris</strong>
               </p>
             </article>
-            <p className="body-text--dark">{currentRecipe?.description}</p>
+            <p className="body-text--dark">{product?.description}</p>
           </article>
         </article>
         <article className="recipe__lowerbox">
@@ -217,43 +197,49 @@ const Recipe = () => {
             <form onSubmit={handleSubmit} className="recipe__form">
               {/* Checkbox form */}
 
-              {localIngredients.map((ingredient) => (
-                <div
-                  key={ingredient.ingredientID}
-                  className="recipe__input-container"
-                >
-                  <label className="recipe__label">
-                    <input
-                      type="checkbox"
-                      name={ingredient.ingredientName}
-                      checked={ingredient.checked}
-                      onChange={(e) => handleChange(e, ingredient.ingredientID)}
-                      className="recipe__input"
-                    />
-                    {`${ingredient.quantity} ${ingredient.units} ${ingredient.ingredientName}`}
-                  </label>
-                </div>
-              ))}
+              {fullIngredients?.map((ingredient) => {
+                return (
+                  <div
+                    key={ingredient.ingredientID}
+                    className="recipe__input-container"
+                  >
+                    <label className="recipe__label">
+                      <input
+                        type="checkbox"
+                        name={`ingredient-${ingredient.ingredientID}`}
+                        defaultChecked={true}
+                        onChange={handleChange}
+                        className="recipe__input"
+                      />
+                      {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
+                    </label>
+                  </div>
+                );
+              })}
 
               <div className="recipe__total-div">
                 <h6 className="recipe__total-text">Totalt</h6>
                 <h6 className="recipe__total-text--bold">
-                  <strong>
-                    {currentOrder
-                      ? `${currentOrder?.price} kr`
-                      : `${currentRecipe?.price} kr`}
-                  </strong>
+                  <strong>{price} SEK</strong>
                 </h6>
               </div>
 
-              <button className="recipe__button" type="submit">
-                Lägg till i kundvagn
+              <button
+                className="recipe__button"
+                type="submit"
+                style={{ backgroundColor: addedToCart ? "green" : "#cc8d80" }}
+                disabled={
+                  uncheckedIngredients.length === product?.ingredients.length ||
+                  addedToCart
+                }
+              >
+                {addedToCart ? "Tillagd" : "Lägg till i kundvagn"}
               </button>
             </form>
           </article>
           <article className="recipe__lowerbox--lowerbox-info">
             <h6 className="h6--dark">Gör såhär</h6>
-            {currentRecipe?.recipe.map((rec, index) => (
+            {product?.recipe.map((rec, index) => (
               <div key={index} className="recipe__steps">
                 <p className="body-text--dark recipe-instruction">{rec}</p>
               </div>
@@ -265,4 +251,4 @@ const Recipe = () => {
   );
 };
 
-export default Recipe;
+export default Recipe2;

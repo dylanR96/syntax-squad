@@ -12,12 +12,7 @@ import {
 import { fetchProducts } from "../../features/products/productsSlice";
 import { address } from "framer-motion/client";
 import { jwtToken } from "../../features/fetchFromApi";
-
-/* 
-
-När man klickar på beställ så görs ett post anrop till databasen för att skapa ordern
-
-*/
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [userInfo, setUserInfo] = useState({
@@ -27,7 +22,11 @@ const Checkout = () => {
     city: "",
     phoneNumber: "",
   });
+
+  const [orderNO, setOrderNO] = useState<number>();
   const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
 
   const { products, status: productsStatus } = useSelector(
     (state: RootState) => state.products
@@ -39,7 +38,7 @@ const Checkout = () => {
   const fullOrder = useSelector((state: RootState) => state.order);
 
   useEffect(() => {
-    console.log(JSON.stringify(fullOrder, null, 2));
+    console.log("Full order start", JSON.stringify(fullOrder, null, 2));
   }, [fullOrder]);
 
   /* Dispatch Products API */
@@ -69,9 +68,52 @@ const Checkout = () => {
     });
   };
 
+  const [sendRequest, setSendRequest] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function skicka() {
+      try {
+        const response = await fetch(
+          "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwtToken}`,
+            },
+            body: JSON.stringify(fullOrder),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setOrderNO(data);
+          console.log("DATA ORDER", data);
+          console.log("Order created successfully");
+        } else {
+          console.error("Failed to create order");
+        }
+      } catch (error) {
+        console.error("Error creating order:", error);
+      }
+    }
+
+    if (sendRequest) {
+      skicka();
+    }
+  }, [sendRequest]);
+
+  useEffect(() => {
+    if (orderNO) {
+      console.log("ordernumber navigate GO!!", orderNO);
+      navigate(`/confirmation/${orderNO}`);
+    }
+  }, [orderNO, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addInfo(userInfo));
+
     setUserInfo({
       comment: "",
       address: "",
@@ -80,27 +122,7 @@ const Checkout = () => {
       phoneNumber: "",
     });
 
-    try {
-      const response = await fetch(
-        "https://ez7mtpao6i.execute-api.eu-north-1.amazonaws.com/order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtToken}`,
-          },
-          body: JSON.stringify(fullOrder),
-        }
-      );
-
-      if (response.ok) {
-        console.log("Order created successfully");
-      } else {
-        console.error("Failed to create order");
-      }
-    } catch (error) {
-      console.error("Error creating order:", error);
-    }
+    setSendRequest(true);
   };
 
   return (
@@ -206,7 +228,14 @@ const Checkout = () => {
               <h3 className="cart-total__title">Totalt</h3>
               <h3 className="cart-total__price">{`${fullOrder.price} SEK`}</h3>
             </div>
-            <button className="cart__button">Beställ</button>
+            <button
+              className="cart__button"
+              /* style={{ backgroundColor: noInfo ? "grey" : "#cc8d80" }} */
+              /* disabled={!userInfo} */
+            >
+              {/* {noInfo ? "Fyll i uppgifter" : "Beställ"} */}
+              Beställ
+            </button>
           </div>
         </form>
       </section>

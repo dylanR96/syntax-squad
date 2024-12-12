@@ -69,6 +69,8 @@ const orderSlice = createSlice({
         exclude: exclude,
         price: price,
       });
+
+      updateTotalPrice(state); // Uppdatera totala priset
     },
     toggleIngredient: (
       state,
@@ -158,6 +160,8 @@ const orderSlice = createSlice({
       state.zipcode = action.payload.zipcode;
       state.city = action.payload.city;
       state.phoneNumber = action.payload.phoneNumber;
+
+      console.log("MIDDLE", state.address);
     },
   },
 });

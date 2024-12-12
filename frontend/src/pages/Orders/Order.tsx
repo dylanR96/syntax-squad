@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "../Confirmation/Confirmation.css";
-import { ENDPOINT_GET_ORDERS_BY_ID, ENDPOINT_PRODUCT } from "../../endpoints/apiEndpoints";
+import {
+  ENDPOINT_GET_ORDERS_BY_ID,
+  ENDPOINT_PRODUCT,
+} from "../../endpoints/apiEndpoints";
 import { API_CALL_GET } from "../../features/fetchFromApi";
 import OrderTotal from "../Confirmation/OrderTotal";
 import { formatDateTime } from "../../utils/formatters";
@@ -65,18 +68,23 @@ const Order: React.FC = () => {
         }
 
         const productsWithNames = await Promise.all(
-            matchedOrder.products.map(async (product) => {
-              try {
-                const productData = await API_CALL_GET(`${ENDPOINT_PRODUCT}/${product.productID}`);
-                
-                return { ...product, name: productData.productName };
-              } catch (error) {
-                console.error(`Error fetching product ${product.productID}:`, error);
-                return { ...product, name: "Okänd produkt" };
-              }
-            })
-          );
-          
+          matchedOrder.products.map(async (product) => {
+            try {
+              const productData = await API_CALL_GET(
+                `${ENDPOINT_PRODUCT}/${product.productID}`
+              );
+
+              return { ...product, name: productData.productName };
+            } catch (error) {
+              console.error(
+                `Error fetching product ${product.productID}:`,
+                error
+              );
+              return { ...product, name: "Okänd produkt" };
+            }
+          })
+        );
+
         setOrder({ ...matchedOrder, products: productsWithNames });
       } catch (err: any) {
         setError(err.message);
@@ -141,10 +149,18 @@ const Order: React.FC = () => {
           <article className="confirmation__part">
             <h4 className="h4--dark">Produkter</h4>
             {order.products.map((product, index) => (
-              <div className="confirmation__product" key={index}>
-                <p className="h5--dark">{" "}{product.name}
-        
-          </p>
+
+              <div key={index}>
+                <p className="h5--dark">
+                  {" "}
+                  <Link
+                    to={`/recipe/${product.productID}`}
+                    className="product-link"
+                  >
+                    {product.name}
+                  </Link>
+                </p>
+
                 <p className="h5--dark">Antal: {product.quantity}</p>
                 <p className="h5--dark price-per-unit">Pris per styck: {product.price} SEK</p>
                 <Link to={`/recipe2/${product.productID}`} className="confirmation__order-again">
@@ -156,19 +172,26 @@ const Order: React.FC = () => {
           <article className="confirmation__part">
             <h3 className="h4--dark">Leveransadress</h3>
             <p className="h5--dark">{order.address}</p>
-            <p className="h5--dark">{order.zipcode} {order.city}</p>
-          </article>  
-          </div>
-          <div className="confirmation__right">
-          <article className="confirmation__part">
-            <h4 className="h4--dark">Kommentar/meddelande</h4>
-            <p className="h5--dark">{order.comment || "Ingen kommentar"}</p>
+            <p className="h5--dark">
+              {order.zipcode} {order.city}
+            </p>
+
           </article>
             <article className="confirmation__part">       
           <OrderTotal total={order.price} />
           <section className="confirmation__buttons">
-            <button className="confirmation__cancel-button" onClick={handleDeleteOrder}>Avbryt order</button>
-            <button className="confirmation__OK-button" onClick={() => navigate("/profile")}>Ok</button>
+            <button
+              className="confirmation__cancel-button"
+              onClick={handleDeleteOrder}
+            >
+              Avbryt order
+            </button>
+            <button
+              className="confirmation__OK-button"
+              onClick={() => navigate("/profile")}
+            >
+              Ok
+            </button>
           </section>
           </article>
           </div>
