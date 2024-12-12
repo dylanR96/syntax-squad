@@ -62,6 +62,16 @@ const Profile: React.FC = () => {
     fetchOrders();
   }, []);
 
+  const mapOrderStatus = (status: string): string => {
+    const statusMapping: { [key: string]: string } = {
+      pending: "Behandlas",
+      confirmed: "Färdig",
+      done: "Skickad",
+    };
+  
+    return statusMapping[status] || "Okänd status"; // Fallback om statusvärdet inte matchar
+  };
+  
   return (
     <>
       <main className="container">
@@ -78,20 +88,16 @@ const Profile: React.FC = () => {
         {error && <p>{error}</p>}
         {!loading && !error && orders.length === 0 && <p>No orders found.</p>}
         {orders.map((order) => (
-          <div
-            className="profile__order-history"
-            key={order.orderNO}
-          >
-            <Link to={`/confirmation/${order.orderNO}`} className="profile__order-link">
-            Order: {order.orderNO}
-            </Link>
-            <p className="profile__order-status">{order.status}</p>
-            <p className="profile__order-date">
-              {formatDateTime(order.orderDate)}
-            </p>
-            <p className="profile__order-amount">{order.price} kr</p>
-          </div>
-        ))}
+  <div className="profile__order-history" key={order.orderNO}>
+    <Link to={`/confirmation/${order.orderNO}`} className="profile__order-link">
+      Order: {order.orderNO}
+    </Link>
+    <p className="profile__order-status">{mapOrderStatus(order.status)}</p>
+    <p className="profile__order-date">{formatDateTime(order.orderDate)}</p>
+    <p className="profile__order-amount">{order.price} kr</p>
+  </div>
+))}
+
 
         <div className="profile__buttons">
           <ProfileEditButton />
