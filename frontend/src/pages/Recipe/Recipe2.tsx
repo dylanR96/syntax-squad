@@ -13,6 +13,7 @@ import { jwtToken } from "../../features/fetchFromApi";
 import { fetchIngredients } from "../../features/ingredients/ingredientsSlice";
 import { addRecipeIngredients } from "../../features/order/orderSlice";
 import { motion } from "framer-motion";
+import Loader from "../../components/ui/Loader";
 /* PRODUCT INTERFACES */
 interface ProductIngredient {
   id: number; // ID för ingrediensen
@@ -165,87 +166,95 @@ const Recipe2 = () => {
   return (
     <>
       <main className="container">
-        <article className="recipe__upperbox">
-          <img
-            src={product?.image}
-            alt="image of recipe"
-            className="recipe__upperbox-img"
-          />
+        {product && price ? (
+          <>
+            <article className="recipe__upperbox">
+              <img
+                src={product?.image}
+                alt="image of recipe"
+                className="recipe__upperbox-img"
+              />
 
-          <article className="upperbox-info">
-            <h1 className="h1--dark">{product?.productName}</h1>
-            <article className="recipe__info-box">
-              <p className="recipe__info-box-text">
-                {`${product?.bakingTime} min`} <br />{" "}
-                <strong>Tillagningstid</strong>
-              </p>
-              <p className="recipe__info-box-text">
-                {product?.ingredients.length} <br />{" "}
-                <strong>Ingredienser</strong>
-              </p>
-              <p className="recipe__info-box-text">
-                {`${product?.price} kr`} <br />
-                <strong>Pris</strong>
-              </p>
+              <article className="upperbox-info">
+                <h1 className="h1--dark">{product?.productName}</h1>
+                <article className="recipe__info-box">
+                  <p className="recipe__info-box-text">
+                    {`${product?.bakingTime} min`} <br />{" "}
+                    <strong>Tillagningstid</strong>
+                  </p>
+                  <p className="recipe__info-box-text">
+                    {product?.ingredients.length} <br />{" "}
+                    <strong>Ingredienser</strong>
+                  </p>
+                  <p className="recipe__info-box-text">
+                    {`${product?.price} kr`} <br />
+                    <strong>Pris</strong>
+                  </p>
+                </article>
+                <p className="body-text--dark">{product?.description}</p>
+              </article>
             </article>
-            <p className="body-text--dark">{product?.description}</p>
-          </article>
-        </article>
-        <article className="recipe__lowerbox">
-          <article className="recipe__lowerbox--upperbox-info">
-            <h6 className="h6--dark">Ingredienser</h6>
-            <form onSubmit={handleSubmit} className="recipe__form">
-              {/* Checkbox form */}
+            <article className="recipe__lowerbox">
+              <article className="recipe__lowerbox--upperbox-info">
+                <h6 className="h6--dark">Ingredienser</h6>
+                <form onSubmit={handleSubmit} className="recipe__form">
+                  {/* Checkbox form */}
 
-              {fullIngredients?.map((ingredient) => {
-                return (
-                  <div
-                    key={ingredient.ingredientID}
-                    className="recipe__input-container"
-                  >
-                    <label className="recipe__label">
-                      <input
-                        type="checkbox"
-                        name={`ingredient-${ingredient.ingredientID}`}
-                        defaultChecked={true}
-                        onChange={handleChange}
-                        className="recipe__input"
-                      />
-                      {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
-                    </label>
+                  {fullIngredients?.map((ingredient) => {
+                    return (
+                      <div
+                        key={ingredient.ingredientID}
+                        className="recipe__input-container"
+                      >
+                        <label className="recipe__label">
+                          <input
+                            type="checkbox"
+                            name={`ingredient-${ingredient.ingredientID}`}
+                            defaultChecked={true}
+                            onChange={handleChange}
+                            className="recipe__input"
+                          />
+                          {`${ingredient.quantity} ${ingredient?.units} ${ingredient?.ingredientName}`}
+                        </label>
+                      </div>
+                    );
+                  })}
+
+                  <div className="recipe__total-div">
+                    <h6 className="recipe__total-text">Totalt</h6>
+                    <h6 className="recipe__total-text--bold">
+                      <strong>{price} SEK</strong>
+                    </h6>
                   </div>
-                );
-              })}
 
-              <div className="recipe__total-div">
-                <h6 className="recipe__total-text">Totalt</h6>
-                <h6 className="recipe__total-text--bold">
-                  <strong>{price} SEK</strong>
-                </h6>
-              </div>
-
-              <button
-                className="recipe__button"
-                type="submit"
-                style={{ backgroundColor: addedToCart ? "green" : "#cc8d80" }}
-                disabled={
-                  uncheckedIngredients.length === product?.ingredients.length ||
-                  addedToCart
-                }
-              >
-                {addedToCart ? "Tillagd" : "Lägg till i kundvagn"}
-              </button>
-            </form>
-          </article>
-          <article className="recipe__lowerbox--lowerbox-info">
-            <h6 className="h6--dark">Gör såhär</h6>
-            {product?.recipe.map((rec, index) => (
-              <div key={index} className="recipe__steps">
-                <p className="body-text--dark recipe-instruction">{rec}</p>
-              </div>
-            ))}
-          </article>
-        </article>
+                  <button
+                    className="recipe__button"
+                    type="submit"
+                    style={{
+                      backgroundColor: addedToCart ? "green" : "#cc8d80",
+                    }}
+                    disabled={
+                      uncheckedIngredients.length ===
+                        product?.ingredients.length || addedToCart
+                    }
+                  >
+                    {addedToCart ? "Tillagd" : "Lägg till i kundvagn"}
+                  </button>
+                </form>
+              </article>
+              <article className="recipe__lowerbox--lowerbox-info">
+                <h6 className="h6--dark">Gör såhär</h6>
+                {product?.recipe.map((rec, index) => (
+                  <div key={index} className="recipe__steps">
+                    <p className="body-text--dark recipe-instruction">{rec}</p>
+                  </div>
+                ))}
+              </article>
+            </article>
+          </>
+        ) : (
+          <Loader />
+        )}
       </main>
     </>
   );

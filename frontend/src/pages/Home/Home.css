@@ -67,7 +67,7 @@
   color: #fff;
   font-size: 1.25rem;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease;
 }
 .home__fa-filter:hover {
   transform: scale(1.2); /* Gör ikonen lite större vid hover */
@@ -133,7 +133,8 @@
   gap: 10px;
 }
 
-.filter__select, .filter__option {
+.filter__select,
+.filter__option {
   text-transform: capitalize;
 }
 label {
@@ -149,8 +150,6 @@ select {
   border-radius: 5px;
 }
 
-
-
 /* Media queries */
 
 @media (min-width: 768px) {
@@ -160,5 +159,9 @@ select {
 
   .cards-wrapper {
     gap: 1.5rem;
+  }
+  .cards-wrapper {
+    overflow-x: auto;
+    flex-wrap: wrap;
   }
 }

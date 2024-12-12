@@ -18,7 +18,7 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
-
+  const userRole = sessionStorage.getItem("userRole");
   return (
     <header className="navbar__header">
       <img className="navbar__menu" src={menuIcon} onClick={toggleMenu} />
@@ -30,10 +30,19 @@ const Header = () => {
         <img className="navbar__logo" src={Logo} alt="EasyBake Logo" />
         <h3 className="navbar__title">EasyBake</h3>
       </Link>
-
       <nav className="navbar__nav">
         <Link to="/profile">Profil</Link>
         <Link to="/about">Om</Link>
+        {userRole == "admin" && (
+          <>
+            <Link to="/admin/ingredients" className="menu__admin">
+              <i>Ingredienser</i>
+            </Link>
+            <Link to="/admin/products" className="menu__admin">
+              <i>Produkter</i>
+            </Link>
+          </>
+        )}
       </nav>
 
       <img className="navbar__cart" src={cartIcon} onClick={toggleCart} />
