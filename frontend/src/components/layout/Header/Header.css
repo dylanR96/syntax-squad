@@ -12,7 +12,10 @@
 .navbar__nav {
   display: none;
 }
-
+.menu__admin {
+  color: #654112 !important;
+  font-style: italic;
+}
 .navbar__logo {
   width: 64px;
 }

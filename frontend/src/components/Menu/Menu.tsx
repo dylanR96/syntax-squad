@@ -23,6 +23,8 @@ type MenuProps = {
 };
 
 const Menu = ({ toggleMenu }: MenuProps) => {
+  const userRole = sessionStorage.getItem("userRole");
+
   return (
     <motion.div
       className="menu"
@@ -38,6 +40,24 @@ const Menu = ({ toggleMenu }: MenuProps) => {
       <NavLink to={"/about"} onClick={toggleMenu} className="menu__link">
         Om oss
       </NavLink>
+      {userRole == "admin" && (
+        <>
+          <NavLink
+            onClick={toggleMenu}
+            className="menu__link menu__admin"
+            to="/admin/ingredients"
+          >
+            Ingredienser
+          </NavLink>
+          <NavLink
+            onClick={toggleMenu}
+            className="menu__link menu__admin"
+            to="/admin/products"
+          >
+            Produkter
+          </NavLink>
+        </>
+      )}
     </motion.div>
   );
 };
